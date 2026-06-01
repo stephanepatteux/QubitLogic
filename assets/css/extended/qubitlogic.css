@@ -745,6 +745,8 @@ code, pre, kbd, samp {
   margin: 0.75rem 0 0;
 }
 .ql-beehiiv-form { min-height: 52px; width: 100%; }
+.ql-beehiiv-form--modal { max-height: 90px; overflow: hidden; }
+.ql-beehiiv-form--modal iframe { max-height: 90px !important; }
 
 /* ── Newsletter modal ─────────────────────────────────────── */
 body.ql-modal-open { overflow: hidden; }
@@ -771,7 +773,7 @@ body.ql-modal-open { overflow: hidden; }
 .ql-modal-panel {
   position: relative;
   width: 100%;
-  max-width: 640px;
+  max-width: 440px;
   max-height: 90vh;
   overflow-y: auto;
   background: var(--qs-surface);
@@ -804,22 +806,14 @@ body.ql-modal-open { overflow: hidden; }
 }
 .ql-modal-close:hover { background: var(--qs-border); }
 
-.ql-modal-layout { display: flex; flex-direction: column; }
-
-.ql-modal-visual {
-  border-bottom: 1px solid var(--qs-border-soft);
-  line-height: 0;
-}
-.ql-modal-visual img {
-  width: 100%;
-  height: auto;
-  max-height: 140px;
-  object-fit: cover;
-}
-
 .ql-modal-form {
-  padding: 1.5rem 1.75rem 1.25rem;
+  padding: 1.75rem 1.75rem 1.25rem;
   text-align: center;
+}
+
+.ql-modal-icon {
+  color: var(--qs-green);
+  margin-bottom: 0.75rem;
 }
 
 .ql-modal-title {
