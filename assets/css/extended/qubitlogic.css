@@ -3,8 +3,24 @@
    assets/css/extended/qubitlogic.css
    ============================================================ */
 
-/* ── Design Tokens ───────────────────────────────────────── */
+/* ── Design Tokens (shared) ───────────────────────────────── */
 :root {
+  --qs-green:       #00c96a;
+  --qs-green-dim:   #00a855;
+  --qs-green-glow:  rgba(0, 201, 106, 0.15);
+  --qs-blue:        #0284c7;
+  --qs-purple:      #7c3aed;
+  --qs-font-mono:   "JetBrains Mono", "Fira Code", monospace;
+  --qs-font-sans:   "Inter", system-ui, -apple-system, sans-serif;
+  --qs-radius:      10px;
+  --qs-radius-sm:   6px;
+  --qs-transition:  0.15s ease;
+  --qs-header-bg:   rgba(248, 249, 252, 0.9);
+}
+
+/* ── Dark theme (site default) ────────────────────────────── */
+:root[data-theme="dark"],
+:root:not([data-theme="light"]) {
   --qs-green:       #00e87a;
   --qs-green-dim:   #00b85e;
   --qs-green-glow:  rgba(0, 232, 122, 0.12);
@@ -19,16 +35,10 @@
   --qs-text:        #e4e4ec;
   --qs-text-muted:  #8888a0;
   --qs-text-faint:  #55556a;
-  --qs-font-mono:   "JetBrains Mono", "Fira Code", monospace;
-  --qs-font-sans:   "Inter", system-ui, -apple-system, sans-serif;
-  --qs-radius:      10px;
-  --qs-radius-sm:   6px;
-  --qs-transition:  0.15s ease;
-}
+  --qs-header-bg:   rgba(12, 12, 15, 0.85);
+  --qs-modal-backdrop: rgba(0, 0, 0, 0.72);
+  --qs-btn-on-accent: #000;
 
-/* Wire our tokens into PaperMod's dark theme */
-:root[data-theme="dark"],
-:root {
   --theme:          var(--qs-bg);
   --entry:          var(--qs-surface);
   --primary:        var(--qs-text);
@@ -37,14 +47,46 @@
   --content:        var(--qs-text);
   --border:         var(--qs-border);
   --code-block-bg:  var(--qs-surface-2);
+  --code-bg:        var(--qs-surface-3);
+}
+
+/* ── Light theme ──────────────────────────────────────────── */
+:root[data-theme="light"] {
+  --qs-green:       #00a855;
+  --qs-green-dim:   #008f48;
+  --qs-green-glow:  rgba(0, 168, 85, 0.12);
+  --qs-blue:        #0284c7;
+  --qs-purple:      #7c3aed;
+  --qs-bg:          #f8f9fc;
+  --qs-surface:     #ffffff;
+  --qs-surface-2:   #f1f3f8;
+  --qs-surface-3:   #e8ebf2;
+  --qs-border:      #d8dce6;
+  --qs-border-soft: #e8ebf2;
+  --qs-text:        #1a1a24;
+  --qs-text-muted:  #4a4a5e;
+  --qs-text-faint:  #6b6b80;
+  --qs-header-bg:   rgba(248, 249, 252, 0.92);
+  --qs-modal-backdrop: rgba(26, 26, 36, 0.45);
+  --qs-btn-on-accent: #fff;
+
+  --theme:          var(--qs-bg);
+  --entry:          var(--qs-surface);
+  --primary:        var(--qs-text);
+  --secondary:      var(--qs-text-muted);
+  --tertiary:       var(--qs-border);
+  --content:        var(--qs-text);
+  --border:         var(--qs-border);
+  --code-block-bg:  var(--qs-surface-2);
+  --code-bg:        var(--qs-surface-3);
 }
 
 /* ── Base ─────────────────────────────────────────────────── */
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--qs-bg);
-  color: var(--qs-text);
+  background: var(--theme);
+  color: var(--primary);
   font-family: var(--qs-font-sans);
   font-size: 16px;
   line-height: 1.7;
@@ -76,8 +118,8 @@ code, pre, kbd, samp {
 
 /* ── Header ───────────────────────────────────────────────── */
 .header {
-  border-bottom: 1px solid var(--qs-border-soft);
-  background: rgba(12, 12, 15, 0.85);
+  border-bottom: 1px solid var(--border);
+  background: var(--qs-header-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   position: sticky;
@@ -134,8 +176,8 @@ code, pre, kbd, samp {
 
 /* ── Post cards ───────────────────────────────────────────── */
 .post-entry {
-  background: var(--qs-surface);
-  border: 1px solid var(--qs-border-soft);
+  background: var(--entry);
+  border: 1px solid var(--border);
   border-radius: var(--qs-radius);
   padding: 1.4rem 1.6rem;
   transition: border-color var(--qs-transition), transform 0.15s ease, box-shadow 0.15s ease;
@@ -151,11 +193,11 @@ code, pre, kbd, samp {
   font-size: 1.05rem;
   font-weight: 600;
   line-height: 1.4;
-  color: var(--qs-text);
+  color: var(--primary);
 }
 
 .post-entry .entry-content {
-  color: var(--qs-text-muted);
+  color: var(--secondary);
   font-size: 0.9rem;
   line-height: 1.55;
   margin-top: 0.35rem;
@@ -185,7 +227,7 @@ code, pre, kbd, samp {
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.25;
-  color: var(--qs-text);
+  color: var(--primary);
 }
 
 .post-meta {
@@ -219,24 +261,24 @@ code, pre, kbd, samp {
 .post-content {
   font-size: 1rem;
   line-height: 1.75;
-  color: var(--qs-text);
+  color: var(--content);
 }
 
 .post-content h2 {
   font-size: 1.45rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  border-bottom: 1px solid var(--qs-border-soft);
+  border-bottom: 1px solid var(--border);
   padding-bottom: 0.4rem;
   margin-top: 3rem;
-  color: var(--qs-text);
+  color: var(--primary);
 }
 
 .post-content h3 {
   font-size: 1.15rem;
   font-weight: 600;
   margin-top: 2.25rem;
-  color: var(--qs-text);
+  color: var(--primary);
 }
 
 .post-content h4 {
@@ -369,19 +411,20 @@ code, pre, kbd, samp {
 
 /* ── TOC ──────────────────────────────────────────────────── */
 #TableOfContents {
-  background: var(--qs-surface);
-  border: 1px solid var(--qs-border);
+  background: var(--entry);
+  border: 1px solid var(--border);
   border-left: 3px solid var(--qs-green);
   border-radius: 0 var(--qs-radius) var(--qs-radius) 0;
   padding: 1rem 1.5rem;
   font-size: 0.875rem;
   margin: 2rem 0;
+  color: var(--primary);
 }
 
 #TableOfContents > ul { margin: 0; padding-left: 0; list-style: none; }
-#TableOfContents li { margin-bottom: 0.25rem; }
+#TableOfContents li { margin-bottom: 0.25rem; color: var(--primary); }
 #TableOfContents a {
-  color: var(--qs-text-muted);
+  color: var(--secondary);
   text-decoration: none;
   transition: color var(--qs-transition);
 }
@@ -422,7 +465,7 @@ code, pre, kbd, samp {
   top: -0.7rem;
   left: 1rem;
   background: var(--qs-green);
-  color: #000;
+  color: var(--qs-btn-on-accent);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -466,7 +509,7 @@ code, pre, kbd, samp {
   align-items: center;
   gap: 0.35rem;
   background: var(--qs-green);
-  color: #000 !important;
+  color: var(--qs-btn-on-accent) !important;
   font-weight: 700;
   font-size: 0.875rem;
   padding: 0.55rem 1.2rem;
@@ -477,7 +520,8 @@ code, pre, kbd, samp {
   flex-shrink: 0;
 }
 .qs-affiliate-btn:hover {
-  background: #fff;
+  background: var(--primary);
+  color: var(--theme) !important;
   transform: translateY(-1px);
   border-bottom: none;
 }
@@ -720,7 +764,7 @@ body.ql-modal-open { overflow: hidden; }
 .ql-modal-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.72);
+  background: var(--qs-modal-backdrop);
   backdrop-filter: blur(4px);
 }
 
@@ -823,7 +867,7 @@ body.ql-modal-open { overflow: hidden; }
   gap: 0.4rem;
   padding: 0.6rem 1rem;
   background: var(--qs-green);
-  color: #000;
+  color: var(--qs-btn-on-accent);
   border: none;
   border-radius: 999px;
   font-size: 0.85rem;
@@ -834,7 +878,8 @@ body.ql-modal-open { overflow: hidden; }
   transition: transform 0.15s ease, background var(--qs-transition);
 }
 .ql-newsletter-fab:hover {
-  background: #fff;
+  background: var(--primary);
+  color: var(--theme);
   transform: translateY(-2px);
 }
 .ql-newsletter-fab[hidden] { display: none !important; }
@@ -874,8 +919,8 @@ body.ql-modal-open { overflow: hidden; }
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--qs-surface-2);
-  border-top: 1px solid var(--qs-border);
+  background: var(--entry);
+  border-top: 1px solid var(--border);
   padding: 14px 24px;
   display: flex;
   align-items: center;
@@ -884,13 +929,13 @@ body.ql-modal-open { overflow: hidden; }
   font-size: 0.83rem;
   z-index: 9999;
   flex-wrap: wrap;
-  color: var(--qs-text-muted);
+  color: var(--secondary);
 }
 #ql-cookie-notice p { margin: 0; flex: 1; }
 #ql-cookie-notice a { color: var(--qs-green); }
 #ql-cookie-accept {
   background: var(--qs-green);
-  color: #000;
+  color: var(--qs-btn-on-accent);
   border: none;
   padding: 6px 18px;
   border-radius: var(--qs-radius-sm);
@@ -900,7 +945,10 @@ body.ql-modal-open { overflow: hidden; }
   white-space: nowrap;
   font-family: var(--qs-font-sans);
 }
-#ql-cookie-accept:hover { background: #fff; }
+#ql-cookie-accept:hover {
+  background: var(--primary);
+  color: var(--theme);
+}
 
 /* ── Nav: hide "Search" text, keep icon button only ──────── */
 #menu a[href="/search/"] {
