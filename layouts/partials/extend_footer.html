@@ -1,0 +1,73 @@
+{{/* QubitLogic footer additions: compliance links + cookie notice */}}
+
+<footer class="ql-footer-compliance">
+  <nav aria-label="Legal">
+    <a href="/privacy/">Privacy Policy</a>
+    <span aria-hidden="true">·</span>
+    <a href="/affiliate-disclosure/">Affiliate Disclosure</a>
+  </nav>
+</footer>
+
+<div id="ql-cookie-notice" role="dialog" aria-label="Cookie notice" aria-live="polite" style="display:none">
+  <p>
+    This site uses no tracking cookies. Affiliate links may set cookies on third-party sites when clicked.
+    <a href="/privacy/">Learn more</a>
+  </p>
+  <button id="ql-cookie-accept" aria-label="Dismiss cookie notice">Got it</button>
+</div>
+
+<style>
+.ql-footer-compliance {
+  text-align: center;
+  padding: 12px 0 20px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+.ql-footer-compliance a {
+  text-decoration: none;
+  margin: 0 6px;
+}
+.ql-footer-compliance a:hover { text-decoration: underline; }
+
+#ql-cookie-notice {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--theme);
+  border-top: 1px solid var(--border);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 0.85rem;
+  z-index: 9999;
+  flex-wrap: wrap;
+}
+#ql-cookie-notice p { margin: 0; flex: 1; }
+#ql-cookie-accept {
+  background: var(--primary);
+  color: var(--theme);
+  border: none;
+  padding: 6px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+#ql-cookie-accept:hover { opacity: 0.85; }
+</style>
+
+<script>
+(function() {
+  if (localStorage.getItem('ql_cookie_ok')) return;
+  var notice = document.getElementById('ql-cookie-notice');
+  if (notice) notice.style.display = 'flex';
+  var btn = document.getElementById('ql-cookie-accept');
+  if (btn) btn.addEventListener('click', function() {
+    localStorage.setItem('ql_cookie_ok', '1');
+    notice.style.display = 'none';
+  });
+})();
+</script>

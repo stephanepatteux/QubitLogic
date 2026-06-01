@@ -105,6 +105,18 @@ paginate = 10
     url = "/tags/"
     weight = 50
 
+[[menu.footer]]
+  identifier = "privacy"
+  name = "Privacy Policy"
+  url = "/privacy/"
+  weight = 10
+
+[[menu.footer]]
+  identifier = "affiliate-disclosure"
+  name = "Affiliate Disclosure"
+  url = "/affiliate-disclosure/"
+  weight = 20
+
 [outputs]
   home = ["HTML", "RSS", "JSON"]   # JSON required for client-side search
 

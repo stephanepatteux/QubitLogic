@@ -12,7 +12,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          submodules: true   # fetch PaperMod theme
+          submodules: true
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
@@ -24,11 +24,14 @@ jobs:
         run: hugo --minify
 
       - name: Deploy to VPS
-        uses: burnett01/rsync-deployments@7.0.1
-        with:
-          switches: -avz --delete
-          path: public/
-          remote_path: /var/www/qubitlogic/
-          remote_host: 51.195.86.197
-          remote_user: ubuntu
-          remote_key: ${{ secrets.VPS_SSH_KEY }}
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H 51.195.86.197 >> ~/.ssh/known_hosts
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            public/ \
+            ubuntu@51.195.86.197:/var/www/qubitlogic/
