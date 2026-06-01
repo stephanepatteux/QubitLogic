@@ -3,6 +3,7 @@ locale = "en-us"
 title = "QubitLogic"
 theme = "PaperMod"
 enableRobotsTXT = true
+enableGitInfo = true
 buildDrafts = false
 buildFuture = false
 buildExpired = false
@@ -31,7 +32,7 @@ paginate = 10
 
   # Social / icons
   socialIcons = [
-    { name = "github", url = "https://github.com/" },
+    { name = "github", url = "https://github.com/stephanepatteux" },
     { name = "rss", url = "/index.xml" }
   ]
 

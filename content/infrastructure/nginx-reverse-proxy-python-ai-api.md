@@ -47,7 +47,7 @@ You can follow every step except the TLS section using your VPS IP address direc
 
 {{< affiliate_box
     name="DigitalOcean"
-    url="https://m.do.co/c/YOURREF"
+    url="AFFILIATE_LINK_DIGITALOCEAN"
     cta="Deploy a Droplet"
     badge="Recommended"
     desc="The fastest way to get a VPS with a static IP. Add a domain via the Networking tab and DigitalOcean manages your DNS records for free."

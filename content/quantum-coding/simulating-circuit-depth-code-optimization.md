@@ -1,6 +1,6 @@
 ---
 title: "Simulating Circuit Depth: Code Optimization"
-date: 2026-06-01T16:00:00+01:00
+date: 2026-06-01T11:00:00+01:00
 lastmod: 2026-06-01T16:00:00+01:00
 draft: false
 description: "How circuit depth affects simulation time and hardware noise — and how to reduce it using Qiskit's transpiler, gate cancellation, and circuit rewriting. Includes benchmarks and reproducible optimization techniques."
@@ -32,6 +32,15 @@ This article covers the tools and techniques to measure, understand, and reduce 
 ```bash
 pip install qiskit qiskit-aer qiskit-ibm-runtime
 ```
+
+{{< affiliate_box
+    name="IBM Quantum"
+    url="AFFILIATE_LINK_IBM_QUANTUM"
+    cta="Access IBM Quantum"
+    badge="Free Tier Available"
+    desc="Test your optimised circuits on real IBM hardware. The free tier gives access to 5–7 qubit systems — enough to validate transpiler optimisation results against actual device noise."
+    price="Free"
+>}}
 
 ---
 
@@ -300,4 +309,12 @@ The practical workflow:
 - Use **graph edge colouring** for QAOA cost unitaries to maximise parallelism
 - Check **`circuit_report()`** before submission and target < 20 two-qubit gates for results above 90% fidelity
 
-The next article applies these optimization principles to a concrete problem — the **Travelling Salesperson Problem** solved with simulated annealing, with a clean Python implementation you can run overnight.
+The next article applies these optimisation principles to a concrete problem — the [Travelling Salesperson Problem solved with Simulated Annealing](/quantum-coding/traveling-salesperson-simulated-annealing/), with a clean Python implementation you can run overnight.
+
+---
+
+## Further Reading
+
+- [Qiskit transpiler pass manager — official docs](https://docs.quantum.ibm.com/api/qiskit/transpiler) — complete reference for `PassManager`, optimisation passes, and the `transpile()` function
+- [Qiskit circuit library](https://docs.quantum.ibm.com/api/qiskit/circuit_library) — full reference for `QFT` and other built-in circuits used in the benchmarks above
+- [QAOA circuit depth problem](/quantum-coding/quantum-inspired-optimizer-python/) — see how the QAOA cost unitary generates the deep circuits this article teaches you to optimise

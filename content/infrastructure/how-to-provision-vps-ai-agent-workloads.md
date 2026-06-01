@@ -58,7 +58,7 @@ For multi-agent pipelines (3+ concurrent agents, vector DB on the same host), go
 
 {{< affiliate_box
     name="DigitalOcean"
-    url="https://m.do.co/c/YOURREF"
+    url="AFFILIATE_LINK_DIGITALOCEAN"
     cta="Deploy a Droplet"
     badge="Recommended"
     desc="Premium NVMe SSDs, 99.99% uptime SLA, and the best onboarding experience for developers. The $6/mo Basic Droplet is a solid entry point."
@@ -67,7 +67,7 @@ For multi-agent pipelines (3+ concurrent agents, vector DB on the same host), go
 
 {{< affiliate_box
     name="Vultr High Frequency"
-    url="https://www.vultr.com/?ref=YOURREF"
+    url="AFFILIATE_LINK_VULTR"
     cta="Launch a Server"
     badge="Best Value"
     desc="High Frequency instances run on 3GHz+ Intel Ice Lake CPUs with pure NVMe storage. Consistently lower CPU steal than standard tiers."

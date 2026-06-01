@@ -97,7 +97,7 @@ If you plan to simulate circuits above 28 qubits locally, upgrade to 8–16 GB R
 
 {{< affiliate_box
     name="DigitalOcean"
-    url="https://m.do.co/c/YOURREF"
+    url="AFFILIATE_LINK_DIGITALOCEAN"
     cta="Deploy a Droplet"
     badge="Recommended"
     desc="The $24/mo Premium AMD Droplet (2 vCPU / 4 GB) handles everything in this series. Upgrade to the $48/mo plan (4 vCPU / 8 GB) for circuits above 26 qubits."
@@ -184,7 +184,7 @@ Cost: $0.01 per task + $0.00035 per shot on IonQ Aria via Braket. A 100-shot exp
 
 {{< affiliate_box
     name="AWS Braket"
-    url="https://aws.amazon.com/braket/"
+    url="AFFILIATE_LINK_AWS_BRAKET"
     cta="Start Free Trial"
     badge="Multi-Provider"
     desc="Run circuits on IonQ, Rigetti, Oxford Quantum Circuits, and simulators from a single SDK. $0.00035/shot on IonQ Aria. Free tier includes 1 hour of local simulator."

@@ -1,6 +1,6 @@
 ---
 title: "Building a Quantum-Inspired Optimizer in Python"
-date: 2026-06-01T14:00:00+01:00
+date: 2026-06-01T09:00:00+01:00
 lastmod: 2026-06-01T14:00:00+01:00
 draft: false
 description: "A step-by-step Python implementation of a quantum-inspired optimizer using QAOA on Qiskit Aer — solving a weighted MaxCut problem and comparing results against a classical greedy baseline."

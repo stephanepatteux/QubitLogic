@@ -1,6 +1,6 @@
 ---
 title: "Auditing Code for Post-Quantum Compliance"
-date: 2026-06-01T20:00:00+01:00
+date: 2026-06-01T10:30:00+01:00
 lastmod: 2026-06-01T20:00:00+01:00
 draft: false
 description: "A complete Python tool for auditing codebases for post-quantum cryptographic compliance — scanning for vulnerable algorithms, generating remediation reports, and integrating into CI/CD pipelines."
@@ -525,7 +525,7 @@ The migration cost is low. The risk of not migrating compounds every year as qua
 
 {{< affiliate_box
     name="DigitalOcean"
-    url="https://m.do.co/c/YOURREF"
+    url="AFFILIATE_LINK_DIGITALOCEAN"
     cta="Deploy Securely"
     badge="Recommended"
     desc="Ubuntu 24.04 with OpenSSL 3.5. Configure post-quantum TLS, harden your Python API stack, and deploy using the full QubitLogic infrastructure guide."

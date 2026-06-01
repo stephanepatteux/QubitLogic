@@ -1,6 +1,6 @@
 ---
 title: "Quantum Machine Learning: When to Use It"
-date: 2026-06-01T17:00:00+01:00
+date: 2026-06-01T12:00:00+01:00
 lastmod: 2026-06-01T17:00:00+01:00
 draft: false
 description: "A data-driven decision framework for when quantum machine learning adds value over classical ML — covering quantum kernel advantage conditions, the dequantization threat, hardware requirements, and a practical checklist for 2026."
@@ -224,3 +224,12 @@ The value of Phase 2 for a working developer is:
 4. You know the hardware threshold that needs to be crossed before QML becomes broadly practical
 
 **Phase 3: Professional Edge** takes everything built in Phases 1 and 2 and applies it to the security, enterprise, and financial contexts where the stakes are highest — starting with post-quantum cryptography and the API vulnerabilities that exist right now, before quantum hardware matures.
+
+For a classical optimisation baseline that contextualises where QML fits, the [TSP with Simulated Annealing](/quantum-coding/traveling-salesperson-simulated-annealing/) article is the best reference — it demonstrates how strong classical algorithms are on tractable problem sizes.
+
+---
+
+## Further Reading
+
+- [PennyLane QML documentation](https://pennylane.ai/qml/) — the most comprehensive resource for quantum machine learning in Python, covering quantum kernels, VQC, and QNN architectures
+- [Qiskit Machine Learning module](https://qiskit-community.github.io/qiskit-machine-learning/) — the Qiskit-native approach used in [the hybrid workflow article](/quantum-coding/qiskit-scikit-learn-hybrid-workflow/)

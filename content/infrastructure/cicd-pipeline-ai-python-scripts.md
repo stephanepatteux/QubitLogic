@@ -391,7 +391,7 @@ With pip caching enabled (`cache: pip` in `setup-python`), the full pipeline fro
 
 {{< affiliate_box
     name="DigitalOcean"
-    url="https://m.do.co/c/YOURREF"
+    url="AFFILIATE_LINK_DIGITALOCEAN"
     cta="Deploy a Droplet"
     badge="Recommended"
     desc="The VPS target for this pipeline. The $12–$24/mo Droplet handles the rsync + systemctl deploy in under 45 seconds consistently."

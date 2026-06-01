@@ -233,7 +233,7 @@ Open `flamegraph.svg` in your browser. Wide bars = time spent. Narrow tall stack
 
 {{< affiliate_box
     name="Vultr High Frequency"
-    url="https://www.vultr.com/?ref=YOURREF"
+    url="AFFILIATE_LINK_VULTR"
     cta="Launch a Server"
     badge="Best Value"
     desc="High Frequency instances give you 3GHz+ dedicated vCPUs with NVMe SSD. The right host for CPU-intensive Python profiling and agent workloads."

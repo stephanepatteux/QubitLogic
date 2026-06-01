@@ -1,6 +1,6 @@
 ---
 title: "Solving the Traveling Salesperson Problem with Simulated Annealing"
-date: 2026-06-01T16:30:00+01:00
+date: 2026-06-01T11:30:00+01:00
 lastmod: 2026-06-01T16:30:00+01:00
 draft: false
 description: "A complete Python implementation of simulated annealing for the Travelling Salesperson Problem — with 2-opt local search, adaptive cooling schedules, convergence analysis, and benchmarks up to 500 cities."
@@ -36,6 +36,15 @@ pip install numpy matplotlib tqdm
 ```
 
 No quantum libraries needed for this article — TSP on SA is pure classical Python.
+
+{{< affiliate_box
+    name="Vultr"
+    url="AFFILIATE_LINK_VULTR"
+    cta="Deploy a VPS"
+    badge="$35 Credit"
+    desc="Run overnight SA benchmark jobs on a dedicated VPS — no competing processes, reproducible wall-clock times. Vultr's $12/mo 2 vCPU / 4 GB plan is ideal for this workload."
+    price="From $6/mo"
+>}}
 
 ---
 
@@ -368,6 +377,8 @@ For N=10 cities, this requires 100 qubits — at the boundary of what current qu
 
 The simulated annealing solver in this article is your classical benchmark when you eventually run quantum annealing experiments. A quantum solver that does not beat this SA implementation is not production-ready.
 
+See [QAOA vs. Classical Brute Force: A Benchmarking Guide](/quantum-coding/qaoa-vs-classical-brute-force-benchmarking/) for a direct head-to-head on MaxCut — the same methodology applied to graph optimisation. The [Quantum-Inspired Optimizer](/quantum-coding/quantum-inspired-optimizer-python/) shows how to encode a combinatorial problem as a QAOA circuit, which is the quantum equivalent of the SA approach in this article.
+
 ---
 
 ## Conclusion
@@ -382,3 +393,10 @@ The SA TSP solver in this article:
 This is the classical benchmark every quantum TSP solver needs to beat. Until quantum hardware scales to >200 high-fidelity qubits with near-zero error rates, simulated annealing remains the practical choice for real TSP instances.
 
 The final Phase 2 article answers the question this series has been building toward: **when is quantum machine learning actually worth using?**
+
+---
+
+## Further Reading
+
+- [NetworkX TSP algorithms reference](https://networkx.org/documentation/stable/reference/algorithms/tsp.html) — official NetworkX docs for `christofides()`, `greedy_tsp()`, and `simulated_annealing_tsp()` for comparison against this implementation
+- [SciPy optimize module](https://docs.scipy.org/doc/scipy/reference/optimize.html) — classical optimisation toolkit including `dual_annealing()`, a production-ready SA implementation for benchmark comparison

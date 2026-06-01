@@ -287,7 +287,7 @@ wrk -t4 -c100 -d60s https://yourdomain.com/health
 
 {{< affiliate_box
     name="Vultr High Frequency"
-    url="https://www.vultr.com/?ref=YOURREF"
+    url="AFFILIATE_LINK_VULTR"
     cta="Launch a Server"
     badge="Best Benchmark Performance"
     desc="13% faster CPU, 10% more memory bandwidth, 10% higher API throughput than the equivalent DigitalOcean plan — at $6/mo less. The data-driven choice for CPU-intensive AI workloads."
@@ -296,7 +296,7 @@ wrk -t4 -c100 -d60s https://yourdomain.com/health
 
 {{< affiliate_box
     name="DigitalOcean"
-    url="https://m.do.co/c/YOURREF"
+    url="AFFILIATE_LINK_DIGITALOCEAN"
     cta="Deploy a Droplet"
     badge="Best for OpenAI Workloads"
     desc="Fastest latency to OpenAI and Anthropic APIs in our London benchmark. Best sequential read I/O, best documentation, and the smoothest onboarding for first-time VPS deployments."

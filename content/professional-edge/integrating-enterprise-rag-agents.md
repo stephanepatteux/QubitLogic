@@ -1,6 +1,6 @@
 ---
 title: "Integrating Enterprise-Grade RAG Agents"
-date: 2026-06-01T18:00:00+01:00
+date: 2026-06-01T08:30:00+01:00
 lastmod: 2026-06-01T18:00:00+01:00
 draft: false
 description: "A production architecture for enterprise RAG agents — covering chunking strategy, embedding model selection, vector database choice, retrieval evaluation with RAGAS, and deployment on a self-hosted VPS stack."
@@ -376,7 +376,7 @@ The reranker alone delivers the largest single improvement (+0.23 faithfulness) 
 
 {{< affiliate_box
     name="DigitalOcean"
-    url="https://m.do.co/c/YOURREF"
+    url="AFFILIATE_LINK_DIGITALOCEAN"
     cta="Deploy the RAG Stack"
     badge="Recommended"
     desc="The $48/mo 4 vCPU / 8 GB Droplet runs ChromaDB + BGE-large + FastAPI comfortably. Self-host your entire RAG pipeline — no data leaves your infrastructure."

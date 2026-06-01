@@ -1,6 +1,6 @@
 ---
 title: "Implementing Grover's Search Logic in Python"
-date: 2026-06-01T15:00:00+01:00
+date: 2026-06-01T10:00:00+01:00
 lastmod: 2026-06-01T15:00:00+01:00
 draft: false
 description: "A complete Python implementation of Grover's search algorithm using Qiskit — from oracle construction to amplitude amplification — with a database search use case and honest classical vs quantum comparison."
@@ -30,6 +30,15 @@ This article builds Grover's search from scratch in Qiskit: oracle construction,
 ```bash
 pip install qiskit qiskit-aer numpy
 ```
+
+{{< affiliate_box
+    name="IBM Quantum"
+    url="AFFILIATE_LINK_IBM_QUANTUM"
+    cta="Access IBM Quantum"
+    badge="Free Tier Available"
+    desc="Run your Grover's circuits on real quantum hardware — IBM Quantum offers free access to 5–7 qubit systems for registered developers. No credit card required."
+    price="Free"
+>}}
 
 ---
 
@@ -338,6 +347,14 @@ Grover's algorithm is the cleanest quantum speedup in the Qiskit toolbox:
 3. **Iteration count matters precisely** — use `⌊π/4 × √(N/M)⌋` for M targets in N items.
 4. **Practical crossover** on a simulator: feasible up to ~25 qubits (30 GB RAM) for statevector simulation; real hardware needed above that.
 
-The security implication worth noting: Grover's halves the effective key length of any symmetric cipher. AES-128 offers only 64 bits of security against a quantum adversary. This is covered in depth in **Phase 3: Post-Quantum Cryptography**.
+The security implication worth noting: Grover's halves the effective key length of any symmetric cipher. AES-128 offers only 64 bits of security against a quantum adversary. This is covered in depth in [Post-Quantum Cryptography: API Security Vulnerabilities](/professional-edge/post-quantum-cryptography-api-security/).
 
 The next article bridges the quantum and classical ML worlds — connecting Qiskit circuits directly to Scikit-Learn pipelines for hybrid classification.
+
+---
+
+## Further Reading
+
+- [Qiskit — `GroverOperator` API reference](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.GroverOperator) — official documentation for the `GroverOperator` class used in this tutorial
+- [NIST Post-Quantum Cryptography project](https://csrc.nist.gov/projects/post-quantum-cryptography) — why Grover's halving of symmetric key strength drove the NIST PQC standardisation process
+- [Building a Quantum-Inspired Optimizer in Python](/quantum-coding/quantum-inspired-optimizer-python/) — introduces QAOA and variational quantum circuits, the complementary algorithm to Grover's exact search

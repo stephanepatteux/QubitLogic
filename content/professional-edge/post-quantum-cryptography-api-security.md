@@ -1,6 +1,6 @@
 ---
 title: "Post-Quantum Cryptography: API Security Vulnerabilities"
-date: 2026-06-01T17:30:00+01:00
+date: 2026-06-01T08:00:00+01:00
 lastmod: 2026-06-01T17:30:00+01:00
 draft: false
 description: "A developer-focused breakdown of which cryptographic algorithms are vulnerable to quantum attacks, which NIST PQC standards replace them, and how to audit and harden Python API stacks right now — before quantum hardware matures."
@@ -313,9 +313,18 @@ The final article in this series provides a full **code auditing checklist for p
 
 {{< affiliate_box
     name="DigitalOcean"
-    url="https://m.do.co/c/YOURREF"
+    url="AFFILIATE_LINK_DIGITALOCEAN"
     cta="Deploy a Hardened Droplet"
     badge="Recommended"
     desc="Ubuntu 24.04 with OpenSSL 3.5 pre-installed. Configure hybrid PQC TLS in under 10 minutes using the Nginx config from this article."
     price="From $6/mo"
 >}}
+
+---
+
+## Further Reading
+
+- [NIST FIPS 203 — ML-KEM (Kyber)](https://csrc.nist.gov/pubs/fips/203/final) — the finalised post-quantum key encapsulation standard your API TLS should migrate to
+- [NIST FIPS 204 — ML-DSA (Dilithium)](https://csrc.nist.gov/pubs/fips/204/final) — the finalised post-quantum digital signature standard for JWT and certificate signing
+- [NIST FIPS 205 — SLH-DSA (SPHINCS+)](https://csrc.nist.gov/pubs/fips/205/final) — the hash-based signature standard, recommended for long-lived signatures
+- [IETF JOSE PQC draft](https://datatracker.ietf.org/doc/draft-ietf-jose-pqc-kem/) — the working draft for post-quantum algorithms in JSON Web Encryption

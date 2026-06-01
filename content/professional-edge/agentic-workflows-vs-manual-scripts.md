@@ -1,6 +1,6 @@
 ---
 title: "Agentic Workflows vs. Manual Scripts: A Benchmark"
-date: 2026-06-01T19:00:00+01:00
+date: 2026-06-01T09:30:00+01:00
 lastmod: 2026-06-01T19:00:00+01:00
 draft: false
 description: "A controlled benchmark comparing LangGraph agentic workflows against equivalent hand-written Python scripts across four task categories — with cost, latency, reliability, and maintenance metrics."
@@ -18,6 +18,15 @@ weight: 18
 ## Overview
 
 The engineering community has developed a reflexive tendency to reach for an LLM agent when a well-structured Python script would do the job faster, cheaper, and more reliably.
+
+{{< affiliate_box
+    name="DigitalOcean"
+    url="AFFILIATE_LINK_DIGITALOCEAN"
+    cta="Deploy a Droplet"
+    badge="Recommended"
+    desc="Both agent and script implementations in this benchmark were run on a DigitalOcean $12/mo Droplet (2 vCPU / 4 GB, London). Consistent environment is critical for fair benchmarking — a shared cloud instance introduces noise."
+    price="From $6/mo"
+>}}
 
 This article runs a controlled comparison across four real task categories to produce a data-driven answer to when agentic workflows justify their cost and complexity overhead.
 
@@ -278,4 +287,13 @@ Agents are not a replacement for well-written scripts — they are a tool for a 
 
 The engineering discipline is knowing which category your problem belongs to before reaching for an LLM.
 
+For a production deployment of the research synthesis agent pattern, see [Integrating Enterprise-Grade RAG Agents](/professional-edge/integrating-enterprise-rag-agents/) — which covers the full production stack including reranking, evaluation, and VPS deployment. The [VPS provisioning guide](/infrastructure/how-to-provision-vps-ai-agent-workloads/) covers the infrastructure used to run the benchmarks in this article.
+
 The next article steps back from architecture and addresses a practical career question: are quantum AI certifications worth pursuing, and if so, which ones?
+
+---
+
+## Further Reading
+
+- [LangGraph documentation](https://langchain-ai.github.io/langgraph/) — official docs for the graph-based agent framework used in the benchmark, including state management and conditional edges
+- [Python `asyncio` documentation](https://docs.python.org/3/library/asyncio.html) — for script-based async orchestration that can handle concurrent API calls without an agent framework

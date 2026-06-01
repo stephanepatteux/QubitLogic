@@ -1,6 +1,6 @@
 ---
 title: "QAOA vs. Classical Brute Force: A Benchmarking Guide"
-date: 2026-06-01T14:30:00+01:00
+date: 2026-06-01T09:30:00+01:00
 lastmod: 2026-06-01T14:30:00+01:00
 draft: false
 description: "A rigorous Python benchmark comparing QAOA against brute force, greedy, and simulated annealing across MaxCut problem sizes from 6 to 20 nodes — with reproducible code and an honest answer to when QAOA is worth using."
@@ -293,7 +293,7 @@ The next article takes a different quantum algorithm — **Grover's search** —
 
 {{< affiliate_box
     name="AWS Braket"
-    url="https://aws.amazon.com/braket/"
+    url="AFFILIATE_LINK_AWS_BRAKET"
     cta="Run on Real Hardware"
     badge="Multi-Provider"
     desc="Test these QAOA circuits on IonQ Aria (99.4% 2Q fidelity) or Rigetti hardware via a single SDK. Free tier includes 1 hour of local simulator time per month."

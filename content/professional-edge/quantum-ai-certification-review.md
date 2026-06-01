@@ -1,6 +1,6 @@
 ---
 title: "Review: Are Quantum AI Certifications Worth It?"
-date: 2026-06-01T19:30:00+01:00
+date: 2026-06-01T10:00:00+01:00
 lastmod: 2026-06-01T19:30:00+01:00
 draft: false
 description: "An honest review of the major quantum computing and quantum AI certifications available in 2026 — covering IBM Quantum, Classiq, AWS Braket, and university programs — with a verdict on ROI for working developers."
@@ -17,7 +17,25 @@ weight: 19
 
 ## Overview
 
-The quantum computing job market is growing faster than the supply of credentialed developers. In 2026, "quantum developer" roles at IBM, Google, IonQ, startups, and defence contractors are posting salaries 30–50% above equivalent classical ML positions.
+The quantum computing job market is growing faster than the supply of credentialed developers.
+
+{{< affiliate_box
+    name="IBM Quantum Professional Certificate"
+    url="AFFILIATE_LINK_COURSERA_IBM_QUANTUM"
+    cta="Enrol on Coursera"
+    badge="Top Pick"
+    desc="The highest-value quantum credential for working developers. Five hands-on courses with real IBM hardware access — reviewed and rated ★★★★★ in this article."
+    price="~$250 total"
+>}}
+
+{{< affiliate_box
+    name="Brilliant.org"
+    url="AFFILIATE_LINK_BRILLIANT"
+    cta="Try Brilliant Free"
+    badge="Best for Foundations"
+    desc="Interactive quantum computing and linear algebra courses built for developers. Ideal preparation before tackling the IBM certification. 20% off with the QubitLogic link."
+    price="From $15.99/mo"
+>}} In 2026, "quantum developer" roles at IBM, Google, IonQ, startups, and defence contractors are posting salaries 30–50% above equivalent classical ML positions.
 
 The question is whether a certification is the right signal for that market — or whether the practical skills demonstrated by this series (working Qiskit code, real benchmarks, hardware submissions) are more valuable.
 
@@ -38,7 +56,7 @@ This review evaluates seven credentials across five dimensions:
 ### 1. IBM Quantum Learning — Qiskit Developer Certification
 
 **Provider:** IBM  
-**Cost:** Free learning + $200 exam fee  
+**Cost:** Free learning + $200 exam fee ([exam registration](https://www.ibm.com/training/certification/C0010300))  
 **Time:** 40–60 hours  
 **Format:** Self-paced online + proctored exam
 
@@ -92,7 +110,7 @@ AWS Braket's learning content is provider-focused (unsurprisingly) — it teache
 
 ### 4. edX/MIT — Quantum Computing Fundamentals
 
-**Provider:** MIT / edX  
+**Provider:** MIT / edX ([course page](https://www.edx.org/learn/quantum-computing/massachusetts-institute-of-technology-quantum-computing-realities))  
 **Cost:** Free to audit, $399 for verified certificate  
 **Time:** 60–80 hours  
 **Format:** 3-course series, self-paced
@@ -114,7 +132,7 @@ MIT's series covers:
 
 ### 5. Coursera — IBM Quantum Developer Professional Certificate
 
-**Provider:** IBM / Coursera  
+**Provider:** IBM / Coursera ([enrol here](https://www.coursera.org/professional-certificates/ibm-quantum-developer))  
 **Cost:** $49/mo (typically 4–6 months) = $196–$294  
 **Time:** 80–120 hours  
 **Format:** 5-course series, hands-on labs
@@ -217,3 +235,13 @@ The certifications worth pursuing, in order:
 Skip: CQAID and any certification from providers without direct relationships with quantum hardware manufacturers or major research institutions.
 
 The final article in this series ties everything together — a complete **post-quantum compliance audit tool** you can run against any Python codebase to identify cryptographic vulnerabilities before they become a security incident.
+
+To get hands-on with the algorithms covered in these certifications, the [Quantum-Ready Tech Stack guide](/infrastructure/quantum-ready-tech-stack/) sets up your local Qiskit environment, and [Implementing Grover's Search](/quantum-coding/grovers-search-logic-python/) is the most common practical exam topic — building it from scratch cements your understanding better than any flashcard.
+
+---
+
+## Further Reading
+
+- [IBM Quantum certification registration](https://www.ibm.com/training/certification/C0010300) — official exam page for the Qiskit Developer Certification
+- [IBM Quantum Professional Certificate on Coursera](https://www.coursera.org/professional-certificates/ibm-quantum-developer) — the deeper 5-course track with hardware capstone
+- [MIT Quantum Computing on edX](https://www.edx.org/learn/quantum-computing) — free to audit, $399 for certificate; best theoretical foundation available online
