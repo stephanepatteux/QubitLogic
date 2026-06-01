@@ -194,7 +194,7 @@ This combination signals both practical Qiskit skills (IBM cert) and theoretical
 
 **What certifications cannot replace:**
 - Demonstrated code on GitHub (Qiskit circuits, benchmarks, real hardware submissions)
-- Articles demonstrating applied knowledge (the QuantumStack series is this)
+- Articles demonstrating applied knowledge (the QubitLogic series is this)
 - Contributions to open-source quantum projects
 
 The most effective quantum developer portfolio in 2026 is: IBM certification + public code demonstrating you can actually use it. Certifications open doors; code closes them.

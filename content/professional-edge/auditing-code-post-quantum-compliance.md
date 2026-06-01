@@ -19,7 +19,7 @@ weight: 20
 
 [Post 15](/professional-edge/post-quantum-cryptography-api-security/) introduced the cryptographic vulnerabilities that quantum computing creates and the NIST PQC standards that address them. It included a basic `audit_project()` function.
 
-This final article builds that concept into a production-grade compliance tool:
+This final QubitLogic article builds that concept into a production-grade compliance tool:
 
 - Scans Python, configuration files, Dockerfiles, and CI/CD workflows
 - Classifies findings by severity and migration effort
@@ -513,7 +513,7 @@ After your first audit, use this as your migration tracking document:
 
 ## Conclusion — Phase 3 and Series Complete
 
-This audit tool brings the entire QuantumStack series full circle. You now have:
+This audit tool brings the entire QubitLogic series full circle. You now have:
 
 - The **infrastructure** to run production Python AI agents (Phase 1)
 - The **algorithms and quantum code** to build hybrid quantum-classical systems (Phase 2)
@@ -528,6 +528,6 @@ The migration cost is low. The risk of not migrating compounds every year as qua
     url="https://m.do.co/c/YOURREF"
     cta="Deploy Securely"
     badge="Recommended"
-    desc="Ubuntu 24.04 with OpenSSL 3.5. Configure post-quantum TLS, harden your Python API stack, and deploy using the full QuantumStack infrastructure guide."
+    desc="Ubuntu 24.04 with OpenSSL 3.5. Configure post-quantum TLS, harden your Python API stack, and deploy using the full QubitLogic infrastructure guide."
     price="From $6/mo"
 >}}

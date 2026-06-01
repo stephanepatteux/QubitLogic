@@ -1,7 +1,7 @@
-# Project Vision: QuantumStack.com
+# Project Vision: QubitLogic.dev
 
 ## Objective
-Build a high-performance, affiliate-focused technical blog dedicated to Quantum-AI Hybrid Development. The site serves as a "Technical Workbench" for developers and IT professionals.
+Build a high-performance, affiliate-focused technical blog dedicated to Quantum-AI Hybrid Development. The site serves as a "Technical Workbench" for developers and IT professionals. Domain: qubitlogic.dev
 
 ## Core Pillars
 1. **Practicality:** Focus on code-first tutorials (Python, Qiskit, AI Agent APIs).

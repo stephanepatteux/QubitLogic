@@ -1,4 +1,4 @@
-# Deployment Notes — QuantumStack on Ubuntu VPS + Nginx
+# Deployment Notes — QubitLogic on Ubuntu VPS + Nginx
 
 ## 1. Build the site
 
@@ -11,7 +11,7 @@ Output lands in `public/`. Copy this to your VPS.
 ## 2. Transfer to VPS
 
 ```bash
-rsync -avz --delete public/ user@YOUR_VPS_IP:/var/www/quantumstack/
+rsync -avz --delete public/ user@YOUR_VPS_IP:/var/www/qubitlogic/
 ```
 
 ## 3. Nginx site config
@@ -21,19 +21,19 @@ Create `/etc/nginx/sites-available/quantumstack`:
 ```nginx
 server {
     listen 80;
-    server_name quantumstack.com www.quantumstack.com;
+    server_name qubitlogic.dev www.qubitlogic.dev;
     return 301 https://$host$request_uri;
 }
 
 server {
     listen 443 ssl http2;
-    server_name quantumstack.com www.quantumstack.com;
+    server_name qubitlogic.dev www.qubitlogic.dev;
 
     root /var/www/quantumstack;
     index index.html;
 
-    ssl_certificate     /etc/letsencrypt/live/quantumstack.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/quantumstack.com/privkey.pem;
+    ssl_certificate     /etc/letsencrypt/live/qubitlogic.dev/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/qubitlogic.dev/privkey.pem;
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_prefer_server_ciphers on;
 
@@ -85,7 +85,7 @@ systemctl reload nginx
 
 ```bash
 apt install certbot python3-certbot-nginx -y
-certbot --nginx -d quantumstack.com -d www.quantumstack.com
+certbot --nginx -d qubitlogic.dev -d www.qubitlogic.dev
 ```
 
 ## 5. Auto-renew
@@ -99,7 +99,7 @@ systemctl list-timers | grep certbot
 ## 6. Performance checklist
 
 - [ ] PageSpeed Insights score ≥ 95 on mobile before launch
-- [ ] `curl -I https://quantumstack.com` shows `content-encoding: gzip`
+- [ ] `curl -I https://qubitlogic.dev` shows `content-encoding: gzip`
 - [ ] Lighthouse: CLS < 0.1, LCP < 1.5 s, TBT < 200 ms
 
 ## 7. Hugo version pinning

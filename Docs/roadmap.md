@@ -1,4 +1,4 @@
-# Roadmap: QuantumStack.com Content
+# Roadmap: QubitLogic.dev Content
 
 ## Phase 1: Infrastructure & Workbench
 1. How to Provision a High-Frequency VPS for AI Agent Workloads

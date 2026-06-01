@@ -1,6 +1,6 @@
 ---
 title: "Search"
 layout: "search"
-summary: "Search QuantumStack"
+summary: "Search QubitLogic"
 placeholder: "Search articles..."
 ---

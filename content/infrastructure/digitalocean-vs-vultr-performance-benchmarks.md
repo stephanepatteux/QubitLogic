@@ -17,7 +17,7 @@ weight: 7
 
 ## Overview
 
-This is the final article in Phase 1 of the QuantumStack infrastructure series. Every previous article has referenced DigitalOcean and Vultr as the two primary VPS recommendations. This article delivers the data behind those recommendations.
+This is the final article in Phase 1 of the QubitLogic infrastructure series. Every previous article has referenced DigitalOcean and Vultr as the two primary VPS recommendations. This article delivers the data behind those recommendations. All tests were run on fresh nodes provisioned for QubitLogic benchmarking.
 
 **Test setup:**
 
@@ -340,7 +340,7 @@ Save the output and compare against the tables in this article. If a provider's 
 
 ## Phase 1 Complete
 
-This article concludes **Phase 1: Infrastructure** of the QuantumStack series. Over seven articles, we built a complete, production-grade infrastructure stack for Python AI agent workloads:
+This article concludes **Phase 1: Infrastructure** of the QubitLogic series. Over seven articles, we built a complete, production-grade infrastructure stack for Python AI agent workloads:
 
 | Article | What you built |
 |---|---|

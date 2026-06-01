@@ -1,6 +1,6 @@
-baseURL = "https://quantumstack.com/"
+baseURL = "https://qubitlogic.dev/"
 locale = "en-us"
-title = "QuantumStack"
+title = "QubitLogic"
 theme = "PaperMod"
 enableRobotsTXT = true
 buildDrafts = false
@@ -15,10 +15,10 @@ paginate = 10
 
 [params]
   env = "production"
-  title = "QuantumStack"
+  title = "QubitLogic"
   description = "A technical workbench for Quantum-AI Hybrid Development. Code-first tutorials on Qiskit, AI agents, Python infrastructure, and self-hosted stacks."
   keywords = ["quantum computing", "AI development", "Qiskit", "Python", "VPS", "self-hosted", "AI agents", "quantum machine learning"]
-  author = "QuantumStack"
+  author = "QubitLogic"
   images = ["/images/og-default.png"]
 
   # Dark mode default
@@ -26,7 +26,7 @@ paginate = 10
   disableThemeToggle = false
 
   # Homepage layout
-  homeInfoParams.Title = "QuantumStack"
+  homeInfoParams.Title = "QubitLogic"
   homeInfoParams.Content = "A technical workbench for Quantum-AI Hybrid Development. Benchmarks, code, and infrastructure for developers building at the frontier."
 
   # Social / icons

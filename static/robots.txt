@@ -17,4 +17,4 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-Sitemap: https://quantumstack.com/sitemap.xml
+Sitemap: https://qubitlogic.dev/sitemap.xml
