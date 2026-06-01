@@ -592,25 +592,30 @@ code, pre, kbd, samp {
 /* ── Footer ───────────────────────────────────────────────── */
 .footer {
   border-top: 1px solid var(--qs-border-soft);
-  color: var(--qs-text-faint);
-  font-size: 0.82rem;
+  color: var(--qs-text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 1.25rem 1rem 1.5rem;
+  line-height: 1.8;
 }
 
-.ql-footer-compliance {
-  text-align: center;
-  padding: 12px 0 20px;
-  font-size: 0.78rem;
-  color: var(--qs-text-faint);
-}
-.ql-footer-compliance a {
-  color: var(--qs-text-faint);
+.footer a {
+  color: var(--qs-text-muted);
   text-decoration: none;
-  margin: 0 8px;
   transition: color var(--qs-transition);
 }
-.ql-footer-compliance a:hover { color: var(--qs-green); }
+.footer a:hover { color: var(--qs-green); }
+
+/* Site links row (params.footer.text) — About, Privacy, Affiliate */
+.footer span:first-of-type + span,
+.footer > span:nth-child(3) {
+  display: block;
+  margin-top: 0.35rem;
+}
 
 /* ── Cookie banner ────────────────────────────────────────── */
+#ql-cookie-notice a { color: var(--qs-green); }
+
 #ql-cookie-notice {
   position: fixed;
   bottom: 0;

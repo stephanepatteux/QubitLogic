@@ -1,17 +1,7 @@
-{{/* QubitLogic footer additions: newsletter signup (articles only) + compliance links + cookie notice */}}
+{{/* QubitLogic footer additions: newsletter signup (articles only) + cookie notice */}}
 {{ if and (not .IsHome) (.IsPage) (not (in (slice "about" "privacy" "affiliate-disclosure" "search" "newsletter") .File.ContentBaseName)) }}
 {{ partial "newsletter_signup.html" . }}
 {{ end }}
-
-<footer class="ql-footer-compliance">
-  <nav aria-label="Site">
-    <a href="/about/">About</a>
-    <span aria-hidden="true">·</span>
-    <a href="/privacy/">Privacy Policy</a>
-    <span aria-hidden="true">·</span>
-    <a href="/affiliate-disclosure/">Affiliate Disclosure</a>
-  </nav>
-</footer>
 
 <div id="ql-cookie-notice" role="dialog" aria-label="Cookie notice" aria-live="polite" style="display:none">
   <p>
@@ -21,52 +11,8 @@
   <button id="ql-cookie-accept" aria-label="Dismiss cookie notice">Got it</button>
 </div>
 
-<style>
-.ql-footer-compliance {
-  text-align: center;
-  padding: 12px 0 20px;
-  font-size: 0.8rem;
-  opacity: 0.6;
-}
-.ql-footer-compliance a {
-  text-decoration: none;
-  margin: 0 6px;
-}
-.ql-footer-compliance a:hover { text-decoration: underline; }
-
-#ql-cookie-notice {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--theme);
-  border-top: 1px solid var(--border);
-  padding: 12px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  font-size: 0.85rem;
-  z-index: 9999;
-  flex-wrap: wrap;
-}
-#ql-cookie-notice p { margin: 0; flex: 1; }
-#ql-cookie-accept {
-  background: var(--primary);
-  color: var(--theme);
-  border: none;
-  padding: 6px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  white-space: nowrap;
-}
-#ql-cookie-accept:hover { opacity: 0.85; }
-</style>
-
 <script>
 (function() {
-  // Cookie notice
   if (!localStorage.getItem('ql_cookie_ok')) {
     var notice = document.getElementById('ql-cookie-notice');
     if (notice) notice.style.display = 'flex';
@@ -77,7 +23,6 @@
     });
   }
 
-  // Reading progress bar (articles only)
   var bar = document.createElement('div');
   bar.id = 'qs-progress';
   document.body.prepend(bar);

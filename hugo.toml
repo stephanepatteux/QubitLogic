@@ -64,6 +64,9 @@ paginate = 10
   # [params.analytics.google]
   #   SiteVerificationTag = "YOUR_TAG"
 
+[params.footer]
+  text = '<a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/affiliate-disclosure/">Affiliate</a>'
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
