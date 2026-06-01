@@ -1,22 +1,11 @@
-{{/* QubitLogic — Beehiiv newsletter embed
-     Replace the PASTE_BEEHIIV_EMBED_HERE block with the iframe/form
-     from Beehiiv → Grow → Newsletter Forms → Embed.
-*/}}
+{{/* QubitLogic — Beehiiv subscribe form (v3 embed) */}}
 <div class="ql-newsletter-box">
   <div class="ql-newsletter-inner">
     <p class="ql-newsletter-title">One serious article per week</p>
     <p class="ql-newsletter-sub">Quantum algorithms, AI infrastructure, and financial tools — with code you can run. No hype.</p>
-    <!-- PASTE_BEEHIIV_EMBED_HERE -->
-    <iframe
-      src="https://embeds.beehiiv.com/REPLACE_WITH_YOUR_BEEHIIV_FORM_ID"
-      data-test-id="beehiiv-embed"
-      width="100%"
-      height="52"
-      frameborder="0"
-      scrolling="no"
-      style="border-radius:4px;border:1px solid var(--border,#3d3d3d);margin:0;background:transparent;"
-    ></iframe>
-    <!-- END BEEHIIV EMBED -->
+    <div class="ql-beehiiv-form">
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="ff5f3c88-b321-4bfc-ab3b-063a10784a78"></script>
+    </div>
     <p class="ql-newsletter-note">Free. No spam. Unsubscribe any time.</p>
   </div>
 </div>
@@ -39,6 +28,9 @@
   font-size: 0.88rem;
   opacity: 0.75;
   margin: 0 0 1rem;
+}
+.ql-beehiiv-form {
+  min-height: 52px;
 }
 .ql-newsletter-note {
   font-size: 0.75rem;
