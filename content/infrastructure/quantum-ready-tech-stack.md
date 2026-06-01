@@ -183,12 +183,12 @@ print(task.result().measurement_counts)
 Cost: $0.01 per task + $0.00035 per shot on IonQ Aria via Braket. A 100-shot experiment costs ~$0.045.
 
 {{< affiliate_box
-    name="AWS Braket"
-    url="AFFILIATE_LINK_AWS_BRAKET"
-    cta="Start Free Trial"
-    badge="Multi-Provider"
-    desc="Run circuits on IonQ, Rigetti, Oxford Quantum Circuits, and simulators from a single SDK. $0.00035/shot on IonQ Aria. Free tier includes 1 hour of local simulator."
-    price="From $0.01/task"
+    name="Paperspace GPU Cloud"
+    url="AFFILIATE_LINK_PAPERSPACE"
+    cta="Start with GPU Cloud"
+    badge="25% Off First Month"
+    desc="GPU-accelerated quantum simulation with Qiskit Aer GPU and PennyLane lightning.gpu — both CUDA-compatible. A100 instances from $2.30/hr, with pay-per-hour billing."
+    price="From $0.07/hr"
 >}}
 
 ---

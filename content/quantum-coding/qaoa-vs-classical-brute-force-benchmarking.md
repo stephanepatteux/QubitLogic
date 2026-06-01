@@ -300,10 +300,10 @@ This is not a reason to dismiss QAOA — it is a reason to understand where it s
 The next article takes a different quantum algorithm — **Grover's search** — and implements it from scratch in Python, with a concrete database search use case and an honest assessment of its classical vs quantum tradeoff.
 
 {{< affiliate_box
-    name="AWS Braket"
-    url="AFFILIATE_LINK_AWS_BRAKET"
-    cta="Run on Real Hardware"
-    badge="Multi-Provider"
-    desc="Test these QAOA circuits on IonQ Aria (99.4% 2Q fidelity) or Rigetti hardware via a single SDK. Free tier includes 1 hour of local simulator time per month."
-    price="From $0.01/task"
+    name="Paperspace GPU Cloud"
+    url="AFFILIATE_LINK_PAPERSPACE"
+    cta="Run QAOA on GPU"
+    badge="25% Off First Month"
+    desc="GPU-accelerated Qiskit Aer simulation cuts QAOA benchmark runtimes by 10–50×. Run the full 6–20 node benchmark suite on an A100 instance in minutes rather than hours."
+    price="From $0.07/hr"
 >}}
