@@ -283,10 +283,10 @@ Key takeaways:
 The next article examines how circuit depth affects simulation time — and how to redesign circuits to reduce gate count without changing output quality.
 
 {{< affiliate_box
-    name="IBM Quantum"
-    url="https://quantum.ibm.com"
-    cta="Access Real Hardware"
-    badge="Free Tier"
-    desc="Run the VQC and quantum kernel circuits from this article on IBM's 127-qubit Eagle processors. The free tier gives enough access for educational and benchmarking use."
-    price="Free to start"
+    name="Paperspace GPU Cloud"
+    url="AFFILIATE_LINK_PAPERSPACE"
+    cta="Run QML on GPU"
+    badge="25% Off First Month"
+    desc="GPU-accelerated VQC training with PennyLane lightning.gpu is 10–40× faster than CPU simulation. Paperspace A100 instances let you iterate hybrid quantum-classical models at ML research speed."
+    price="From $0.07/hr"
 >}}

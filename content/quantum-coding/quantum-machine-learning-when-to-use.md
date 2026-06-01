@@ -197,6 +197,46 @@ Provides `VQC`, `QSVC`, `QNNClassifier`, and `SamplerQNN` — all sklearn-compat
 
 ---
 
+## 2026 Hardware Landscape: What This Means for QML Timelines
+
+Understanding where quantum hardware stands is essential context for the decision framework above.
+
+### Current NISQ Constraints
+
+The "quantum advantage" threshold for QML requires circuits deep enough to express features that classical kernels cannot — roughly 50+ high-fidelity qubits with two-qubit gate error rates below 0.1%. Current hardware status:
+
+| Platform | Best qubit count | 2Q gate error | QML verdict |
+|---|---|---|---|
+| IBM Heron (127Q) | 127 | ~0.1–0.3% | NISQ limits still apply |
+| Google Willow | 105 | ~0.1% | Same constraints |
+| IonQ Forte | 36 | ~0.3% | Too few qubits for deep QML |
+| Quantinuum H2 | 56 | ~0.05% | Best fidelity, limited scale |
+
+No current platform has demonstrated QML advantage on a real dataset against a well-tuned classical baseline. The honest position in 2026: **NISQ QML is a research tool, not a production advantage**.
+
+### The Error Correction Threshold
+
+Fault-tolerant quantum computing (FTQC) requires logical qubits with error rates below ~10^-6, achieved by encoding 1,000–10,000 physical qubits into 1 logical qubit. IBM's roadmap targets useful FTQC workloads around 2029–2033. Google's Willow chip demonstrated below-threshold error correction in late 2024.
+
+**Practical implication:** If your use case genuinely requires quantum advantage, plan for FTQC hardware timelines. For QML applications that might benefit from quantum kernels, start building the classical infrastructure now and test quantum components as hardware improves.
+
+### Running QML Cost-Effectively
+
+Developing quantum ML locally with Aer simulation has no hardware cost. For GPU-accelerated simulation:
+
+{{< affiliate_box
+    name="Paperspace GPU Cloud"
+    url="AFFILIATE_LINK_PAPERSPACE"
+    cta="Run QML on GPU"
+    badge="25% Off First Month"
+    desc="PennyLane lightning.gpu and Qiskit Aer GPU both accelerate quantum circuit simulation by 10–50×. Paperspace A100 instances let you simulate 28+ qubit QML circuits without waiting hours per training run."
+    price="From $0.07/hr"
+>}}
+
+For real hardware access, IBM Quantum's free tier (5–7 qubit systems) is sufficient for educational QML experiments. Production QML research uses the paid IBM Quantum Network access.
+
+---
+
 ## The Honest Summary
 
 {{< code_benchmark title="QML decision matrix — 2026 practical guidance" >}}
