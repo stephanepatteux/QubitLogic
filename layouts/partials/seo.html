@@ -1,0 +1,106 @@
+{{/*
+  QuantumStack SEO partial
+  Outputs: JSON-LD Article schema + extended Open Graph + Twitter Card + AI-crawler hints
+  Include in: layouts/partials/extend_head.html (PaperMod hook)
+*/}}
+
+{{ $isPost := and (not .IsHome) (.IsPage) }}
+{{ $siteName := .Site.Title }}
+{{ $siteURL  := .Site.BaseURL | strings.TrimSuffix "/" }}
+{{ $pageURL  := .Permalink }}
+{{ $desc     := .Description | default .Summary | default .Site.Params.description }}
+{{ $image    := "" }}
+{{ with .Params.images }}{{ $image = index . 0 }}{{ else }}{{ $image = "/images/og-default.png" }}{{ end }}
+{{ $imageAbs := printf "%s%s" $siteURL $image }}
+
+{{/* ── Open Graph ───────────────────────────────────────────────── */}}
+<meta property="og:site_name"   content="{{ $siteName }}">
+<meta property="og:url"         content="{{ $pageURL }}">
+<meta property="og:title"       content="{{ .Title }}">
+<meta property="og:description" content="{{ $desc | truncate 200 }}">
+<meta property="og:image"       content="{{ $imageAbs }}">
+<meta property="og:image:width"  content="1200">
+<meta property="og:image:height" content="630">
+{{ if $isPost }}
+<meta property="og:type"         content="article">
+<meta property="article:author"  content="{{ .Site.Params.author | default $siteName }}">
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta property="article:modified_time"  content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+{{ range .Params.tags }}
+<meta property="article:tag" content="{{ . }}">
+{{ end }}
+{{ else }}
+<meta property="og:type" content="website">
+{{ end }}
+
+{{/* ── Twitter Card ──────────────────────────────────────────────── */}}
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="{{ .Title }}">
+<meta name="twitter:description" content="{{ $desc | truncate 200 }}">
+<meta name="twitter:image"       content="{{ $imageAbs }}">
+
+{{/* ── Canonical ──────────────────────────────────────────────────── */}}
+<link rel="canonical" href="{{ $pageURL }}">
+
+{{/* ── AI Crawler / LLM hints ───────────────────────────────────── */}}
+{{/*
+  These meta tags assist AI search crawlers (Perplexity, ChatGPT browsing,
+  Gemini) in correctly attributing authorship and content type.
+*/}}
+<meta name="author"  content="{{ .Site.Params.author | default $siteName }}">
+<meta name="robots"  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+{{/* ── JSON-LD Article / WebSite ─────────────────────────────────── */}}
+{{ if $isPost }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": {{ .Title | jsonify }},
+  "description": {{ $desc | truncate 200 | jsonify }},
+  "image": {{ $imageAbs | jsonify }},
+  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified":  "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+  "author": {
+    "@type": "Organization",
+    "name": {{ $siteName | jsonify }},
+    "url": {{ $siteURL | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ $siteName | jsonify }},
+    "url": {{ $siteURL | jsonify }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ printf "%s/images/logo.png" $siteURL | jsonify }}
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ $pageURL | jsonify }}
+  }{{ with .Params.series }},
+  "isPartOf": {
+    "@type": "CreativeWorkSeries",
+    "name": {{ index . 0 | jsonify }}
+  }{{ end }}
+}
+</script>
+{{ else if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ $siteName | jsonify }},
+  "url": {{ $siteURL | jsonify }},
+  "description": {{ .Site.Params.description | jsonify }},
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": {{ printf "%s/search/?q={search_term_string}" $siteURL | jsonify }}
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+{{ end }}

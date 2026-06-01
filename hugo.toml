@@ -1,0 +1,123 @@
+baseURL = "https://quantumstack.com/"
+locale = "en-us"
+title = "QuantumStack"
+theme = "PaperMod"
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+enableEmoji = true
+paginate = 10
+
+[minify]
+  disableXML = true
+  minifyOutput = true
+
+[params]
+  env = "production"
+  title = "QuantumStack"
+  description = "A technical workbench for Quantum-AI Hybrid Development. Code-first tutorials on Qiskit, AI agents, Python infrastructure, and self-hosted stacks."
+  keywords = ["quantum computing", "AI development", "Qiskit", "Python", "VPS", "self-hosted", "AI agents", "quantum machine learning"]
+  author = "QuantumStack"
+  images = ["/images/og-default.png"]
+
+  # Dark mode default
+  defaultTheme = "dark"
+  disableThemeToggle = false
+
+  # Homepage layout
+  homeInfoParams.Title = "QuantumStack"
+  homeInfoParams.Content = "A technical workbench for Quantum-AI Hybrid Development. Benchmarks, code, and infrastructure for developers building at the frontier."
+
+  # Social / icons
+  socialIcons = [
+    { name = "github", url = "https://github.com/" },
+    { name = "rss", url = "/index.xml" }
+  ]
+
+  # Reading experience
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+  disableSpecial1stPost = false
+  disableScrollToTop = false
+  comments = false
+  hidemeta = false
+  hideSummary = false
+
+  # Search
+  fuseOpts.isCaseSensitive = false
+  fuseOpts.shouldSort = true
+  fuseOpts.location = 0
+  fuseOpts.distance = 1000
+  fuseOpts.threshold = 0.4
+  fuseOpts.minMatchCharLength = 2
+  fuseOpts.keys = ["title", "permalink", "summary", "content"]
+
+  # Analytics placeholder (replace with your ID)
+  # [params.analytics.google]
+  #   SiteVerificationTag = "YOUR_TAG"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true          # allow raw HTML in markdown (needed for shortcodes with HTML)
+  [markup.highlight]
+    noClasses = false        # use external CSS for syntax highlighting
+    lineNos = true
+    lineNumbersInTable = true
+    style = "monokai"
+
+[taxonomies]
+  tag = "tags"
+  series = "series"
+  category = "categories"
+
+[menu]
+  [[menu.main]]
+    identifier = "infrastructure"
+    name = "Infrastructure"
+    url = "/infrastructure/"
+    weight = 10
+  [[menu.main]]
+    identifier = "quantum-coding"
+    name = "Quantum Coding"
+    url = "/quantum-coding/"
+    weight = 20
+  [[menu.main]]
+    identifier = "professional-edge"
+    name = "Professional Edge"
+    url = "/professional-edge/"
+    weight = 30
+  [[menu.main]]
+    identifier = "search"
+    name = "Search"
+    url = "/search/"
+    weight = 40
+  [[menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags/"
+    weight = 50
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]   # JSON required for client-side search
+
+[privacy]
+  [privacy.vimeo]
+    disabled = false
+    simple = true
+  [privacy.x]
+    disabled = false
+    enableDNT = true
+    simple = true
+  [privacy.instagram]
+    disabled = false
+    simple = true
+  [privacy.youtube]
+    disabled = false
+    privacyEnhanced = true

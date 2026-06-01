@@ -1,0 +1,21 @@
+{{/*
+  code_benchmark shortcode — renders a benchmark comparison table.
+  Parameters:
+    title  - Table caption (optional)
+
+  Usage (content between open/close tags is raw markdown table rows):
+    {{< code_benchmark title="DigitalOcean vs Vultr — fio 4K random read" >}}
+    | Provider | IOPS | Latency (ms) | Price/mo |
+    |---|---|---|---|
+    | DigitalOcean | 92,000 | 0.21 | $12 |
+    | Vultr | 88,500 | 0.23 | $10 |
+    {{< /code_benchmark >}}
+*/}}
+
+{{ $title := .Get "title" }}
+<figure class="qs-benchmark">
+  {{ if $title }}<figcaption>{{ $title }}</figcaption>{{ end }}
+  <div class="qs-benchmark-table">
+    {{ .Inner | markdownify }}
+  </div>
+</figure>

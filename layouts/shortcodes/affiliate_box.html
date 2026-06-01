@@ -1,0 +1,63 @@
+{{/*
+  affiliate_box shortcode
+  Parameters:
+    name    - Display name of the product/service (required)
+    url     - Affiliate URL (required)
+    cta     - Call-to-action button text (default: "Get Started")
+    badge   - Short badge label, e.g. "Recommended", "Best Value" (optional)
+    logo    - Path to logo image under /static/images/ (optional)
+    desc    - Short description sentence (optional)
+    price   - Pricing hint, e.g. "$6/mo" (optional)
+
+  Usage:
+    {{< affiliate_box
+        name="DigitalOcean"
+        url="https://m.do.co/c/YOURREF"
+        cta="Deploy a Droplet"
+        badge="Recommended"
+        desc="High-frequency VPS with SSD NVMe. Best price-to-performance for AI workloads."
+        price="From $6/mo"
+    >}}
+*/}}
+
+{{ $name  := .Get "name"  | default "Partner" }}
+{{ $url   := .Get "url"   | default "#" }}
+{{ $cta   := .Get "cta"   | default "Get Started" }}
+{{ $badge := .Get "badge" }}
+{{ $logo  := .Get "logo"  }}
+{{ $desc  := .Get "desc"  }}
+{{ $price := .Get "price" }}
+
+<div class="qs-affiliate-box" role="complementary" aria-label="Affiliate recommendation: {{ $name }}">
+  {{ if $badge }}
+  <span class="qs-affiliate-badge">{{ $badge }}</span>
+  {{ end }}
+
+  <div class="qs-affiliate-inner">
+    {{ if $logo }}
+    <div class="qs-affiliate-logo">
+      <img src="/images/{{ $logo }}" alt="{{ $name }} logo" loading="lazy" width="80" height="40">
+    </div>
+    {{ end }}
+
+    <div class="qs-affiliate-content">
+      <p class="qs-affiliate-name">{{ $name }}</p>
+      {{ if $desc }}<p class="qs-affiliate-desc">{{ $desc }}</p>{{ end }}
+      {{ if $price }}<p class="qs-affiliate-price">{{ $price }}</p>{{ end }}
+    </div>
+
+    <div class="qs-affiliate-action">
+      <a href="{{ $url }}"
+         target="_blank"
+         rel="noopener nofollow sponsored"
+         class="qs-affiliate-btn"
+         data-affiliate="{{ $name | urlize }}">
+        {{ $cta }} &rarr;
+      </a>
+    </div>
+  </div>
+
+  <p class="qs-affiliate-disclosure">
+    <small>Disclosure: This is an affiliate link. QuantumStack may earn a commission at no extra cost to you.</small>
+  </p>
+</div>

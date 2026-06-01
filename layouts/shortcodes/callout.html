@@ -1,0 +1,19 @@
+{{/*
+  callout shortcode — styled info/warning/tip boxes.
+  Parameters:
+    type  - "info" | "warning" | "tip" | "danger" (default: "info")
+    title - Box heading (optional)
+
+  Usage:
+    {{< callout type="warning" title="Rate Limits Apply" >}}
+    The free tier of this API caps at 100 requests/day.
+    {{< /callout >}}
+*/}}
+
+{{ $type  := .Get "type"  | default "info" }}
+{{ $title := .Get "title" }}
+
+<div class="qs-callout qs-callout--{{ $type }}" role="note">
+  {{ if $title }}<p class="qs-callout-title">{{ $title }}</p>{{ end }}
+  <div class="qs-callout-body">{{ .Inner | markdownify }}</div>
+</div>

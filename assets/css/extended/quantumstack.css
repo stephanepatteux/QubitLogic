@@ -1,0 +1,273 @@
+/* ============================================================
+   QuantumStack brand overrides for PaperMod
+   File: assets/css/extended/quantumstack.css
+   PaperMod auto-imports all files in assets/css/extended/
+   ============================================================ */
+
+/* ── Brand Colour Tokens ────────────────────────────────────── */
+:root {
+  --qs-green:       #00ff9d;   /* primary accent — quantum green */
+  --qs-green-dim:   #00cc7a;
+  --qs-blue:        #0af;
+  --qs-bg:          #0d0d0f;
+  --qs-surface:     #141418;
+  --qs-surface-2:   #1c1c22;
+  --qs-border:      #2a2a35;
+  --qs-text:        #e2e2e8;
+  --qs-text-muted:  #888899;
+  --qs-font-mono:   "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  --qs-font-sans:   "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
+body {
+  background-color: var(--qs-bg);
+  color: var(--qs-text);
+  font-family: var(--qs-font-sans);
+}
+
+code, pre, kbd, samp {
+  font-family: var(--qs-font-mono);
+}
+
+/* ── Header / Nav ───────────────────────────────────────────── */
+.header {
+  border-bottom: 1px solid var(--qs-border);
+  background: var(--qs-bg);
+}
+
+.logo a,
+.logo span {
+  color: var(--qs-green) !important;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+#menu .menu-item a {
+  color: var(--qs-text-muted);
+  transition: color 0.15s ease;
+}
+#menu .menu-item a:hover {
+  color: var(--qs-green);
+}
+
+/* ── Post Cards ─────────────────────────────────────────────── */
+.post-entry {
+  background: var(--qs-surface);
+  border: 1px solid var(--qs-border);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+.post-entry:hover {
+  border-color: var(--qs-green);
+  transform: translateY(-2px);
+}
+
+.post-entry .entry-header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* ── Article Typography ─────────────────────────────────────── */
+.post-content h2 {
+  border-bottom: 1px solid var(--qs-border);
+  padding-bottom: 0.3rem;
+  margin-top: 2.5rem;
+  color: var(--qs-text);
+}
+
+.post-content h3 {
+  color: var(--qs-text);
+  margin-top: 2rem;
+}
+
+.post-content a {
+  color: var(--qs-green);
+  text-decoration: none;
+}
+.post-content a:hover {
+  text-decoration: underline;
+}
+
+/* ── Code Blocks ────────────────────────────────────────────── */
+.highlight pre {
+  background: var(--qs-surface-2) !important;
+  border: 1px solid var(--qs-border);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+}
+
+/* ── Affiliate Box ───────────────────────────────────────────── */
+.qs-affiliate-box {
+  position: relative;
+  background: var(--qs-surface);
+  border: 1px solid var(--qs-green-dim);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem 1rem;
+  margin: 2rem 0;
+}
+
+.qs-affiliate-badge {
+  position: absolute;
+  top: -0.65rem;
+  left: 1rem;
+  background: var(--qs-green);
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.6rem;
+  border-radius: 3px;
+}
+
+.qs-affiliate-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.qs-affiliate-logo img {
+  max-width: 80px;
+  height: auto;
+  filter: brightness(0.9);
+}
+
+.qs-affiliate-content {
+  flex: 1;
+}
+
+.qs-affiliate-name {
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0 0 0.25rem;
+  color: var(--qs-text);
+}
+
+.qs-affiliate-desc {
+  font-size: 0.88rem;
+  color: var(--qs-text-muted);
+  margin: 0 0 0.2rem;
+}
+
+.qs-affiliate-price {
+  font-size: 0.85rem;
+  color: var(--qs-green);
+  font-weight: 600;
+  margin: 0;
+}
+
+.qs-affiliate-btn {
+  display: inline-block;
+  background: var(--qs-green);
+  color: #000 !important;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 5px;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.qs-affiliate-btn:hover {
+  background: #fff;
+  transform: translateY(-1px);
+}
+
+.qs-affiliate-disclosure {
+  margin: 0.75rem 0 0;
+  color: var(--qs-text-muted);
+  font-size: 0.75rem;
+}
+
+/* ── Callout Boxes ───────────────────────────────────────────── */
+.qs-callout {
+  border-left: 3px solid;
+  background: var(--qs-surface-2);
+  border-radius: 0 6px 6px 0;
+  padding: 0.9rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.qs-callout--info    { border-color: var(--qs-blue); }
+.qs-callout--warning { border-color: #f5a623; }
+.qs-callout--tip     { border-color: var(--qs-green); }
+.qs-callout--danger  { border-color: #e05252; }
+
+.qs-callout-title {
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.4rem;
+  color: var(--qs-text);
+}
+
+.qs-callout-body > *:last-child { margin-bottom: 0; }
+
+/* ── Benchmark Table ─────────────────────────────────────────── */
+.qs-benchmark {
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+
+.qs-benchmark figcaption {
+  font-size: 0.8rem;
+  color: var(--qs-text-muted);
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.qs-benchmark table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.qs-benchmark th {
+  background: var(--qs-surface-2);
+  color: var(--qs-green);
+  font-weight: 700;
+  padding: 0.6rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--qs-border);
+}
+.qs-benchmark td {
+  padding: 0.55rem 1rem;
+  border-bottom: 1px solid var(--qs-border);
+  color: var(--qs-text);
+}
+.qs-benchmark tr:hover td {
+  background: var(--qs-surface-2);
+}
+
+/* ── TOC ─────────────────────────────────────────────────────── */
+#TableOfContents {
+  background: var(--qs-surface);
+  border: 1px solid var(--qs-border);
+  border-radius: 6px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+#TableOfContents a {
+  color: var(--qs-text-muted);
+}
+#TableOfContents a:hover {
+  color: var(--qs-green);
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+.footer {
+  border-top: 1px solid var(--qs-border);
+  color: var(--qs-text-muted);
+  font-size: 0.82rem;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .qs-affiliate-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
