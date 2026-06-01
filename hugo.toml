@@ -104,11 +104,6 @@ paginate = 10
     url = "/start-here/"
     weight = 40
   [[menu.main]]
-    identifier = "about"
-    name = "About"
-    url = "/about/"
-    weight = 45
-  [[menu.main]]
     identifier = "search"
     name = "Search"
     url = "/search/"
