@@ -3,7 +3,7 @@ title: "CI/CD Pipeline for AI Python Scripts"
 date: 2026-06-01T16:00:00+01:00
 lastmod: 2026-06-01T13:00:00+01:00
 draft: false
-description: "Build a production CI/CD pipeline for Python AI agent scripts using GitHub Actions — automated testing with pytest, dependency auditing, type checking, and zero-downtime deployment to a Linux VPS via SSH."
+description: "GitHub Actions CI/CD for Python AI scripts — pytest, dependency auditing, mypy type checking, and zero-downtime SSH deployment to a Linux VPS. Complete workflow included."
 summary: "Manually SSHing into your VPS to deploy updated agent code is a liability. This guide builds a complete GitHub Actions pipeline that tests, audits, and deploys Python AI scripts to a VPS automatically on every push to main."
 
 series: ["Phase 1: Infrastructure"]

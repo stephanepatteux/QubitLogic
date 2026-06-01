@@ -3,7 +3,7 @@ title: "Post-Quantum Cryptography: API Security Vulnerabilities"
 date: 2026-06-01T08:00:00+01:00
 lastmod: 2026-06-01T17:30:00+01:00
 draft: false
-description: "A developer-focused breakdown of which cryptographic algorithms are vulnerable to quantum attacks, which NIST PQC standards replace them, and how to audit and harden Python API stacks right now — before quantum hardware matures."
+description: "Post-quantum cryptography for Python APIs — which algorithms are vulnerable to quantum attacks, NIST FIPS replacements, and how to audit and migrate your API stack now."
 summary: "RSA-2048 and ECDSA are broken by a sufficiently powerful quantum computer. That hardware does not exist yet — but 'harvest now, decrypt later' attacks mean your API traffic is at risk today. Here is what to fix and how."
 
 series: ["Phase 3: Professional Edge"]
@@ -11,6 +11,14 @@ tags: ["security", "cryptography", "post-quantum", "api", "python", "tls", "nist
 categories: ["tutorial"]
 
 images: ["/images/og-default.png"]
+
+faq:
+  - q: "Is RSA-2048 still safe to use in 2026?"
+    a: "RSA-2048 is safe against classical attacks today. However, 'harvest now, decrypt later' attacks mean adversaries can store encrypted traffic now and decrypt it once fault-tolerant quantum computers exist (estimated 5–15 years). For long-lived secrets and sensitive API traffic, migration to NIST FIPS 203/204/205 algorithms should begin now."
+  - q: "Which NIST post-quantum algorithms should I use?"
+    a: "NIST finalised three standards in 2024: ML-KEM (FIPS 203) for key encapsulation, ML-DSA (FIPS 204) for digital signatures, and SLH-DSA (FIPS 205) as a hash-based signature fallback. For TLS, migrate to ML-KEM. For code signing, use ML-DSA."
+  - q: "How do I find quantum-vulnerable cryptography in my Python codebase?"
+    a: "Use static analysis tools to scan for RSA, ECDSA, ECDH, and DH usage. The companion article 'Auditing Code for Post-Quantum Compliance' provides a complete Python scanner that identifies vulnerable primitives and generates a prioritised remediation report."
 
 weight: 15
 ---

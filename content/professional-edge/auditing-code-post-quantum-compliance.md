@@ -3,7 +3,7 @@ title: "Auditing Code for Post-Quantum Compliance"
 date: 2026-06-01T15:30:00+01:00
 lastmod: 2026-06-01T20:00:00+01:00
 draft: false
-description: "A complete Python tool for auditing codebases for post-quantum cryptographic compliance — scanning for vulnerable algorithms, generating remediation reports, and integrating into CI/CD pipelines."
+description: "Post-quantum compliance audit tool in Python — scan codebases for vulnerable crypto, generate prioritised remediation reports, and integrate PQC checks into CI/CD pipelines."
 summary: "The post-quantum migration starts with knowing what you have. This guide builds a production-grade compliance audit tool in Python that scans any codebase, generates a prioritised remediation report, and runs automatically in your CI/CD pipeline."
 
 series: ["Phase 3: Professional Edge"]

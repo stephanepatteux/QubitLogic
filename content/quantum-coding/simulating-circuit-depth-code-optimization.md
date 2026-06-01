@@ -3,7 +3,7 @@ title: "Simulating Circuit Depth: Code Optimization"
 date: 2026-06-01T15:00:00+01:00
 lastmod: 2026-06-01T16:00:00+01:00
 draft: false
-description: "How circuit depth affects simulation time and hardware noise — and how to reduce it using Qiskit's transpiler, gate cancellation, and circuit rewriting. Includes benchmarks and reproducible optimization techniques."
+description: "Qiskit circuit depth optimisation — transpiler levels, gate cancellation, and circuit rewriting to reduce noise and simulation time. Benchmarks and reproducible commands."
 summary: "Deep circuits are slow to simulate and noisy on real hardware. This guide covers Qiskit transpiler optimization levels, gate cancellation, circuit rewriting, and how to measure and reduce depth without changing your circuit's logical output."
 
 series: ["Phase 2: Quantum Coding"]
@@ -34,12 +34,12 @@ pip install qiskit qiskit-aer qiskit-ibm-runtime
 ```
 
 {{< affiliate_box
-    name="IBM Quantum"
-    url="AFFILIATE_LINK_IBM_QUANTUM"
-    cta="Access IBM Quantum"
-    badge="Free Tier Available"
-    desc="Test your optimised circuits on real IBM hardware. The free tier gives access to 5–7 qubit systems — enough to validate transpiler optimisation results against actual device noise."
-    price="Free"
+    name="Paperspace GPU Cloud"
+    url="AFFILIATE_LINK_PAPERSPACE"
+    cta="Start with GPU Cloud"
+    badge="25% Off First Month"
+    desc="Run Qiskit Aer simulations on A100 GPU instances. Circuit simulation with GPU-accelerated statevectors is 10–50× faster than CPU — critical when benchmarking transpiler optimisation at scale."
+    price="From $0.07/hr"
 >}}
 
 ---

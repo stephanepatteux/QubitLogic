@@ -3,7 +3,7 @@ title: "Bridging Qiskit and Scikit-Learn: Hybrid Workflow"
 date: 2026-06-01T13:30:00+01:00
 lastmod: 2026-06-01T15:30:00+01:00
 draft: false
-description: "A practical guide to integrating Qiskit quantum circuits into a Scikit-Learn pipeline — building a quantum kernel classifier, wrapping a variational quantum circuit as a sklearn estimator, and benchmarking against classical SVM and random forest."
+description: "Qiskit + Scikit-Learn hybrid ML — quantum kernel SVM as a sklearn estimator, benchmarked against classical SVM and random forest with GridSearchCV and cross-validation."
 summary: "Qiskit circuits and Scikit-Learn pipelines can be composed directly using the sklearn estimator protocol. This guide builds a quantum kernel SVM and a variational quantum classifier that plug into GridSearchCV, Pipeline, and cross_val_score."
 
 series: ["Phase 2: Quantum Coding"]

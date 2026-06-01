@@ -96,11 +96,6 @@ paginate = 10
     url = "/professional-edge/"
     weight = 30
   [[menu.main]]
-    identifier = "about"
-    name = "About"
-    url = "/about/"
-    weight = 35
-  [[menu.main]]
     identifier = "search"
     name = "Search"
     url = "/search/"
@@ -110,6 +105,11 @@ paginate = 10
     name = "Tags"
     url = "/tags/"
     weight = 50
+  [[menu.main]]
+    identifier = "start-here"
+    name = "Start Here"
+    url = "/start-here/"
+    weight = 55
   [[menu.main]]
     identifier = "about"
     name = "About"

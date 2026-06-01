@@ -3,7 +3,7 @@ title: "Cost-Effective Cloud Architecture for Backtesting Pipelines"
 date: 2026-06-01T14:30:00+01:00
 lastmod: 2026-06-01T12:30:00+01:00
 draft: false
-description: "How to architect a Python backtesting pipeline on a single $24/mo VPS — parallel strategy execution with multiprocessing, memory-mapped data, chunked I/O, and overnight batch scheduling that won't OOM your server."
+description: "Python backtesting pipeline on a $24/mo VPS — multiprocessing pools, memory-mapped data loading, chunked I/O, and cron scheduling for 500+ overnight strategy runs."
 summary: "Running 500 strategy variations overnight on a $24/mo VPS is an architecture problem, not a hardware problem. This guide covers memory-mapped data loading, multiprocessing pools, chunked result storage, and cron scheduling for backtesting pipelines."
 
 series: ["Phase 1: Infrastructure"]

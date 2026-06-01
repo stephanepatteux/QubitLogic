@@ -1,4 +1,7 @@
-{{/* QubitLogic footer additions: compliance links + cookie notice */}}
+{{/* QubitLogic footer additions: newsletter signup (articles only) + compliance links + cookie notice */}}
+{{ if and (not .IsHome) (.IsPage) (not (in (slice "about" "privacy" "affiliate-disclosure" "search" "newsletter") .File.ContentBaseName)) }}
+{{ partial "newsletter_signup.html" . }}
+{{ end }}
 
 <footer class="ql-footer-compliance">
   <nav aria-label="Legal">

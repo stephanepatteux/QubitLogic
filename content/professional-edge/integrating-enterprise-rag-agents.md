@@ -3,7 +3,7 @@ title: "Integrating Enterprise-Grade RAG Agents"
 date: 2026-06-01T09:30:00+01:00
 lastmod: 2026-06-01T18:00:00+01:00
 draft: false
-description: "A production architecture for enterprise RAG agents — covering chunking strategy, embedding model selection, vector database choice, retrieval evaluation with RAGAS, and deployment on a self-hosted VPS stack."
+description: "Enterprise RAG agent architecture — chunking strategy, embedding model selection, vector DB choice, RAGAS retrieval evaluation, and self-hosted VPS deployment guide."
 summary: "A RAG agent that works in a demo often fails in production. This guide covers the architectural decisions that separate reliable enterprise RAG from brittle prototype RAG — chunking, retrieval evaluation, reranking, and self-hosted deployment."
 
 series: ["Phase 3: Professional Edge"]

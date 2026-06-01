@@ -3,7 +3,7 @@ title: "QAOA vs. Classical Brute Force: A Benchmarking Guide"
 date: 2026-06-01T10:30:00+01:00
 lastmod: 2026-06-01T14:30:00+01:00
 draft: false
-description: "A rigorous Python benchmark comparing QAOA against brute force, greedy, and simulated annealing across MaxCut problem sizes from 6 to 20 nodes — with reproducible code and an honest answer to when QAOA is worth using."
+description: "QAOA vs classical benchmark — MaxCut across 6–20 nodes comparing brute force, greedy, and simulated annealing. Reproducible code and an honest verdict on when QAOA wins."
 summary: "When does QAOA beat classical methods? We ran controlled benchmarks across problem sizes 6–20 nodes with four algorithms. Here is the data, the crossover point, and what it actually means for practical quantum development."
 
 series: ["Phase 2: Quantum Coding"]
@@ -11,6 +11,14 @@ tags: ["qiskit", "qaoa", "benchmarks", "optimization", "python", "classical-algo
 categories: ["benchmark"]
 
 images: ["/images/og-default.png"]
+
+faq:
+  - q: "When does QAOA outperform classical optimization?"
+    a: "Our benchmarks show QAOA does not consistently outperform classical methods at problem sizes achievable on current NISQ hardware (under 50 qubits). Simulated annealing and greedy algorithms match or beat QAOA on MaxCut up to 20 nodes. QAOA shows theoretical promise for specific problem structures at scale, but practical quantum advantage is not demonstrated yet."
+  - q: "What problem size is needed for QAOA to beat classical methods?"
+    a: "Current research suggests quantum advantage may emerge beyond 50–100 qubits with error correction. On NISQ devices (noisy, under 133 qubits), QAOA approximation ratios typically fall below classical simulated annealing due to gate errors accumulating in deep circuits."
+  - q: "Is QAOA worth learning in 2026?"
+    a: "Yes — QAOA is the canonical variational quantum algorithm and understanding it is essential for quantum computing careers. The skills transfer directly to VQE, QSVM, and future fault-tolerant implementations. Even if QAOA does not beat classical today, the tooling and problem formulation skills are immediately valuable."
 
 weight: 9
 ---

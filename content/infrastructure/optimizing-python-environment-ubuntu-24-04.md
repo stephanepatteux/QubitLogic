@@ -3,7 +3,7 @@ title: "Optimizing Python Environment Performance on Ubuntu 24.04 LTS"
 date: 2026-06-01T11:30:00+01:00
 lastmod: 2026-06-01T11:30:00+01:00
 draft: false
-description: "A practical guide to squeezing maximum Python performance from Ubuntu 24.04 — covering virtual environment isolation, dependency pinning, uvicorn worker tuning, profiling, and memory optimisation for AI agent workloads."
+description: "Python performance on Ubuntu 24.04 — venv isolation, uvicorn worker sizing, py-spy profiling, and memory optimisation for AI agent workloads. Reproducible benchmarks."
 summary: "The default Python setup on Ubuntu 24.04 leaves significant performance on the table. This guide covers venv strategy, dependency pinning, uvicorn worker count formulas, and how to profile and fix the real bottlenecks in your AI agent stack."
 
 series: ["Phase 1: Infrastructure"]

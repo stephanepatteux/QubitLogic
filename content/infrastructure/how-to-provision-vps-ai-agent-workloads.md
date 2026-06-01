@@ -3,7 +3,7 @@ title: "How to Provision a High-Frequency VPS for AI Agent Workloads"
 date: 2026-06-01T08:30:00+01:00
 lastmod: 2026-06-01T10:00:00+01:00
 draft: false
-description: "A step-by-step guide to provisioning, hardening, and benchmarking a Linux VPS optimised for Python AI agent workloads — covering CPU governor tuning, swap configuration, Nginx, and provider selection."
+description: "VPS for AI agent workloads on Ubuntu 24.04 — provision, harden, and benchmark with sysbench and fio. CPU governor tuning, swap config, Nginx, and cloud provider selection."
 summary: "Stop running AI agents on commodity shared hosting. This guide walks you through selecting, provisioning, and benchmarking a high-frequency VPS — with real fio and sysbench numbers for DigitalOcean and Vultr."
 
 series: ["Phase 1: Infrastructure"]

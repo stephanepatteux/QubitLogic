@@ -3,7 +3,7 @@ title: "Agentic Workflows vs. Manual Scripts: A Benchmark"
 date: 2026-06-01T12:30:00+01:00
 lastmod: 2026-06-01T19:00:00+01:00
 draft: false
-description: "A controlled benchmark comparing LangGraph agentic workflows against equivalent hand-written Python scripts across four task categories — with cost, latency, reliability, and maintenance metrics."
+description: "LangGraph vs Python scripts benchmark — agentic AI vs deterministic code across data pipelines, research, code generation, and API orchestration. Cost, latency, and reliability measured."
 summary: "Agentic AI is not always better than a well-written script. We benchmarked LangGraph agents against deterministic Python across four task types: data pipeline, research synthesis, code generation, and multi-step API orchestration. Here is when to use each."
 
 series: ["Phase 3: Professional Edge"]

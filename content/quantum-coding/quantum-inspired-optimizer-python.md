@@ -3,7 +3,7 @@ title: "Building a Quantum-Inspired Optimizer in Python"
 date: 2026-06-01T09:00:00+01:00
 lastmod: 2026-06-01T14:00:00+01:00
 draft: false
-description: "A step-by-step Python implementation of a quantum-inspired optimizer using QAOA on Qiskit Aer — solving a weighted MaxCut problem and comparing results against a classical greedy baseline."
+description: "QAOA optimizer in Python with Qiskit — implement quantum-inspired MaxCut from scratch, build the cost Hamiltonian, and benchmark against a classical greedy baseline."
 summary: "Quantum-inspired optimization does not require a quantum computer. This guide implements QAOA from scratch in Python using Qiskit, applies it to a real combinatorial problem (MaxCut), and benchmarks it honestly against classical alternatives."
 
 series: ["Phase 2: Quantum Coding"]

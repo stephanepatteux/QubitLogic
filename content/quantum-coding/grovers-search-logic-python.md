@@ -3,7 +3,7 @@ title: "Implementing Grover's Search Logic in Python"
 date: 2026-06-01T12:00:00+01:00
 lastmod: 2026-06-01T15:00:00+01:00
 draft: false
-description: "A complete Python implementation of Grover's search algorithm using Qiskit — from oracle construction to amplitude amplification — with a database search use case and honest classical vs quantum comparison."
+description: "Grover's algorithm in Python with Qiskit — oracle construction, amplitude amplification, iteration count formula, and honest O(√N) vs O(N) benchmark with Qiskit Aer."
 summary: "Grover's algorithm searches an unsorted database in O(√N) steps vs O(N) classical. This guide implements it from scratch in Qiskit with a concrete use case, explains every gate, and benchmarks the real-world tradeoff."
 
 series: ["Phase 2: Quantum Coding"]
@@ -11,6 +11,14 @@ tags: ["qiskit", "grovers-algorithm", "quantum-computing", "python", "search", "
 categories: ["tutorial"]
 
 images: ["/images/og-default.png"]
+
+faq:
+  - q: "What is Grover's algorithm used for in practice?"
+    a: "Grover's algorithm searches an unsorted database in O(√N) steps vs O(N) classically. Practical applications include database search, cryptanalysis (halving symmetric key security), satisfiability problems, and as a subroutine in other quantum algorithms. Currently limited to simulators and small-scale quantum hardware."
+  - q: "How many qubits does Grover's algorithm require?"
+    a: "The qubit count equals the number of bits needed to index your search space, plus ancilla qubits for the oracle. Searching 2^n items requires n qubits. A 10-item search uses 4 qubits (2^4=16 ≥ 10). Real hardware implementations are currently limited to ~10–20 qubits before noise degrades results."
+  - q: "Does Grover's algorithm break AES encryption?"
+    a: "Grover's halves the effective key length of symmetric ciphers: AES-128 drops to 64-bit security, AES-256 to 128-bit. This means AES-256 remains secure against Grover's attacks. However, building a quantum computer capable of running Grover's at cryptographic scale requires millions of logical qubits — far beyond current hardware."
 
 weight: 10
 ---
@@ -32,12 +40,12 @@ pip install qiskit qiskit-aer numpy
 ```
 
 {{< affiliate_box
-    name="IBM Quantum"
-    url="AFFILIATE_LINK_IBM_QUANTUM"
-    cta="Access IBM Quantum"
-    badge="Free Tier Available"
-    desc="Run your Grover's circuits on real quantum hardware — IBM Quantum offers free access to 5–7 qubit systems for registered developers. No credit card required."
-    price="Free"
+    name="Brilliant.org — Quantum Computing Course"
+    url="AFFILIATE_LINK_BRILLIANT"
+    cta="Try Brilliant Free"
+    badge="Best Foundations Course"
+    desc="Master the linear algebra and gate mechanics behind Grover's algorithm with Brilliant's interactive quantum computing course — built for developers who learn by doing."
+    price="From $15.99/mo"
 >}}
 
 ---

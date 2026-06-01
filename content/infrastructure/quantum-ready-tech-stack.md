@@ -3,7 +3,7 @@ title: "The Quantum-Ready Tech Stack: Hardware and Cloud Recommendations"
 date: 2026-06-01T13:00:00+01:00
 lastmod: 2026-06-01T12:00:00+01:00
 draft: false
-description: "A practical hardware and cloud service guide for developers building at the intersection of quantum computing and AI — covering real quantum backends, simulators, classical co-processors, and the services worth paying for in 2026."
+description: "Quantum-AI developer stack 2026 — IBM Quantum, IonQ, and Azure Quantum reviewed with real cost breakdowns, simulator options, and honest hardware capability ratings."
 summary: "You do not need a quantum computer on your desk. You need the right access layer. This guide maps every tier of the quantum-AI stack — from local Qiskit simulators to IBM and IonQ cloud backends — with honest cost and capability assessments."
 
 series: ["Phase 1: Infrastructure"]

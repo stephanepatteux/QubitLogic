@@ -3,7 +3,7 @@ title: "Quantum Machine Learning: When to Use It"
 date: 2026-06-01T17:30:00+01:00
 lastmod: 2026-06-01T17:00:00+01:00
 draft: false
-description: "A data-driven decision framework for when quantum machine learning adds value over classical ML — covering quantum kernel advantage conditions, the dequantization threat, hardware requirements, and a practical checklist for 2026."
+description: "When to use quantum machine learning — kernel advantage conditions, dequantization risks, hardware requirements, and a go/no-go decision framework for developers in 2026."
 summary: "Quantum ML is not always better than classical ML. This guide gives you a decision framework — based on kernel theory, dequantization results, and benchmark data from this series — for identifying the specific conditions where QML earns its place."
 
 series: ["Phase 2: Quantum Coding"]
