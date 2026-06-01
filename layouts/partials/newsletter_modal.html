@@ -1,0 +1,29 @@
+{{/* Newsletter subscribe modal — shown once per visitor until dismissed */}}
+<div id="ql-newsletter-modal" class="ql-modal" role="dialog" aria-modal="true" aria-labelledby="ql-modal-title" hidden>
+  <div class="ql-modal-backdrop" data-ql-modal-close></div>
+  <div class="ql-modal-panel">
+    <button type="button" class="ql-modal-close" data-ql-modal-close aria-label="Close">×</button>
+    <div class="ql-modal-layout">
+      <div class="ql-modal-visual" aria-hidden="true">
+        <img src="/images/banner-quantum.svg" alt="" width="480" height="128">
+      </div>
+      <div class="ql-modal-form">
+        <h2 id="ql-modal-title" class="ql-modal-title">Stay ahead of the quantum curve</h2>
+        <p class="ql-modal-desc">Join developers getting one serious tutorial per week — with runnable code, honest benchmarks, and no vendor fluff.</p>
+        <div class="ql-beehiiv-form ql-beehiiv-form--modal">
+          <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="ff5f3c88-b321-4bfc-ab3b-063a10784a78"></script>
+        </div>
+        <p class="ql-modal-note">Free. No spam. <a href="/newsletter/">Learn more</a></p>
+        <button type="button" class="ql-modal-dismiss" data-ql-modal-close>No thanks</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button type="button" id="ql-newsletter-fab" class="ql-newsletter-fab" aria-label="Subscribe to newsletter" title="Subscribe" hidden>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+    <polyline points="22,6 12,13 2,6"/>
+  </svg>
+  <span>Subscribe</span>
+</button>

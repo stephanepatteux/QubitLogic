@@ -1,0 +1,10 @@
+{{/* Section list page header image */}}
+{{ $banner := "" }}
+{{ if eq .Section "infrastructure" }}{{ $banner = "/images/banner-infrastructure.svg" }}{{ end }}
+{{ if eq .Section "quantum-coding" }}{{ $banner = "/images/banner-quantum.svg" }}{{ end }}
+{{ if eq .Section "professional-edge" }}{{ $banner = "/images/banner-professional.svg" }}{{ end }}
+{{ if $banner }}
+<figure class="ql-section-banner">
+  <img src="{{ $banner }}" alt="{{ .Title }} — QubitLogic" width="1200" height="320" loading="eager">
+</figure>
+{{ end }}

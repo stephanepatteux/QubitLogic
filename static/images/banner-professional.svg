@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0c0c0f"/>
+      <stop offset="1" stop-color="#0f1418"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="600" y1="0" x2="600" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38bdf8" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#00e87a" stop-opacity="0.04"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="320" fill="url(#bg)"/>
+  <rect width="1200" height="320" fill="url(#glow)"/>
+  <g stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1">
+    <rect x="380" y="100" width="440" height="150" rx="10"/>
+    <path d="M420 200 L480 140 L540 180 L600 120 L660 170 L720 130 L780 200"/>
+    <line x1="420" y1="130" x2="780" y2="130"/>
+    <circle cx="480" cy="140" r="5" fill="#00e87a" fill-opacity="0.7"/>
+    <circle cx="600" cy="120" r="5" fill="#fbbf24" fill-opacity="0.7"/>
+    <circle cx="720" cy="130" r="5" fill="#38bdf8" fill-opacity="0.7"/>
+  </g>
+  <text x="600" y="175" text-anchor="middle" fill="#e4e4ec" font-family="system-ui,sans-serif" font-size="28" font-weight="700">Professional Edge</text>
+  <text x="600" y="210" text-anchor="middle" fill="#8888a0" font-family="system-ui,sans-serif" font-size="14">PQC · RAG · APIs · Compliance</text>
+</svg>

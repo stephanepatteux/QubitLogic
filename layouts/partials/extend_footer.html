@@ -1,7 +1,5 @@
-{{/* QubitLogic footer additions: newsletter signup (articles only) + cookie notice */}}
-{{ if and (not .IsHome) (.IsPage) (not (in (slice "about" "privacy" "affiliate-disclosure" "search" "newsletter") .File.ContentBaseName)) }}
-{{ partial "newsletter_signup.html" . }}
-{{ end }}
+{{/* Footer: cookie notice, newsletter modal, reading progress */}}
+{{ partial "newsletter_modal.html" . }}
 
 <div id="ql-cookie-notice" role="dialog" aria-label="Cookie notice" aria-live="polite" style="display:none">
   <p>
@@ -13,25 +11,100 @@
 
 <script>
 (function() {
-  if (!localStorage.getItem('ql_cookie_ok')) {
+  var COOKIE_KEY = 'ql_cookie_ok';
+  var NL_KEY = 'ql_newsletter_dismiss';
+  var skipPages = ['/newsletter/', '/privacy/', '/affiliate-disclosure/'];
+
+  function pathSkip() {
+    var p = location.pathname;
+    return skipPages.some(function(s) { return p === s || p === s.slice(0,-1); });
+  }
+
+  // Cookie banner
+  if (!localStorage.getItem(COOKIE_KEY)) {
     var notice = document.getElementById('ql-cookie-notice');
     if (notice) notice.style.display = 'flex';
     var btn = document.getElementById('ql-cookie-accept');
     if (btn) btn.addEventListener('click', function() {
-      localStorage.setItem('ql_cookie_ok', '1');
+      localStorage.setItem(COOKIE_KEY, '1');
       notice.style.display = 'none';
+      maybeShowNewsletter(1500);
     });
   }
 
+  // Reading progress
   var bar = document.createElement('div');
   bar.id = 'qs-progress';
   document.body.prepend(bar);
-  function updateProgress() {
+  window.addEventListener('scroll', function() {
     var el = document.documentElement;
     var scrolled = el.scrollTop || document.body.scrollTop;
     var total = el.scrollHeight - el.clientHeight;
     bar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+    checkScrollTrigger();
+  }, { passive: true });
+
+  // Newsletter modal
+  var modal = document.getElementById('ql-newsletter-modal');
+  var fab = document.getElementById('ql-newsletter-fab');
+  var shown = false;
+  var scrollTriggered = false;
+
+  function openModal() {
+    if (!modal || localStorage.getItem(NL_KEY)) return;
+    modal.removeAttribute('hidden');
+    document.body.classList.add('ql-modal-open');
+    if (fab) fab.hidden = true;
   }
-  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  function closeModal(persist) {
+    if (!modal) return;
+    modal.setAttribute('hidden', '');
+    document.body.classList.remove('ql-modal-open');
+    if (persist) {
+      localStorage.setItem(NL_KEY, '1');
+      if (fab) fab.hidden = false;
+    }
+  }
+
+  if (modal) {
+    modal.querySelectorAll('[data-ql-modal-close]').forEach(function(el) {
+      el.addEventListener('click', function() { closeModal(true); });
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !modal.hasAttribute('hidden')) closeModal(true);
+    });
+  }
+
+  if (fab) {
+    fab.addEventListener('click', function() {
+      localStorage.removeItem(NL_KEY);
+      openModal();
+    });
+  }
+
+  function maybeShowNewsletter(delay) {
+    if (pathSkip() || localStorage.getItem(NL_KEY) || shown) return;
+    shown = true;
+    setTimeout(openModal, delay || 0);
+  }
+
+  function checkScrollTrigger() {
+    if (scrollTriggered || pathSkip() || localStorage.getItem(NL_KEY)) return;
+    var el = document.documentElement;
+    var pct = el.scrollTop / (el.scrollHeight - el.clientHeight);
+    if (pct > 0.35) {
+      scrollTriggered = true;
+      maybeShowNewsletter(500);
+    }
+  }
+
+  if (!pathSkip()) {
+    if (localStorage.getItem(NL_KEY)) {
+      if (fab) fab.hidden = false;
+    } else if (localStorage.getItem(COOKIE_KEY)) {
+      setTimeout(function() { maybeShowNewsletter(0); }, 8000);
+    }
+  }
 })();
 </script>

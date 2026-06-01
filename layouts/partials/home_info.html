@@ -1,0 +1,35 @@
+{{- with site.Params.homeInfoParams }}
+<article class="first-entry home-info ql-hero">
+  <div class="ql-hero-bg" aria-hidden="true"></div>
+  <div class="ql-hero-inner">
+    <header class="entry-header">
+      <p class="ql-hero-eyebrow">Quantum · AI · Infrastructure</p>
+      <h1>{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="entry-content md-content ql-hero-desc">
+      {{ $opts := dict "display" "block" }}
+      {{ .Content | $.Page.RenderString $opts }}
+    </div>
+    <div class="ql-phase-cards">
+      <a class="ql-phase-card" href="/infrastructure/">
+        <img src="/images/banner-infrastructure.svg" alt="" width="400" height="107" loading="eager">
+        <span class="ql-phase-label">Phase 1 — Infrastructure</span>
+      </a>
+      <a class="ql-phase-card" href="/quantum-coding/">
+        <img src="/images/banner-quantum.svg" alt="" width="400" height="107" loading="eager">
+        <span class="ql-phase-label">Phase 2 — Quantum Coding</span>
+      </a>
+      <a class="ql-phase-card" href="/professional-edge/">
+        <img src="/images/banner-professional.svg" alt="" width="400" height="107" loading="eager">
+        <span class="ql-phase-label">Phase 3 — Professional Edge</span>
+      </a>
+    </div>
+    <p class="ql-hero-cta">
+      New here? <a href="/start-here/">Start with the learning path →</a>
+    </p>
+    <footer class="entry-footer">
+      {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+    </footer>
+  </div>
+</article>
+{{- end }}

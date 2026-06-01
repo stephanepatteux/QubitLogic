@@ -1,40 +1,17 @@
-{{/* QubitLogic — Beehiiv subscribe form (v3 embed) */}}
+{{/* Beehiiv subscribe form — use inside modal or /newsletter/ page */}}
 <div class="ql-newsletter-box">
   <div class="ql-newsletter-inner">
-    <p class="ql-newsletter-title">One serious article per week</p>
-    <p class="ql-newsletter-sub">Quantum algorithms, AI infrastructure, and financial tools — with code you can run. No hype.</p>
+    <div class="ql-newsletter-icon" aria-hidden="true">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+    </div>
+    <p class="ql-newsletter-title">Weekly digest for developers</p>
+    <p class="ql-newsletter-sub">One article per week — quantum algorithms, AI infrastructure, and Python you can run. No hype.</p>
     <div class="ql-beehiiv-form">
       <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="ff5f3c88-b321-4bfc-ab3b-063a10784a78"></script>
     </div>
-    <p class="ql-newsletter-note">Free. No spam. Unsubscribe any time.</p>
+    <p class="ql-newsletter-note">Free · Unsubscribe any time · PQC checklist for new subscribers</p>
   </div>
 </div>
-
-<style>
-.ql-newsletter-box {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  border: 1px solid var(--border, #3d3d3d);
-  border-radius: 8px;
-  background: var(--entry, #1e1e1e);
-}
-.ql-newsletter-inner { max-width: 480px; }
-.ql-newsletter-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin: 0 0 0.25rem;
-}
-.ql-newsletter-sub {
-  font-size: 0.88rem;
-  opacity: 0.75;
-  margin: 0 0 1rem;
-}
-.ql-beehiiv-form {
-  min-height: 52px;
-}
-.ql-newsletter-note {
-  font-size: 0.75rem;
-  opacity: 0.5;
-  margin: 0.5rem 0 0;
-}
-</style>

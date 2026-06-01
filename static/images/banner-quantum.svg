@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0c0c0f"/>
+      <stop offset="1" stop-color="#120f1a"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="160" x2="1200" y2="160" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a78bfa" stop-opacity="0.12"/>
+      <stop offset="0.5" stop-color="#00e87a" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="320" fill="url(#bg)"/>
+  <rect width="1200" height="320" fill="url(#glow)"/>
+  <g stroke="#a78bfa" stroke-opacity="0.35" stroke-width="1.5">
+    <circle cx="600" cy="155" r="70"/>
+    <circle cx="600" cy="155" r="45"/>
+    <line x1="600" y1="85" x2="600" y2="225"/>
+    <line x1="530" y1="155" x2="670" y2="155"/>
+    <line x1="550" y1="105" x2="650" y2="205"/>
+    <line x1="650" y1="105" x2="550" y2="205"/>
+  </g>
+  <circle cx="530" cy="105" r="6" fill="#00e87a" fill-opacity="0.8"/>
+  <circle cx="670" cy="205" r="6" fill="#38bdf8" fill-opacity="0.8"/>
+  <text x="600" y="175" text-anchor="middle" fill="#e4e4ec" font-family="system-ui,sans-serif" font-size="28" font-weight="700">Quantum Coding</text>
+  <text x="600" y="210" text-anchor="middle" fill="#8888a0" font-family="system-ui,sans-serif" font-size="14">Qiskit · QAOA · Grover's · QML</text>
+</svg>
