@@ -28,10 +28,12 @@ jobs:
           SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/deploy_key
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H 51.195.86.197 >> ~/.ssh/known_hosts
+          ssh-keyscan -H 51.195.86.197 >> ~/.ssh/known_hosts 2>/dev/null
+          echo "Key fingerprint:"
+          ssh-keygen -lf ~/.ssh/deploy_key
           rsync -avz --delete \
-            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts" \
             public/ \
             ubuntu@51.195.86.197:/var/www/qubitlogic/
