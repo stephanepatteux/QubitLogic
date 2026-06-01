@@ -1,6 +1,6 @@
 ---
 title: "Implementing Grover's Search Logic in Python"
-date: 2026-06-01T10:00:00+01:00
+date: 2026-06-01T12:00:00+01:00
 lastmod: 2026-06-01T15:00:00+01:00
 draft: false
 description: "A complete Python implementation of Grover's search algorithm using Qiskit — from oracle construction to amplitude amplification — with a database search use case and honest classical vs quantum comparison."

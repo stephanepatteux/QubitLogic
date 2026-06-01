@@ -1,6 +1,6 @@
 ---
 title: "Integrating Enterprise-Grade RAG Agents"
-date: 2026-06-01T08:30:00+01:00
+date: 2026-06-01T09:30:00+01:00
 lastmod: 2026-06-01T18:00:00+01:00
 draft: false
 description: "A production architecture for enterprise RAG agents — covering chunking strategy, embedding model selection, vector database choice, retrieval evaluation with RAGAS, and deployment on a self-hosted VPS stack."

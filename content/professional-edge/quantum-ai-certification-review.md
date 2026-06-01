@@ -1,6 +1,6 @@
 ---
 title: "Review: Are Quantum AI Certifications Worth It?"
-date: 2026-06-01T10:00:00+01:00
+date: 2026-06-01T14:00:00+01:00
 lastmod: 2026-06-01T19:30:00+01:00
 draft: false
 description: "An honest review of the major quantum computing and quantum AI certifications available in 2026 — covering IBM Quantum, Classiq, AWS Braket, and university programs — with a verdict on ROI for working developers."

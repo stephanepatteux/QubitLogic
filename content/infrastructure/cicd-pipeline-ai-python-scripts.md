@@ -1,6 +1,6 @@
 ---
 title: "CI/CD Pipeline for AI Python Scripts"
-date: 2026-06-01T13:00:00+01:00
+date: 2026-06-01T16:00:00+01:00
 lastmod: 2026-06-01T13:00:00+01:00
 draft: false
 description: "Build a production CI/CD pipeline for Python AI agent scripts using GitHub Actions — automated testing with pytest, dependency auditing, type checking, and zero-downtime deployment to a Linux VPS via SSH."

@@ -1,6 +1,6 @@
 ---
 title: "The Quantum-Ready Tech Stack: Hardware and Cloud Recommendations"
-date: 2026-06-01T12:00:00+01:00
+date: 2026-06-01T13:00:00+01:00
 lastmod: 2026-06-01T12:00:00+01:00
 draft: false
 description: "A practical hardware and cloud service guide for developers building at the intersection of quantum computing and AI — covering real quantum backends, simulators, classical co-processors, and the services worth paying for in 2026."

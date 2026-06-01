@@ -1,6 +1,6 @@
 ---
 title: "Agentic Workflows vs. Manual Scripts: A Benchmark"
-date: 2026-06-01T09:30:00+01:00
+date: 2026-06-01T12:30:00+01:00
 lastmod: 2026-06-01T19:00:00+01:00
 draft: false
 description: "A controlled benchmark comparing LangGraph agentic workflows against equivalent hand-written Python scripts across four task categories — with cost, latency, reliability, and maintenance metrics."

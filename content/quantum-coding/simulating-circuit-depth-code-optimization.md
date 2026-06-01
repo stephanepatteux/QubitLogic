@@ -1,6 +1,6 @@
 ---
 title: "Simulating Circuit Depth: Code Optimization"
-date: 2026-06-01T11:00:00+01:00
+date: 2026-06-01T15:00:00+01:00
 lastmod: 2026-06-01T16:00:00+01:00
 draft: false
 description: "How circuit depth affects simulation time and hardware noise — and how to reduce it using Qiskit's transpiler, gate cancellation, and circuit rewriting. Includes benchmarks and reproducible optimization techniques."

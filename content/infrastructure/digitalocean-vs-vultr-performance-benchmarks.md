@@ -1,6 +1,6 @@
 ---
 title: "DigitalOcean vs. Vultr: Performance Benchmarks for AI Agent Workloads"
-date: 2026-06-01T13:30:00+01:00
+date: 2026-06-01T17:00:00+01:00
 lastmod: 2026-06-01T13:30:00+01:00
 draft: false
 description: "A reproducible head-to-head benchmark of DigitalOcean Premium AMD vs Vultr High Frequency — CPU, disk I/O, memory bandwidth, network latency, and real-world Python AI agent workloads tested on equivalent $12/mo plans."

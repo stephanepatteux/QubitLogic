@@ -1,6 +1,6 @@
 ---
 title: "Top 5 APIs for Real-Time Financial Data (2026)"
-date: 2026-06-01T09:00:00+01:00
+date: 2026-06-01T11:00:00+01:00
 lastmod: 2026-06-01T18:30:00+01:00
 draft: false
 description: "A developer's comparison of the top 5 real-time financial data APIs in 2026 — covering latency, rate limits, data quality, Python integration, and cost — for AI agent and algorithmic trading use cases."

@@ -1,6 +1,6 @@
 ---
 title: "Nginx Reverse Proxy: Securing Your Python AI API"
-date: 2026-06-01T11:00:00+01:00
+date: 2026-06-01T10:00:00+01:00
 lastmod: 2026-06-01T11:00:00+01:00
 draft: false
 description: "A production Nginx configuration for Python AI APIs — covering TLS termination via Certbot, rate limiting, upstream health checks, and proxy timeout tuning for slow LLM responses."

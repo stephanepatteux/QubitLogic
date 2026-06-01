@@ -1,6 +1,6 @@
 ---
 title: "How to Provision a High-Frequency VPS for AI Agent Workloads"
-date: 2026-06-01T10:00:00+01:00
+date: 2026-06-01T08:30:00+01:00
 lastmod: 2026-06-01T10:00:00+01:00
 draft: false
 description: "A step-by-step guide to provisioning, hardening, and benchmarking a Linux VPS optimised for Python AI agent workloads — covering CPU governor tuning, swap configuration, Nginx, and provider selection."

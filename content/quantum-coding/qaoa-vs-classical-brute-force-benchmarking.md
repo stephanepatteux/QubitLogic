@@ -1,6 +1,6 @@
 ---
 title: "QAOA vs. Classical Brute Force: A Benchmarking Guide"
-date: 2026-06-01T09:30:00+01:00
+date: 2026-06-01T10:30:00+01:00
 lastmod: 2026-06-01T14:30:00+01:00
 draft: false
 description: "A rigorous Python benchmark comparing QAOA against brute force, greedy, and simulated annealing across MaxCut problem sizes from 6 to 20 nodes — with reproducible code and an honest answer to when QAOA is worth using."

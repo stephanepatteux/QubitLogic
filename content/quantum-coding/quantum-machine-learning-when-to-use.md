@@ -1,6 +1,6 @@
 ---
 title: "Quantum Machine Learning: When to Use It"
-date: 2026-06-01T12:00:00+01:00
+date: 2026-06-01T17:30:00+01:00
 lastmod: 2026-06-01T17:00:00+01:00
 draft: false
 description: "A data-driven decision framework for when quantum machine learning adds value over classical ML — covering quantum kernel advantage conditions, the dequantization threat, hardware requirements, and a practical checklist for 2026."

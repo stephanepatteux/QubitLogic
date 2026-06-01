@@ -1,6 +1,6 @@
 ---
 title: "Cost-Effective Cloud Architecture for Backtesting Pipelines"
-date: 2026-06-01T12:30:00+01:00
+date: 2026-06-01T14:30:00+01:00
 lastmod: 2026-06-01T12:30:00+01:00
 draft: false
 description: "How to architect a Python backtesting pipeline on a single $24/mo VPS — parallel strategy execution with multiprocessing, memory-mapped data, chunked I/O, and overnight batch scheduling that won't OOM your server."

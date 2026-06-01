@@ -1,6 +1,6 @@
 ---
 title: "Solving the Traveling Salesperson Problem with Simulated Annealing"
-date: 2026-06-01T11:30:00+01:00
+date: 2026-06-01T16:30:00+01:00
 lastmod: 2026-06-01T16:30:00+01:00
 draft: false
 description: "A complete Python implementation of simulated annealing for the Travelling Salesperson Problem — with 2-opt local search, adaptive cooling schedules, convergence analysis, and benchmarks up to 500 cities."
