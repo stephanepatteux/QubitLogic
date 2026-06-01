@@ -64,13 +64,27 @@
 
 <script>
 (function() {
-  if (localStorage.getItem('ql_cookie_ok')) return;
-  var notice = document.getElementById('ql-cookie-notice');
-  if (notice) notice.style.display = 'flex';
-  var btn = document.getElementById('ql-cookie-accept');
-  if (btn) btn.addEventListener('click', function() {
-    localStorage.setItem('ql_cookie_ok', '1');
-    notice.style.display = 'none';
-  });
+  // Cookie notice
+  if (!localStorage.getItem('ql_cookie_ok')) {
+    var notice = document.getElementById('ql-cookie-notice');
+    if (notice) notice.style.display = 'flex';
+    var btn = document.getElementById('ql-cookie-accept');
+    if (btn) btn.addEventListener('click', function() {
+      localStorage.setItem('ql_cookie_ok', '1');
+      notice.style.display = 'none';
+    });
+  }
+
+  // Reading progress bar (articles only)
+  var bar = document.createElement('div');
+  bar.id = 'qs-progress';
+  document.body.prepend(bar);
+  function updateProgress() {
+    var el = document.documentElement;
+    var scrolled = el.scrollTop || document.body.scrollTop;
+    var total = el.scrollHeight - el.clientHeight;
+    bar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
 })();
 </script>
