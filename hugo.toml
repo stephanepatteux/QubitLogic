@@ -22,6 +22,12 @@ paginate = 10
   author = "QubitLogic"
   images = ["/images/og-default.png"]
 
+  # Header logo
+  [params.label]
+    text = ""
+    icon = "/images/logo.svg"
+    iconHeight = 36
+
   # Dark mode default
   defaultTheme = "dark"
   disableThemeToggle = false
