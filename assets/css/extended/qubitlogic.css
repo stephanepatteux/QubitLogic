@@ -644,7 +644,24 @@ code, pre, kbd, samp {
 }
 #ql-cookie-accept:hover { background: #fff; }
 
-/* ── Search ───────────────────────────────────────────────── */
+/* ── Nav: hide "Search" text, keep icon button only ──────── */
+#menu a[href="/search/"] {
+  font-size: 0;           /* hide text */
+  padding: 0 6px;
+}
+#menu a[href="/search/"]::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238888a0' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") center/contain no-repeat;
+  vertical-align: middle;
+}
+#menu a[href="/search/"]:hover::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2300e87a' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+}
+
+/* ── Search page ──────────────────────────────────────────── */
 #searchbox input {
   background: var(--qs-surface);
   border: 1px solid var(--qs-border);
