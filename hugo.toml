@@ -32,7 +32,7 @@ paginate = 10
 
   # Social / icons
   socialIcons = [
-    { name = "github", url = "https://github.com/stephanepatteux" },
+    { name = "github", url = "https://github.com/stephanepatteux/QubitLogic" },
     { name = "rss", url = "/index.xml" }
   ]
 
@@ -44,6 +44,7 @@ paginate = 10
   ShowCodeCopyButtons = true
   ShowToc = true
   TocOpen = false
+  ShowSeriesNavigation = true
   disableSpecial1stPost = false
   disableScrollToTop = false
   comments = false
