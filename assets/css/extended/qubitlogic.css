@@ -127,7 +127,7 @@ code, pre, kbd, samp {
   z-index: 100;
 }
 
-.logo a, .logo span {
+.logo a.logo-link {
   color: var(--primary) !important;
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -135,13 +135,25 @@ code, pre, kbd, samp {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  text-decoration: none;
 }
 
-/* Icon inherits currentColor from the anchor, orbits adapt to theme */
-.logo a img, .logo span img {
-  display: block;
+.logo-mark {
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
+  color: var(--primary);
 }
+
+.logo-wordmark {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.logo-qubit { color: var(--primary); }
+.logo-logic { color: var(--qs-green); }
 
 #menu .menu-item a {
   color: var(--qs-text-muted);
