@@ -23,6 +23,20 @@ faq:
 weight: 8
 ---
 
+## Quick Summary
+
+Based on sysbench CPU and fio NVMe testing across equivalent $5–$12/mo plans (June 2026):
+
+| Provider | Single-core sysbench score | fio 4K random read | Best for | Action |
+|:---|:---|:---|:---|:---|
+| **Vultr High Frequency** | **1,074 events/s** | **~410 MB/s** | Raw AI compute, low-latency Python APIs | [Deploy on Vultr](AFFILIATE_LINK_VULTR) |
+| **Hetzner CX22** | 939 events/s | ~250 MB/s | RAM-heavy backtesting, EU workloads, cost-sensitivity | [Deploy on Hetzner](AFFILIATE_LINK_HETZNER) |
+| **DigitalOcean Premium AMD** | 772 events/s | ~150 MB/s | Best documentation, US staging, beginners | [Deploy on DO](AFFILIATE_LINK_DIGITALOCEAN) |
+
+**Bottom line:** Vultr wins on raw single-core throughput for Python API workloads. Hetzner wins on price-to-RAM ratio — 4 GB for ~$5/mo is unmatched. DigitalOcean wins on developer experience and US network reliability. Full methodology and reproducible commands below.
+
+---
+
 ## Overview
 
 The [DigitalOcean vs Vultr benchmark](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/) has been one of the most-read posts on QubitLogic since it went up. The feedback was consistent: *where's Hetzner?* Fair point. Hetzner Cloud has quietly become the go-to provider for European developers running AI workloads, with pricing that makes DigitalOcean and Vultr look expensive by comparison. This article supersedes that earlier benchmark with a three-way comparison at equivalent (or as close as the pricing allows) plan tiers.
@@ -424,3 +438,16 @@ Run each test at least three times and use the median. A single-run benchmark nu
 {{< callout type="info" >}}
 These benchmarks reflect shared VPS performance in June 2026. Cloud providers continuously refresh hardware and occasionally migrate instances to newer host generations. Re-run this suite every quarter if you are making cost-optimisation decisions based on performance data.
 {{< /callout >}}
+
+{{< affiliate_box
+    name="Hetzner Cloud"
+    url="AFFILIATE_LINK_HETZNER"
+    cta="Start on Hetzner"
+    badge="Best Value"
+    desc="CX22: 2 vCPU AMD EPYC, 4 GB RAM, 40 GB NVMe — from €4.51/mo. Best price-to-RAM ratio in this benchmark. EU datacentres (Nuremberg, Helsinki) + US (Ashburn)."
+    price="From €4.51/mo"
+>}}
+
+---
+
+*Part of [Phase 1: Infrastructure](/infrastructure/) — [See the full learning path](/start-here/)*

@@ -385,6 +385,51 @@ The reranker alone delivers the largest single improvement (+0.23 faithfulness) 
 
 ---
 
+## Web Scraping and IP Ban Architecture
+
+Enterprise RAG systems that ingest data from external web sources — competitor intelligence, regulatory filings, news feeds, financial disclosures — hit a consistent production failure: **IP bans**.
+
+A single VPS IP making repeated structured requests to the same domain will be rate-limited or banned within hours. This is not a bug in your scraping logic; it is the target site's bot detection working correctly. The architectural fix is a residential or datacenter proxy layer between your agent and the target.
+
+{{< callout type="warning" title="IP bans will silently corrupt your RAG pipeline" >}}
+An IP-banned scraper returns HTTP 403, empty responses, or—most dangerously—CAPTCHAs that your parser interprets as content. Your vector store gets poisoned with garbage chunks that will surface as confident-sounding hallucinations. Always validate scraper output before ingestion.
+{{< /callout >}}
+
+Two proxy providers used in production RAG deployments at scale:
+
+| Provider | Type | Locations | Pricing | Best for |
+|:---|:---|:---|:---|:---|
+| **Bright Data** | Residential + Datacenter | 195 countries, 72M+ IPs | Pay-as-you-go from ~$10.50/GB | High-scale scraping, JS rendering, anti-bot bypass |
+| **Oxylabs** | Residential + Datacenter | 195+ countries, 100M+ IPs | From $15/GB | Enterprise SLAs, financial data sources, compliance |
+
+**Integration pattern** — route your `httpx` or `requests` session through the proxy:
+
+```python
+import httpx
+import os
+
+PROXY_URL = os.getenv("BRIGHTDATA_PROXY_URL")  # or OXYLABS_PROXY_URL
+
+async def fetch_with_proxy(url: str) -> str:
+    async with httpx.AsyncClient(proxies=PROXY_URL, timeout=30) as client:
+        response = await client.get(url)
+        response.raise_for_status()
+        return response.text
+```
+
+Use this as the fetch layer before passing content to your document loader. Rotate sessions per domain and per scraping job — never reuse a session across target sites.
+
+{{< affiliate_box
+    name="Bright Data"
+    url="AFFILIATE_LINK_BRIGHTDATA"
+    cta="Start Free Trial"
+    badge="Enterprise Proxy"
+    desc="72M+ residential IPs across 195 countries. Built-in JavaScript rendering, CAPTCHA bypass, and structured data extraction. The standard proxy infrastructure for production-scale RAG pipelines."
+    price="From ~$10.50/GB"
+>}}
+
+---
+
 ## Conclusion
 
 Enterprise RAG quality is determined by four decisions in order of impact:
@@ -393,5 +438,10 @@ Enterprise RAG quality is determined by four decisions in order of impact:
 2. **Reranking** — cross-encoder on top-20 vector candidates, return top-5
 3. **Embedding model** — `bge-large-en-v1.5` for self-hosted, `text-embedding-3-large` for API
 4. **Evaluation** — RAGAS metrics before and after every change; faithfulness > 0.85 is the production bar
+5. **Data ingestion hygiene** — proxy-backed scraping with output validation before vector store writes
 
 The next article covers the data layer feeding RAG agents for financial use cases — the top 5 APIs for real-time financial data and how to integrate them into an agent pipeline.
+
+**→ Next: [Top 5 APIs for Real-Time Financial Data 2026](/professional-edge/top-5-apis-real-time-financial-data/)**
+
+*Part of [Phase 3: Professional Edge](/professional-edge/) — [See the full learning path](/start-here/)*

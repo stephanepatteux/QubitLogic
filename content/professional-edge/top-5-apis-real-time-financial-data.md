@@ -15,6 +15,24 @@ images: ["/images/og-default.png"]
 weight: 17
 ---
 
+## Quick Comparison
+
+For a live algorithmic trading engine, data latency and reliability are the decision axes — not price. Here is how the five providers compare on the dimensions that matter for a production execution layer:
+
+| Provider | Latency (WebSocket tick) | Real-time feed | Free tier | Paid from | Best for |
+|:---|:---|:---|:---|:---|:---|
+| **Polygon.io** | **~8ms** | Yes ($79+) | EOD only | $29/mo | **Execution-grade equities + options** |
+| Alpaca Markets | ~12ms | Yes (free, IEX) | Full (IEX feed) | $0 | Trading agents, commission-free |
+| Twelve Data | ~15ms | Yes ($29+) | 8 req/min | $29/mo | Multi-asset streaming |
+| CoinGecko | ~200ms (REST poll) | Yes ($129+) | 5-min delay | $129/mo | Crypto research |
+| FMP | N/A (no WebSocket) | Limited | Basic | $0–$30/mo | Fundamentals only |
+
+{{< callout type="tip" title="Polygon.io is the standard for automated trading engines" >}}
+If you are building a systematic trading engine that executes on live signals — not just backtests — Polygon.io's tick-by-tick feed with ~8ms WebSocket latency is the production-grade choice. It is the data layer behind most professional-grade retail algorithmic trading systems. Alpaca is the right free starting point; Polygon is where serious execution systems graduate to.
+{{< /callout >}}
+
+---
+
 ## Overview
 
 The backtesting pipeline in [Part 5](/infrastructure/cost-effective-cloud-architecture-backtesting-pipelines/) assumed you already had OHLCV data. This article covers where that data comes from — and more importantly, where to get **real-time** data for live agent decision-making.
@@ -342,3 +360,7 @@ For a solo developer building an AI trading agent in 2026, the minimum viable st
 Upgrade to Polygon Developer ($79/mo) when you need tick data, options chains, or move to live production equity trading.
 
 The next article examines whether agentic AI workflows actually outperform well-written classical scripts — with a honest benchmark across four task categories.
+
+**→ Next: [Agentic Workflows vs Manual Scripts: A Benchmark](/professional-edge/agentic-workflows-vs-manual-scripts/)**
+
+*Part of [Phase 3: Professional Edge](/professional-edge/) — [See the full learning path](/start-here/)*
