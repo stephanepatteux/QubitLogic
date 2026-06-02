@@ -336,3 +336,9 @@ The final article in this series provides a full **code auditing checklist for p
 - [NIST FIPS 204 — ML-DSA (Dilithium)](https://csrc.nist.gov/pubs/fips/204/final) — the finalised post-quantum digital signature standard for JWT and certificate signing
 - [NIST FIPS 205 — SLH-DSA (SPHINCS+)](https://csrc.nist.gov/pubs/fips/205/final) — the hash-based signature standard, recommended for long-lived signatures
 - [IETF JOSE PQC draft](https://datatracker.ietf.org/doc/draft-ietf-jose-pqc-kem/) — the working draft for post-quantum algorithms in JSON Web Encryption
+
+---
+
+**→ Next: [Auditing Code for Post-Quantum Compliance](/professional-edge/auditing-code-post-quantum-compliance/)**
+
+*Part of [Phase 3: Professional Edge](/professional-edge/) — [See the full learning path](/start-here/)*

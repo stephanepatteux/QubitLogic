@@ -49,7 +49,12 @@
 
 {{/* ── Robots / AI crawler hints ────────────────────────────────── */}}
 <meta name="author" content="{{ .Site.Params.author | default $siteName }}">
+{{- $isTaxonomy := or (eq .Kind "taxonomy") (eq .Kind "term") -}}
+{{- if $isTaxonomy }}
+<meta name="robots" content="noindex, follow">
+{{- else }}
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+{{- end }}
 
 {{/* ── BreadcrumbList ────────────────────────────────────────────── */}}
 {{ if $isPost }}

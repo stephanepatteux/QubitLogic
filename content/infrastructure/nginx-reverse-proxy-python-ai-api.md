@@ -423,3 +423,9 @@ A properly configured Nginx reverse proxy is not optional for a production AI AP
 5. **Health endpoint** — expose `/health` and poll it. Know before your users do when the API is down.
 
 The next article covers **optimising your Python environment performance on Ubuntu 24.04** — virtual environment isolation, `pip` dependency pinning, and `uvicorn` worker count tuning for CPU-bound vs. I/O-bound agent workloads.
+
+**→ Next: [Optimizing Python Environment Performance on Ubuntu 24.04](/infrastructure/optimizing-python-environment-ubuntu-24-04/)**
+
+---
+
+*Part of [Phase 1: Infrastructure](/infrastructure/) — [See the full learning path](/start-here/)*

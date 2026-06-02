@@ -386,3 +386,9 @@ A well-provisioned $12/mo VPS outperforms a $100/mo managed platform for single-
 6. **Benchmark before committing.** The fio and sysbench commands above are reproducible on any provider.
 
 The next article in this series covers configuring Nginx as a full reverse proxy with TLS termination, rate limiting, and upstream health checks for Python AI APIs.
+
+**→ Next: [Nginx Reverse Proxy: Securing Your Python AI API](/infrastructure/nginx-reverse-proxy-python-ai-api/)**
+
+---
+
+*Part of [Phase 1: Infrastructure](/infrastructure/) — [See the full learning path](/start-here/)*

@@ -11,84 +11,82 @@ ShowToc: true
 TocOpen: true
 ---
 
-QubitLogic covers the full journey from provisioning your first server to deploying quantum-classical hybrid applications in production. This page routes you to the right starting point.
+QubitLogic covers the full journey from provisioning your first server to deploying quantum-classical hybrid applications in production. Every article has runnable code. Pick your entry point below.
 
 ---
 
-## Which path is right for you?
+## Phase 1 — Infrastructure
 
-### "I want to build the AI/quantum infrastructure stack from scratch"
+Build the server stack that runs every quantum experiment in Phase 2.
 
-Start at **Phase 1** and work through the series in order. Each article builds on the last — the VPS you provision in article 1 hosts the API secured in article 2.
+**Start here →** [How to Provision a VPS for AI Agent Workloads](/infrastructure/how-to-provision-vps-ai-agent-workloads/)
 
-**→ [How to Provision a VPS for AI Agent Workloads](/infrastructure/how-to-provision-vps-ai-agent-workloads/)**
-
----
-
-### "I already have infrastructure and want to start with quantum algorithms"
-
-Jump straight to **Phase 2**. You need Python 3.11+ and `pip install qiskit qiskit-aer` to follow along. No quantum hardware required — Qiskit Aer simulates everything locally.
-
-**→ [Building a Quantum-Inspired Optimizer in Python](/quantum-coding/quantum-inspired-optimizer-python/)**
-
----
-
-### "I want the security and AI production applications"
-
-Go straight to **Phase 3**. These articles are self-contained — you do not need to complete Phases 1 or 2 first, though the context helps.
-
-**→ [Post-Quantum Cryptography: API Security Vulnerabilities](/professional-edge/post-quantum-cryptography-api-security/)**
+| # | Article | Type |
+|---|---------|------|
+| 1 | [How to Provision a VPS for AI Agent Workloads](/infrastructure/how-to-provision-vps-ai-agent-workloads/) | Tutorial |
+| 2 | [Nginx Reverse Proxy: Securing Your Python AI API](/infrastructure/nginx-reverse-proxy-python-ai-api/) | Tutorial |
+| 3 | [Optimizing Python Environment Performance on Ubuntu 24.04](/infrastructure/optimizing-python-environment-ubuntu-24-04/) | Tutorial |
+| 4 | [The Quantum-Ready Tech Stack](/infrastructure/quantum-ready-tech-stack/) | Review |
+| 5 | [Cost-Effective Cloud Architecture for Backtesting Pipelines](/infrastructure/cost-effective-cloud-architecture-backtesting-pipelines/) | Tutorial |
+| 6 | [CI/CD Pipeline for AI Python Scripts](/infrastructure/cicd-pipeline-ai-python-scripts/) | Tutorial |
+| 7 | [DigitalOcean vs Vultr: Performance Benchmarks for AI Workloads](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/) | Benchmark |
+| 8 | [DigitalOcean vs Vultr vs Hetzner VPS Benchmark 2026](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/) | Benchmark |
 
 ---
 
-## The Full Series
+## Phase 2 — Quantum Coding
 
-```
-Phase 1: Infrastructure
-├── 1. Provision a VPS for AI workloads
-├── 2. Nginx reverse proxy for Python APIs
-├── 3. Python environment performance on Ubuntu 24.04
-├── 4. Quantum-ready tech stack (hardware guide)
-├── 5. Cost-effective backtesting pipeline architecture
-├── 6. CI/CD pipeline for AI Python scripts
-├── 7. DigitalOcean vs Vultr benchmark
-└── 8. DigitalOcean vs Vultr vs Hetzner benchmark 2026 ← NEW
+Build and benchmark quantum algorithms in Python. No hardware required — Qiskit Aer simulates everything locally.
 
-Phase 2: Quantum Coding
-├── 1. Quantum-inspired optimizer in Python (QAOA)
-├── 2. QAOA vs classical brute force benchmark
-├── 3. Grover's search algorithm in Python
-├── 4. Qiskit + Scikit-Learn hybrid ML workflow
-├── 5. Circuit depth optimisation
-├── 6. Simulated annealing for TSP
-├── 7. When to use quantum machine learning
-└── 8. Qiskit vs PennyLane 2026 ← NEW
+**Start here →** [Building a Quantum-Inspired Optimizer in Python](/quantum-coding/quantum-inspired-optimizer-python/)
 
-Phase 3: Professional Edge
-├── 1. Post-quantum cryptography for API security
-├── 2. Enterprise RAG agent architecture
-├── 3. Top 5 financial data APIs 2026
-├── 4. Agentic workflows vs manual scripts
-├── 5. Quantum AI certification review
-└── 6. Auditing code for PQC compliance
-```
+| # | Article | Type |
+|---|---------|------|
+| 1 | [Building a Quantum-Inspired Optimizer in Python](/quantum-coding/quantum-inspired-optimizer-python/) | Tutorial |
+| 2 | [QAOA vs Classical Brute Force: A Benchmarking Guide](/quantum-coding/qaoa-vs-classical-brute-force-benchmarking/) | Benchmark |
+| 3 | [Implementing Grover's Search Algorithm in Python](/quantum-coding/grovers-search-logic-python/) | Tutorial |
+| 4 | [Bridging Qiskit and Scikit-Learn: Hybrid ML Workflow](/quantum-coding/qiskit-scikit-learn-hybrid-workflow/) | Tutorial |
+| 5 | [Simulating Circuit Depth and Code Optimization](/quantum-coding/simulating-circuit-depth-code-optimization/) | Tutorial |
+| 6 | [Solving TSP with Simulated Annealing](/quantum-coding/traveling-salesperson-simulated-annealing/) | Tutorial |
+| 7 | [Quantum Machine Learning: When to Use It](/quantum-coding/quantum-machine-learning-when-to-use/) | Review |
+| 8 | [Qiskit vs PennyLane 2026](/quantum-coding/qiskit-vs-pennylane-2026/) | Benchmark |
+| 9 | [Qiskit 2.x Migration Guide](/quantum-coding/qiskit-2-migration-guide/) | Tutorial |
 
 ---
 
-## The Logic of the Series
+## Phase 3 — Professional Edge
 
-**Phase 1 — Infrastructure** establishes the foundation. You leave with a hardened VPS running a Python API behind Nginx with TLS and CI/CD automation. This server runs every quantum experiment in Phase 2.
+Apply quantum and AI skills to production. These articles are self-contained.
 
-**Phase 2 — Quantum Coding** builds from variational algorithms (QAOA) up through exact algorithms (Grover's) and into quantum ML. Each article produces a benchmark you can reproduce. You leave understanding when quantum methods actually outperform classical ones — and when they do not.
+**Start here →** [Post-Quantum Cryptography: API Security Vulnerabilities](/professional-edge/post-quantum-cryptography-api-security/)
 
-**Phase 3 — Professional Edge** applies everything to production concerns: securing APIs against quantum attacks, building RAG agents, using financial data APIs, and proving your skills with certifications. The code in this phase is deployable.
+| # | Article | Type |
+|---|---------|------|
+| 1 | [Post-Quantum Cryptography: API Security Vulnerabilities](/professional-edge/post-quantum-cryptography-api-security/) | Tutorial |
+| 2 | [Integrating Enterprise-Grade RAG Agents](/professional-edge/integrating-enterprise-rag-agents/) | Tutorial |
+| 3 | [Top 5 APIs for Real-Time Financial Data 2026](/professional-edge/top-5-apis-real-time-financial-data/) | Review |
+| 4 | [Agentic Workflows vs Manual Scripts: A Benchmark](/professional-edge/agentic-workflows-vs-manual-scripts/) | Benchmark |
+| 5 | [Are Quantum AI Certifications Worth It?](/professional-edge/quantum-ai-certification-review/) | Review |
+| 6 | [Auditing Code for Post-Quantum Compliance](/professional-edge/auditing-code-post-quantum-compliance/) | Tutorial |
 
 ---
 
-## Tools You Will Use
+## Not sure where to start?
+
+| Goal | Start here |
+|------|-----------|
+| I want to build an AI server stack from scratch | [Phase 1 article 1](/infrastructure/how-to-provision-vps-ai-agent-workloads/) |
+| I want to write quantum algorithms in Python | [Phase 2 article 1](/quantum-coding/quantum-inspired-optimizer-python/) |
+| I want to secure APIs against quantum attacks | [Phase 3 article 1](/professional-edge/post-quantum-cryptography-api-security/) |
+| I want to compare quantum frameworks | [Qiskit vs PennyLane 2026](/quantum-coding/qiskit-vs-pennylane-2026/) |
+| I want to choose a VPS provider | [DO vs Vultr vs Hetzner benchmark](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/) |
+
+---
+
+## Tools you will use
 
 | Tool | Phase | What for |
-|---|---|---|
+|------|-------|----------|
 | Ubuntu 24.04 VPS | 1 | Hosting everything |
 | Nginx | 1 | Reverse proxy, TLS |
 | Python 3.11+ | All | All code |

@@ -322,6 +322,12 @@ The honest result on 10 nodes: QAOA is not faster than classical methods. The va
 
 The next article benchmarks exactly that: QAOA vs classical brute force across problem sizes from 6 to 20 nodes, with a clear data-driven answer to the question every developer asks — at what size does QAOA become worth running?
 
+**→ Next: [QAOA vs Classical Brute Force: A Benchmarking Guide](/quantum-coding/qaoa-vs-classical-brute-force-benchmarking/)**
+
+---
+
+*Part of [Phase 2: Quantum Coding](/quantum-coding/) — [See the full learning path](/start-here/)*
+
 {{< affiliate_box
     name="IBM Quantum"
     url="https://quantum.ibm.com"
