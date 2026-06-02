@@ -1,10 +1,10 @@
-{{/* Section list page header image */}}
-{{ $banner := "" }}
-{{ if eq .Section "infrastructure" }}{{ $banner = "/images/banner-infrastructure.svg" }}{{ end }}
-{{ if eq .Section "quantum-coding" }}{{ $banner = "/images/banner-quantum.svg" }}{{ end }}
-{{ if eq .Section "professional-edge" }}{{ $banner = "/images/banner-professional.svg" }}{{ end }}
-{{ if $banner }}
-<figure class="ql-section-banner">
-  <img src="{{ $banner }}" alt="{{ .Title }} — QubitLogic" width="1200" height="320" loading="eager">
-</figure>
+{{/* Section list page header banner — CSS gradient, no external image dependency */}}
+{{ $class := "" }}
+{{ if eq .Section "infrastructure" }}{{ $class = "ql-section-banner ql-section-banner--infra" }}{{ end }}
+{{ if eq .Section "quantum-coding" }}{{ $class = "ql-section-banner ql-section-banner--quantum" }}{{ end }}
+{{ if eq .Section "professional-edge" }}{{ $class = "ql-section-banner ql-section-banner--edge" }}{{ end }}
+{{ if $class }}
+<div class="{{ $class }}" aria-hidden="true">
+  <span class="ql-section-banner__label">{{ .Title }}</span>
+</div>
 {{ end }}
