@@ -729,15 +729,6 @@ code, pre, kbd, samp {
   position: relative;
 }
 
-.ql-section-banner__label {
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: #e4e4ec;
-  position: relative;
-  z-index: 1;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-}
 
 .ql-section-banner--infra {
   background: linear-gradient(120deg, #0c0c0f 0%, #0f2027 50%, #131a22 100%);
