@@ -24,9 +24,9 @@ paginate = 10
 
   # Header logo
   [params.label]
-    text = ""
+    text = "QubitLogic"
     icon = "/images/logo.svg"
-    iconHeight = 36
+    iconHeight = 28
 
   # Dark mode default
   defaultTheme = "dark"

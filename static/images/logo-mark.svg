@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <!-- Orbit 1: horizontal tilt -->
-  <ellipse cx="32" cy="32" rx="28" ry="10" stroke="#e4e4ec" stroke-width="2.5" transform="rotate(-30 32 32)"/>
+  <ellipse cx="32" cy="32" rx="28" ry="10" stroke="currentColor" stroke-width="2.5" transform="rotate(-30 32 32)"/>
   <!-- Orbit 2: vertical tilt -->
-  <ellipse cx="32" cy="32" rx="28" ry="10" stroke="#e4e4ec" stroke-width="2.5" transform="rotate(30 32 32)"/>
+  <ellipse cx="32" cy="32" rx="28" ry="10" stroke="currentColor" stroke-width="2.5" transform="rotate(30 32 32)"/>
   <!-- Nucleus -->
   <circle cx="32" cy="32" r="4.5" fill="#00e87a"/>
   <!-- Qubit nodes on orbits -->

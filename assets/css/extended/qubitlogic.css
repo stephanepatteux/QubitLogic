@@ -128,10 +128,19 @@ code, pre, kbd, samp {
 }
 
 .logo a, .logo span {
-  color: var(--qs-green) !important;
+  color: var(--primary) !important;
   font-weight: 700;
   letter-spacing: -0.03em;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Icon inherits currentColor from the anchor, orbits adapt to theme */
+.logo a img, .logo span img {
+  display: block;
+  flex-shrink: 0;
 }
 
 #menu .menu-item a {
