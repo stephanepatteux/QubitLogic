@@ -67,7 +67,7 @@ For multi-agent pipelines (3+ concurrent agents, vector DB on the same host), go
 
 {{< affiliate_box
     name="Vultr High Frequency"
-    url="https://www.vultr.com/?ref=9904429-9J"
+    url="AFFILIATE_LINK_VULTR"
     cta="Get $300 Free Credits"
     badge="Limited Offer"
     desc="New Vultr accounts get $300 in credits (30-day expiry) to provision and benchmark this stack. High Frequency instances run on 3GHz+ Intel Ice Lake with pure NVMe and low CPU steal."

@@ -41,6 +41,7 @@ We currently participate in (or are in the process of joining) the following aff
 | Service | Programme | What we earn | Apply / sign up |
 |---|---|---|---|
 | Vultr | Referral program | $100 per verified referral (30+ days active, $100+ spend); time-limited promos (e.g. $300 credit for new users) may apply | [vultr.com/affiliates](https://www.vultr.com/affiliates/) |
+| Cursor | Referral program | Per [Cursor referral terms](https://cursor.com/referral) (credits or rewards when referred users sign up) | [cursor.com/referral](https://cursor.com/referral) |
 | DigitalOcean | Awin | $25 per qualifying referral | [Awin publisher signup](https://ui.awin.com/publisher-signup) → search “DigitalOcean” in marketplace |
 | Coursera | Impact | 15–45% of eligible purchases (30-day cookie) | [about.coursera.org/affiliates](https://about.coursera.org/affiliates) |
 | Brilliant.org | MyAffiliates | ~20% recurring commission (per programme terms) | [affiliates.brilliant.partners/signup](https://affiliates.brilliant.partners/signup.php) |

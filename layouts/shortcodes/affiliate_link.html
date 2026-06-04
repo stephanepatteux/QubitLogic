@@ -8,6 +8,10 @@
 {{- $url := .Get "url" | default "#" -}}
 {{- if eq $url "AFFILIATE_LINK_DIGITALOCEAN" -}}
   {{- $url = site.Params.affiliates.digitalocean -}}
+{{- else if eq $url "AFFILIATE_LINK_VULTR" -}}
+  {{- $url = site.Params.affiliates.vultr -}}
+{{- else if eq $url "AFFILIATE_LINK_CURSOR" -}}
+  {{- $url = site.Params.affiliates.cursor -}}
 {{- else if eq $url "AFFILIATE_LINK_PAPERSPACE" -}}
   {{- $url = site.Params.affiliates.paperspace -}}
 {{- else if eq $url "AFFILIATE_LINK_BRIGHTDATA" -}}

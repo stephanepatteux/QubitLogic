@@ -233,7 +233,7 @@ Open `flamegraph.svg` in your browser. Wide bars = time spent. Narrow tall stack
 
 {{< affiliate_box
     name="Vultr High Frequency"
-    url="https://www.vultr.com/?ref=9904429-9J"
+    url="AFFILIATE_LINK_VULTR"
     cta="Get $300 Free Credits"
     badge="Best Value"
     desc="3GHz+ dedicated vCPUs with NVMe — ideal for profiling and agent workloads. New Vultr accounts: $300 credit to deploy the Ubuntu stack in this series (expires after 30 days)."

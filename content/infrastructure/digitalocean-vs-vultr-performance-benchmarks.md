@@ -295,7 +295,7 @@ wrk -t4 -c100 -d60s https://yourdomain.com/health
 
 {{< affiliate_box
     name="Vultr High Frequency"
-    url="https://www.vultr.com/?ref=9904429-9J"
+    url="AFFILIATE_LINK_VULTR"
     cta="Get $300 Free Credits"
     badge="Best Benchmark Performance"
     desc="13% faster CPU, 10% more memory bandwidth, and 10% higher API throughput than the equivalent DigitalOcean plan — at $6/mo less. New accounts: $300 credit to reproduce every test in this article (credit expires after 30 days)."

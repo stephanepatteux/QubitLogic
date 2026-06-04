@@ -70,7 +70,7 @@ Vultr High Frequency instances have the fastest NVMe disk I/O in our benchmarks.
 
 {{< affiliate_box
     name="Vultr"
-    url="https://www.vultr.com/?ref=9904429-9J"
+    url="AFFILIATE_LINK_VULTR"
     cta="Get $300 Free Credits"
     badge="Fastest Disk I/O"
     desc="Highest fio 4K random read in our benchmarks (51K IOPS vs 42K on DigitalOcean). New Vultr accounts: $300 credit to run infrastructure and quantum workloads (expires after 30 days)."
@@ -89,6 +89,25 @@ When you need GPU-accelerated quantum simulation (Qiskit Aer GPU, PennyLane ligh
     desc="GPU-accelerated Qiskit Aer simulation is 10–50× faster than CPU. Paperspace (now DigitalOcean) A100 instances start at $2.30/hr — cheaper than keeping a GPU VPS running 24/7."
     price="From $0.07/hr"
 >}}
+
+---
+
+## Development environment
+
+### Cursor — AI-assisted editing for Python and agents
+
+What I use for drafting FastAPI services, refactoring Qiskit notebooks, and iterating on agent prompts against a real repo. Not quantum-specific, but it matches how most QubitLogic code is written: Python-first, lots of context, tight edit-run loops on a VPS or local venv.
+
+{{< affiliate_box
+    name="Cursor"
+    url="AFFILIATE_LINK_CURSOR"
+    cta="Try Cursor"
+    badge="AI-assisted IDE"
+    desc="VS Code–style editor with inline AI for code, tests, and docs. Handy when you are juggling infrastructure articles, quantum scripts, and API glue in one workspace."
+    price="Free tier; paid plans for heavier use"
+>}}
+
+Used when building or editing: [VPS AI agent provisioning](/infrastructure/how-to-provision-vps-ai-agent-workloads/), [agentic workflows](/professional-edge/agentic-workflows-vs-manual-scripts/), [CI/CD for Python AI scripts](/infrastructure/cicd-pipeline-ai-python-scripts/)
 
 ---
 

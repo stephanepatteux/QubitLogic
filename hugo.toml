@@ -19,6 +19,8 @@ paginate = 10
 [params.affiliates]
   digitalocean = "https://www.awin1.com/cread.php?awinmid=123996&awinaffid=2917857&ued=https%3A%2F%2Fwww.digitalocean.com%2Fpricing"
   paperspace = "https://www.awin1.com/cread.php?awinmid=123996&awinaffid=2917857&ued=https%3A%2F%2Fwww.paperspace.com%2F"
+  vultr = "https://www.vultr.com/?ref=9904429-9J"
+  cursor = "https://cursor.com/referral?code=TKHKBWB8304Q"
   bright_data = "https://get.brightdata.com/4xmvog6ozily"
   coursera_ibm_quantum = ""
 
