@@ -89,8 +89,11 @@ html = f"""<!DOCTYPE html>
           </a>
         </td></tr>
         <tr><td style="background:#111;padding:16px 32px;border-top:1px solid #2a2a2a;">
-          <p style="margin:0;font-size:0.75rem;color:#475569;">
-            Test send via newsletter/test_send.py — not sent to real subscribers.
+          <p style="margin:0;font-size:0.75rem;color:#475569;line-height:1.5;">
+            You're receiving this because you subscribed at qubitlogic.dev.<br>
+            <a href="{SITE_URL}/api/newsletter/unsubscribe?token=TEST_TOKEN_PLACEHOLDER"
+               style="color:#475569;">Unsubscribe</a>
+            &nbsp;·&nbsp; <em>Test send — not sent to real subscribers.</em>
           </p>
         </td></tr>
       </table>
