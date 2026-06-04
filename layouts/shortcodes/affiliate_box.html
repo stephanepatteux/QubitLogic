@@ -34,6 +34,7 @@
 {{ $logo  := .Get "logo"  }}
 {{ $desc  := .Get "desc"  }}
 {{ $price := .Get "price" }}
+{{ $rel   := site.Params.affiliate_link_rel | default "nofollow sponsored noopener" }}
 
 <div class="qs-affiliate-box" role="complementary" aria-label="Affiliate recommendation: {{ $name }}">
   {{ if $badge }}
@@ -56,7 +57,7 @@
     <div class="qs-affiliate-action">
       <a href="{{ $url }}"
          target="_blank"
-         rel="noopener nofollow sponsored"
+         rel="{{ $rel }}"
          class="qs-affiliate-btn"
          data-affiliate="{{ $name | urlize }}">
         {{ $cta }} &rarr;

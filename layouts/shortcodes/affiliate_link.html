@@ -1,0 +1,17 @@
+{{/*
+  affiliate_link — inline text link with sponsored/nofollow (for tables and prose)
+
+  Usage:
+    {{< affiliate_link url="https://www.vultr.com/?ref=9904429-9J" >}}Deploy on Vultr{{< /affiliate_link >}}
+    {{< affiliate_link url="AFFILIATE_LINK_DIGITALOCEAN" >}}Deploy on DO{{< /affiliate_link >}}
+*/}}
+{{- $url := .Get "url" | default "#" -}}
+{{- if eq $url "AFFILIATE_LINK_DIGITALOCEAN" -}}
+  {{- $url = site.Params.affiliates.digitalocean -}}
+{{- else if eq $url "AFFILIATE_LINK_BRIGHTDATA" -}}
+  {{- $url = site.Params.affiliates.bright_data -}}
+{{- else if eq $url "AFFILIATE_LINK_COURSERA_IBM_QUANTUM" -}}
+  {{- $url = site.Params.affiliates.coursera_ibm_quantum | default "https://www.coursera.org/learn/packt-beginners-guide-to-practical-quantum-computing-with-ibm-qiskit-w6mos" -}}
+{{- end -}}
+{{- $rel := site.Params.affiliate_link_rel | default "nofollow sponsored noopener" -}}
+<a href="{{ $url }}" target="_blank" rel="{{ $rel }}">{{ .Inner }}</a>

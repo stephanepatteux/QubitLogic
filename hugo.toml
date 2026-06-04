@@ -22,6 +22,8 @@ paginate = 10
   coursera_ibm_quantum = ""
 
 [params]
+  # rel on paid/affiliate outbound links (Google: sponsored + nofollow)
+  affiliate_link_rel = "nofollow sponsored noopener"
   env = "production"
   title = "QubitLogic"
   description = "A technical workbench for Quantum-AI Hybrid Development. Code-first tutorials on Qiskit, AI agents, Python infrastructure, and self-hosted stacks."

@@ -7,4 +7,5 @@
 */}}
 {{ $dest := .Get "url" | default "https://www.coursera.org/learn/packt-beginners-guide-to-practical-quantum-computing-with-ibm-qiskit-w6mos" }}
 {{ $href := site.Params.affiliates.coursera_ibm_quantum | default $dest }}
-<a href="{{ $href }}" target="_blank" rel="noopener sponsored">{{ .Inner }}</a>
+{{- $rel := site.Params.affiliate_link_rel | default "nofollow sponsored noopener" -}}
+<a href="{{ $href }}" target="_blank" rel="{{ $rel }}">{{ .Inner }}</a>
