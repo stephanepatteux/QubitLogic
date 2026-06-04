@@ -118,8 +118,14 @@ jobs:
           sudo systemctl daemon-reload
           sudo systemctl enable qubitlogic-newsletter
           sudo systemctl restart qubitlogic-newsletter
-          sleep 2
-          sudo systemctl is-active qubitlogic-newsletter && echo "Service: running" || echo "Service: FAILED"
+          sleep 3
+          if sudo systemctl is-active --quiet qubitlogic-newsletter; then
+            echo "Service: running"
+          else
+            echo "Service: FAILED — journalctl output:"
+            sudo journalctl -xeu qubitlogic-newsletter --no-pager -n 40
+            exit 1
+          fi
 
           # Patch Nginx — add /api/newsletter/ block if not already present
           NGINX_CONF=/etc/nginx/sites-available/qubitlogic
