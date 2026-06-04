@@ -17,6 +17,7 @@ on:
           - test-send    # send one email to test_email address
           - send         # normal send (skips if post already sent)
           - force-send   # resend even if post was already sent
+          - setup-api    # one-time: install systemd service + patch Nginx
       test_email:
         description: "Email for test-send mode"
         required: false
@@ -102,6 +103,36 @@ jobs:
           set -a; source /opt/qubitlogic/newsletter/.env; set +a
           /opt/qubitlogic/newsletter/venv/bin/python \
             /opt/qubitlogic/newsletter/send.py --force
+          RUN
+
+      # One-time API service + Nginx setup
+      - name: "Mode: setup-api"
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'setup-api'
+        run: |
+          ssh ubuntu@51.195.86.197 'bash -s' <<'RUN'
+          set -e
+
+          # Install systemd service
+          sudo cp /opt/qubitlogic/newsletter/qubitlogic-newsletter.service \
+            /etc/systemd/system/qubitlogic-newsletter.service
+          sudo systemctl daemon-reload
+          sudo systemctl enable qubitlogic-newsletter
+          sudo systemctl restart qubitlogic-newsletter
+          sleep 2
+          sudo systemctl is-active qubitlogic-newsletter && echo "Service: running" || echo "Service: FAILED"
+
+          # Patch Nginx — add /api/newsletter/ block if not already present
+          NGINX_CONF=/etc/nginx/sites-available/qubitlogic
+          if grep -q "api/newsletter" "$NGINX_CONF"; then
+            echo "Nginx: /api/newsletter/ block already present — skipping"
+          else
+            # Insert before the closing } of the server block
+            sudo sed -i 's|^}$|    # Newsletter API\n    location /api/newsletter/ {\n        proxy_pass         http://127.0.0.1:8001/api/newsletter/;\n        proxy_set_header   Host              $host;\n        proxy_set_header   X-Real-IP         $remote_addr;\n        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;\n        proxy_set_header   X-Forwarded-Proto $scheme;\n        proxy_read_timeout 10s;\n    }\n}|' "$NGINX_CONF"
+            sudo nginx -t && sudo systemctl reload nginx && echo "Nginx: reloaded with /api/newsletter/ block"
+          fi
+
+          # Quick health check
+          curl -sf http://127.0.0.1:8001/api/newsletter/health && echo "API health: OK" || echo "API health: FAILED"
           RUN
 
       # Scheduled run + manual "send" mode
