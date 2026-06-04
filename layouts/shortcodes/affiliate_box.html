@@ -24,6 +24,8 @@
 {{ $url   := .Get "url"   | default "#" }}
 {{ if eq $url "AFFILIATE_LINK_DIGITALOCEAN" }}
   {{ $url = site.Params.affiliates.digitalocean }}
+{{ else if eq $url "AFFILIATE_LINK_PAPERSPACE" }}
+  {{ $url = site.Params.affiliates.paperspace }}
 {{ else if eq $url "AFFILIATE_LINK_BRIGHTDATA" }}
   {{ $url = site.Params.affiliates.bright_data }}
 {{ else if eq $url "AFFILIATE_LINK_COURSERA_IBM_QUANTUM" }}

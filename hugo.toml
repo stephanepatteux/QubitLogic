@@ -18,6 +18,7 @@ paginate = 10
 # Deep-link target (if building manually): coursera.org/learn/packt-beginners-guide-to-practical-quantum-computing-with-ibm-qiskit-w6mos
 [params.affiliates]
   digitalocean = "https://www.awin1.com/cread.php?awinmid=123996&awinaffid=2917857"
+  paperspace = "https://www.awin1.com/cread.php?awinmid=123996&awinaffid=2917857&ued=https%3A%2F%2Fwww.paperspace.com%2F"
   bright_data = "https://get.brightdata.com/4xmvog6ozily"
   coursera_ibm_quantum = ""
 
