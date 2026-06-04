@@ -37,4 +37,4 @@ Free with your subscription.
 ---
 
 **Free. No tracking. Unsubscribe any time.**  
-Built with [Beehiiv](https://beehiiv.com).
+Self-hosted — your email stays on this server, never shared.
