@@ -50,11 +50,24 @@
   var shown = false;
   var scrollTriggered = false;
 
+  function loadBeehiivForm(container) {
+    if (!container || container.dataset.beehiivReady) return;
+    var formId = container.getAttribute('data-beehiiv-form-id');
+    if (!formId) return;
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://subscribe-forms.beehiiv.com/v3/loader.js';
+    script.setAttribute('data-beehiiv-form', formId);
+    container.appendChild(script);
+    container.dataset.beehiivReady = '1';
+  }
+
   function openModal() {
     if (!modal || localStorage.getItem(NL_KEY)) return;
     modal.removeAttribute('hidden');
     document.body.classList.add('ql-modal-open');
     if (fab) fab.hidden = true;
+    loadBeehiivForm(modal.querySelector('.ql-beehiiv-form--modal'));
   }
 
   function closeModal(persist) {

@@ -832,9 +832,22 @@ code, pre, kbd, samp {
   color: var(--qs-text-faint);
   margin: 0.75rem 0 0;
 }
-.ql-beehiiv-form { min-height: 52px; width: 100%; }
-.ql-beehiiv-form--modal { max-height: 90px; overflow: hidden; }
-.ql-beehiiv-form--modal iframe { max-height: 90px !important; }
+.ql-beehiiv-form {
+  width: 100%;
+  min-height: 72px;
+}
+.ql-beehiiv-form iframe,
+.ql-beehiiv-form .beehiiv-embed {
+  display: block;
+  width: 100% !important;
+  min-height: 72px;
+  margin: 0 auto;
+  border: 0;
+  background: transparent;
+}
+.ql-beehiiv-form--modal {
+  min-height: 88px;
+}
 
 /* ── Newsletter modal ─────────────────────────────────────── */
 body.ql-modal-open { overflow: hidden; }
