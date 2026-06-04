@@ -43,7 +43,8 @@ jobs:
           # Create dirs and venv
           ssh ubuntu@51.195.86.197 'bash -s' <<'SETUP'
           set -e
-          mkdir -p /opt/qubitlogic/newsletter /var/lib/qubitlogic
+          sudo mkdir -p /opt/qubitlogic/newsletter /var/lib/qubitlogic
+          sudo chown -R ubuntu:ubuntu /opt/qubitlogic /var/lib/qubitlogic
           if [ ! -f /opt/qubitlogic/newsletter/venv/bin/python ]; then
             python3 -m venv /opt/qubitlogic/newsletter/venv
           fi
