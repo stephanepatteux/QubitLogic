@@ -48,7 +48,7 @@ We currently participate in (or are in the process of joining) the following aff
 | Paperspace (DigitalOcean) | DigitalOcean / Awin | Typically via DigitalOcean partner terms when GPU products are in scope | Same as DigitalOcean |
 | Polygon.io | Partner program | ~20% recurring commission (per programme terms) | [polygon.io](https://polygon.io/) — Partner Program (see site / sales contact) |
 | Alpaca Markets | Partner program | Revenue share (per programme terms) | [alpaca.markets/partners](https://alpaca.markets/partners) |
-| Bright Data | Direct | Per programme terms | [brightdata.com affiliate](https://brightdata.com/affiliate-program) |
+| Bright Data | PartnerStack | Per programme terms | [get.brightdata.com](https://get.brightdata.com/4xmvog6ozily) |
 | Amazon (AWS / books) | Amazon Associates | 3–10% on qualifying purchases | [affiliate-program.amazon.com](https://affiliate-program.amazon.com/) |
 
 ---
