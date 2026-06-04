@@ -1,0 +1,48 @@
+name: Weekly Newsletter Send
+
+# Tuesday 09:00 UTC = 10:00 BST (Apr-Oct) / 09:00 GMT (Nov-Mar)
+on:
+  schedule:
+    - cron: "0 9 * * 2"
+
+  # Allow manual trigger from GitHub Actions UI (useful for testing)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (no emails sent)"
+        required: false
+        default: "false"
+        type: choice
+        options: ["true", "false"]
+      force:
+        description: "Force send even if post already sent"
+        required: false
+        default: "false"
+        type: choice
+        options: ["true", "false"]
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Load SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+
+      - name: Add VPS to known hosts
+        run: ssh-keyscan -H 51.195.86.197 >> ~/.ssh/known_hosts
+
+      - name: Run newsletter send
+        run: |
+          FLAGS=""
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            FLAGS="$FLAGS --dry-run"
+          fi
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            FLAGS="$FLAGS --force"
+          fi
+          ssh ubuntu@51.195.86.197 \
+            "source /etc/qubitlogic/newsletter.env 2>/dev/null; \
+             python3 /opt/qubitlogic/newsletter/send.py $FLAGS"

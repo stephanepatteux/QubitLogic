@@ -1,4 +1,4 @@
-{{/* Beehiiv subscribe form — use inside modal or /newsletter/ page */}}
+{{/* Inline newsletter signup box — used on /newsletter/, start-here, toolkit pages */}}
 <div class="ql-newsletter-box">
   <div class="ql-newsletter-inner">
     <div class="ql-newsletter-icon" aria-hidden="true">
@@ -9,9 +9,24 @@
     </div>
     <p class="ql-newsletter-title">Weekly digest for developers</p>
     <p class="ql-newsletter-sub">One article per week — quantum algorithms, AI infrastructure, and Python you can run. No hype.</p>
-    <div class="ql-beehiiv-form">
-      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="ff5f3c88-b321-4bfc-ab3b-063a10784a78"></script>
-    </div>
+
+    <form id="ql-subscribe-form-inline" class="ql-subscribe-form" novalidate>
+      {{/* Honeypot */}}
+      <input type="text" name="website" tabindex="-1" aria-hidden="true"
+             autocomplete="off" style="display:none!important">
+      <div class="ql-subscribe-row">
+        <input
+          type="email" name="email" required
+          placeholder="you@example.com"
+          class="ql-subscribe-input"
+          autocomplete="email"
+          aria-label="Email address"
+        >
+        <button type="submit" class="ql-subscribe-btn">Subscribe</button>
+      </div>
+      <div class="ql-subscribe-msg" aria-live="polite" hidden></div>
+    </form>
+
     <p class="ql-newsletter-note">Free · Unsubscribe any time · PQC checklist for new subscribers</p>
   </div>
 </div>

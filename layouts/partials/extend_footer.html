@@ -121,3 +121,53 @@
   }
 })();
 </script>
+
+<script>
+(function() {
+  function handleSubscribeForm(form) {
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var emailEl  = form.querySelector('input[name="email"]');
+      var msgEl    = form.querySelector('.ql-subscribe-msg');
+      var btn      = form.querySelector('.ql-subscribe-btn');
+      var email    = emailEl ? emailEl.value.trim() : '';
+
+      if (!email || !emailEl.checkValidity()) {
+        msgEl.textContent = 'Please enter a valid email address.';
+        msgEl.className = 'ql-subscribe-msg ql-subscribe-msg--error';
+        msgEl.hidden = false;
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      var data = new FormData(form);
+
+      fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        body: data,
+      })
+      .then(function(res) {
+        // API returns an HTML page; treat any 200 as success
+        if (res.ok) {
+          form.innerHTML =
+            '<p class="ql-subscribe-success">Check your email for a confirmation link.</p>';
+        } else {
+          throw new Error('Server error ' + res.status);
+        }
+      })
+      .catch(function() {
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+        msgEl.textContent = 'Something went wrong — please try again shortly.';
+        msgEl.className = 'ql-subscribe-msg ql-subscribe-msg--error';
+        msgEl.hidden = false;
+      });
+    });
+  }
+
+  document.querySelectorAll('.ql-subscribe-form').forEach(handleSubscribeForm);
+})();
+</script>

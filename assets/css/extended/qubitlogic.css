@@ -832,21 +832,66 @@ code, pre, kbd, samp {
   color: var(--qs-text-faint);
   margin: 0.75rem 0 0;
 }
-.ql-beehiiv-form {
+/* ── Subscribe form (native) ──────────────────────────────────────────── */
+.ql-subscribe-form { width: 100%; }
+
+.ql-subscribe-row {
+  display: flex;
+  gap: 0.5rem;
   width: 100%;
-  min-height: 72px;
 }
-.ql-beehiiv-form iframe,
-.ql-beehiiv-form .beehiiv-embed {
-  display: block;
-  width: 100% !important;
-  min-height: 72px;
-  margin: 0 auto;
-  border: 0;
-  background: transparent;
+
+.ql-subscribe-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.6rem 0.875rem;
+  border: 1px solid var(--qs-border);
+  border-radius: var(--qs-radius);
+  background: var(--qs-surface-2);
+  color: var(--qs-text);
+  font-size: 0.875rem;
+  font-family: var(--qs-font-sans);
+  outline: none;
+  transition: border-color var(--qs-transition);
 }
-.ql-beehiiv-form--modal {
-  min-height: 88px;
+.ql-subscribe-input:focus {
+  border-color: var(--qs-green);
+}
+.ql-subscribe-input::placeholder { color: var(--qs-text-faint); }
+
+.ql-subscribe-btn {
+  padding: 0.6rem 1.1rem;
+  background: var(--qs-green);
+  color: var(--qs-btn-on-accent);
+  border: none;
+  border-radius: var(--qs-radius);
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: var(--qs-font-sans);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--qs-transition);
+}
+.ql-subscribe-btn:hover { background: var(--primary); color: var(--theme); }
+.ql-subscribe-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.ql-subscribe-msg {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+.ql-subscribe-msg--error { color: #f87171; }
+
+.ql-subscribe-success {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: var(--qs-green);
+  font-weight: 600;
+}
+
+@media (max-width: 400px) {
+  .ql-subscribe-row { flex-direction: column; }
+  .ql-subscribe-btn { width: 100%; }
 }
 
 /* ── Newsletter modal ─────────────────────────────────────── */

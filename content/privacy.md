@@ -10,7 +10,7 @@ ShowBreadCrumbs: false
 ShowToc: true
 ---
 
-*Last updated: 1 June 2026*
+*Last updated: 4 June 2026*
 
 ## Who we are
 
@@ -24,7 +24,14 @@ For privacy enquiries: **privacy@qubitlogic.dev**
 
 ### Data you provide
 
-We do not currently operate a contact form, user accounts, or newsletter. We do not collect any personal data directly.
+**Newsletter subscription.** If you subscribe to the QubitLogic weekly digest, we collect your **email address** and store it on our UK-based VPS in a private SQLite database. We also store a random unsubscribe token tied to your address. We do not collect your name or any other personal data.
+
+- Subscription is double opt-in: you receive a confirmation link and are only added to the active list after you click it.
+- You can unsubscribe at any time using the one-click link in every email. Your record is permanently deleted on unsubscribe.
+- We do not share, sell, or transfer subscriber email addresses to any third party.
+- Email is sent via **Zoho Mail** (`hello@qubitlogic.dev`). Zoho's infrastructure processes your email address in transit. See [Zoho's privacy policy](https://www.zoho.com/privacy.html).
+
+If you do not subscribe, we do not collect any personal data directly.
 
 ### Data collected automatically
 
@@ -63,7 +70,7 @@ Articles on QubitLogic link to external sites including GitHub, IBM Quantum, NIS
 
 ## Your rights under UK GDPR
 
-As we do not collect personal data (beyond anonymised server logs), most GDPR rights are not applicable. If you believe we hold data about you, you have the right to:
+As a newsletter subscriber, your email address is personal data under UK GDPR. You have the right to:
 
 - Request access to that data
 - Request correction or erasure

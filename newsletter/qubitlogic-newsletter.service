@@ -1,0 +1,18 @@
+[Unit]
+Description=QubitLogic Newsletter API
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/qubitlogic/newsletter
+EnvironmentFile=/etc/qubitlogic/newsletter.env
+ExecStart=/opt/qubitlogic/newsletter/venv/bin/uvicorn api:app --host 127.0.0.1 --port 8001 --workers 1
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
