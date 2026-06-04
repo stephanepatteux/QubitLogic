@@ -61,7 +61,7 @@ jobs:
             "NEWSLETTER_STATE=/var/lib/qubitlogic/last_sent_guid.txt",
             "SITE_URL=https://qubitlogic.dev",
             "RSS_URL=https://qubitlogic.dev/index.xml",
-            "EMAIL_FROM=QubitLogic <hello@qubitlogic.dev>",
+            'EMAIL_FROM="QubitLogic <hello@qubitlogic.dev>"',
             "SMTP_HOST=smtppro.zoho.eu",
             "SMTP_PORT=587",
             "SMTP_USER=hello@qubitlogic.dev",
