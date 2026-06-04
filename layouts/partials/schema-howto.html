@@ -1,0 +1,95 @@
+{{/* JSON-LD HowTo schema — rendered only on pages with schema_howto: true */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": {{ .Title | jsonify }},
+  "description": {{ .Description | jsonify }},
+  "totalTime": "PT16H",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "GBP",
+    "value": "10"
+  },
+  "supply": [
+    { "@type": "HowToSupply", "name": "Cursor (free tier)" },
+    { "@type": "HowToSupply", "name": "Domain name (~£10/yr via Namecheap)" },
+    { "@type": "HowToSupply", "name": "VPS — DigitalOcean or Vultr ($6/mo)" },
+    { "@type": "HowToSupply", "name": "GitHub account (free)" },
+    { "@type": "HowToSupply", "name": "Cloudflare account (free)" }
+  ],
+  "tool": [
+    { "@type": "HowToTool", "name": "Hugo (static site generator)" },
+    { "@type": "HowToTool", "name": "PaperMod theme" },
+    { "@type": "HowToTool", "name": "GitHub Actions" },
+    { "@type": "HowToTool", "name": "Nginx" },
+    { "@type": "HowToTool", "name": "Certbot / Let's Encrypt" },
+    { "@type": "HowToTool", "name": "FastAPI + SQLite" }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Install Cursor",
+      "text": "Download and install Cursor from cursor.com. It opens like VS Code with the same extensions and keybindings, plus an AI agent panel that reads your whole codebase.",
+      "url": "{{ .Permalink }}#step-1--install-cursor"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Register a domain with Namecheap and add it to Cloudflare",
+      "text": "Register a .dev or .io domain on Namecheap, then immediately point the nameservers to Cloudflare for free DNS, DDoS protection, and SSL edge termination.",
+      "url": "{{ .Permalink }}#step-2--register-a-domain-namecheap--cloudflare"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Provision a VPS running Ubuntu 24.04 LTS",
+      "text": "Create a $6/mo Droplet on DigitalOcean or a High Frequency instance on Vultr. Choose Ubuntu 24.04 LTS and use SSH key authentication from the start.",
+      "url": "{{ .Permalink }}#step-3--provision-a-vps"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Install Hugo Extended and the PaperMod theme",
+      "text": "Install Hugo Extended via Homebrew or direct download. Clone PaperMod as a Git submodule and configure hugo.toml with your baseURL, title, and theme settings.",
+      "url": "{{ .Permalink }}#step-4--install-hugo-locally"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Design an SVG logo with Cursor",
+      "text": "Describe the logo concept in plain English in Cursor's chat panel. Iterate on the SVG output until satisfied. The result is a hand-coded SVG that loads instantly and scales perfectly.",
+      "url": "{{ .Permalink }}#step-6--design-the-logo-with-cursor"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "Configure Nginx with TLS and security headers",
+      "text": "Install Nginx, obtain a Let's Encrypt certificate with Certbot, and configure security headers (HSTS, CSP, X-Frame-Options). Use Cursor to generate and review the nginx.conf.",
+      "url": "{{ .Permalink }}#step-12--security-hardening-nginx-headers"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 7,
+      "name": "Set up GitHub Actions for automated deploy",
+      "text": "Create a .github/workflows/deploy.yml that builds the Hugo site and rsyncs the public/ directory to the VPS on every push to main. Store the deploy SSH key as a GitHub secret.",
+      "url": "{{ .Permalink }}#step-10--github-actions-cicd"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 8,
+      "name": "Build the self-hosted newsletter API with FastAPI and SQLite",
+      "text": "Write a FastAPI service with subscribe/confirm/unsubscribe endpoints backed by SQLite. Run it as a systemd service on the same VPS. Use Zoho Mail free tier for transactional email delivery.",
+      "url": "{{ .Permalink }}#step-14--self-hosted-newsletter"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 9,
+      "name": "Write compliance pages: Privacy Policy, Cookie Policy, Affiliate Disclosure",
+      "text": "Use Cursor to draft GDPR-compliant privacy policy and affiliate disclosure pages based on your actual data flows. Review and publish before going live.",
+      "url": "{{ .Permalink }}#step-13--compliance-privacy-cookies-and-affiliate-disclosure"
+    }
+  ]
+}
+</script>

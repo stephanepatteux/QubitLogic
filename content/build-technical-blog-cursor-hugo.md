@@ -13,6 +13,7 @@ weight: 99
 ShowToc: true
 TocOpen: true
 ShowReadingTime: true
+schema_howto: true
 ---
 
 QubitLogic launched with 20+ articles, a working newsletter, a self-hosted subscription API, and an automated deploy pipeline — all running for under £10/month. This is the full build log, including the bits most tutorials skip: the logo, legal compliance, and security hardening.
@@ -126,6 +127,22 @@ Cloudflare gives you free DNS, DDoS mitigation, SSL edge termination, and keeps 
 You need a server. I benchmarked [DigitalOcean](https://www.awin1.com/cread.php?awinmid=123996&awinaffid=2917857&ued=https%3A%2F%2Fwww.digitalocean.com%2Fpricing) and [Vultr](https://www.vultr.com/?ref=9904429-9J) for a [separate article on this site](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/). For a static Hugo site plus a lightweight newsletter API, the **$6/mo plan** (1 vCPU, 1 GB RAM) is plenty.
 
 {{< affiliate_stack >}}
+
+**Why a VPS instead of GitHub Pages or Cloudflare Pages?**
+
+Every competing tutorial in this space uses free static hosting. Here is why this stack uses a paid VPS instead:
+
+| Factor | GitHub Pages / Cloudflare Pages | VPS ($6/mo) |
+|:---|:---|:---|
+| Hosting cost | Free | ~$6/mo |
+| Self-hosted newsletter API | ❌ No server-side code | ✅ Run FastAPI + SQLite |
+| GDPR data control | ❌ Data on US platform | ✅ You own the server |
+| Custom Nginx config | ❌ Not possible | ✅ Full control |
+| Affiliate tracking flexibility | ❌ Limited | ✅ Any server-side redirect |
+| Ability to run cron jobs / agents | ❌ | ✅ |
+| SSL | ✅ Automatic | ✅ Let's Encrypt / Certbot |
+
+**The summary:** if you only want a static blog with no newsletter and no server-side code, GitHub Pages is free and fine. The moment you add a newsletter, any server-side feature, or want full data sovereignty, a $6/mo VPS pays for itself from the first affiliate conversion.
 
 Choose **Ubuntu 24.04 LTS** when creating the instance. Use SSH key authentication, not a password.
 
@@ -839,6 +856,44 @@ Honest summary of where it saved the most time:
 **Compliance writing** — drafting a GDPR privacy policy from a description of your data flows is something Cursor handles well. I reviewed it, made it accurate, had a lawyer friend glance at it. Don't publish compliance documents without a human review, but Cursor gets you to 80% in 10 minutes.
 
 The workflow in practice: write or describe what you want in the chat panel (with the relevant file open), review the output, edit and refine, commit. The integrated terminal means the full loop — edit, test `hugo server`, commit, push, live — never leaves the same window.
+
+---
+
+## The `.cursorrules` File for a Hugo Project
+
+Every competing tutorial that mentions `.cursorrules` shows a generic example. Here is the actual Hugo-specific rules file used for this project. Drop it in your repository root as `.cursorrules`:
+
+```
+# QubitLogic — Cursor rules for Hugo + PaperMod
+
+## Project context
+- Hugo v0.162+ (extended), theme: PaperMod (themes/PaperMod/)
+- All content in content/ as Markdown with YAML front matter
+- Custom layouts in layouts/ override PaperMod defaults — always check layouts/ before editing themes/
+- Custom shortcodes in layouts/shortcodes/
+- Custom CSS in assets/css/extended/ (auto-merged by PaperMod)
+
+## Hugo templating rules — follow these exactly
+- Variable scoping: use `{{ $var := . }}` at the top of `{{ with }}` / `{{ range }}` blocks to capture context
+- Accessing site params inside range: use `{{ site.Params.foo }}` not `{{ .Site.Params.foo }}`
+- Shortcode params: always named, never positional — use `name="value"` pairs, not positional arguments
+- Front matter: YAML only. Required fields: title, date, draft, description, tags, categories
+- Date format: `2026-06-04T18:00:00+01:00` — always include timezone offset
+
+## Content rules
+- Article descriptions: max 155 characters, keyword first, no full stops at end
+- All outbound affiliate links must use the `affiliate_link` or `affiliate_box` shortcodes
+- All affiliate links get `rel="nofollow sponsored noopener"` — this is handled by the shortcodes, never add manually
+- Internal links: use root-relative paths (`/infrastructure/my-article/`) not full URLs
+
+## Do not
+- Do not edit anything in themes/ — override in layouts/ instead
+- Do not add `<script>` or `<style>` tags inline in Markdown
+- Do not use `{{ .Site.Params }}` — use `{{ site.Params }}` (Hugo v0.113+ syntax)
+- Do not create new shortcodes without adding them to layouts/shortcodes/
+```
+
+> **Why this works:** giving Cursor your exact Hugo version, theme name, and the two most common gotchas (variable scoping and `site.Params` vs `.Site.Params`) eliminates the most frequent hallucinations. The "do not edit themes/" rule prevents Cursor from writing changes that get overwritten on theme updates.
 
 ---
 
