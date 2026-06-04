@@ -29,7 +29,7 @@ Based on sysbench CPU and fio NVMe testing across equivalent $5–$12/mo plans (
 
 | Provider | Single-core sysbench score | fio 4K random read | Best for | Action |
 |:---|:---|:---|:---|:---|
-| **Vultr High Frequency** | **1,074 events/s** | **~410 MB/s** | Raw AI compute, low-latency Python APIs | [Deploy on Vultr](AFFILIATE_LINK_VULTR) |
+| **Vultr High Frequency** | **1,074 events/s** | **~410 MB/s** | Raw AI compute, low-latency Python APIs | [Deploy on Vultr](https://www.vultr.com/?ref=9904429-9J) |
 | **Hetzner CX22** | 939 events/s | ~250 MB/s | RAM-heavy backtesting, EU workloads, cost-sensitivity | [Deploy on Hetzner](AFFILIATE_LINK_HETZNER) |
 | **DigitalOcean Premium AMD** | 772 events/s | ~150 MB/s | Best documentation, US staging, beginners | [Deploy on DO](AFFILIATE_LINK_DIGITALOCEAN) |
 
@@ -379,10 +379,10 @@ If you are building a multi-agent AI system that requires 4 separate 2-vCPU work
 
 {{< affiliate_box
     name="Vultr"
-    url="AFFILIATE_LINK_VULTR"
-    cta="Start on Vultr"
+    url="https://www.vultr.com/?ref=9904429-9J"
+    cta="Get $300 Free Credits"
     badge="Fastest Disk I/O"
-    desc="Vultr High Frequency instances use NVMe storage with the fastest sequential read speeds in our benchmark. $100 credit for new accounts."
+    desc="Vultr High Frequency has the fastest sequential read speeds in our three-way benchmark. New accounts get $300 in credits to run the full test suite (credit expires after 30 days)."
     price="From $6/mo"
 >}}
 

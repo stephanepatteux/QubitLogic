@@ -1,4 +1,5 @@
 ---
+courseraAffiliate: true
 title: "Review: Are Quantum AI Certifications Worth It?"
 date: 2026-06-01T14:00:00+01:00
 lastmod: 2026-06-01T19:30:00+01:00
@@ -18,7 +19,7 @@ faq:
   - q: "How long does the IBM Quantum certification take to prepare for?"
     a: "IBM recommends 40–60 hours of preparation. Developers already familiar with Python and linear algebra can prepare in 3–4 weeks of part-time study using the free IBM Quantum Learning platform. Developers new to quantum computing should budget 8–12 weeks."
   - q: "Are online quantum computing certifications recognised by employers?"
-    a: "IBM and MIT certifications have the strongest employer recognition. Coursera quantum certificates from IBM are the best value for money. University micro-masters (MIT xPRO) carry the most academic weight. Generic online quantum courses with no exam component have minimal employer recognition."
+    a: "IBM and MIT certifications have the strongest employer recognition. Paid Coursera courses can supplement learning but do not replace the IBM Qiskit exam credential. University micro-masters (MIT xPRO) carry the most academic weight. Generic online quantum courses with no exam component have minimal employer recognition."
 
 weight: 19
 ---
@@ -28,12 +29,12 @@ weight: 19
 The quantum computing job market is growing faster than the supply of credentialed developers.
 
 {{< affiliate_box
-    name="IBM Quantum Professional Certificate"
+    name="Practical Quantum Computing with IBM Qiskit"
     url="AFFILIATE_LINK_COURSERA_IBM_QUANTUM"
     cta="Enrol on Coursera"
-    badge="Top Pick"
-    desc="The highest-value quantum credential for working developers. Five hands-on courses with real IBM hardware access — reviewed and rated ★★★★★ in this article."
-    price="~$250 total"
+    badge="Best Coursera Qiskit Path"
+    desc="Structured Packt course on Coursera — Qiskit labs and real IBM hardware runs. Complements the free IBM learning path and $200 IBM exam reviewed below."
+    price="Coursera subscription"
 >}}
 
 {{< affiliate_box
@@ -138,20 +139,20 @@ MIT's series covers:
 
 ---
 
-### 5. Coursera — IBM Quantum Developer Professional Certificate
+### 5. Coursera — Practical Quantum Computing with IBM Qiskit (Packt)
 
-**Provider:** IBM / Coursera ([enrol here](https://www.coursera.org/professional-certificates/ibm-quantum-developer))  
-**Cost:** $49/mo (typically 4–6 months) = $196–$294  
-**Time:** 80–120 hours  
-**Format:** 5-course series, hands-on labs
+**Provider:** Packt on Coursera ({{< coursera_link >}}enrol here{{< /coursera_link >}})  
+**Cost:** Coursera Plus / subscription (varies by region)  
+**Time:** ~40–60 hours (self-paced)  
+**Format:** Single course with Qiskit labs and IBM Cloud hardware runs
 
-The Professional Certificate is a deeper version of the standalone Qiskit certification — it includes the full IBM Quantum Learning curriculum plus capstone projects using real hardware.
+There is **no** IBM-branded “Quantum Developer Professional Certificate” on Coursera as of 2026 — the industry credential is the [**IBM Qiskit Developer exam**](https://www.ibm.com/training/certification/ibm-certified-quantum-computation-using-qiskit-v2x-developer-associate-C9008400) on IBM Training. This Packt course is the best **Coursera-native** option if you want guided Qiskit practice before that exam.
 
-**What it tests:** End-to-end quantum application development — problem formulation, circuit design, hardware submission, result analysis.
+**What it covers:** Qubits, Pauli/Hadamard gates, multi-qubit circuits, CNOT/Toffoli, Deutsch–Jozsa, and submitting circuits to real IBM quantum backends.
 
-**Industry recognition:** Strong — the Professional Certificate carries more weight than the standalone exam for developer roles because it includes demonstrated project work.
+**Industry recognition:** Moderate — a Coursera completion certificate signals coursework, not exam-level proficiency. Pair with the IBM exam for hiring credibility.
 
-**Verdict:** ★★★★★ — Best overall credential for a developer targeting quantum computing roles. More expensive than the standalone exam but significantly more comprehensive.
+**Verdict:** ★★★★☆ — Strong supplemental learning path on Coursera. Not a substitute for the IBM Qiskit Developer certification.
 
 ---
 
@@ -193,7 +194,7 @@ The university programs are the gold standard for depth — they cover quantum i
 | Credential | Cost | Time (hrs) | Depth | Recognition | Practical | Overall |
 |---|---|---|---|---|---|---|
 | IBM Qiskit Developer Exam | $200 | 40–60 | ●●● | ●●●●● | ●●●● | ★★★★★ |
-| IBM Quantum Professional (Coursera) | $200–300 | 80–120 | ●●●● | ●●●●● | ●●●●● | ★★★★★ |
+| Coursera Qiskit course (Packt) | Subscr. | 40–60 | ●●● | ●●● | ●●●● | ★★★★☆ |
 | MIT Quantum Fundamentals (edX) | $399 | 60–80 | ●●●●● | ●●●● | ●● | ★★★★☆ |
 | Classiq Developer Cert | Free | 20–30 | ●●● | ●●● | ●●● | ★★★★☆ |
 | AWS Braket Learning | Free | 15–25 | ●● | ●● | ●● | ★★★☆☆ |
@@ -214,9 +215,10 @@ For a working developer targeting a quantum computing role in 2026:
 This combination signals both practical Qiskit skills (IBM cert) and theoretical depth (MIT certificate) — the two questions every quantum hiring manager asks.
 
 **Strongest path: ~$500–700, ~200 hours**
-1. IBM Quantum Professional Certificate (Coursera, ~$250) — includes capstone projects on real hardware
+1. IBM Qiskit Developer Exam ($200) after free IBM Quantum Learning
 2. MIT Quantum Fundamentals (edX, $399)
-3. Classiq Developer Certification (free, 20hrs) — adds enterprise tooling context
+3. Classiq Developer Certification (free, 20hrs) — adds enterprise tooling context  
+   Optional: [Coursera Qiskit course](https://www.coursera.org/learn/packt-beginners-guide-to-practical-quantum-computing-with-ibm-qiskit-w6mos) if you want structured video labs before the exam
 
 **What certifications cannot replace:**
 - Demonstrated code on GitHub (Qiskit circuits, benchmarks, real hardware submissions)
@@ -235,7 +237,7 @@ IBM Quantum Learning is entirely free and covers everything in the Qiskit Develo
 
 The certifications worth pursuing, in order:
 
-1. **IBM Qiskit Developer / IBM Quantum Professional** — the industry-standard practical credential
+1. **IBM Qiskit Developer exam** — the industry-standard practical credential (Coursera courses are optional prep)
 2. **MIT Quantum Fundamentals** — for theoretical depth and research-adjacent roles
 3. **Classiq Developer** — free addition for enterprise/high-abstraction contexts
 4. **University programs** — if you are targeting research roles or academic career paths
@@ -250,6 +252,6 @@ To get hands-on with the algorithms covered in these certifications, the [Quantu
 
 ## Further Reading
 
-- [IBM Quantum certification registration](https://www.ibm.com/training/certification/C0010300) — official exam page for the Qiskit Developer Certification
-- [IBM Quantum Professional Certificate on Coursera](https://www.coursera.org/professional-certificates/ibm-quantum-developer) — the deeper 5-course track with hardware capstone
+- [IBM Qiskit Developer certification](https://www.ibm.com/training/certification/ibm-certified-quantum-computation-using-qiskit-v2x-developer-associate-C9008400) — official exam on IBM Training (not Coursera)
+- {{< coursera_link >}}Practical Quantum Computing with IBM Qiskit (Coursera){{< /coursera_link >}} — hands-on Packt course with IBM hardware labs
 - [MIT Quantum Computing on edX](https://www.edx.org/learn/quantum-computing) — free to audit, $399 for certificate; best theoretical foundation available online

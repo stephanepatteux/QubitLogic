@@ -426,10 +426,10 @@ Memory-mapped data loading saves 170 MB of RAM at 4 workers with essentially no 
 
 {{< affiliate_box
     name="Vultr High Frequency"
-    url="AFFILIATE_LINK_VULTR"
-    cta="Launch a Server"
+    url="https://www.vultr.com/?ref=9904429-9J"
+    cta="Get $300 Free Credits"
     badge="Best Value"
-    desc="The $48/mo 4 vCPU / 8 GB High Frequency instance runs this exact sweep in under 6 minutes. Ideal for daily parameter sweeps across multiple instruments."
+    desc="The $48/mo 4 vCPU / 8 GB High Frequency instance runs this exact sweep in under 6 minutes. New accounts get $300 credit to build and stress-test backtesting pipelines (expires after 30 days)."
     price="From $48/mo for 4 vCPU"
 >}}
 

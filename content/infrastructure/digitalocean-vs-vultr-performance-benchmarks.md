@@ -295,10 +295,10 @@ wrk -t4 -c100 -d60s https://yourdomain.com/health
 
 {{< affiliate_box
     name="Vultr High Frequency"
-    url="AFFILIATE_LINK_VULTR"
-    cta="Launch a Server"
+    url="https://www.vultr.com/?ref=9904429-9J"
+    cta="Get $300 Free Credits"
     badge="Best Benchmark Performance"
-    desc="13% faster CPU, 10% more memory bandwidth, 10% higher API throughput than the equivalent DigitalOcean plan — at $6/mo less. The data-driven choice for CPU-intensive AI workloads."
+    desc="13% faster CPU, 10% more memory bandwidth, and 10% higher API throughput than the equivalent DigitalOcean plan — at $6/mo less. New accounts: $300 credit to reproduce every test in this article (credit expires after 30 days)."
     price="From $18/mo (2 vCPU / 4 GB)"
 >}}
 

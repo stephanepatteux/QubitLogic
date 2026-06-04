@@ -1,4 +1,5 @@
 ---
+courseraAffiliate: true
 title: "Quantum Developer Toolkit: The Stack I Actually Use"
 date: 2026-06-02T00:00:00+01:00
 draft: false
@@ -69,10 +70,10 @@ Vultr High Frequency instances have the fastest NVMe disk I/O in our benchmarks.
 
 {{< affiliate_box
     name="Vultr"
-    url="AFFILIATE_LINK_VULTR"
-    cta="Start on Vultr"
+    url="https://www.vultr.com/?ref=9904429-9J"
+    cta="Get $300 Free Credits"
     badge="Fastest Disk I/O"
-    desc="Vultr High Frequency instances delivered the highest fio 4K random read scores in our benchmark — 51K IOPS vs 42K on DigitalOcean. $100 credit for new accounts."
+    desc="Highest fio 4K random read in our benchmarks (51K IOPS vs 42K on DigitalOcean). New Vultr accounts: $300 credit to run infrastructure and quantum workloads (expires after 30 days)."
     price="From $6/mo"
 >}}
 
@@ -113,17 +114,17 @@ IBM's official learning platform. Structured courses from beginner to certificat
 - **Link:** [learning.quantum.ibm.com](https://learning.quantum.ibm.com/)
 - **Cost:** Free
 
-### Coursera — IBM Quantum Developer Certificate
+### Coursera — Practical Qiskit course (Packt)
 
-The highest-value paid quantum credential in 2026. Five hands-on courses, real IBM hardware access, and the certificate is recognised by quantum employers.
+Hands-on Qiskit course on Coursera: gates, circuits, Deutsch–Jozsa, and running jobs on real IBM quantum hardware via IBM Cloud. Pairs well with free [IBM Quantum Learning](https://learning.quantum.ibm.com/) before the paid IBM exam.
 
 {{< affiliate_box
-    name="IBM Quantum Certificate on Coursera"
+    name="Practical Quantum Computing with IBM Qiskit"
     url="AFFILIATE_LINK_COURSERA_IBM_QUANTUM"
     cta="Enrol on Coursera"
-    badge="Top Quantum Credential"
-    desc="The IBM Quantum Developer Professional Certificate is the most employer-recognised quantum credential for working developers. ~$250 total, 40–60 hours, real hardware access."
-    price="~$250 total"
+    badge="Hands-on Qiskit"
+    desc="Packt course on Coursera — install Qiskit, build circuits, and submit to IBM hardware. Good structured path if you prefer video modules over self-paced docs."
+    price="Coursera subscription"
 >}}
 
 Reviewed in detail: [Quantum AI certifications review](/professional-edge/quantum-ai-certification-review/)

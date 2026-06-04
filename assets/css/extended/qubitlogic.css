@@ -470,6 +470,24 @@ code, pre, kbd, samp {
   font-size: 0.88rem;
 }
 
+/* ── Top-of-post affiliate notice (programme disclosure requirements) ── */
+.qs-affiliate-top-notice {
+  background: var(--qs-surface-2);
+  border: 1px solid var(--qs-green-dim);
+  border-left: 3px solid var(--qs-green);
+  border-radius: 0 var(--qs-radius-sm) var(--qs-radius-sm) 0;
+  padding: 0.85rem 1.15rem;
+  margin: 0 0 1.5rem;
+  font-size: 0.88rem;
+  color: var(--qs-text-muted);
+  line-height: 1.55;
+}
+.qs-affiliate-top-notice p { margin: 0; }
+.qs-affiliate-top-notice a {
+  color: var(--qs-green);
+  font-weight: 600;
+}
+
 /* ── Affiliate box ────────────────────────────────────────── */
 .qs-affiliate-box {
   position: relative;

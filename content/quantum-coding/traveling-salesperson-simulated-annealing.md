@@ -39,10 +39,10 @@ No quantum libraries needed for this article — TSP on SA is pure classical Pyt
 
 {{< affiliate_box
     name="Vultr"
-    url="AFFILIATE_LINK_VULTR"
-    cta="Deploy a VPS"
-    badge="$35 Credit"
-    desc="Run overnight SA benchmark jobs on a dedicated VPS — no competing processes, reproducible wall-clock times. Vultr's $12/mo 2 vCPU / 4 GB plan is ideal for this workload."
+    url="https://www.vultr.com/?ref=9904429-9J"
+    cta="Get $300 Free Credits"
+    badge="Limited Offer"
+    desc="Run overnight SA jobs on a dedicated VPS for reproducible wall-clock times. New accounts: $300 credit; $12/mo 2 vCPU / 4 GB is enough for this workload (credit expires after 30 days)."
     price="From $6/mo"
 >}}
 

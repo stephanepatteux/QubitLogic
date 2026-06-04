@@ -14,6 +14,11 @@ paginate = 10
   disableXML = true
   minifyOutput = true
 
+# Impact click URL — paste from Impact → Brands → Coursera → Create a link
+# Deep-link target (if building manually): coursera.org/learn/packt-beginners-guide-to-practical-quantum-computing-with-ibm-qiskit-w6mos
+[params.affiliates]
+  coursera_ibm_quantum = ""
+
 [params]
   env = "production"
   title = "QubitLogic"

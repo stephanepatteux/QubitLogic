@@ -22,6 +22,9 @@
 
 {{ $name  := .Get "name"  | default "Partner" }}
 {{ $url   := .Get "url"   | default "#" }}
+{{ if eq $url "AFFILIATE_LINK_COURSERA_IBM_QUANTUM" }}
+  {{ $url = site.Params.affiliates.coursera_ibm_quantum | default "https://www.coursera.org/learn/packt-beginners-guide-to-practical-quantum-computing-with-ibm-qiskit-w6mos" }}
+{{ end }}
 {{ $cta   := .Get "cta"   | default "Get Started" }}
 {{ $badge := .Get "badge" }}
 {{ $logo  := .Get "logo"  }}
@@ -58,6 +61,6 @@
   </div>
 
   <p class="qs-affiliate-disclosure">
-    <small>Disclosure: This is an affiliate link. QubitLogic may earn a commission at no extra cost to you.</small>
+    <small>We may earn a commission at no additional cost to you when you use this link.</small>
   </p>
 </div>

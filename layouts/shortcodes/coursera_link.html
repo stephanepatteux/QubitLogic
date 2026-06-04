@@ -1,0 +1,10 @@
+{{/*
+  coursera_link — tracked Coursera href from hugo.toml [params.affiliates] coursera_ibm_quantum
+  Falls back to direct Coursera URL until Impact click link is configured.
+
+  Usage: {{< coursera_link >}}enrol here{{< /coursera_link >}}
+  Optional: {{< coursera_link url="https://www.coursera.org/specializations/foo" >}}text{{< /coursera_link >}}
+*/}}
+{{ $dest := .Get "url" | default "https://www.coursera.org/learn/packt-beginners-guide-to-practical-quantum-computing-with-ibm-qiskit-w6mos" }}
+{{ $href := site.Params.affiliates.coursera_ibm_quantum | default $dest }}
+<a href="{{ $href }}" target="_blank" rel="noopener sponsored">{{ .Inner }}</a>

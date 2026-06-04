@@ -233,10 +233,10 @@ Open `flamegraph.svg` in your browser. Wide bars = time spent. Narrow tall stack
 
 {{< affiliate_box
     name="Vultr High Frequency"
-    url="AFFILIATE_LINK_VULTR"
-    cta="Launch a Server"
+    url="https://www.vultr.com/?ref=9904429-9J"
+    cta="Get $300 Free Credits"
     badge="Best Value"
-    desc="High Frequency instances give you 3GHz+ dedicated vCPUs with NVMe SSD. The right host for CPU-intensive Python profiling and agent workloads."
+    desc="3GHz+ dedicated vCPUs with NVMe — ideal for profiling and agent workloads. New Vultr accounts: $300 credit to deploy the Ubuntu stack in this series (expires after 30 days)."
     price="From $6/mo"
 >}}
 
