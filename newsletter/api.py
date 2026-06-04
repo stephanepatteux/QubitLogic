@@ -5,14 +5,18 @@ POST /api/newsletter/subscribe    — add pending subscriber, send confirm email
 GET  /api/newsletter/confirm      — ?token=...  activate subscriber
 GET  /api/newsletter/unsubscribe  — ?token=...  remove subscriber
 
-Environment (loaded from /etc/qubitlogic/newsletter.env):
+Environment — loaded from the first file that exists:
+  1. /opt/qubitlogic/newsletter/.env   (written by GitHub Actions on each run)
+  2. /etc/qubitlogic/newsletter.env    (fallback for manual installs)
+
+Variables:
   NEWSLETTER_DB   path to SQLite file  (default: /var/lib/qubitlogic/newsletter.db)
   SITE_URL        public site URL      (default: https://qubitlogic.dev)
   EMAIL_FROM      MIME From header     (default: QubitLogic <hello@qubitlogic.dev>)
   SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD
 """
 
-import os, sqlite3, secrets, smtplib, ssl, logging, time
+import os, sqlite3, secrets, smtplib, ssl, logging
 from contextlib import asynccontextmanager
 from email.message import EmailMessage
 from typing import Annotated

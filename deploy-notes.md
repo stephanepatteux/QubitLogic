@@ -1,22 +1,52 @@
 # Deployment Notes — QubitLogic on Ubuntu VPS + Nginx
 
-## 1. Build the site
+## Architecture
 
-```bash
-hugo --minify
-```
+| Component | Location |
+|---|---|
+| Static site (Hugo) | `/var/www/qubitlogic/` on VPS |
+| Newsletter API (FastAPI) | `/opt/qubitlogic/newsletter/` on VPS, port 8001 |
+| Newsletter DB | `/var/lib/qubitlogic/newsletter.db` (SQLite) |
+| Env / secrets | `/opt/qubitlogic/newsletter/.env` (written by GitHub Actions) |
+| VPS IP | `51.195.86.197` |
 
-Output lands in `public/`. Copy this to your VPS.
+## GitHub Actions workflows
 
-## 2. Transfer to VPS
+### `deploy.yml` — triggered on every push to `main`
+1. Builds the Hugo site (`hugo --minify`)
+2. Rsyncs `public/` → `/var/www/qubitlogic/`
+3. Rsyncs `newsletter/` → `/opt/qubitlogic/newsletter/`
 
-```bash
-rsync -avz --delete public/ user@YOUR_VPS_IP:/var/www/qubitlogic/
-```
+### `newsletter.yml` — Tuesday 09:00 UTC + manual dispatch
+Modes (select via `workflow_dispatch`):
 
-## 3. Nginx site config
+| Mode | What it does |
+|---|---|
+| `dry-run` | Parse RSS, log what would be sent — no emails |
+| `test-send` | Send latest post to a single address (default: stephanepatteux@gmail.com) |
+| `send` | Normal weekly send — skips if post already sent this week |
+| `force-send` | Send even if post was already sent |
+| `setup-api` | One-time: install systemd service + patch Nginx |
 
-Create `/etc/nginx/sites-available/quantumstack`:
+## Required GitHub Secrets
+
+| Secret | Description |
+|---|---|
+| `VPS_SSH_KEY` | Private key for `ubuntu@51.195.86.197` |
+| `SMTP_PASSWORD` | Zoho Mail app password for `hello@qubitlogic.dev` |
+
+Add at: **repo → Settings → Secrets and variables → Actions**.
+
+## One-time VPS setup
+
+Run `setup-api` workflow mode once after first deploy. It:
+- Installs `qubitlogic-newsletter.service` as a systemd unit
+- Kills any zombie on port 8001 before starting
+- Patches `/etc/nginx/sites-available/qubitlogic` with the `/api/newsletter/` proxy block
+- Reloads Nginx
+- Health-checks the API
+
+## Nginx site config (`/etc/nginx/sites-available/qubitlogic`)
 
 ```nginx
 server {
@@ -29,7 +59,7 @@ server {
     listen 443 ssl http2;
     server_name qubitlogic.dev www.qubitlogic.dev;
 
-    root /var/www/quantumstack;
+    root /var/www/qubitlogic;
     index index.html;
 
     ssl_certificate     /etc/letsencrypt/live/qubitlogic.dev/fullchain.pem;
@@ -37,33 +67,38 @@ server {
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_prefer_server_ciphers on;
 
-    # Security headers
     add_header X-Frame-Options         "SAMEORIGIN"   always;
     add_header X-Content-Type-Options  "nosniff"      always;
     add_header Referrer-Policy         "strict-origin-when-cross-origin" always;
-    add_header Permissions-Policy      "interest-cohort=()" always;
     add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
 
-    # Aggressive static caching
     location ~* \.(css|js|woff2?|ttf|eot|svg|png|jpg|webp|ico)$ {
         expires 1y;
         add_header Cache-Control "public, immutable";
         access_log off;
     }
 
-    # HTML — no cache (Hugo hashes assets anyway)
     location ~* \.html$ {
         expires -1;
         add_header Cache-Control "no-cache, no-store, must-revalidate";
     }
 
-    # Gzip
     gzip on;
     gzip_types text/plain text/css application/json application/javascript
                text/xml application/xml application/xml+rss text/javascript
                image/svg+xml;
     gzip_min_length 1024;
     gzip_comp_level 6;
+
+    # Newsletter API
+    location /api/newsletter/ {
+        proxy_pass         http://127.0.0.1:8001/api/newsletter/;
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_read_timeout 10s;
+    }
 
     location / {
         try_files $uri $uri/ $uri.html =404;
@@ -73,43 +108,36 @@ server {
 }
 ```
 
-Enable and reload:
-
-```bash
-ln -s /etc/nginx/sites-available/quantumstack /etc/nginx/sites-enabled/
-nginx -t
-systemctl reload nginx
-```
-
-## 4. TLS via Certbot
+## TLS via Certbot
 
 ```bash
 apt install certbot python3-certbot-nginx -y
 certbot --nginx -d qubitlogic.dev -d www.qubitlogic.dev
 ```
 
-## 5. Auto-renew
-
-Certbot adds a systemd timer automatically. Verify:
+Certbot adds a systemd timer for auto-renewal. Verify:
 
 ```bash
 systemctl list-timers | grep certbot
 ```
 
-## 6. Performance checklist
+## Newsletter service management
 
-- [ ] PageSpeed Insights score ≥ 95 on mobile before launch
-- [ ] `curl -I https://qubitlogic.dev` shows `content-encoding: gzip`
-- [ ] Lighthouse: CLS < 0.1, LCP < 1.5 s, TBT < 200 ms
+```bash
+# Status
+sudo systemctl status qubitlogic-newsletter
 
-## 7. Hugo version pinning
+# Logs (live)
+sudo journalctl -fu qubitlogic-newsletter
 
-Current build uses Hugo Extended **v0.162.1**. Lock this in CI:
+# Restart
+sudo systemctl restart qubitlogic-newsletter
 
-```yaml
-# .github/workflows/deploy.yml  (example)
-- uses: peaceiris/actions-hugo@v3
-  with:
-    hugo-version: '0.162.1'
-    extended: true
+# Subscriber list
+sqlite3 /var/lib/qubitlogic/newsletter.db \
+  "SELECT email, confirmed, created_at FROM subscribers ORDER BY created_at DESC"
 ```
+
+## Hugo version
+
+Pinned at **v0.162.1 Extended** in `deploy.yml`.

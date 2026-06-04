@@ -169,37 +169,19 @@ def build_email(post: dict, unsub_url: str) -> tuple[str, str]:
     <tr><td align="center">
       <table cellpadding="0" cellspacing="0"
              style="max-width:560px;width:100%;background:#161616;border:1px solid #2a2a2a;border-radius:12px;overflow:hidden;">
-
-        {{# Header #}}
         <tr><td style="background:#111;padding:18px 32px;border-bottom:1px solid #2a2a2a;">
-          <p style="margin:0;font-size:1rem;font-weight:700;color:#00e87a;letter-spacing:-.01em;">
-            QubitLogic
-          </p>
-          <p style="margin:4px 0 0;font-size:0.75rem;color:#475569;">
-            Weekly quantum &amp; AI developer digest
-          </p>
+          <p style="margin:0;font-size:1rem;font-weight:700;color:#00e87a;letter-spacing:-.01em;">QubitLogic</p>
+          <p style="margin:4px 0 0;font-size:0.75rem;color:#475569;">Weekly quantum &amp; AI developer digest</p>
         </td></tr>
-
-        {{# Body #}}
         <tr><td style="padding:32px;">
-          <p style="margin:0 0 6px;font-size:0.75rem;font-weight:600;color:#475569;
-                    text-transform:uppercase;letter-spacing:.06em;">New tutorial</p>
-          <h1 style="margin:0 0 16px;font-size:1.2rem;line-height:1.35;
-                     color:#e2e8f0;font-weight:700;">
-            {title}
-          </h1>
-          <p style="margin:0 0 28px;color:#94a3b8;line-height:1.65;font-size:0.9rem;">
-            {description}
-          </p>
+          <p style="margin:0 0 6px;font-size:0.75rem;font-weight:600;color:#475569;text-transform:uppercase;letter-spacing:.06em;">New tutorial</p>
+          <h1 style="margin:0 0 16px;font-size:1.2rem;line-height:1.35;color:#e2e8f0;font-weight:700;">{title}</h1>
+          <p style="margin:0 0 28px;color:#94a3b8;line-height:1.65;font-size:0.9rem;">{description}</p>
           <a href="{link}"
-             style="display:inline-block;background:#00e87a;color:#000;
-                    font-weight:700;text-decoration:none;
-                    padding:13px 28px;border-radius:8px;font-size:0.95rem;">
+             style="display:inline-block;background:#00e87a;color:#000;font-weight:700;text-decoration:none;padding:13px 28px;border-radius:8px;font-size:0.95rem;">
             Read article →
           </a>
         </td></tr>
-
-        {{# Footer #}}
         <tr><td style="background:#111;padding:16px 32px;border-top:1px solid #2a2a2a;">
           <p style="margin:0;font-size:0.75rem;color:#475569;line-height:1.5;">
             You're receiving this because you subscribed at
@@ -207,15 +189,10 @@ def build_email(post: dict, unsub_url: str) -> tuple[str, str]:
             <a href="{unsub_url}" style="color:#475569;">Unsubscribe</a>
           </p>
         </td></tr>
-
       </table>
     </td></tr>
   </table>
 </body></html>"""
-
-    # Strip the placeholder comment syntax (used for readability above)
-    html = html.replace("{# Header #}", "").replace("{# Body #}", "") \
-               .replace("{# Footer #}", "")
 
     return text, html
 

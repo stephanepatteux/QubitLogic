@@ -3,7 +3,7 @@
 
 <div id="ql-cookie-notice" role="dialog" aria-label="Cookie notice" aria-live="polite" style="display:none">
   <p>
-    This site uses no first-party tracking cookies. The newsletter signup (Beehiiv) and affiliate links may set cookies on third-party sites when used.
+    This site uses no first-party tracking cookies. Affiliate links may set cookies on third-party sites when used.
     <a href="/privacy/">Learn more</a>
   </p>
   <button id="ql-cookie-accept" aria-label="Dismiss cookie notice">Got it</button>
@@ -50,24 +50,11 @@
   var shown = false;
   var scrollTriggered = false;
 
-  function loadBeehiivForm(container) {
-    if (!container || container.dataset.beehiivReady) return;
-    var formId = container.getAttribute('data-beehiiv-form-id');
-    if (!formId) return;
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://subscribe-forms.beehiiv.com/v3/loader.js';
-    script.setAttribute('data-beehiiv-form', formId);
-    container.appendChild(script);
-    container.dataset.beehiivReady = '1';
-  }
-
   function openModal() {
     if (!modal || localStorage.getItem(NL_KEY)) return;
     modal.removeAttribute('hidden');
     document.body.classList.add('ql-modal-open');
     if (fab) fab.hidden = true;
-    loadBeehiivForm(modal.querySelector('.ql-beehiiv-form--modal'));
   }
 
   function closeModal(persist) {

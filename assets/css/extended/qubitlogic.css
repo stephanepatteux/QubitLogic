@@ -303,13 +303,12 @@ code, pre, kbd, samp {
 }
 
 .post-content h4 {
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 600;
   margin-top: 1.75rem;
   color: var(--qs-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  font-size: 0.85rem;
 }
 
 .post-content a {
@@ -1052,8 +1051,6 @@ body.ql-modal-open { overflow: hidden; }
 }
 
 /* ── Cookie banner ────────────────────────────────────────── */
-#ql-cookie-notice a { color: var(--qs-green); }
-
 #ql-cookie-notice {
   position: fixed;
   bottom: 0;
