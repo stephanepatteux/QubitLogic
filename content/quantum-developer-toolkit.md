@@ -19,6 +19,8 @@ weight: 100
 
 Every tool in this list appears in at least one QubitLogic article. Nothing is here because someone paid for placement — see the [Affiliate Disclosure](/affiliate-disclosure/) for transparency on what earns commission.
 
+{{< affiliate_stack >}}
+
 ---
 
 ## Quantum Frameworks
@@ -56,9 +58,11 @@ The best-documented cloud provider for developers. Premium AMD Droplets run Pyth
 {{< affiliate_box
     name="DigitalOcean"
     url="AFFILIATE_LINK_DIGITALOCEAN"
-    cta="Get $200 Free Credits"
+    cta="Claim $200 Credits"
+    offer="$200 free credits · 60 days for new accounts"
     badge="Best Documentation"
-    desc="New DigitalOcean accounts get $200 in free credits over 60 days. Enough to provision a VPS, run every benchmark in this series, and deploy a production FastAPI stack — at zero cost."
+    primary="true"
+    desc="Enough to provision a VPS, run every benchmark in this series, and deploy a production FastAPI stack before you pay."
     price="From $4/mo"
 >}}
 
@@ -71,9 +75,10 @@ Vultr High Frequency instances have the fastest NVMe disk I/O in our benchmarks.
 {{< affiliate_box
     name="Vultr"
     url="AFFILIATE_LINK_VULTR"
-    cta="Get $300 Free Credits"
+    cta="Claim $300 Credits"
+    offer="$300 free credits · 30 days for new accounts"
     badge="Fastest Disk I/O"
-    desc="Highest fio 4K random read in our benchmarks (51K IOPS vs 42K on DigitalOcean). New Vultr accounts: $300 credit to run infrastructure and quantum workloads (expires after 30 days)."
+    desc="Highest fio 4K random read in our benchmarks. Ideal when your agent or backtester is disk-bound."
     price="From $6/mo"
 >}}
 
@@ -84,9 +89,9 @@ When you need GPU-accelerated quantum simulation (Qiskit Aer GPU, PennyLane ligh
 {{< affiliate_box
     name="Paperspace GPU Cloud"
     url="AFFILIATE_LINK_PAPERSPACE"
-    cta="Start with GPU Cloud"
-    badge="25% Recurring Commission"
-    desc="GPU-accelerated Qiskit Aer simulation is 10–50× faster than CPU. Paperspace (now DigitalOcean) A100 instances start at $2.30/hr — cheaper than keeping a GPU VPS running 24/7."
+    cta="Start GPU Cloud"
+    badge="GPU simulation"
+    desc="GPU-accelerated Qiskit Aer is 10–50× faster than CPU. Pay per hour instead of keeping a GPU VPS on 24/7."
     price="From $0.07/hr"
 >}}
 
@@ -101,9 +106,10 @@ What I use for drafting FastAPI services, refactoring Qiskit notebooks, and iter
 {{< affiliate_box
     name="Cursor"
     url="AFFILIATE_LINK_CURSOR"
-    cta="Try Cursor"
+    cta="Try Cursor free"
+    offer="Referral link · free tier to start"
     badge="AI-assisted IDE"
-    desc="VS Code–style editor with inline AI for code, tests, and docs. Handy when you are juggling infrastructure articles, quantum scripts, and API glue in one workspace."
+    desc="VS Code–style editor with inline AI for code, tests, and docs — how most QubitLogic tutorials are written."
     price="Free tier; paid plans for heavier use"
 >}}
 
@@ -113,25 +119,15 @@ Used when building or editing: [VPS AI agent provisioning](/infrastructure/how-t
 
 ## Learning Resources
 
-### Brilliant.org — Interactive quantum foundations
+### IBM Quantum Learning (Free) — start here for foundations
 
-The fastest way to build the mathematical foundations (linear algebra, complex numbers, probability) that Qiskit and PennyLane assume. Better than reading a textbook for developers who learn by doing.
-
-{{< affiliate_box
-    name="Brilliant.org"
-    url="AFFILIATE_LINK_BRILLIANT"
-    cta="Try Brilliant Free"
-    badge="Best for Foundations"
-    desc="Brilliant's quantum computing and linear algebra courses are built for developers. Interactive problems, immediate feedback, no lectures. 20% off annual plans via QubitLogic."
-    price="From $15.99/mo"
->}}
-
-### IBM Quantum Learning (Free)
-
-IBM's official learning platform. Structured courses from beginner to certification level. The Qiskit Global Summer School content is excellent and permanently free. Start here before buying any paid course.
+IBM's official platform: structured Qiskit paths, certification prep, and Global Summer School content — all free. Start here before paid courses.
 
 - **Link:** [learning.quantum.ibm.com](https://learning.quantum.ibm.com/)
-- **Cost:** Free
+
+### Brilliant.org — interactive maths (affiliate pending)
+
+Brilliant affiliate link is on hold until MyAffiliates provides a valid `brilliant.org` URL (dashboard currently shows unrelated offers).
 
 ### Coursera — Practical Qiskit course (Packt)
 
@@ -152,22 +148,44 @@ Reviewed in detail: [Quantum AI certifications review](/professional-edge/quantu
 
 ## Financial Data APIs
 
-For the algorithmic trading and financial AI articles.
+For the algorithmic trading and financial AI articles. See [Affiliate Disclosure](/affiliate-disclosure/) for which links pay commission.
 
-### Polygon.io — Best overall for US equities
+### Polygon.io — Best overall for US equities (editorial)
 
-Millisecond websocket feeds, REST API, 20+ years of historical data. Used in the financial data APIs article.
+Millisecond websocket feeds, REST API, 20+ years of historical data. No public blogger affiliate programme — we link on merit only.
 
 - **Link:** [polygon.io](https://polygon.io/)
 - **Free tier:** 5 API calls/minute (sufficient for backtesting)
 - **Paid:** From $29/mo for unlimited
 
-### Alpaca — Trading API with paper trading
+### Alpaca — Trading API with paper trading (editorial)
 
-Commission-free trading API for algorithmic strategies. Paper trading mode lets you test strategies without real money. Used in the backtesting pipeline article.
+Commission-free trading + data in one API. [Alpaca confirms](https://alpaca.markets/support/does-alpaca-have-a-referral-program-for-its-api-partners-including-revenue-share) there is no blogger referral programme.
 
 - **Link:** [alpaca.markets](https://alpaca.markets/)
 - **Cost:** Free for paper trading, commission-free for live
+
+### Financial Modeling Prep — Fundamentals (editorial)
+
+Earnings, financial statements, and DCF data for equity agents. We use it in tutorials; no tracking link until we approve the publisher programme terms.
+
+- **Link:** [financialmodelingprep.com](https://site.financialmodelingprep.com/)
+- **Free tier:** 250 API calls/day
+
+### TradingView — Charts and screening
+
+Best-converting finance affiliate on this site. Referred readers get **$15 off** their first paid plan via the web checkout ([partner rules](https://www.tradingview.com/partner-rules/)).
+
+{{< affiliate_box
+    name="TradingView"
+    url="AFFILIATE_LINK_TRADINGVIEW"
+    cta="Get plans — $15 off"
+    offer="$15 off first paid plan (web signup)"
+    badge="Charts & screening"
+    primary="true"
+    desc="Pair with our [financial data APIs guide](/professional-edge/top-5-apis-real-time-financial-data/) — charts for research, APIs for agents."
+    price="Free tier; paid from ~$15/mo"
+>}}
 
 Reviewed in detail: [Top 5 Financial Data APIs 2026](/professional-edge/top-5-apis-real-time-financial-data/)
 

@@ -570,6 +570,97 @@ code, pre, kbd, samp {
   font-size: 0.72rem;
 }
 
+.qs-affiliate-offer {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--qs-green);
+  margin: 0 0 0.25rem;
+  letter-spacing: 0.02em;
+}
+
+.qs-affiliate-box--primary {
+  border-width: 2px;
+  box-shadow: 0 4px 28px var(--qs-green-glow);
+}
+
+/* ── Affiliate stack (multi-offer, high intent) ───────────── */
+.qs-affiliate-stack {
+  margin: 2rem 0;
+  padding: 1.15rem 1.25rem 1rem;
+  background: var(--qs-surface-2);
+  border: 1px solid var(--qs-border);
+  border-radius: var(--qs-radius);
+}
+
+.qs-affiliate-stack-title {
+  margin: 0 0 1rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--qs-text);
+}
+
+.qs-affiliate-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.75rem;
+}
+
+.qs-affiliate-stack-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.85rem 1rem;
+  background: var(--qs-surface);
+  border: 1px solid var(--qs-border);
+  border-radius: var(--qs-radius-sm);
+  text-decoration: none !important;
+  transition: border-color var(--qs-transition), transform 0.1s ease;
+}
+
+.qs-affiliate-stack-card:hover {
+  border-color: var(--qs-green-dim);
+  transform: translateY(-2px);
+}
+
+.qs-affiliate-stack-card--primary {
+  border-color: var(--qs-green-dim);
+  background: linear-gradient(145deg, var(--qs-surface) 0%, var(--qs-surface-2) 100%);
+}
+
+.qs-affiliate-stack-offer {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--qs-green);
+  line-height: 1.35;
+}
+
+.qs-affiliate-stack-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--qs-text);
+}
+
+.qs-affiliate-stack-cta {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--qs-text-muted);
+  margin-top: 0.15rem;
+}
+
+.qs-affiliate-stack-card:hover .qs-affiliate-stack-cta {
+  color: var(--qs-green);
+}
+
+.qs-affiliate-stack-disclosure {
+  margin: 0.85rem 0 0;
+  font-size: 0.72rem;
+  color: var(--qs-text-faint);
+}
+
+.qs-affiliate-stack-disclosure a {
+  color: var(--qs-green);
+}
+
 /* ── Callout boxes ────────────────────────────────────────── */
 .qs-callout {
   border-left: 3px solid;

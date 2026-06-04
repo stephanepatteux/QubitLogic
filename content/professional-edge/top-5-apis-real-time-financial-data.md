@@ -101,12 +101,12 @@ ws.run()
 
 **Verdict:** Best-in-class data quality for US equities. The $79/mo Developer plan is the right entry point for any serious algorithmic trading project.
 
-{{< affiliate_box
+{{< partner_box
     name="Polygon.io"
-    url="https://polygon.io/?utm_source=quantumstack"
+    url="https://polygon.io/"
     cta="Start Free"
     badge="Best for Equities"
-    desc="Institutional-grade US equity, options, forex, and crypto data. Tick-by-tick trades and quotes, WebSocket streaming, 15+ years of history. Free tier available."
+    desc="Institutional-grade US equity, options, forex, and crypto data. Tick-by-tick trades and quotes, WebSocket streaming, 15+ years of history. Free tier available. No public blogger affiliate programme — link is editorial only."
     price="Free — $199/mo"
 >}}
 
@@ -178,12 +178,12 @@ Alpaca's paper trading environment is identical to live trading — same API, sa
 
 **Verdict:** Best choice for developers building trading agents. Data quality is good (IEX feed for equities), trading execution is seamless, and the free tier is genuinely usable.
 
-{{< affiliate_box
+{{< partner_box
     name="Alpaca Markets"
-    url="https://alpaca.markets/?utm_source=quantumstack"
+    url="https://alpaca.markets/"
     cta="Open Free Account"
     badge="Best for Trading Agents"
-    desc="Commission-free stock trading + market data in one API. Paper trading environment for agent testing. Free tier includes real-time data with IEX feed."
+    desc="Commission-free stock trading + market data in one API. Paper trading environment for agent testing. Alpaca confirms there is no referral programme for bloggers — only B2B Broker API partnerships."
     price="Free for paper trading"
 >}}
 
@@ -284,7 +284,7 @@ def get_company_financials(ticker: str) -> str:
     )
 ```
 
-**Verdict:** Unmatched for fundamental data at the $0–$30/mo tier. Not a real-time price feed — pair it with Polygon or Alpaca for price data.
+**Verdict:** Unmatched for fundamental data at the $0–$30/mo tier. Not a real-time price feed — pair it with Polygon or Alpaca for price data. Sign up at [financialmodelingprep.com](https://site.financialmodelingprep.com/) (editorial link — no commission until we join their publisher programme).
 
 ---
 
@@ -349,7 +349,23 @@ ws.connect()
 
 ---
 
+## Monetization in this niche
+
+Several providers in this review do **not** offer blogger referral programmes (Polygon.io, Alpaca, CoinGecko API, Twelve Data). We still recommend them on benchmark merit and label those links clearly.
+
+| Provider | Blogger affiliate? | What to do |
+|:---|:---|:---|
+| **TradingView** | Yes — active on QubitLogic | Charts/screening; **$15 off** first paid plan via web checkout |
+| **Financial Modeling Prep** | Optional — opaque commission terms | Use editorially; we have not prioritised their affiliate programme |
+| Polygon.io / Massive | B2B partner only | Contact sales if you build a product; not for blog sidebars |
+| Alpaca | No ([FAQ](https://alpaca.markets/support/does-alpaca-have-a-referral-program-for-its-api-partners-including-revenue-share)) | Editorial links only |
+| CoinGecko / Twelve Data | No public publisher programme | Editorial links only |
+
+---
+
 ## Conclusion
+
+{{< affiliate_stack variant="finance" >}}
 
 For a solo developer building an AI trading agent in 2026, the minimum viable stack costs $0–$29/month:
 

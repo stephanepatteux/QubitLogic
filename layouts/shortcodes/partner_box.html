@@ -1,0 +1,39 @@
+{{/*
+  partner_box — recommendation without affiliate commission (editorial link only)
+
+  Same layout as affiliate_box; no sponsored rel, no commission disclosure.
+*/}}
+
+{{ $name  := .Get "name"  | default "Partner" }}
+{{ $url   := .Get "url"   | default "#" }}
+{{ $cta   := .Get "cta"   | default "Learn more" }}
+{{ $badge := .Get "badge" }}
+{{ $desc  := .Get "desc"  }}
+{{ $price := .Get "price" }}
+
+<div class="qs-affiliate-box" role="complementary" aria-label="Recommended: {{ $name }}">
+  {{ if $badge }}
+  <span class="qs-affiliate-badge">{{ $badge }}</span>
+  {{ end }}
+
+  <div class="qs-affiliate-inner">
+    <div class="qs-affiliate-content">
+      <p class="qs-affiliate-name">{{ $name }}</p>
+      {{ if $desc }}<p class="qs-affiliate-desc">{{ $desc }}</p>{{ end }}
+      {{ if $price }}<p class="qs-affiliate-price">{{ $price }}</p>{{ end }}
+    </div>
+
+    <div class="qs-affiliate-action">
+      <a href="{{ $url }}"
+         target="_blank"
+         rel="noopener"
+         class="qs-affiliate-btn">
+        {{ $cta }} &rarr;
+      </a>
+    </div>
+  </div>
+
+  <p class="qs-affiliate-disclosure">
+    <small>Editorial recommendation — no affiliate commission from this link.</small>
+  </p>
+</div>

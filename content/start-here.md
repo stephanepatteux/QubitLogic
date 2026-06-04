@@ -13,6 +13,8 @@ TocOpen: true
 
 QubitLogic covers the full journey from provisioning your first server to deploying quantum-classical hybrid applications in production. Every article has runnable code. Pick your entry point below.
 
+{{< affiliate_stack >}}
+
 ---
 
 ## Phase 1 — Infrastructure

@@ -8,6 +8,8 @@
     logo    - Path to logo image under /static/images/ (optional)
     desc    - Short description sentence (optional)
     price   - Pricing hint, e.g. "$6/mo" (optional)
+    offer   - Reader benefit shown above the title, e.g. "$200 free credits" (optional)
+    primary - "true" for stronger visual emphasis (optional)
 
   Usage:
     {{< affiliate_box
@@ -34,15 +36,21 @@
   {{ $url = site.Params.affiliates.bright_data }}
 {{ else if eq $url "AFFILIATE_LINK_COURSERA_IBM_QUANTUM" }}
   {{ $url = site.Params.affiliates.coursera_ibm_quantum | default "https://www.coursera.org/learn/packt-beginners-guide-to-practical-quantum-computing-with-ibm-qiskit-w6mos" }}
+{{ else if eq $url "AFFILIATE_LINK_FMP" }}
+  {{ $url = site.Params.affiliates.fmp | default "https://site.financialmodelingprep.com/" }}
+{{ else if eq $url "AFFILIATE_LINK_TRADINGVIEW" }}
+  {{ $url = site.Params.affiliates.tradingview | default "https://www.tradingview.com/" }}
 {{ end }}
 {{ $cta   := .Get "cta"   | default "Get Started" }}
 {{ $badge := .Get "badge" }}
 {{ $logo  := .Get "logo"  }}
 {{ $desc  := .Get "desc"  }}
 {{ $price := .Get "price" }}
+{{ $offer := .Get "offer" }}
+{{ $primary := eq (.Get "primary" | default "false") "true" }}
 {{ $rel   := site.Params.affiliate_link_rel | default "nofollow sponsored noopener" }}
 
-<div class="qs-affiliate-box" role="complementary" aria-label="Affiliate recommendation: {{ $name }}">
+<div class="qs-affiliate-box{{ if $primary }} qs-affiliate-box--primary{{ end }}" role="complementary" aria-label="Affiliate recommendation: {{ $name }}">
   {{ if $badge }}
   <span class="qs-affiliate-badge">{{ $badge }}</span>
   {{ end }}
@@ -55,6 +63,7 @@
     {{ end }}
 
     <div class="qs-affiliate-content">
+      {{ if $offer }}<p class="qs-affiliate-offer">{{ $offer }}</p>{{ end }}
       <p class="qs-affiliate-name">{{ $name }}</p>
       {{ if $desc }}<p class="qs-affiliate-desc">{{ $desc }}</p>{{ end }}
       {{ if $price }}<p class="qs-affiliate-price">{{ $price }}</p>{{ end }}

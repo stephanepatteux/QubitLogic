@@ -305,14 +305,9 @@ If you are coming from a machine learning background and want to explore variati
 
 The realistic answer for 2026 is that quantum practitioners who do serious work tend to know both. Qiskit for running and characterising circuits on real hardware. PennyLane for research, training, and algorithm development. The `pennylane-qiskit` bridge means you do not have to choose when it matters most. Start with whichever matches your immediate goal, understand the other when you hit its limitations, and treat them as complementary tools rather than competitors.
 
-{{< affiliate_box
-    name="Brilliant.org — Quantum Computing"
-    url="AFFILIATE_LINK_BRILLIANT"
-    cta="Try Brilliant Free"
-    badge="Best Foundations"
-    desc="Master the linear algebra and circuit concepts both Qiskit and PennyLane build on. Brilliant's interactive quantum computing course is the fastest path from zero to writing real quantum code."
-    price="From $15.99/mo"
->}}
+{{< callout type="tip" title="Starting from zero?" >}}
+Use free [IBM Quantum Learning](https://learning.quantum.ibm.com/) for linear algebra and circuit basics, then return to this comparison. [Quantum Developer Toolkit](/quantum-developer-toolkit/).
+{{< /callout >}}
 
 ---
 

@@ -39,14 +39,9 @@ This article builds Grover's search from scratch in Qiskit: oracle construction,
 pip install qiskit qiskit-aer numpy
 ```
 
-{{< affiliate_box
-    name="Brilliant.org — Quantum Computing Course"
-    url="AFFILIATE_LINK_BRILLIANT"
-    cta="Try Brilliant Free"
-    badge="Best Foundations Course"
-    desc="Master the linear algebra and gate mechanics behind Grover's algorithm with Brilliant's interactive quantum computing course — built for developers who learn by doing."
-    price="From $15.99/mo"
->}}
+{{< callout type="tip" title="New to quantum linear algebra?" >}}
+Start with free [IBM Quantum Learning](https://learning.quantum.ibm.com/) before paid courses. Full learning stack: [Quantum Developer Toolkit](/quantum-developer-toolkit/).
+{{< /callout >}}
 
 ---
 

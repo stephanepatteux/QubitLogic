@@ -1,0 +1,50 @@
+{{/*
+  affiliate_stack — compact high-intent offers (one screen, clear CTAs)
+
+  variant="infra" (default): DigitalOcean + Vultr + Cursor
+  variant="finance": TradingView + DigitalOcean (host trading agents)
+*/}}
+
+{{ $variant := .Get "variant" | default "infra" }}
+{{ $rel := site.Params.affiliate_link_rel | default "nofollow sponsored noopener" }}
+
+<div class="qs-affiliate-stack" role="complementary" aria-label="Partner offers for readers">
+  <p class="qs-affiliate-stack-title">Deploy this stack — new-account offers</p>
+
+  {{ if eq $variant "finance" }}
+  <div class="qs-affiliate-stack-grid">
+    <a class="qs-affiliate-stack-card qs-affiliate-stack-card--primary" href="{{ site.Params.affiliates.tradingview }}" target="_blank" rel="{{ $rel }}" data-affiliate="tradingview">
+      <span class="qs-affiliate-stack-offer">$15 off first paid plan</span>
+      <span class="qs-affiliate-stack-name">TradingView</span>
+      <span class="qs-affiliate-stack-cta">View plans →</span>
+    </a>
+    <a class="qs-affiliate-stack-card" href="{{ site.Params.affiliates.digitalocean }}" target="_blank" rel="{{ $rel }}" data-affiliate="digitalocean">
+      <span class="qs-affiliate-stack-offer">$200 free credits</span>
+      <span class="qs-affiliate-stack-name">DigitalOcean</span>
+      <span class="qs-affiliate-stack-cta">Claim credits →</span>
+    </a>
+  </div>
+  {{ else }}
+  <div class="qs-affiliate-stack-grid">
+    <a class="qs-affiliate-stack-card qs-affiliate-stack-card--primary" href="{{ site.Params.affiliates.digitalocean }}" target="_blank" rel="{{ $rel }}" data-affiliate="digitalocean">
+      <span class="qs-affiliate-stack-offer">$200 free credits · 60 days</span>
+      <span class="qs-affiliate-stack-name">DigitalOcean</span>
+      <span class="qs-affiliate-stack-cta">Claim credits →</span>
+    </a>
+    <a class="qs-affiliate-stack-card" href="{{ site.Params.affiliates.vultr }}" target="_blank" rel="{{ $rel }}" data-affiliate="vultr">
+      <span class="qs-affiliate-stack-offer">$300 free credits · 30 days</span>
+      <span class="qs-affiliate-stack-name">Vultr High Frequency</span>
+      <span class="qs-affiliate-stack-cta">Claim credits →</span>
+    </a>
+    <a class="qs-affiliate-stack-card" href="{{ site.Params.affiliates.cursor }}" target="_blank" rel="{{ $rel }}" data-affiliate="cursor">
+      <span class="qs-affiliate-stack-offer">AI code editor</span>
+      <span class="qs-affiliate-stack-name">Cursor</span>
+      <span class="qs-affiliate-stack-cta">Try free →</span>
+    </a>
+  </div>
+  {{ end }}
+
+  <p class="qs-affiliate-stack-disclosure">
+    <small>Affiliate links — we may earn a commission at no extra cost to you. <a href="/affiliate-disclosure/">Disclosure</a></small>
+  </p>
+</div>

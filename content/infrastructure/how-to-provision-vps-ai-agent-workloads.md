@@ -56,23 +56,7 @@ For a single AI agent (1 concurrent LLM call, local tool execution), the minimum
 
 For multi-agent pipelines (3+ concurrent agents, vector DB on the same host), go 4 vCPU / 8 GB RAM and budget $48/mo.
 
-{{< affiliate_box
-    name="DigitalOcean"
-    url="AFFILIATE_LINK_DIGITALOCEAN"
-    cta="Deploy a Droplet"
-    badge="Recommended"
-    desc="Premium NVMe SSDs, 99.99% uptime SLA, and the best onboarding experience for developers. The $6/mo Basic Droplet is a solid entry point."
-    price="From $6/mo"
->}}
-
-{{< affiliate_box
-    name="Vultr High Frequency"
-    url="AFFILIATE_LINK_VULTR"
-    cta="Get $300 Free Credits"
-    badge="Limited Offer"
-    desc="New Vultr accounts get $300 in credits (30-day expiry) to provision and benchmark this stack. High Frequency instances run on 3GHz+ Intel Ice Lake with pure NVMe and low CPU steal."
-    price="From $6/mo"
->}}
+{{< affiliate_stack >}}
 
 ---
 

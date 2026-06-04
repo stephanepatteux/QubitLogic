@@ -37,14 +37,11 @@ The quantum computing job market is growing faster than the supply of credential
     price="Coursera subscription"
 >}}
 
-{{< affiliate_box
-    name="Brilliant.org"
-    url="AFFILIATE_LINK_BRILLIANT"
-    cta="Try Brilliant Free"
-    badge="Best for Foundations"
-    desc="Interactive quantum computing and linear algebra courses built for developers. Ideal preparation before tackling the IBM certification. 20% off with the QubitLogic link."
-    price="From $15.99/mo"
->}} In 2026, "quantum developer" roles at IBM, Google, IonQ, startups, and defence contractors are posting salaries 30–50% above equivalent classical ML positions.
+{{< callout type="tip" title="Preparing for certification?" >}}
+Free [IBM Quantum Learning](https://learning.quantum.ibm.com/) is the best no-cost prep path before paid courses in our [toolkit](/quantum-developer-toolkit/).
+{{< /callout >}}
+
+In 2026, "quantum developer" roles at IBM, Google, IonQ, startups, and defence contractors are posting salaries 30–50% above equivalent classical ML positions.
 
 The question is whether a certification is the right signal for that market — or whether the practical skills demonstrated by this series (working Qiskit code, real benchmarks, hardware submissions) are more valuable.
 

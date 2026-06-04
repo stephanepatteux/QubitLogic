@@ -230,14 +230,9 @@ print(f"Expectation value: {evs}")
 
 This pattern feeds directly into the QAOA implementation — see the [quantum-inspired optimizer article](/quantum-coding/quantum-inspired-optimizer-python/) for a full worked example that uses `EstimatorV2` with a parameterized cost Hamiltonian.
 
-{{< affiliate_box
-    name="Brilliant.org — Quantum Foundations"
-    url="AFFILIATE_LINK_BRILLIANT"
-    cta="Try Brilliant Free"
-    badge="Best for Beginners"
-    desc="If the Qiskit 2.x primitives model is confusing, Brilliant's quantum computing course covers the measurement and circuit execution model interactively — the conceptual foundation that makes the API changes make sense."
-    price="From $15.99/mo"
->}}
+{{< callout type="tip" title="Confused by the primitives model?" >}}
+Free [IBM Quantum Learning](https://learning.quantum.ibm.com/) covers measurement and execution basics. See the [Quantum Developer Toolkit](/quantum-developer-toolkit/) for courses and tools we use.
+{{< /callout >}}
 
 ---
 
