@@ -8,7 +8,7 @@ summary: "The complete walkthrough of how QubitLogic was built: Hugo static site
 keywords: ["build a blog with cursor", "hugo blog tutorial 2026", "hugo papermod tutorial", "self-hosted newsletter python", "cursor ai blog setup", "github actions hugo deploy", "hugo vs astro 2026", "technical blog free stack vps"]
 tags: ["cursor", "hugo", "vps", "python", "github-actions", "build-in-public", "devops", "newsletter", "security", "compliance"]
 categories: ["build"]
-images: ["/images/og-default.png"]
+images: ["/images/og-build-cursor-hugo.png"]
 weight: 99
 ShowToc: true
 TocOpen: true
@@ -21,6 +21,16 @@ QubitLogic launched with 20+ articles, a working newsletter, a self-hosted subsc
 **Cursor** was the coding environment for every file in this project. I'll include the actual prompts used at each step so you can replicate the workflow, not just the code.
 
 Most of the stack is free. Hosting is the only recurring cost.
+
+| | |
+|:---|:---|
+| **Monthly cost** | ~$6–8/mo (VPS only) |
+| **Annual cost** | ~£10 domain + ~$84 VPS |
+| **Hugo build time** | < 6 seconds for 223 pages |
+| **GitHub Actions deploy** | ~2 min 30 sec push-to-live |
+| **Stack runtime dependencies** | 0 (static HTML + 1 FastAPI service) |
+| **Time to build** | 1–2 weekends |
+| **Cursor free tier sufficient?** | Yes |
 
 ---
 
