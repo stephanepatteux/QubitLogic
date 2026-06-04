@@ -1,28 +1,29 @@
-name: Weekly Newsletter Send
+name: Newsletter
 
 # Tuesday 09:00 UTC = 10:00 BST (Apr-Oct) / 09:00 GMT (Nov-Mar)
 on:
   schedule:
     - cron: "0 9 * * 2"
 
-  # Allow manual trigger from GitHub Actions UI (useful for testing)
   workflow_dispatch:
     inputs:
-      dry_run:
-        description: "Dry run (no emails sent)"
-        required: false
-        default: "false"
+      mode:
+        description: "Run mode"
+        required: true
+        default: "dry-run"
         type: choice
-        options: ["true", "false"]
-      force:
-        description: "Force send even if post already sent"
+        options:
+          - dry-run      # parse RSS + log what would happen, no emails
+          - test-send    # send one email to test_email address
+          - send         # normal send (skips if post already sent)
+          - force-send   # resend even if post was already sent
+      test_email:
+        description: "Email for test-send mode"
         required: false
-        default: "false"
-        type: choice
-        options: ["true", "false"]
+        default: "stephanepatteux@gmail.com"
 
 jobs:
-  send:
+  newsletter:
     runs-on: ubuntu-latest
 
     steps:
@@ -34,15 +35,80 @@ jobs:
       - name: Add VPS to known hosts
         run: ssh-keyscan -H 51.195.86.197 >> ~/.ssh/known_hosts
 
-      - name: Run newsletter send
+      # ── Setup: venv + env file (idempotent) ──────────────────────────────────
+      - name: Setup newsletter on VPS
+        env:
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
         run: |
-          FLAGS=""
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-            FLAGS="$FLAGS --dry-run"
+          # Create dirs and venv
+          ssh ubuntu@51.195.86.197 'bash -s' <<'SETUP'
+          set -e
+          mkdir -p /opt/qubitlogic/newsletter /var/lib/qubitlogic
+          if [ ! -f /opt/qubitlogic/newsletter/venv/bin/python ]; then
+            python3 -m venv /opt/qubitlogic/newsletter/venv
           fi
-          if [ "${{ github.event.inputs.force }}" = "true" ]; then
-            FLAGS="$FLAGS --force"
-          fi
-          ssh ubuntu@51.195.86.197 \
-            "source /etc/qubitlogic/newsletter.env 2>/dev/null; \
-             python3 /opt/qubitlogic/newsletter/send.py $FLAGS"
+          /opt/qubitlogic/newsletter/venv/bin/pip install --quiet --upgrade \
+            fastapi "uvicorn[standard]" python-multipart 2>/dev/null
+          SETUP
+
+          # Write env file (no sudo needed – ubuntu owns /opt/qubitlogic)
+          ssh ubuntu@51.195.86.197 "python3 - '$SMTP_PASSWORD'" <<'PYEOF'
+          import sys, os
+          password = sys.argv[1]
+          env = [
+            "NEWSLETTER_DB=/var/lib/qubitlogic/newsletter.db",
+            "NEWSLETTER_STATE=/var/lib/qubitlogic/last_sent_guid.txt",
+            "SITE_URL=https://qubitlogic.dev",
+            "RSS_URL=https://qubitlogic.dev/index.xml",
+            "EMAIL_FROM=QubitLogic <hello@qubitlogic.dev>",
+            "SMTP_HOST=smtppro.zoho.eu",
+            "SMTP_PORT=587",
+            "SMTP_USER=hello@qubitlogic.dev",
+            f"SMTP_PASSWORD={password}",
+          ]
+          path = "/opt/qubitlogic/newsletter/.env"
+          with open(path, "w") as f:
+            f.write("\n".join(env) + "\n")
+          os.chmod(path, 0o600)
+          print(f"Wrote {path}")
+          PYEOF
+
+      # ── Modes ────────────────────────────────────────────────────────────────
+
+      - name: "Mode: dry-run"
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'dry-run'
+        run: |
+          ssh ubuntu@51.195.86.197 'bash -s' <<'RUN'
+          set -a; source /opt/qubitlogic/newsletter/.env; set +a
+          /opt/qubitlogic/newsletter/venv/bin/python \
+            /opt/qubitlogic/newsletter/send.py --dry-run
+          RUN
+
+      - name: "Mode: test-send"
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'test-send'
+        run: |
+          EMAIL="${{ github.event.inputs.test_email }}"
+          ssh ubuntu@51.195.86.197 "bash -s '$EMAIL'" <<'RUN'
+          set -a; source /opt/qubitlogic/newsletter/.env; set +a
+          /opt/qubitlogic/newsletter/venv/bin/python \
+            /opt/qubitlogic/newsletter/test_send.py "$1"
+          RUN
+
+      - name: "Mode: force-send"
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'force-send'
+        run: |
+          ssh ubuntu@51.195.86.197 'bash -s' <<'RUN'
+          set -a; source /opt/qubitlogic/newsletter/.env; set +a
+          /opt/qubitlogic/newsletter/venv/bin/python \
+            /opt/qubitlogic/newsletter/send.py --force
+          RUN
+
+      # Scheduled run + manual "send" mode
+      - name: "Mode: send"
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'send')
+        run: |
+          ssh ubuntu@51.195.86.197 'bash -s' <<'RUN'
+          set -a; source /opt/qubitlogic/newsletter/.env; set +a
+          /opt/qubitlogic/newsletter/venv/bin/python \
+            /opt/qubitlogic/newsletter/send.py
+          RUN

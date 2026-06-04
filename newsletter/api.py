@@ -24,6 +24,17 @@ from fastapi.middleware.cors import CORSMiddleware
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 log = logging.getLogger("newsletter.api")
 
+# Load env file — sibling .env first, then system-wide path
+from pathlib import Path as _Path
+for _ep in (_Path(__file__).parent / ".env", _Path("/etc/qubitlogic/newsletter.env")):
+    if _ep.exists():
+        for _ln in _ep.read_text().splitlines():
+            _ln = _ln.strip()
+            if _ln and not _ln.startswith("#") and "=" in _ln:
+                _k, _, _v = _ln.partition("=")
+                os.environ.setdefault(_k.strip(), _v.strip())
+        break
+
 DB_PATH   = os.getenv("NEWSLETTER_DB",   "/var/lib/qubitlogic/newsletter.db")
 SITE_URL  = os.getenv("SITE_URL",        "https://qubitlogic.dev")
 FROM_ADDR = os.getenv("EMAIL_FROM",      "QubitLogic <hello@qubitlogic.dev>")

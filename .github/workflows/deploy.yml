@@ -31,9 +31,18 @@ jobs:
       - name: Add VPS to known hosts
         run: ssh-keyscan -H 51.195.86.197 >> ~/.ssh/known_hosts
 
-      - name: Deploy to VPS
+      - name: Deploy site to VPS
         run: |
           rsync -avz --delete \
             -e "ssh -o StrictHostKeyChecking=no" \
             public/ \
             ubuntu@51.195.86.197:/var/www/qubitlogic/
+
+      - name: Deploy newsletter scripts to VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@51.195.86.197 \
+            "mkdir -p /opt/qubitlogic/newsletter /var/lib/qubitlogic"
+          rsync -avz \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            newsletter/ \
+            ubuntu@51.195.86.197:/opt/qubitlogic/newsletter/

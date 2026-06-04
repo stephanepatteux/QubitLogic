@@ -32,13 +32,18 @@ from urllib.error import URLError
 
 # ── Env ───────────────────────────────────────────────────────────────────────
 
-ENV_FILE = Path("/etc/qubitlogic/newsletter.env")
-if ENV_FILE.exists():
-    for line in ENV_FILE.read_text().splitlines():
+def _load_env_file(path: Path) -> None:
+    if not path.exists():
+        return
+    for line in path.read_text().splitlines():
         line = line.strip()
         if line and not line.startswith("#") and "=" in line:
             k, _, v = line.partition("=")
             os.environ.setdefault(k.strip(), v.strip())
+
+# Check sibling .env first, then system-wide path
+_load_env_file(Path(__file__).parent / ".env")
+_load_env_file(Path("/etc/qubitlogic/newsletter.env"))
 
 DB_PATH      = os.getenv("NEWSLETTER_DB",    "/var/lib/qubitlogic/newsletter.db")
 STATE_PATH   = os.getenv("NEWSLETTER_STATE", "/var/lib/qubitlogic/last_sent_guid.txt")
