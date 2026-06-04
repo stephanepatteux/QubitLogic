@@ -31,7 +31,7 @@ Based on sysbench CPU and fio NVMe testing across equivalent $5–$12/mo plans (
 |:---|:---|:---|:---|:---|
 | **Vultr High Frequency** | **1,074 events/s** | **~410 MB/s** | Raw AI compute, low-latency Python APIs | [Deploy on Vultr](https://www.vultr.com/?ref=9904429-9J) |
 | **Hetzner CX22** | 939 events/s | ~250 MB/s | RAM-heavy backtesting, EU workloads, cost-sensitivity | [Hetzner Cloud](https://www.hetzner.com/cloud) |
-| **DigitalOcean Premium AMD** | 772 events/s | ~150 MB/s | Best documentation, US staging, beginners | [Deploy on DO](https://www.awin1.com/cread.php?awinmid=123996&awinaffid=2917857) |
+| **DigitalOcean Premium AMD** | 772 events/s | ~150 MB/s | Best documentation, US staging, beginners | [Deploy on DO](AFFILIATE_LINK_DIGITALOCEAN) |
 
 **Bottom line:** Vultr wins on raw single-core throughput for Python API workloads. Hetzner wins on price-to-RAM ratio — 4 GB for ~$5/mo is unmatched. DigitalOcean wins on developer experience and US network reliability. Full methodology and reproducible commands below.
 
@@ -118,7 +118,7 @@ sysbench cpu --cpu-max-prime=20000 --time=60 --threads=2 run
 
 {{< affiliate_box
     name="DigitalOcean"
-    url="https://www.awin1.com/cread.php?awinmid=123996&awinaffid=2917857"
+    url="AFFILIATE_LINK_DIGITALOCEAN"
     cta="Get $200 Free Credits"
     badge="Best Documentation"
     desc="New DigitalOcean accounts get $200 in free credits over 60 days — enough to run this full benchmark suite at zero cost. No credit card required to start."
