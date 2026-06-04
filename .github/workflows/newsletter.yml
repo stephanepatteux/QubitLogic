@@ -112,6 +112,10 @@ jobs:
           ssh ubuntu@51.195.86.197 'bash -s' <<'RUN'
           set -e
 
+          # Kill anything on port 8001 (zombie processes from failed restarts)
+          sudo fuser -k 8001/tcp 2>/dev/null || true
+          sleep 1
+
           # Install systemd service
           sudo cp /opt/qubitlogic/newsletter/qubitlogic-newsletter.service \
             /etc/systemd/system/qubitlogic-newsletter.service
