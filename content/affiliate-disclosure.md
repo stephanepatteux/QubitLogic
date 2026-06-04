@@ -42,7 +42,6 @@ We currently participate in (or are in the process of joining) the following aff
 |---|---|---|---|
 | Vultr | Referral program | $100 per verified referral (30+ days active, $100+ spend); time-limited promos (e.g. $300 credit for new users) may apply | [vultr.com/affiliates](https://www.vultr.com/affiliates/) |
 | DigitalOcean | Awin | $25 per qualifying referral | [Awin publisher signup](https://ui.awin.com/publisher-signup) → search “DigitalOcean” in marketplace |
-| Hetzner | Referral program | Referral credits per new customer | [hetzner.com/a](https://www.hetzner.com/a/) |
 | Coursera | Impact | 15–45% of eligible purchases (30-day cookie) | [about.coursera.org/affiliates](https://about.coursera.org/affiliates) |
 | Brilliant.org | MyAffiliates | ~20% recurring commission (per programme terms) | [affiliates.brilliant.partners/signup](https://affiliates.brilliant.partners/signup.php) |
 | Paperspace (DigitalOcean) | DigitalOcean / Awin | Typically via DigitalOcean partner terms when GPU products are in scope | Same as DigitalOcean |
