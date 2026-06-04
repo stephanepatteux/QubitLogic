@@ -38,6 +38,8 @@ QubitLogic is written and maintained by **Stephane Patteux**, a developer based 
 
 Code for all articles is on [GitHub](https://github.com/stephanepatteux/QubitLogic).
 
+The full build log — Hugo, Nginx, GitHub Actions, self-hosted newsletter, SVG logo, compliance — is documented in [How to Build a Technical Blog with Cursor and Hugo](/build-technical-blog-cursor-hugo/).
+
 ---
 
 ## Contact

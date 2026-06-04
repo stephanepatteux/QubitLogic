@@ -82,6 +82,7 @@ Apply quantum and AI skills to production. These articles are self-contained.
 | I want to secure APIs against quantum attacks | [Phase 3 article 1](/professional-edge/post-quantum-cryptography-api-security/) |
 | I want to compare quantum frameworks | [Qiskit vs PennyLane 2026](/quantum-coding/qiskit-vs-pennylane-2026/) |
 | I want to choose a VPS provider | [DO vs Vultr vs Hetzner benchmark](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/) |
+| I want to build a blog like this with Cursor and Hugo | [How to Build a Technical Blog with Cursor and Hugo](/build-technical-blog-cursor-hugo/) |
 
 ---
 

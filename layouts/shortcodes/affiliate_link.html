@@ -22,6 +22,10 @@
   {{- $url = site.Params.affiliates.fmp | default "https://site.financialmodelingprep.com/" -}}
 {{- else if eq $url "AFFILIATE_LINK_TRADINGVIEW" -}}
   {{- $url = site.Params.affiliates.tradingview | default "https://www.tradingview.com/" -}}
+{{- else if eq $url "AFFILIATE_LINK_NAMECHEAP" -}}
+  {{- $url = site.Params.affiliates.namecheap | default "https://www.namecheap.com/" -}}
+{{- else if eq $url "AFFILIATE_LINK_ZOHO" -}}
+  {{- $url = site.Params.affiliates.zoho | default "https://www.zoho.com/mail/" -}}
 {{- end -}}
 {{- $rel := site.Params.affiliate_link_rel | default "nofollow sponsored noopener" -}}
 <a href="{{ $url }}" target="_blank" rel="{{ $rel }}">{{ .Inner }}</a>

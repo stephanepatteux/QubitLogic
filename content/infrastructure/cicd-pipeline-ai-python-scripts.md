@@ -413,3 +413,7 @@ Manual VPS deployment is a risk that compounds over time — the more you deploy
 The total monthly cost of this CI/CD setup: **$0** for public repos, or a few minutes of your 2,000 free GitHub Actions minutes for private repos. There is no reason not to have it from day one.
 
 The final article in Phase 1 delivers the benchmark data we have referenced throughout the series — a **full head-to-head performance comparison of DigitalOcean vs Vultr** across CPU, disk I/O, network, and real-world Python AI agent workloads.
+
+---
+
+*Want to see exactly how this CI/CD pipeline is used to deploy QubitLogic itself? → [How to Build a Technical Blog with Cursor and Hugo](/build-technical-blog-cursor-hugo/)*

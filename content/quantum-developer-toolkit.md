@@ -115,6 +115,8 @@ What I use for drafting FastAPI services, refactoring Qiskit notebooks, and iter
 
 Used when building or editing: [VPS AI agent provisioning](/infrastructure/how-to-provision-vps-ai-agent-workloads/), [agentic workflows](/professional-edge/agentic-workflows-vs-manual-scripts/), [CI/CD for Python AI scripts](/infrastructure/cicd-pipeline-ai-python-scripts/)
 
+**See also:** [How to Build a Technical Blog with Cursor and Hugo](/build-technical-blog-cursor-hugo/) — the full build log of this site, with the actual Cursor prompts used at every step.
+
 ---
 
 ## Learning Resources

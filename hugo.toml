@@ -26,6 +26,10 @@ paginate = 10
   # Apply: https://site.financialmodelingprep.com/affiliates — paste tracking URL when approved
   fmp = ""
   tradingview = "https://www.tradingview.com/?aff_id=157199"
+  # Apply: https://www.namecheap.com/affiliates/ via Impact — 20% domains, 35% hosting/SSL
+  namecheap = ""
+  # Apply: https://www.zoho.com/affiliate/ — 15-20% recurring for 12 months, 90-day cookie
+  zoho = ""
 
 [params]
   # rel on paid/affiliate outbound links (Google: sponsored + nofollow)

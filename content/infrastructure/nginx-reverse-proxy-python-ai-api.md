@@ -429,3 +429,5 @@ The next article covers **optimising your Python environment performance on Ubun
 ---
 
 *Part of [Phase 1: Infrastructure](/infrastructure/) — [See the full learning path](/start-here/)*
+
+*The Nginx config used on this site (including the security headers and Cloudflare integration) is documented in full: [How to Build a Technical Blog with Cursor and Hugo](/build-technical-blog-cursor-hugo/)*
