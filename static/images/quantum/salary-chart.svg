@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" role="img" aria-label="Quantum computing job salary ranges 2026">
+  <defs>
+    <linearGradient id="sbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f0f14"/>
+      <stop offset="100%" stop-color="#131318"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="760" height="360" fill="url(#sbg)" rx="12"/>
+  <rect width="760" height="360" fill="none" stroke="#2c2c36" stroke-width="1" rx="12"/>
+
+  <!-- Title -->
+  <text x="30" y="36" fill="#e4e4ec" font-family="system-ui,sans-serif" font-size="14" font-weight="700">Quantum Computing Salaries  US Base Pay (2026)</text>
+  <text x="30" y="54" fill="#55556a" font-family="system-ui,sans-serif" font-size="11">Total compensation (base + stock) at major tech companies is typically 1.52.5× these figures.</text>
+
+  <!-- Axis -->
+  <line x1="220" y1="68" x2="220" y2="328" stroke="#2c2c36" stroke-width="1"/>
+  <line x1="220" y1="328" x2="740" y2="328" stroke="#2c2c36" stroke-width="1"/>
+
+  <!-- Scale: $80K at x=220, $300K at x=730 ’ $1K = 2.32px, scale factor = (730-220)/220 = 2.318 px/$K -->
+  <!-- x = 220 + (salary_K - 80) * 2.318 -->
+
+  <!-- Scale labels -->
+  <text x="220" y="344" text-anchor="middle" fill="#55556a" font-family="ui-monospace,monospace" font-size="9">$80K</text>
+  <text x="336" y="344" text-anchor="middle" fill="#55556a" font-family="ui-monospace,monospace" font-size="9">$130K</text>
+  <text x="452" y="344" text-anchor="middle" fill="#55556a" font-family="ui-monospace,monospace" font-size="9">$180K</text>
+  <text x="568" y="344" text-anchor="middle" fill="#55556a" font-family="ui-monospace,monospace" font-size="9">$230K</text>
+  <text x="684" y="344" text-anchor="middle" fill="#55556a" font-family="ui-monospace,monospace" font-size="9">$280K</text>
+  <line x1="336" y1="68" x2="336" y2="328" stroke="#2c2c36" stroke-width="1" stroke-dasharray="3,4"/>
+  <line x1="452" y1="68" x2="452" y2="328" stroke="#2c2c36" stroke-width="1" stroke-dasharray="3,4"/>
+  <line x1="568" y1="68" x2="568" y2="328" stroke="#2c2c36" stroke-width="1" stroke-dasharray="3,4"/>
+  <line x1="684" y1="68" x2="684" y2="328" stroke="#2c2c36" stroke-width="1" stroke-dasharray="3,4"/>
+
+  <!-- Rows  each 36px tall, starting at y=74 -->
+  <!-- Formula: bar_x = 220 + (low-80)*2.318, bar_w = (high-low)*2.318 -->
+
+  <!-- 1. Junior Developer $85K-$140K | bar: x=231, w=127, color green -->
+  <text x="215" y="93" text-anchor="end" fill="#e4e4ec" font-family="system-ui,sans-serif" font-size="10" font-weight="600">Junior Developer</text>
+  <text x="215" y="105" text-anchor="end" fill="#55556a" font-family="system-ui,sans-serif" font-size="9">+18% YoY</text>
+  <rect x="231" y="82" width="127" height="20" rx="3" fill="#00e87a" fill-opacity="0.18"/>
+  <rect x="231" y="82" width="127" height="20" rx="3" fill="none" stroke="#00e87a" stroke-width="1" stroke-opacity="0.5"/>
+  <rect x="231" y="82" width="127" height="20" rx="3" fill="#00e87a" fill-opacity="0.7"/>
+  <text x="362" y="96" fill="#00e87a" font-family="ui-monospace,monospace" font-size="9" dx="4">$85K$140K</text>
+
+  <!-- 2. Quantum Software (Mid) $110K-$175K | x=290, w=150 -->
+  <text x="215" y="129" text-anchor="end" fill="#e4e4ec" font-family="system-ui,sans-serif" font-size="10" font-weight="600">Software Eng (Mid)</text>
+  <text x="215" y="141" text-anchor="end" fill="#55556a" font-family="system-ui,sans-serif" font-size="9">+20% YoY</text>
+  <rect x="290" y="118" width="150" height="20" rx="3" fill="#00e87a" fill-opacity="0.7"/>
+  <text x="444" y="132" fill="#00e87a" font-family="ui-monospace,monospace" font-size="9" dx="4">$110K$175K</text>
+
+  <!-- 3. QML Scientist $135K-$250K | x=128+220=... x=220+(135-80)*2.318=347, w=(250-135)*2.318=266 -->
+  <text x="215" y="165" text-anchor="end" fill="#e4e4ec" font-family="system-ui,sans-serif" font-size="10" font-weight="600">QML Scientist</text>
+  <text x="215" y="177" text-anchor="end" fill="#55556a" font-family="system-ui,sans-serif" font-size="9">+22% YoY ‘</text>
+  <rect x="347" y="154" width="266" height="20" rx="3" fill="#a78bfa" fill-opacity="0.7"/>
+  <text x="617" y="168" fill="#a78bfa" font-family="ui-monospace,monospace" font-size="9" dx="4">$135K$250K</text>
+
+  <!-- 4. Senior SW Eng $150K-$230K | x=220+(150-80)*2.318=382, w=(230-150)*2.318=185 -->
+  <text x="215" y="201" text-anchor="end" fill="#e4e4ec" font-family="system-ui,sans-serif" font-size="10" font-weight="600">Senior SW Eng</text>
+  <text x="215" y="213" text-anchor="end" fill="#55556a" font-family="system-ui,sans-serif" font-size="9">+18% YoY</text>
+  <rect x="382" y="190" width="185" height="20" rx="3" fill="#38bdf8" fill-opacity="0.7"/>
+  <text x="571" y="204" fill="#38bdf8" font-family="ui-monospace,monospace" font-size="9" dx="4">$150K$230K</text>
+
+  <!-- 5. QC Cryptography $130K-$210K | x=220+(130-80)*2.318=335, w=(210-130)*2.318=185 -->
+  <text x="215" y="237" text-anchor="end" fill="#e4e4ec" font-family="system-ui,sans-serif" font-size="10" font-weight="600">Cryptography Eng</text>
+  <text x="215" y="249" text-anchor="end" fill="#55556a" font-family="system-ui,sans-serif" font-size="9">+25% YoY ‘‘</text>
+  <rect x="335" y="226" width="185" height="20" rx="3" fill="#fbbf24" fill-opacity="0.7"/>
+  <text x="524" y="240" fill="#fbbf24" font-family="ui-monospace,monospace" font-size="9" dx="4">$130K$210K</text>
+
+  <!-- 6. Hardware Physicist $145K-$260K | x=220+(145-80)*2.318=370, w=(260-145)*2.318=266 -->
+  <text x="215" y="273" text-anchor="end" fill="#e4e4ec" font-family="system-ui,sans-serif" font-size="10" font-weight="600">Hardware Physicist</text>
+  <text x="215" y="285" text-anchor="end" fill="#55556a" font-family="system-ui,sans-serif" font-size="9">+10% YoY</text>
+  <rect x="370" y="262" width="266" height="20" rx="3" fill="#f87171" fill-opacity="0.7"/>
+  <text x="640" y="276" fill="#f87171" font-family="ui-monospace,monospace" font-size="9" dx="4">$145K$260K</text>
+
+  <!-- 7. Principal Engineer $180K-$300K | x=220+(180-80)*2.318=451, w=(300-180)*2.318=278 -->
+  <text x="215" y="309" text-anchor="end" fill="#e4e4ec" font-family="system-ui,sans-serif" font-size="10" font-weight="600">Principal Engineer</text>
+  <text x="215" y="321" text-anchor="end" fill="#55556a" font-family="system-ui,sans-serif" font-size="9">+15% YoY</text>
+  <rect x="451" y="298" width="278" height="20" rx="3" fill="#a78bfa"/>
+  <text x="733" y="312" fill="#a78bfa" font-family="ui-monospace,monospace" font-size="9" dx="4">’$300K+</text>
+
+  <!-- Note -->
+  <text x="30" y="350" fill="#444" font-family="system-ui,sans-serif" font-size="9">Source: JobQuantum salary guide 2026 · Chicago Quantum Exchange · engineersalarydata.com</text>
+</svg>

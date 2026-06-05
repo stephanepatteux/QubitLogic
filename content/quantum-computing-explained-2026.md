@@ -85,6 +85,8 @@ This is not a gap in our knowledge. It is not that the coin is "secretly" one si
 
 Now here is what makes this useful.
 
+{{< figure src="/images/quantum/bit-vs-qubit.svg" alt="Classical bit vs qubit: a bit is always 0 or 1; a qubit lives in superposition described by a state vector on the Bloch sphere" caption="A classical bit is always definitively 0 or 1. A qubit exists as a probability amplitude — both states simultaneously — described by a vector on the Bloch sphere. Measurement collapses it to one outcome." >}}
+
 ### Entanglement
 
 Two qubits can be **entangled**: their quantum states become correlated. Measure one qubit and you instantly know something about the other, regardless of distance. Einstein called this "spooky action at a distance" and spent years trying to disprove it. He failed. Entanglement is real, experimentally verified a thousand times over, and it is what allows quantum computers to process correlated information exponentially more efficiently than classical ones.
@@ -176,6 +178,8 @@ Building a world-class quantum lab — not just buying hardware but designing an
 - AWS Braket — pay-per-shot pricing, $0.01–$0.075 per shot depending on backend
 - Azure Quantum — credits for IonQ, Quantinuum, Pasqal systems
 - Enterprise contracts — $50,000–$500,000/year for dedicated capacity
+
+{{< figure src="/images/quantum/hardware-cost.svg" alt="Quantum computer hardware cost breakdown 2026 — dilution refrigerator dominates at up to $10M, control electronics $3M–$5M, facility prep $200K–$400K" caption="Cost breakdown for an enterprise-grade superconducting quantum system (500+ qubits). The dilution refrigerator alone can cost more than a Manhattan apartment building. Cloud access sidesteps all of this from free." >}}
 
 {{< affiliate_box
     name="DigitalOcean"
@@ -325,6 +329,8 @@ If you want to dig deeper into the sector before forming any view, the [State of
 
 The global quantum computing workforce is estimated at roughly **14,500 professionals** as of 2024. Projections put it at **250,000 by 2030** and **840,000 by 2035**. The gap between open roles and qualified candidates is already significant — and widening.
 
+{{< figure src="/images/quantum/salary-chart.svg" alt="Quantum computing salary ranges by role 2026 — junior developer $85K-$140K through principal engineer $180K-$300K+" caption="Quantum computing salary ranges by role (US base pay, 2026). Total compensation with stock and bonus at major tech companies is typically 1.5–2.5× these figures. Source: JobQuantum 2026 salary guide." >}}
+
 ### Salary Ranges by Role (US, 2026)
 
 | Role | Base salary range | YoY growth |
@@ -366,7 +372,30 @@ The largest hiring clusters in 2026:
 
 Remote-friendly roles exist primarily in quantum software, algorithms, and DevOps. Hardware physics roles require physical presence at labs.
 
-The best job boards currently: [JobQuantum.com](https://www.jobquantum.com/), [Quantum Computing Report jobs listings](https://quantumcomputingreport.com/jobs/), and LinkedIn searches for "quantum engineer" or "Qiskit developer".
+The best job boards for quantum roles:
+
+- **[JobQuantum.com](https://www.jobquantum.com/)** — dedicated quantum computing job board, 500+ active listings
+- **[Quantum Computing Report jobs](https://quantumcomputingreport.com/jobs/)** — curated, signal over noise
+- **[LinkedIn](https://www.linkedin.com/jobs/quantum-computing-jobs/)** — search "quantum engineer" or "Qiskit developer"
+- **[Jooble quantum jobs](https://jooble.org/jobs-quantum-computing)** — aggregates across all major boards in one search
+
+{{< affiliate_box
+    name="Jooble — Quantum Computing Jobs"
+    url="AFFILIATE_LINK_JOOBLE"
+    cta="Search Quantum Jobs"
+    badge="Job Search"
+    desc="Jooble aggregates quantum computing roles from Indeed, LinkedIn, Glassdoor, company career pages, and 140+ specialist boards into a single search. Filter by location, seniority, or remote. Free for job seekers."
+    price="Free"
+>}}
+
+{{< affiliate_box
+    name="Jobscan — Beat the ATS"
+    url="AFFILIATE_LINK_JOBSCAN"
+    cta="Optimise Your Resume"
+    badge="Career Tool"
+    desc="Most quantum job applications pass through ATS (Applicant Tracking Systems) before a human reads them. Jobscan analyses your resume against each job description and shows you exactly which keywords are missing. Especially useful for quantum roles where the terminology gap between your CV and the job description can be large."
+    price="From $49.95/mo"
+>}}
 
 ---
 
@@ -424,10 +453,20 @@ For a full framework comparison before you commit to Qiskit or PennyLane, [Qiski
 |---|---|---|
 | [IBM Quantum Learning](https://learning.quantum.ibm.com/) | Free | Complete beginners through intermediate |
 | [Qiskit Global Summer School 2026](https://www.ibm.com/quantum/blog/qiskit-summer-school-2026) (13–24 July) | Free | Structured 2-week intensive with IBM experts |
-| IBM Certified Quantum Developer ($200) | $200 | Industry-recognised software credential |
+| IBM Certified Quantum Developer | $200 | Industry-recognised software credential |
+| [Practical Quantum Computing with Qiskit (Coursera)](https://www.coursera.org/learn/packt-beginners-guide-to-practical-quantum-computing-with-ibm-qiskit-w6mos) | Subscription | Hands-on Qiskit circuits, ideal for software engineers |
 | MIT xPRO Quantum Computing Fundamentals | ~$3,000 | Professionals who need structured curriculum |
 | University of Chicago Quantum cert (edX) | ~$500 | Part-time, self-paced, recognised in academia |
 | QubitLogic quantum coding series | Free | [Grover's](/quantum-coding/grovers-search-logic-python/), [QAOA](/quantum-coding/qaoa-vs-classical-brute-force-benchmarking/), [QML](/quantum-coding/quantum-machine-learning-when-to-use/), [circuit optimisation](/quantum-coding/simulating-circuit-depth-code-optimization/) — all with runnable code |
+
+{{< affiliate_box
+    name="Practical Quantum Computing with IBM Qiskit — Coursera"
+    url="AFFILIATE_LINK_COURSERA_IBM_QUANTUM"
+    cta="Enrol on Coursera"
+    badge="Top Rated"
+    desc="Hands-on Qiskit course: build circuits, run them on real IBM hardware, and understand superposition, entanglement, and key quantum algorithms through working Python code. One of the most practical entry points for software engineers. Backed by the IBM Qiskit team."
+    price="Coursera subscription"
+>}}
 
 ---
 

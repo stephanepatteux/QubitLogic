@@ -30,6 +30,10 @@ paginate = 10
   namecheap = ""
   # Apply: https://www.zoho.com/affiliate/ — 15-20% recurring for 12 months, 90-day cookie
   zoho = ""
+  # Apply: https://www.jobscan.co/affiliates via ShareASale — 15% commission, 45-day cookie. Quantum job seekers need ATS optimisation.
+  jobscan = ""
+  # Apply: https://jooble.org/info/en/about-affiliate — CPC job aggregator, strong tech inventory, no minimum traffic requirement
+  jooble = "https://jooble.org/jobs-quantum-computing"
 
 [params]
   # rel on paid/affiliate outbound links (Google: sponsored + nofollow)

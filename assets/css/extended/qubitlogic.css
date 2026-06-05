@@ -808,6 +808,53 @@ code, pre, kbd, samp {
   object-fit: cover;
 }
 
+/* ── Inline article figures / diagrams ───────────────────── */
+.post-content figure.qs-diagram {
+  margin: 2rem 0;
+  border: 1px solid var(--qs-border);
+  border-radius: var(--qs-radius);
+  overflow: hidden;
+  background: var(--qs-surface);
+}
+
+.post-content figure.qs-diagram img,
+.post-content figure.qs-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--qs-radius) var(--qs-radius) 0 0;
+}
+
+.post-content figure.qs-diagram figcaption {
+  font-size: 0.8rem;
+  color: var(--qs-text-faint);
+  padding: 0.55rem 1rem;
+  background: var(--qs-surface-2);
+  border-top: 1px solid var(--qs-border);
+  line-height: 1.5;
+}
+
+/* Hugo's built-in figure shortcode styling */
+.post-content figure {
+  margin: 1.75rem 0;
+}
+
+.post-content figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--qs-radius);
+  border: 1px solid var(--qs-border);
+}
+
+.post-content figcaption {
+  font-size: 0.8rem;
+  color: var(--qs-text-faint);
+  text-align: center;
+  margin-top: 0.4rem;
+  font-style: italic;
+}
+
 /* ── Post list: square thumbnail left of card ─────────────── */
 .post-entry,
 .first-entry {
