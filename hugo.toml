@@ -36,7 +36,9 @@ paginate = 10
   jooble = "https://jooble.org/jobs-quantum-computing"
 
 [params]
-  # rel on paid/affiliate outbound links (Google: sponsored + nofollow)
+  # Applied to every paid/affiliate outbound link (shortcodes + auto-detected markdown links).
+  # Google: use rel="sponsored" for commission links; nofollow is recommended alongside.
+  # See layouts/partials/affiliate/rel.html and url_is_affiliate.html
   affiliate_link_rel = "nofollow sponsored noopener"
   env = "production"
   title = "QubitLogic"

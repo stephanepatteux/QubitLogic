@@ -1,0 +1,34 @@
+{{- /* Returns true if $url is a configured or known affiliate outbound link */ -}}
+{{- $dest := . -}}
+{{- $isAffiliate := false -}}
+
+{{- range site.Params.affiliates -}}
+  {{- if and . (in $dest .) -}}
+    {{- $isAffiliate = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $isAffiliate -}}
+  {{- if or
+      (in $dest "awin1.com")
+      (in $dest "awinaffid=")
+      (in $dest "get.brightdata.com")
+      (in $dest "cursor.com/referral")
+      (and (in $dest "tradingview.com") (in $dest "aff_id="))
+      (in $dest "m.do.co/c/")
+      (and (in $dest "vultr.com") (in $dest "ref="))
+      (in $dest "coursera.org/learn/packt-beginners-guide-to-practical-quantum-computing")
+      (in $dest "jobscan.co")
+      (in $dest "jooble.org")
+      (in $dest "impactcdn.com")
+      (in $dest "impactradius.com")
+      (in $dest "shareasale.com")
+      (in $dest "partnerstack.com")
+      (in $dest "sjv.io")
+      (in $dest "prf.hn")
+    -}}
+    {{- $isAffiliate = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $isAffiliate -}}

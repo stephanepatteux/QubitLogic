@@ -36,7 +36,7 @@
 
   {{- if .Content }}
   <div class="post-content md-content">
-    {{- if or (in .RawContent "affiliate_box") (in .RawContent "affiliate_stack") }}
+    {{- if or (in .RawContent "affiliate_box") (in .RawContent "affiliate_stack") (in .RawContent "affiliate_link") (in .RawContent "coursera_link") }}
     {{- partial "affiliate/top_notice.html" . }}
     {{- end }}
     {{- if not (.Param "disableAnchoredHeadings") }}

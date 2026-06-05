@@ -56,7 +56,6 @@
 {{ $price := .Get "price" }}
 {{ $offer := .Get "offer" }}
 {{ $primary := eq (.Get "primary" | default "false") "true" }}
-{{ $rel   := site.Params.affiliate_link_rel | default "nofollow sponsored noopener" }}
 
 <div class="qs-affiliate-box{{ if $primary }} qs-affiliate-box--primary{{ end }}" role="complementary" aria-label="Affiliate recommendation: {{ $name }}">
   {{ if $badge }}
@@ -78,9 +77,7 @@
     </div>
 
     <div class="qs-affiliate-action">
-      <a href="{{ $url }}"
-         target="_blank"
-         rel="{{ $rel }}"
+      <a href="{{ $url }}"{{ partial "affiliate/outbound_attrs.html" . | safeHTMLAttr }}
          class="qs-affiliate-btn"
          data-affiliate="{{ $name | urlize }}">
         {{ $cta }} &rarr;

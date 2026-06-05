@@ -1,31 +1,7 @@
 {{- $dest := .Destination -}}
-{{- $rel := site.Params.affiliate_link_rel | default "nofollow sponsored noopener" -}}
-{{- $isAffiliate := false -}}
-
-{{- /* URLs configured in hugo.toml [params.affiliates] */ -}}
-{{- range site.Params.affiliates -}}
-  {{- if and . (in $dest .) -}}
-    {{- $isAffiliate = true -}}
-  {{- end -}}
-{{- end -}}
-
-{{- if not $isAffiliate -}}
-  {{- if or
-      (in $dest "awin1.com")
-      (in $dest "get.brightdata.com")
-      (in $dest "cursor.com/referral")
-      (and (in $dest "tradingview.com") (in $dest "aff_id="))
-      (in $dest "m.do.co/c/")
-      (in $dest "awinaffid=")
-      (in $dest "utm_source=")
-      (and (in $dest "vultr.com") (in $dest "ref="))
-      (in $dest "coursera.org/learn/packt-beginners-guide-to-practical-quantum-computing")
-    -}}
-    {{- $isAffiliate = true -}}
-  {{- end -}}
-{{- end -}}
+{{- $isAffiliate := partial "affiliate/url_is_affiliate.html" $dest -}}
 
 <a href="{{ $dest | safeURL }}"
-  {{- if $isAffiliate }} rel="{{ $rel }}" target="_blank"{{- end -}}
+  {{- if $isAffiliate }}{{ partial "affiliate/outbound_attrs.html" . | safeHTMLAttr }}{{- end -}}
   {{- with .Title }} title="{{ . }}"{{- end -}}
 >{{ .Text | safeHTML }}</a>

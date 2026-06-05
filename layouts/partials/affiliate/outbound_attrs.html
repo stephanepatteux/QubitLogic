@@ -1,0 +1,3 @@
+{{- /* Leading space — safe to inject on <a> tags via safeHTMLAttr */ -}}
+{{- $rel := partial "affiliate/rel.html" . -}}
+{{- return (printf ` target="_blank" rel="%s" data-link-type="affiliate"` $rel) -}}

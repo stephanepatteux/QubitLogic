@@ -31,5 +31,4 @@
 {{- else if eq $url "AFFILIATE_LINK_JOOBLE" -}}
   {{- $url = site.Params.affiliates.jooble | default "https://jooble.org/jobs-quantum-computing" -}}
 {{- end -}}
-{{- $rel := site.Params.affiliate_link_rel | default "nofollow sponsored noopener" -}}
-<a href="{{ $url }}" target="_blank" rel="{{ $rel }}">{{ .Inner }}</a>
+<a href="{{ $url }}"{{ partial "affiliate/outbound_attrs.html" . | safeHTMLAttr }}>{{ .Inner }}</a>
