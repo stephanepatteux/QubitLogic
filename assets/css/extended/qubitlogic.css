@@ -807,6 +807,25 @@ code, pre, kbd, samp {
   aspect-ratio: 1200 / 320;
   object-fit: cover;
 }
+
+/* Post list / single cover images */
+.entry-cover {
+  margin-bottom: 1rem;
+  border-radius: var(--qs-radius, 10px);
+  overflow: hidden;
+  border: 1px solid var(--qs-border, rgba(255, 255, 255, 0.08));
+}
+.entry-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+  border-radius: var(--qs-radius, 10px);
+}
+.first-entry .entry-cover img {
+  max-height: 320px;
+}
 .ql-phase-label {
   display: block;
   padding: 0.5rem 0.75rem;

@@ -9,8 +9,8 @@
 {{ $siteURL  := .Site.BaseURL | strings.TrimSuffix "/" }}
 {{ $pageURL  := .Permalink }}
 {{ $desc     := .Description | default .Summary | default .Site.Params.description }}
-{{ $image    := "" }}
-{{ with .Params.images }}{{ $image = index . 0 }}{{ else }}{{ $image = "/images/og-default.png" }}{{ end }}
+{{ $image := partial "cover-image-url.html" . }}
+{{ with .Params.images }}{{ $image = index . 0 }}{{ end }}
 {{ $imageAbs := printf "%s%s" $siteURL $image }}
 {{ $imageAlt := .Title | default $siteName }}
 

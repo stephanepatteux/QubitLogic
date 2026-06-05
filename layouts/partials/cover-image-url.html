@@ -1,0 +1,21 @@
+{{/*
+  Resolve cover image URL for a page.
+  Priority: cover.image → auto-generated /images/covers/{path}.svg → og-default.png
+*/}}
+{{- $image := "" -}}
+{{- with .Params.cover.image -}}
+  {{- $image = . -}}
+{{- else -}}
+  {{- $rel := .RelPermalink | strings.TrimPrefix "/" | strings.TrimSuffix "/" -}}
+  {{- if $rel -}}
+    {{- $image = printf "/images/covers/%s.svg" $rel -}}
+  {{- else -}}
+    {{- with .File -}}
+      {{- $image = printf "/images/covers/%s.svg" .BaseFileName -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $image -}}
+  {{- $image = "/images/og-default.png" -}}
+{{- end -}}
+{{- return $image -}}

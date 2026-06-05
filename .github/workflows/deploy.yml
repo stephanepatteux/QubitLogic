@@ -20,6 +20,9 @@ jobs:
           hugo-version: '0.162.1'
           extended: true
 
+      - name: Generate post cover images
+        run: python3 scripts/generate_cover_images.py
+
       - name: Build
         run: hugo --minify
 

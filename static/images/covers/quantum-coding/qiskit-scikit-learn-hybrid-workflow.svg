@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none" role="img" aria-label="Bridging Qiskit and Scikit-Learn: Hybrid Workflow">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0c0c0f"/>
+      <stop offset="1" stop-color="#120f1a"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="900" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a78bfa" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#00e87a" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="0" y="0" width="8" height="630" fill="#a78bfa"/>
+
+  <g stroke="#a78bfa" stroke-opacity="0.35" stroke-width="1.5" fill="none">
+    <ellipse cx="1000" cy="180" rx="95" ry="34" transform="rotate(-28 1000 180)"/>
+    <ellipse cx="1000" cy="180" rx="95" ry="34" transform="rotate(28 1000 180)"/>
+    <circle cx="1000" cy="180" r="10" fill="#a78bfa" fill-opacity="0.75"/>
+    <circle cx="905" cy="155" r="6" fill="#00e87a" fill-opacity="0.8"/>
+    <circle cx="1095" cy="205" r="6" fill="#00e87a" fill-opacity="0.8"/>
+  </g>
+  <rect x="72" y="56" width="162" height="34" rx="17" fill="#a78bfa" fill-opacity="0.12" stroke="#a78bfa" stroke-opacity="0.35"/>
+  <text x="90" y="78" fill="#a78bfa" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" letter-spacing="0.04em">QUANTUM CODING</text>
+  <rect x="992" y="56" width="88" height="34" rx="17" fill="#00e87a" fill-opacity="0.12" stroke="#00e87a" stroke-opacity="0.4"/>
+  <text x="1028" y="78" fill="#00e87a" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Tutorial</text>
+  <text x="72" y="272" fill="#e4e4ec" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="700">Bridging Qiskit and Scikit-</text>
+  <text x="72" y="328" fill="#e4e4ec" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="700">Learn: Hybrid Workflow</text>
+  <text x="72" y="590" fill="#8888a0" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="500">qubitlogic.dev</text>
+  <circle cx="1128" cy="578" r="5" fill="#a78bfa" fill-opacity="0.8"/>
+  <circle cx="1154" cy="578" r="5" fill="#00e87a" fill-opacity="0.55"/>
+</svg>
