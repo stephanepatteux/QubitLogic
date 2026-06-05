@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Generate small topic-specific SVG thumbnails for QubitLogic blog posts.
+"""Generate bold, topic-specific SVG thumbnail icons for QubitLogic blog posts.
 
-Thumbnails are used in post lists (left column). Run before Hugo build:
-    python scripts/generate_cover_images.py
+Each icon is 96x96 viewBox — designed to look great at 96x96px displayed size.
+Run before Hugo build: python scripts/generate_cover_images.py
 """
 
 from __future__ import annotations
-
 import re
 from pathlib import Path
 
@@ -15,18 +14,14 @@ CONTENT = ROOT / "content"
 OUTPUT = ROOT / "static" / "images" / "covers"
 
 SKIP_FILES = {
-    "about.md",
-    "privacy.md",
-    "affiliate-disclosure.md",
-    "start-here.md",
-    "newsletter.md",
-    "search.md",
+    "about.md", "privacy.md", "affiliate-disclosure.md",
+    "start-here.md", "newsletter.md", "search.md",
 }
 
 SECTIONS = {
-    "infrastructure": {"accent": "#00e87a", "secondary": "#38bdf8", "bg_end": "#131a22"},
-    "quantum-coding": {"accent": "#a78bfa", "secondary": "#00e87a", "bg_end": "#120f1a"},
-    "professional-edge": {"accent": "#38bdf8", "secondary": "#fbbf24", "bg_end": "#0f1418"},
+    "infrastructure":    {"accent": "#00e87a", "secondary": "#38bdf8", "bg": "#0c0e10"},
+    "quantum-coding":    {"accent": "#a78bfa", "secondary": "#00e87a", "bg": "#0d0b14"},
+    "professional-edge": {"accent": "#38bdf8", "secondary": "#fbbf24", "bg": "#0a0e12"},
 }
 
 CATEGORY_COLORS = {
@@ -36,57 +31,318 @@ CATEGORY_COLORS = {
     "build": "#fbbf24",
 }
 
-# Unique icon per post slug — matched to article topic
-SLUG_MOTIFS: dict[str, str] = {
-    "build-technical-blog-cursor-hugo": "cursor_hugo",
-    "cicd-pipeline-ai-python-scripts": "cicd",
-    "cost-effective-cloud-architecture-backtesting-pipelines": "backtest",
-    "digitalocean-vs-vultr-hetzner-vps-benchmark-2026": "vps_three",
-    "digitalocean-vs-vultr-performance-benchmarks": "vps_race",
-    "how-to-provision-vps-ai-agent-workloads": "vps_terminal",
-    "nginx-reverse-proxy-python-ai-api": "nginx",
-    "optimizing-python-environment-ubuntu-24-04": "python_perf",
-    "quantum-ready-tech-stack": "stack",
-    "agentic-workflows-vs-manual-scripts": "agents_vs",
-    "auditing-code-post-quantum-compliance": "audit_lock",
-    "integrating-enterprise-rag-agents": "rag",
-    "post-quantum-cryptography-api-security": "pqc_lock",
-    "quantum-ai-certification-review": "certificate",
-    "top-5-apis-real-time-financial-data": "finance_api",
-    "grovers-search-logic-python": "grover",
-    "qaoa-vs-classical-brute-force-benchmarking": "qaoa_bench",
-    "qiskit-2-migration-guide": "migration",
-    "qiskit-scikit-learn-hybrid-workflow": "hybrid_ml",
-    "qiskit-vs-pennylane-2026": "frameworks_vs",
-    "quantum-inspired-optimizer-python": "optimizer",
-    "quantum-machine-learning-when-to-use": "qml_decision",
-    "simulating-circuit-depth-code-optimization": "circuit_depth",
-    "traveling-salesperson-simulated-annealing": "tsp",
-    "quantum-developer-toolkit": "toolkit",
+# Each motif is SVG inner elements for a 96x96 viewBox.
+# Use ACCENT and SECONDARY as placeholders — replaced at render time.
+# Icons are bold, high-contrast, immediately recognisable at 96px.
+MOTIFS: dict[str, str] = {
+
+    # ── Build article: code editor window ──────────────────────────────
+    "cursor_hugo": """
+  <rect x="8" y="8" width="80" height="62" rx="7" fill="ACCENT" fill-opacity="0.09" stroke="ACCENT" stroke-width="2.5"/>
+  <rect x="8" y="8" width="80" height="19" rx="7" fill="ACCENT" fill-opacity="0.28"/>
+  <rect x="8" y="21" width="80" height="6" fill="ACCENT" fill-opacity="0.22"/>
+  <circle cx="19" cy="17" r="3.2" fill="#ff5f57"/>
+  <circle cx="29" cy="17" r="3.2" fill="#febc2e"/>
+  <circle cx="39" cy="17" r="3.2" fill="#28c840"/>
+  <line x1="16" y1="37" x2="62" y2="37" stroke="ACCENT" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="16" y1="49" x2="80" y2="49" stroke="SECONDARY" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="16" y1="60" x2="46" y2="60" stroke="ACCENT" stroke-opacity="0.45" stroke-width="3.5" stroke-linecap="round"/>
+  <rect x="48" y="56" width="3.5" height="9" rx="1.5" fill="ACCENT"/>""",
+
+    # ── CI/CD: three-node pipeline ──────────────────────────────────────
+    "cicd": """
+  <circle cx="18" cy="48" r="14" fill="ACCENT" fill-opacity="0.18" stroke="ACCENT" stroke-width="2.5"/>
+  <path d="M12 48 L16 52 L24 44" stroke="ACCENT" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <line x1="32" y1="48" x2="42" y2="48" stroke="ACCENT" stroke-opacity="0.5" stroke-width="2.5" stroke-dasharray="4,3" stroke-linecap="round"/>
+  <circle cx="52" cy="48" r="14" fill="SECONDARY" fill-opacity="0.18" stroke="SECONDARY" stroke-width="2.5"/>
+  <rect x="44" y="41" width="16" height="14" rx="3" stroke="SECONDARY" stroke-width="2" fill="none"/>
+  <path d="M48 48 H56 M52 44 V52" stroke="SECONDARY" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="66" y1="48" x2="76" y2="48" stroke="ACCENT" stroke-opacity="0.5" stroke-width="2.5" stroke-dasharray="4,3" stroke-linecap="round"/>
+  <circle cx="82" cy="48" r="10" fill="ACCENT" fill-opacity="0.8"/>
+  <path d="M77 48 L82 43 L87 48 L82 53 Z" fill="#0c0c0f"/>""",
+
+    # ── Backtesting: candlestick chart ──────────────────────────────────
+    "backtest": """
+  <line x1="12" y1="84" x2="88" y2="84" stroke="ACCENT" stroke-opacity="0.3" stroke-width="1.5"/>
+  <line x1="12" y1="84" x2="12" y2="12" stroke="ACCENT" stroke-opacity="0.3" stroke-width="1.5"/>
+  <line x1="30" y1="24" x2="30" y2="76" stroke="SECONDARY" stroke-width="2"/>
+  <rect x="24" y="38" width="12" height="28" rx="2" fill="SECONDARY" fill-opacity="0.85"/>
+  <line x1="50" y1="16" x2="50" y2="70" stroke="ACCENT" stroke-width="2"/>
+  <rect x="44" y="24" width="12" height="30" rx="2" fill="ACCENT" fill-opacity="0.9"/>
+  <line x1="70" y1="10" x2="70" y2="62" stroke="ACCENT" stroke-width="2"/>
+  <rect x="64" y="16" width="12" height="26" rx="2" fill="ACCENT"/>
+  <path d="M24 58 L44 36 L64 22" stroke="ACCENT" stroke-width="2" stroke-dasharray="5,3" fill="none" stroke-linecap="round"/>""",
+
+    # ── DO vs Vultr vs Hetzner: three server bars ───────────────────────
+    "vps_three": """
+  <rect x="8" y="22" width="24" height="58" rx="5" fill="ACCENT" fill-opacity="0.14" stroke="ACCENT" stroke-width="2"/>
+  <circle cx="26" cy="36" r="3.5" fill="ACCENT" fill-opacity="0.8"/>
+  <line x1="14" y1="48" x2="26" y2="48" stroke="ACCENT" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>
+  <line x1="14" y1="58" x2="26" y2="58" stroke="ACCENT" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>
+  <rect x="36" y="12" width="24" height="68" rx="5" fill="SECONDARY" fill-opacity="0.18" stroke="SECONDARY" stroke-width="2"/>
+  <circle cx="54" cy="26" r="3.5" fill="SECONDARY" fill-opacity="0.9"/>
+  <line x1="42" y1="38" x2="54" y2="38" stroke="SECONDARY" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round"/>
+  <line x1="42" y1="48" x2="54" y2="48" stroke="SECONDARY" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round"/>
+  <rect x="64" y="30" width="24" height="50" rx="5" fill="ACCENT" fill-opacity="0.12" stroke="ACCENT" stroke-width="2"/>
+  <circle cx="82" cy="44" r="3.5" fill="ACCENT" fill-opacity="0.7"/>
+  <line x1="70" y1="56" x2="82" y2="56" stroke="ACCENT" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>""",
+
+    # ── DO vs Vultr benchmark: speedometer ─────────────────────────────
+    "vps_race": """
+  <path d="M14 76 A36 36 0 0 1 82 76" stroke="ACCENT" stroke-opacity="0.18" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M14 76 A36 36 0 0 1 72 40" stroke="ACCENT" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <circle cx="48" cy="76" r="7" fill="ACCENT"/>
+  <line x1="48" y1="76" x2="72" y2="40" stroke="ACCENT" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="18" cy="78" r="3" fill="SECONDARY" fill-opacity="0.7"/>
+  <circle cx="30" cy="50" r="3" fill="SECONDARY" fill-opacity="0.7"/>
+  <circle cx="66" cy="38" r="3" fill="SECONDARY" fill-opacity="0.7"/>
+  <circle cx="80" cy="56" r="3" fill="SECONDARY" fill-opacity="0.7"/>""",
+
+    # ── VPS provisioning: terminal window ──────────────────────────────
+    "vps_terminal": """
+  <rect x="8" y="8" width="80" height="72" rx="8" fill="#080a0c" stroke="ACCENT" stroke-width="2.5"/>
+  <rect x="8" y="8" width="80" height="20" rx="8" fill="ACCENT" fill-opacity="0.22"/>
+  <rect x="8" y="22" width="80" height="6" fill="ACCENT" fill-opacity="0.18"/>
+  <circle cx="20" cy="18" r="3.5" fill="#ff5f57"/>
+  <circle cx="31" cy="18" r="3.5" fill="#febc2e"/>
+  <circle cx="42" cy="18" r="3.5" fill="#28c840"/>
+  <text x="16" y="46" fill="ACCENT" font-family="ui-monospace,monospace" font-size="10" font-weight="600">$ ssh ubuntu@vps</text>
+  <text x="16" y="60" fill="SECONDARY" font-family="ui-monospace,monospace" font-size="10">Connected &#x2713;</text>
+  <rect x="16" y="63" width="3.5" height="8" rx="1" fill="ACCENT"/>""",
+
+    # ── Nginx: shield with N ────────────────────────────────────────────
+    "nginx": """
+  <path d="M48 8 L82 24 L82 54 C82 70 66 82 48 90 C30 82 14 70 14 54 L14 24 Z" fill="ACCENT" fill-opacity="0.14" stroke="ACCENT" stroke-width="2.5"/>
+  <path d="M32 68 L32 36 L64 68 L64 36" stroke="ACCENT" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>""",
+
+    # ── Python performance: snake + lightning ───────────────────────────
+    "python_perf": """
+  <circle cx="36" cy="36" r="22" fill="ACCENT" fill-opacity="0.14" stroke="ACCENT" stroke-width="2.5"/>
+  <circle cx="60" cy="60" r="22" fill="SECONDARY" fill-opacity="0.14" stroke="SECONDARY" stroke-width="2.5"/>
+  <circle cx="43" cy="30" r="4" fill="ACCENT"/>
+  <circle cx="53" cy="66" r="4" fill="SECONDARY"/>
+  <path d="M54 14 L42 44 L56 44 L44 82" stroke="ACCENT" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>""",
+
+    # ── Quantum-ready tech stack: stacked layers ────────────────────────
+    "stack": """
+  <rect x="10" y="74" width="76" height="14" rx="4" fill="ACCENT" fill-opacity="0.85"/>
+  <rect x="16" y="56" width="64" height="14" rx="4" fill="SECONDARY" fill-opacity="0.75"/>
+  <rect x="22" y="38" width="52" height="14" rx="4" fill="ACCENT" fill-opacity="0.55"/>
+  <rect x="28" y="20" width="40" height="14" rx="4" fill="SECONDARY" fill-opacity="0.4"/>
+  <circle cx="48" cy="16" r="6" fill="ACCENT"/>""",
+
+    # ── Agentic vs manual: robot vs terminal ───────────────────────────
+    "agents_vs": """
+  <rect x="6" y="28" width="34" height="32" rx="5" fill="ACCENT" fill-opacity="0.15" stroke="ACCENT" stroke-width="2.5"/>
+  <rect x="14" y="14" width="18" height="16" rx="4" fill="ACCENT" fill-opacity="0.15" stroke="ACCENT" stroke-width="2"/>
+  <circle cx="19" cy="38" r="4.5" fill="ACCENT" fill-opacity="0.85"/>
+  <circle cx="31" cy="38" r="4.5" fill="ACCENT" fill-opacity="0.85"/>
+  <line x1="18" y1="60" x2="14" y2="76" stroke="ACCENT" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="28" y1="60" x2="32" y2="76" stroke="ACCENT" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="48" y="52" text-anchor="middle" fill="#666" font-family="system-ui,sans-serif" font-size="12" font-weight="700">vs</text>
+  <rect x="56" y="26" width="34" height="36" rx="5" fill="SECONDARY" fill-opacity="0.15" stroke="SECONDARY" stroke-width="2.5"/>
+  <text x="73" y="38" text-anchor="middle" fill="SECONDARY" font-family="ui-monospace,monospace" font-size="9">&gt;_</text>
+  <line x1="62" y1="46" x2="84" y2="46" stroke="SECONDARY" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="62" y1="54" x2="78" y2="54" stroke="SECONDARY" stroke-width="2.5" stroke-linecap="round"/>""",
+
+    # ── Audit: magnifying glass over lock ──────────────────────────────
+    "audit_lock": """
+  <circle cx="38" cy="40" r="24" fill="SECONDARY" fill-opacity="0.1" stroke="SECONDARY" stroke-width="3"/>
+  <line x1="56" y1="58" x2="72" y2="74" stroke="SECONDARY" stroke-width="5.5" stroke-linecap="round"/>
+  <rect x="28" y="38" width="20" height="18" rx="4" fill="ACCENT" fill-opacity="0.85" stroke="ACCENT" stroke-width="1.5"/>
+  <path d="M32 38 V32 C32 26 44 26 44 32 V38" stroke="ACCENT" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="38" cy="48" r="3.5" fill="#0c0c0f"/>""",
+
+    # ── Enterprise RAG: document → brain ───────────────────────────────
+    "rag": """
+  <rect x="8" y="16" width="26" height="36" rx="4" fill="SECONDARY" fill-opacity="0.15" stroke="SECONDARY" stroke-width="2"/>
+  <line x1="14" y1="26" x2="28" y2="26" stroke="SECONDARY" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="14" y1="34" x2="28" y2="34" stroke="SECONDARY" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="14" y1="42" x2="24" y2="42" stroke="SECONDARY" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="36" y1="34" x2="52" y2="34" stroke="ACCENT" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M48 30 L54 34 L48 38" fill="ACCENT"/>
+  <circle cx="70" cy="34" r="20" fill="ACCENT" fill-opacity="0.13" stroke="ACCENT" stroke-width="2"/>
+  <circle cx="63" cy="28" r="4.5" fill="ACCENT" fill-opacity="0.85"/>
+  <circle cx="77" cy="26" r="3.5" fill="ACCENT" fill-opacity="0.7"/>
+  <circle cx="80" cy="40" r="4.5" fill="ACCENT" fill-opacity="0.85"/>
+  <circle cx="64" cy="42" r="3.5" fill="ACCENT" fill-opacity="0.65"/>
+  <line x1="63" y1="28" x2="77" y2="26" stroke="ACCENT" stroke-width="2"/>
+  <line x1="77" y1="26" x2="80" y2="40" stroke="ACCENT" stroke-width="2"/>
+  <line x1="80" y1="40" x2="64" y2="42" stroke="ACCENT" stroke-width="2"/>
+  <line x1="63" y1="28" x2="80" y2="40" stroke="ACCENT" stroke-width="1.5" stroke-opacity="0.45"/>""",
+
+    # ── Post-quantum crypto: padlock with hex lattice ───────────────────
+    "pqc_lock": """
+  <path d="M48 8 L62 16 L62 32 L48 40 L34 32 L34 16 Z" fill="SECONDARY" fill-opacity="0.12" stroke="SECONDARY" stroke-opacity="0.4" stroke-width="1.5"/>
+  <rect x="32" y="52" width="32" height="28" rx="7" fill="ACCENT" fill-opacity="0.18" stroke="ACCENT" stroke-width="2.5"/>
+  <path d="M38 52 V42 C38 30 58 30 58 42 V52" stroke="ACCENT" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="48" cy="66" r="5.5" fill="ACCENT" fill-opacity="0.9"/>
+  <line x1="48" y1="71" x2="48" y2="76" stroke="ACCENT" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="26" cy="24" r="3" fill="SECONDARY" fill-opacity="0.7"/>
+  <circle cx="70" cy="24" r="3" fill="SECONDARY" fill-opacity="0.7"/>""",
+
+    # ── Quantum AI certifications: medal + ribbon ───────────────────────
+    "certificate": """
+  <circle cx="48" cy="40" r="28" fill="ACCENT" fill-opacity="0.14" stroke="ACCENT" stroke-width="2.5"/>
+  <circle cx="48" cy="40" r="19" fill="ACCENT" fill-opacity="0.1" stroke="ACCENT" stroke-opacity="0.4" stroke-width="1.5"/>
+  <path d="M48 22 L51.8 33.2 L63.6 33.2 L54.2 40.2 L57.9 51.4 L48 44.4 L38.1 51.4 L41.8 40.2 L32.4 33.2 L44.2 33.2 Z" fill="ACCENT" fill-opacity="0.9"/>
+  <path d="M36 66 L48 76 L60 66 L56 82 L48 78 L40 82 Z" fill="SECONDARY" fill-opacity="0.85"/>""",
+
+    # ── Top 5 financial APIs: candlestick + API badge ───────────────────
+    "finance_api": """
+  <line x1="12" y1="82" x2="88" y2="82" stroke="ACCENT" stroke-opacity="0.3" stroke-width="1.5"/>
+  <line x1="26" y1="20" x2="26" y2="76" stroke="SECONDARY" stroke-width="2"/>
+  <rect x="20" y="32" width="12" height="30" rx="2" fill="SECONDARY" fill-opacity="0.85"/>
+  <line x1="46" y1="12" x2="46" y2="76" stroke="ACCENT" stroke-width="2"/>
+  <rect x="40" y="20" width="12" height="38" rx="2" fill="ACCENT" fill-opacity="0.9"/>
+  <line x1="66" y1="8" x2="66" y2="70" stroke="ACCENT" stroke-width="2"/>
+  <rect x="60" y="14" width="12" height="32" rx="2" fill="ACCENT"/>
+  <rect x="70" y="66" width="22" height="14" rx="4" fill="SECONDARY" fill-opacity="0.2" stroke="SECONDARY" stroke-width="1.5"/>
+  <text x="81" y="76" text-anchor="middle" fill="SECONDARY" font-family="ui-monospace,monospace" font-size="8.5" font-weight="700">API</text>""",
+
+    # ── Grover's algorithm: magnifier + quantum orbits ──────────────────
+    "grover": """
+  <circle cx="40" cy="40" r="26" fill="ACCENT" fill-opacity="0.1" stroke="ACCENT" stroke-width="3"/>
+  <line x1="60" y1="60" x2="78" y2="78" stroke="ACCENT" stroke-width="5.5" stroke-linecap="round"/>
+  <ellipse cx="40" cy="40" rx="14" ry="6" stroke="SECONDARY" stroke-width="2" fill="none" stroke-opacity="0.8"/>
+  <ellipse cx="40" cy="40" rx="14" ry="6" stroke="SECONDARY" stroke-width="2" fill="none" stroke-opacity="0.8" transform="rotate(60 40 40)"/>
+  <ellipse cx="40" cy="40" rx="14" ry="6" stroke="SECONDARY" stroke-width="2" fill="none" stroke-opacity="0.8" transform="rotate(120 40 40)"/>
+  <circle cx="40" cy="40" r="4.5" fill="ACCENT"/>""",
+
+    # ── QAOA benchmark: Q gate vs classical bars ────────────────────────
+    "qaoa_bench": """
+  <rect x="8" y="24" width="32" height="48" rx="5" fill="ACCENT" fill-opacity="0.15" stroke="ACCENT" stroke-width="2"/>
+  <text x="24" y="55" text-anchor="middle" fill="ACCENT" font-family="ui-monospace,monospace" font-size="22" font-weight="700">Q</text>
+  <line x1="46" y1="16" x2="46" y2="84" stroke="#444" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="52" y1="82" x2="92" y2="82" stroke="SECONDARY" stroke-opacity="0.35" stroke-width="1.5"/>
+  <rect x="55" y="46" width="10" height="36" rx="2" fill="SECONDARY" fill-opacity="0.75"/>
+  <rect x="69" y="30" width="10" height="52" rx="2" fill="ACCENT" fill-opacity="0.75"/>
+  <rect x="83" y="54" width="10" height="28" rx="2" fill="SECONDARY" fill-opacity="0.55"/>""",
+
+    # ── Qiskit 2 migration: 1.x → 2.x ──────────────────────────────────
+    "migration": """
+  <rect x="8" y="34" width="32" height="32" rx="6" fill="SECONDARY" fill-opacity="0.15" stroke="SECONDARY" stroke-width="2"/>
+  <text x="24" y="56" text-anchor="middle" fill="SECONDARY" font-family="ui-monospace,monospace" font-size="14" font-weight="700">1.x</text>
+  <line x1="42" y1="50" x2="56" y2="50" stroke="ACCENT" stroke-width="3" stroke-linecap="round"/>
+  <path d="M52 44 L60 50 L52 56" stroke="ACCENT" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="58" y="22" width="32" height="44" rx="6" fill="ACCENT" fill-opacity="0.2" stroke="ACCENT" stroke-width="2.5"/>
+  <text x="74" y="50" text-anchor="middle" fill="ACCENT" font-family="ui-monospace,monospace" font-size="14" font-weight="700">2.x</text>
+  <circle cx="82" cy="28" r="5" fill="ACCENT" fill-opacity="0.9"/>""",
+
+    # ── Qiskit + sklearn hybrid: circuit meets neural net ───────────────
+    "hybrid_ml": """
+  <line x1="8" y1="32" x2="50" y2="32" stroke="ACCENT" stroke-opacity="0.55" stroke-width="2"/>
+  <line x1="8" y1="48" x2="50" y2="48" stroke="ACCENT" stroke-opacity="0.55" stroke-width="2"/>
+  <line x1="8" y1="64" x2="50" y2="64" stroke="ACCENT" stroke-opacity="0.55" stroke-width="2"/>
+  <rect x="16" y="25" width="14" height="14" rx="3" fill="ACCENT" fill-opacity="0.25" stroke="ACCENT" stroke-width="2"/>
+  <text x="23" y="36" text-anchor="middle" fill="ACCENT" font-family="ui-monospace,monospace" font-size="10" font-weight="700">H</text>
+  <rect x="32" y="41" width="12" height="14" rx="3" fill="ACCENT" fill-opacity="0.2" stroke="ACCENT" stroke-width="2"/>
+  <line x1="50" y1="48" x2="60" y2="32" stroke="SECONDARY" stroke-width="2" stroke-opacity="0.7"/>
+  <line x1="50" y1="48" x2="60" y2="64" stroke="SECONDARY" stroke-width="2" stroke-opacity="0.7"/>
+  <circle cx="60" cy="32" r="7" fill="SECONDARY" fill-opacity="0.85"/>
+  <circle cx="60" cy="64" r="7" fill="SECONDARY" fill-opacity="0.85"/>
+  <circle cx="82" cy="48" r="10" fill="SECONDARY"/>
+  <line x1="67" y1="32" x2="72" y2="48" stroke="SECONDARY" stroke-width="2"/>
+  <line x1="67" y1="64" x2="72" y2="48" stroke="SECONDARY" stroke-width="2"/>""",
+
+    # ── Qiskit vs PennyLane: two shields ───────────────────────────────
+    "frameworks_vs": """
+  <path d="M24 10 L42 20 L42 44 C42 56 34 64 24 70 C14 64 6 56 6 44 L6 20 Z" fill="ACCENT" fill-opacity="0.15" stroke="ACCENT" stroke-width="2.5"/>
+  <text x="24" y="48" text-anchor="middle" fill="ACCENT" font-family="ui-monospace,monospace" font-size="20" font-weight="700">Q</text>
+  <text x="48" y="44" text-anchor="middle" fill="#555" font-family="system-ui,sans-serif" font-size="12" font-weight="700">vs</text>
+  <path d="M72 10 L90 20 L90 44 C90 56 82 64 72 70 C62 64 54 56 54 44 L54 20 Z" fill="SECONDARY" fill-opacity="0.15" stroke="SECONDARY" stroke-width="2.5"/>
+  <text x="72" y="48" text-anchor="middle" fill="SECONDARY" font-family="ui-monospace,monospace" font-size="14" font-weight="700">PL</text>""",
+
+    # ── Quantum optimizer: parabola with minimum ────────────────────────
+    "optimizer": """
+  <line x1="10" y1="84" x2="88" y2="84" stroke="ACCENT" stroke-opacity="0.3" stroke-width="1.5"/>
+  <path d="M12 75 C22 42 36 18 48 14 C60 10 74 28 84 58" stroke="ACCENT" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <circle cx="48" cy="14" r="8" fill="ACCENT" fill-opacity="0.9"/>
+  <path d="M48 7 L50.4 12 L56 12 L51.8 15.2 L53.6 21 L48 17.7 L42.4 21 L44.2 15.2 L40 12 L45.6 12 Z" fill="ACCENT"/>
+  <path d="M22 60 L36 34" stroke="SECONDARY" stroke-width="2" stroke-dasharray="3,2" stroke-linecap="round" stroke-opacity="0.7"/>
+  <path d="M76 50 L62 26" stroke="SECONDARY" stroke-width="2" stroke-dasharray="3,2" stroke-linecap="round" stroke-opacity="0.7"/>""",
+
+    # ── QML decision: decision diamond ─────────────────────────────────
+    "qml_decision": """
+  <path d="M48 10 L80 42 L48 74 L16 42 Z" fill="ACCENT" fill-opacity="0.13" stroke="ACCENT" stroke-width="2.5"/>
+  <text x="48" y="38" text-anchor="middle" fill="ACCENT" font-family="system-ui,sans-serif" font-size="10" font-weight="700">QML?</text>
+  <text x="48" y="52" text-anchor="middle" fill="ACCENT" font-family="ui-monospace,monospace" font-size="12">&#8987;</text>
+  <line x1="16" y1="42" x2="8" y2="68" stroke="ACCENT" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="4" y="82" fill="ACCENT" font-family="system-ui,sans-serif" font-size="10" font-weight="600">Yes</text>
+  <line x1="80" y1="42" x2="88" y2="68" stroke="#555" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="78" y="82" fill="#555" font-family="system-ui,sans-serif" font-size="10" font-weight="600">No</text>""",
+
+    # ── Circuit depth optimization: quantum gates ───────────────────────
+    "circuit_depth": """
+  <line x1="8" y1="28" x2="88" y2="28" stroke="ACCENT" stroke-opacity="0.5" stroke-width="2.5"/>
+  <line x1="8" y1="48" x2="88" y2="48" stroke="ACCENT" stroke-opacity="0.5" stroke-width="2.5"/>
+  <line x1="8" y1="68" x2="88" y2="68" stroke="ACCENT" stroke-opacity="0.5" stroke-width="2.5"/>
+  <rect x="16" y="20" width="16" height="16" rx="3" fill="ACCENT" fill-opacity="0.85" stroke="ACCENT"/>
+  <text x="24" y="32" text-anchor="middle" fill="#0c0c0f" font-family="ui-monospace,monospace" font-size="10" font-weight="700">H</text>
+  <rect x="44" y="20" width="16" height="16" rx="3" fill="SECONDARY" fill-opacity="0.75" stroke="SECONDARY"/>
+  <text x="52" y="32" text-anchor="middle" fill="#0c0c0f" font-family="ui-monospace,monospace" font-size="8" font-weight="700">RZ</text>
+  <rect x="28" y="40" width="16" height="16" rx="3" fill="ACCENT" fill-opacity="0.75" stroke="ACCENT"/>
+  <text x="36" y="52" text-anchor="middle" fill="#0c0c0f" font-family="ui-monospace,monospace" font-size="10" font-weight="700">X</text>
+  <circle cx="62" cy="68" r="8" fill="none" stroke="ACCENT" stroke-width="2.5"/>
+  <line x1="54" y1="68" x2="70" y2="68" stroke="ACCENT" stroke-width="2.5"/>
+  <line x1="62" y1="60" x2="62" y2="76" stroke="ACCENT" stroke-width="2.5"/>
+  <circle cx="62" cy="48" r="4" fill="ACCENT" fill-opacity="0.85"/>
+  <line x1="62" y1="52" x2="62" y2="60" stroke="ACCENT" stroke-width="2"/>""",
+
+    # ── TSP simulated annealing: route map ──────────────────────────────
+    "tsp": """
+  <circle cx="48" cy="14" r="8" fill="ACCENT" fill-opacity="0.9"/>
+  <circle cx="78" cy="34" r="8" fill="ACCENT" fill-opacity="0.9"/>
+  <circle cx="74" cy="72" r="8" fill="ACCENT" fill-opacity="0.9"/>
+  <circle cx="22" cy="72" r="8" fill="SECONDARY" fill-opacity="0.9"/>
+  <circle cx="18" cy="34" r="8" fill="ACCENT" fill-opacity="0.7"/>
+  <path d="M48 14 L78 34 L74 72 L22 72 L18 34 Z" stroke="ACCENT" stroke-width="2.5" fill="none" stroke-dasharray="6,3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M58 20 L66 26" stroke="ACCENT" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M63 24 L66 26 L64 29" stroke="ACCENT" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>""",
+
+    # ── Quantum developer toolkit: toolbox ──────────────────────────────
+    "toolkit": """
+  <rect x="10" y="44" width="76" height="44" rx="7" fill="ACCENT" fill-opacity="0.12" stroke="ACCENT" stroke-width="2.5"/>
+  <rect x="28" y="32" width="40" height="16" rx="5" fill="ACCENT" fill-opacity="0.2" stroke="ACCENT" stroke-width="2"/>
+  <line x1="10" y1="58" x2="86" y2="58" stroke="ACCENT" stroke-opacity="0.4" stroke-width="2"/>
+  <path d="M30 74 L50 54" stroke="ACCENT" stroke-width="4.5" stroke-linecap="round"/>
+  <circle cx="54" cy="50" r="9" fill="none" stroke="ACCENT" stroke-width="3"/>
+  <circle cx="54" cy="50" r="3.5" fill="ACCENT" fill-opacity="0.8"/>
+  <line x1="62" y1="64" x2="74" y2="76" stroke="SECONDARY" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M56 58 L64 66 L60 70 L52 62 Z" fill="SECONDARY" fill-opacity="0.9"/>""",
+
+    # ── Fallback ────────────────────────────────────────────────────────
+    "default": """
+  <circle cx="48" cy="46" r="32" fill="ACCENT" fill-opacity="0.14" stroke="ACCENT" stroke-width="2.5"/>
+  <circle cx="48" cy="46" r="8" fill="ACCENT"/>""",
 }
 
-TAG_MOTIFS: dict[str, str] = {
-    "nginx": "nginx",
-    "cicd": "cicd",
-    "github-actions": "cicd",
-    "vps": "vps_terminal",
-    "benchmark": "vps_race",
-    "benchmarks": "vps_race",
-    "qiskit": "circuit_depth",
-    "grovers-algorithm": "grover",
-    "qaoa": "optimizer",
-    "pennylane": "frameworks_vs",
-    "rag": "rag",
-    "langgraph": "agents_vs",
-    "post-quantum": "pqc_lock",
-    "cryptography": "pqc_lock",
-    "financial-data": "finance_api",
-    "cursor": "cursor_hugo",
-    "hugo": "cursor_hugo",
-    "newsletter": "cursor_hugo",
-    "backtesting": "backtest",
-    "optimization": "optimizer",
-    "toolkit": "toolkit",
+SLUG_MOTIFS: dict[str, str] = {
+    "build-technical-blog-cursor-hugo":                   "cursor_hugo",
+    "cicd-pipeline-ai-python-scripts":                    "cicd",
+    "cost-effective-cloud-architecture-backtesting-pipelines": "backtest",
+    "digitalocean-vs-vultr-hetzner-vps-benchmark-2026":   "vps_three",
+    "digitalocean-vs-vultr-performance-benchmarks":       "vps_race",
+    "how-to-provision-vps-ai-agent-workloads":            "vps_terminal",
+    "nginx-reverse-proxy-python-ai-api":                  "nginx",
+    "optimizing-python-environment-ubuntu-24-04":         "python_perf",
+    "quantum-ready-tech-stack":                           "stack",
+    "agentic-workflows-vs-manual-scripts":                "agents_vs",
+    "auditing-code-post-quantum-compliance":              "audit_lock",
+    "integrating-enterprise-rag-agents":                  "rag",
+    "post-quantum-cryptography-api-security":             "pqc_lock",
+    "quantum-ai-certification-review":                    "certificate",
+    "top-5-apis-real-time-financial-data":                "finance_api",
+    "grovers-search-logic-python":                        "grover",
+    "qaoa-vs-classical-brute-force-benchmarking":         "qaoa_bench",
+    "qiskit-2-migration-guide":                           "migration",
+    "qiskit-scikit-learn-hybrid-workflow":                "hybrid_ml",
+    "qiskit-vs-pennylane-2026":                           "frameworks_vs",
+    "quantum-inspired-optimizer-python":                  "optimizer",
+    "quantum-machine-learning-when-to-use":               "qml_decision",
+    "simulating-circuit-depth-code-optimization":         "circuit_depth",
+    "traveling-salesperson-simulated-annealing":          "tsp",
+    "quantum-developer-toolkit":                          "toolkit",
 }
 
 FRONT_MATTER_RE = re.compile(r"^---\s*\n(.*?)\n---", re.DOTALL)
@@ -94,266 +350,81 @@ TITLE_RE = re.compile(r'^title:\s*["\']?(.+?)["\']?\s*$', re.MULTILINE)
 CATEGORIES_RE = re.compile(
     r'^categories:\s*\[(.+?)\]|^categories:\s*["\']?(.+?)["\']?\s*$', re.MULTILINE
 )
-TAGS_RE = re.compile(r'^tags:\s*\[(.+?)\]', re.MULTILINE)
 
 
 def parse_front_matter(path: Path) -> dict:
     text = path.read_text(encoding="utf-8")
-    match = FRONT_MATTER_RE.match(text)
-    if not match:
+    m = FRONT_MATTER_RE.match(text)
+    if not m:
         return {}
-    fm = match.group(1)
-    meta: dict = {"title": "", "category": "", "tags": []}
-    if m := TITLE_RE.search(fm):
-        meta["title"] = m.group(1).strip()
-    if m := CATEGORIES_RE.search(fm):
-        raw = (m.group(1) or m.group(2) or "").strip().strip("[]")
+    fm = m.group(1)
+    meta: dict = {"title": "", "category": ""}
+    if t := TITLE_RE.search(fm):
+        meta["title"] = t.group(1).strip()
+    if c := CATEGORIES_RE.search(fm):
+        raw = (c.group(1) or c.group(2) or "").strip().strip("[]")
         meta["category"] = raw.split(",")[0].strip().strip('"').strip("'")
-    if m := TAGS_RE.search(fm):
-        raw = m.group(1)
-        meta["tags"] = [
-            t.strip().strip('"').strip("'")
-            for t in raw.split(",")
-            if t.strip()
-        ]
     return meta
-
-
-def motif_key(slug: str, tags: list[str]) -> str:
-    if slug in SLUG_MOTIFS:
-        return SLUG_MOTIFS[slug]
-    for tag in tags:
-        if tag in TAG_MOTIFS:
-            return TAG_MOTIFS[tag]
-    return "default"
-
-
-def escape_xml(text: str) -> str:
-    return (
-        text.replace("&", "&amp;")
-        .replace("<", "&lt;")
-        .replace(">", "&gt;")
-        .replace('"', "&quot;")
-    )
-
-
-def draw_motif(key: str, accent: str, secondary: str) -> str:
-    cx, cy = 200, 135
-    motifs = {
-        "cursor_hugo": f"""
-  <rect x="145" y="88" width="110" height="78" rx="8" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.08"/>
-  <path d="M158 108 L158 148 M158 108 L188 108 L188 128" stroke="{accent}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <text x="200" y="132" text-anchor="middle" fill="{secondary}" font-family="monospace" font-size="22" font-weight="700">&lt;/&gt;</text>
-  <circle cx="238" cy="100" r="5" fill="{accent}"/>""",
-        "cicd": f"""
-  <circle cx="155" cy="135" r="18" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.15"/>
-  <path d="M185 135 H225 M215 125 L225 135 L215 145" stroke="{secondary}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <rect x="235" y="117" width="46" height="36" rx="6" stroke="{accent}" stroke-width="2" fill="none"/>
-  <path d="M248 135 H268" stroke="{accent}" stroke-width="2"/>""",
-        "backtest": f"""
-  <path d="M130 175 L160 145 L190 158 L220 118 L250 130 L270 108" stroke="{secondary}" stroke-width="2.5" fill="none"/>
-  <rect x="130" y="95" width="28" height="22" rx="4" stroke="{accent}" stroke-width="1.5" fill="{accent}" fill-opacity="0.12"/>
-  <rect x="168" y="95" width="28" height="22" rx="4" stroke="{accent}" stroke-width="1.5" fill="{accent}" fill-opacity="0.12"/>
-  <rect x="206" y="95" width="28" height="22" rx="4" stroke="{accent}" stroke-width="1.5" fill="{accent}" fill-opacity="0.12"/>""",
-        "vps_three": f"""
-  <rect x="128" y="100" width="44" height="70" rx="6" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.1"/>
-  <rect x="178" y="90" width="44" height="80" rx="6" stroke="{secondary}" stroke-width="2" fill="{secondary}" fill-opacity="0.1"/>
-  <rect x="228" y="108" width="44" height="62" rx="6" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.1"/>
-  <line x1="136" y1="118" x2="164" y2="118" stroke="{accent}" stroke-width="2"/>
-  <line x1="186" y1="108" x2="214" y2="108" stroke="{secondary}" stroke-width="2"/>
-  <line x1="236" y1="126" x2="264" y2="126" stroke="{accent}" stroke-width="2"/>""",
-        "vps_race": f"""
-  <rect x="125" y="108" width="55" height="62" rx="6" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.12"/>
-  <rect x="220" y="98" width="55" height="72" rx="6" stroke="{secondary}" stroke-width="2" fill="{secondary}" fill-opacity="0.12"/>
-  <path d="M195 135 L210 125 L210 145 Z" fill="{accent}"/>""",
-        "vps_terminal": f"""
-  <rect x="130" y="92" width="140" height="86" rx="8" stroke="{accent}" stroke-width="2" fill="#0a0a0c"/>
-  <path d="M148 118 L168 135 L148 152" stroke="{accent}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <line x1="178" y1="152" x2="240" y2="152" stroke="{secondary}" stroke-width="2" stroke-linecap="round"/>""",
-        "nginx": f"""
-  <rect x="145" y="95" width="110" height="28" rx="4" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.15"/>
-  <rect x="155" y="133" width="90" height="28" rx="4" stroke="{secondary}" stroke-width="2" fill="{secondary}" fill-opacity="0.12"/>
-  <rect x="165" y="171" width="70" height="28" rx="4" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.1"/>
-  <path d="M200 95 V171" stroke="{accent}" stroke-width="1" stroke-opacity="0.4"/>""",
-        "python_perf": f"""
-  <path d="M175 108 C175 98 185 92 200 92 C215 92 225 98 225 108 V122 C225 132 215 138 200 138 H190 V152 H210" stroke="{accent}" stroke-width="2.5" fill="none"/>
-  <circle cx="200" cy="115" r="4" fill="{secondary}"/>
-  <path d="M155 175 L175 155 L195 168 L215 142 L245 158" stroke="{secondary}" stroke-width="2" fill="none"/>""",
-        "stack": f"""
-  <rect x="140" y="168" width="120" height="18" rx="4" stroke="{accent}" stroke-width="1.5" fill="{accent}" fill-opacity="0.15"/>
-  <rect x="150" y="142" width="100" height="18" rx="4" stroke="{secondary}" stroke-width="1.5" fill="{secondary}" fill-opacity="0.12"/>
-  <rect x="160" y="116" width="80" height="18" rx="4" stroke="{accent}" stroke-width="1.5" fill="{accent}" fill-opacity="0.1"/>
-  <circle cx="200" cy="102" r="10" stroke="{accent}" stroke-width="2" fill="none"/>""",
-        "agents_vs": f"""
-  <circle cx="165" cy="135" r="28" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.1"/>
-  <circle cx="165" cy="128" r="8" fill="{accent}"/>
-  <path d="M155 148 H175 M160 158 H170" stroke="{accent}" stroke-width="2" stroke-linecap="round"/>
-  <rect x="215" y="108" width="70" height="54" rx="6" stroke="{secondary}" stroke-width="2" fill="none"/>
-  <line x1="225" y1="122" x2="275" y2="122" stroke="{secondary}" stroke-width="2"/>
-  <line x1="225" y1="136" x2="265" y2="136" stroke="{secondary}" stroke-width="1.5" stroke-opacity="0.6"/>
-  <line x1="225" y1="150" x2="255" y2="150" stroke="{secondary}" stroke-width="1.5" stroke-opacity="0.6"/>""",
-        "audit_lock": f"""
-  <circle cx="175" cy="140" r="32" stroke="{secondary}" stroke-width="2" fill="none"/>
-  <path d="M188 140 L170 158 L160 148" stroke="{accent}" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <rect x="220" y="118" width="50" height="44" rx="8" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.1"/>
-  <path d="M245 118 V108 C245 98 255 92 245 92 H240" stroke="{accent}" stroke-width="2" fill="none"/>""",
-        "rag": f"""
-  <rect x="125" y="108" width="42" height="54" rx="4" stroke="{secondary}" stroke-width="2" fill="{secondary}" fill-opacity="0.08"/>
-  <rect x="175" y="100" width="42" height="54" rx="4" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.08"/>
-  <path d="M167 135 H185 M217 135 H235" stroke="{accent}" stroke-width="2"/>
-  <circle cx="255" cy="135" r="22" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.12"/>
-  <circle cx="255" cy="135" r="6" fill="{accent}"/>""",
-        "pqc_lock": f"""
-  <rect x="168" y="128" width="64" height="48" rx="8" stroke="{accent}" stroke-width="2.5" fill="{accent}" fill-opacity="0.12"/>
-  <path d="M184 128 V112 C184 98 216 98 216 112 V128" stroke="{accent}" stroke-width="2.5" fill="none"/>
-  <circle cx="200" cy="152" r="6" fill="{secondary}"/>
-  <ellipse cx="200" cy="88" rx="40" ry="12" stroke="{secondary}" stroke-width="1.5" fill="none" stroke-opacity="0.5"/>""",
-        "certificate": f"""
-  <rect x="145" y="95" width="110" height="80" rx="6" stroke="{secondary}" stroke-width="2" fill="{secondary}" fill-opacity="0.08"/>
-  <circle cx="200" cy="125" r="18" stroke="{accent}" stroke-width="2" fill="none"/>
-  <path d="M192 125 L198 131 L210 119" stroke="{accent}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <line x1="165" y1="155" x2="235" y2="155" stroke="{accent}" stroke-width="2" stroke-opacity="0.5"/>""",
-        "finance_api": f"""
-  <line x1="130" y1="175" x2="270" y2="175" stroke="{accent}" stroke-opacity="0.3" stroke-width="1"/>
-  <rect x="145" y="148" width="14" height="27" fill="{accent}" fill-opacity="0.7"/>
-  <rect x="168" y="132" width="14" height="43" fill="{secondary}" fill-opacity="0.7"/>
-  <rect x="191" y="158" width="14" height="17" fill="{accent}" fill-opacity="0.5"/>
-  <rect x="214" y="122" width="14" height="53" fill="{secondary}" fill-opacity="0.8"/>
-  <rect x="237" y="140" width="14" height="35" fill="{accent}" fill-opacity="0.6"/>
-  <path d="M130 108 H270" stroke="{secondary}" stroke-width="2"/>""",
-        "grover": f"""
-  <ellipse cx="200" cy="135" rx="70" ry="24" stroke="{accent}" stroke-width="2" fill="none" transform="rotate(-25 200 135)"/>
-  <ellipse cx="200" cy="135" rx="70" ry="24" stroke="{secondary}" stroke-width="2" fill="none" transform="rotate(25 200 135)"/>
-  <circle cx="200" cy="135" r="8" fill="{accent}"/>
-  <path d="M248 108 L268 88 M268 88 L268 108 M268 88 L248 88" stroke="{secondary}" stroke-width="2.5" fill="none" stroke-linecap="round"/>""",
-        "qaoa_bench": f"""
-  <path d="M130 170 L170 130 L210 148 L250 108" stroke="{accent}" stroke-width="2.5" fill="none"/>
-  <rect x="215" y="108" width="70" height="62" rx="4" stroke="{secondary}" stroke-width="1.5" fill="none"/>
-  <line x1="225" y1="122" x2="275" y2="122" stroke="{secondary}" stroke-opacity="0.5"/>
-  <line x1="225" y1="138" x2="275" y2="138" stroke="{secondary}" stroke-opacity="0.5"/>
-  <line x1="225" y1="154" x2="275" y2="154" stroke="{secondary}" stroke-opacity="0.5"/>""",
-        "migration": f"""
-  <rect x="130" y="118" width="50" height="40" rx="6" stroke="{secondary}" stroke-width="2" fill="{secondary}" fill-opacity="0.1"/>
-  <path d="M195 138 H215 M210 128 L220 138 L210 148" stroke="{accent}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <rect x="230" y="108" width="50" height="50" rx="6" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.12"/>
-  <text x="255" y="140" text-anchor="middle" fill="{accent}" font-family="monospace" font-size="16" font-weight="700">2.x</text>""",
-        "hybrid_ml": f"""
-  <circle cx="160" cy="135" r="30" stroke="{accent}" stroke-width="2" fill="none"/>
-  <line x1="160" y1="105" x2="160" y2="165" stroke="{accent}" stroke-opacity="0.5"/>
-  <line x1="130" y1="135" x2="190" y2="135" stroke="{accent}" stroke-opacity="0.5"/>
-  <path d="M205 135 H235" stroke="{secondary}" stroke-width="2.5"/>
-  <rect x="235" y="110" width="50" height="50" rx="6" stroke="{secondary}" stroke-width="2" fill="{secondary}" fill-opacity="0.1"/>
-  <path d="M248 145 L262 128 L275 152" stroke="{secondary}" stroke-width="2" fill="none"/>""",
-        "frameworks_vs": f"""
-  <rect x="125" y="108" width="55" height="55" rx="8" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.1"/>
-  <text x="152" y="142" text-anchor="middle" fill="{accent}" font-family="monospace" font-size="14" font-weight="700">Q</text>
-  <text x="200" y="142" text-anchor="middle" fill="#8888a0" font-family="system-ui" font-size="18" font-weight="700">vs</text>
-  <rect x="220" y="108" width="55" height="55" rx="8" stroke="{secondary}" stroke-width="2" fill="{secondary}" fill-opacity="0.1"/>
-  <text x="247" y="142" text-anchor="middle" fill="{secondary}" font-family="monospace" font-size="14" font-weight="700">PL</text>""",
-        "optimizer": f"""
-  <path d="M130 168 Q165 108 200 128 T270 98" stroke="{accent}" stroke-width="2.5" fill="none"/>
-  <circle cx="200" cy="128" r="8" fill="{accent}"/>
-  <circle cx="165" cy="145" r="5" fill="{secondary}" fill-opacity="0.7"/>
-  <circle cx="235" cy="112" r="5" fill="{secondary}" fill-opacity="0.7"/>""",
-        "qml_decision": f"""
-  <path d="M200 95 V175 M160 135 H240" stroke="{accent}" stroke-opacity="0.4" stroke-width="2"/>
-  <circle cx="160" cy="115" r="16" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.15"/>
-  <circle cx="240" cy="115" r="16" stroke="{secondary}" stroke-width="2" fill="{secondary}" fill-opacity="0.15"/>
-  <circle cx="160" cy="175" r="16" stroke="{secondary}" stroke-width="2" fill="{secondary}" fill-opacity="0.15"/>
-  <circle cx="240" cy="175" r="16" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.15"/>""",
-        "circuit_depth": f"""
-  <line x1="145" y1="175" x2="145" y2="105" stroke="{accent}" stroke-width="3"/>
-  <line x1="175" y1="175" x2="175" y2="115" stroke="{accent}" stroke-width="3"/>
-  <line x1="205" y1="175" x2="205" y2="125" stroke="{secondary}" stroke-width="3"/>
-  <line x1="235" y1="175" x2="235" y2="135" stroke="{secondary}" stroke-width="3"/>
-  <line x1="265" y1="175" x2="265" y2="145" stroke="{accent}" stroke-width="3"/>
-  <line x1="140" y1="140" x2="270" y2="140" stroke="{accent}" stroke-width="1.5" stroke-opacity="0.4"/>""",
-        "tsp": f"""
-  <circle cx="155" cy="118" r="8" fill="{accent}"/>
-  <circle cx="245" cy="108" r="8" fill="{accent}"/>
-  <circle cx="265" cy="168" r="8" fill="{secondary}"/>
-  <circle cx="145" cy="168" r="8" fill="{secondary}"/>
-  <circle cx="200" cy="145" r="8" fill="{accent}" fill-opacity="0.6"/>
-  <path d="M155 118 L245 108 L265 168 L145 168 Z" stroke="{accent}" stroke-width="2" fill="none" stroke-dasharray="6 4"/>""",
-        "toolkit": f"""
-  <rect x="135" y="100" width="130" height="70" rx="8" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.08"/>
-  <rect x="148" y="88" width="36" height="18" rx="4" fill="{accent}" fill-opacity="0.25"/>
-  <line x1="155" y1="130" x2="245" y2="130" stroke="{secondary}" stroke-width="2"/>
-  <line x1="155" y1="148" x2="220" y2="148" stroke="{accent}" stroke-width="2" stroke-opacity="0.5"/>
-  <circle cx="230" cy="155" r="8" stroke="{secondary}" stroke-width="2" fill="none"/>""",
-        "default": f"""
-  <circle cx="{cx}" cy="{cy}" r="42" stroke="{accent}" stroke-width="2" fill="{accent}" fill-opacity="0.1"/>
-  <circle cx="{cx}" cy="{cy}" r="8" fill="{accent}"/>""",
-    }
-    return motifs.get(key, motifs["default"])
-
-
-def build_thumbnail(
-    title: str,
-    section: dict[str, str],
-    category: str,
-    motif: str,
-    label: str,
-) -> str:
-    cat = category or "article"
-    cat_color = CATEGORY_COLORS.get(cat, section["accent"])
-
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none" role="img" aria-label="{escape_xml(title)}">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="400" y2="300" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0c0c0f"/>
-      <stop offset="1" stop-color="{section['bg_end']}"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="55%">
-      <stop stop-color="{section['accent']}" stop-opacity="0.18"/>
-      <stop offset="1" stop-color="{section['accent']}" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-  <rect width="400" height="300" fill="url(#bg)"/>
-  <rect width="400" height="300" fill="url(#glow)"/>
-  <rect x="0" y="0" width="4" height="300" fill="{section['accent']}"/>
-{draw_motif(motif, section['accent'], section['secondary'])}
-  <rect x="16" y="258" width="{min(len(label) * 7 + 20, 180)}" height="22" rx="11" fill="{cat_color}" fill-opacity="0.15" stroke="{cat_color}" stroke-opacity="0.35"/>
-  <text x="26" y="273" fill="{cat_color}" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">{escape_xml(label[:22])}</text>
-</svg>
-"""
 
 
 def section_key(md_path: Path) -> str:
     rel = md_path.relative_to(CONTENT)
-    if rel.parent != Path("."):
-        return rel.parts[0]
-    return "build" if "build" in rel.stem else "site"
+    return rel.parts[0] if rel.parent != Path(".") else "build"
 
 
-def section_style(key: str) -> dict[str, str]:
-    return SECTIONS.get(
-        key,
-        {"accent": "#00e87a", "secondary": "#38bdf8", "bg_end": "#131a22"},
-    )
+def section_style(key: str) -> dict:
+    return SECTIONS.get(key, {"accent": "#00e87a", "secondary": "#38bdf8", "bg": "#0c0e10"})
 
 
 def cover_output_path(md_path: Path) -> Path:
     rel = md_path.relative_to(CONTENT)
-    if rel.parent == Path("."):
-        return OUTPUT / f"{rel.stem}.svg"
-    return OUTPUT / rel.parent / f"{rel.stem}.svg"
+    return OUTPUT / rel.parent / f"{rel.stem}.svg" if rel.parent != Path(".") \
+        else OUTPUT / f"{rel.stem}.svg"
 
 
-def primary_label(tags: list[str], category: str) -> str:
-    if tags:
-        return tags[0].replace("-", " ")
-    return category or "article"
+def escape_xml(text: str) -> str:
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+
+
+def build_thumbnail(title: str, style: dict, category: str, motif_key: str) -> str:
+    a = style["accent"]
+    b = style["secondary"]
+    bg = style["bg"]
+    cat = category or "article"
+    cat_color = CATEGORY_COLORS.get(cat, a)
+    cat_label = cat.replace("-", " ").title()
+
+    icon = MOTIFS.get(motif_key, MOTIFS["default"])
+    icon = icon.replace("ACCENT", a).replace("SECONDARY", b)
+
+    badge_w = min(len(cat_label) * 5 + 14, 86)
+
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none" role="img" aria-label="{escape_xml(title)}">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0c0c0f"/>
+      <stop offset="1" stop-color="{bg}"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="44%" r="52%">
+      <stop stop-color="{a}" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="{a}" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="96" height="96" fill="url(#bg)"/>
+  <rect width="96" height="96" fill="url(#glow)"/>
+  <rect x="0" y="0" width="3.5" height="96" fill="{a}"/>
+{icon}
+</svg>
+"""
 
 
 def iter_posts() -> list[Path]:
-    posts: list[Path] = []
-    for path in sorted(CONTENT.rglob("*.md")):
-        if path.name in SKIP_FILES or path.name == "_index.md":
-            continue
-        if parse_front_matter(path).get("title"):
-            posts.append(path)
-    return posts
+    return [
+        p for p in sorted(CONTENT.rglob("*.md"))
+        if p.name not in SKIP_FILES
+        and p.name != "_index.md"
+        and parse_front_matter(p).get("title")
+    ]
 
 
 def main() -> None:
@@ -363,20 +434,13 @@ def main() -> None:
         slug = md_path.stem
         key = section_key(md_path)
         style = section_style(key)
-        motif = motif_key(slug, meta.get("tags", []))
-        label = primary_label(meta.get("tags", []), meta.get("category", ""))
-        svg = build_thumbnail(
-            meta["title"],
-            style,
-            meta.get("category", ""),
-            motif,
-            label,
-        )
+        motif = SLUG_MOTIFS.get(slug, "default")
+        svg = build_thumbnail(meta["title"], style, meta.get("category", ""), motif)
         out = cover_output_path(md_path)
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(svg, encoding="utf-8", newline="\n")
         print(f"  {slug}: {motif}")
-    print(f"\nGenerated {len(posts)} thumbnails in {OUTPUT.relative_to(ROOT)}/")
+    print(f"\nGenerated {len(posts)} thumbnails")
 
 
 if __name__ == "__main__":

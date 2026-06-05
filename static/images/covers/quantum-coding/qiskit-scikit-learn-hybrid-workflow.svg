@@ -1,24 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none" role="img" aria-label="Bridging Qiskit and Scikit-Learn: Hybrid Workflow">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none" role="img" aria-label="Bridging Qiskit and Scikit-Learn: Hybrid Workflow">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="400" y2="300" gradientUnits="userSpaceOnUse">
+    <linearGradient id="bg" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
       <stop stop-color="#0c0c0f"/>
-      <stop offset="1" stop-color="#120f1a"/>
+      <stop offset="1" stop-color="#0d0b14"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="55%">
-      <stop stop-color="#a78bfa" stop-opacity="0.18"/>
+    <radialGradient id="glow" cx="50%" cy="44%" r="52%">
+      <stop stop-color="#a78bfa" stop-opacity="0.22"/>
       <stop offset="1" stop-color="#a78bfa" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <rect width="400" height="300" fill="url(#bg)"/>
-  <rect width="400" height="300" fill="url(#glow)"/>
-  <rect x="0" y="0" width="4" height="300" fill="#a78bfa"/>
+  <rect width="96" height="96" fill="url(#bg)"/>
+  <rect width="96" height="96" fill="url(#glow)"/>
+  <rect x="0" y="0" width="3.5" height="96" fill="#a78bfa"/>
 
-  <circle cx="160" cy="135" r="30" stroke="#a78bfa" stroke-width="2" fill="none"/>
-  <line x1="160" y1="105" x2="160" y2="165" stroke="#a78bfa" stroke-opacity="0.5"/>
-  <line x1="130" y1="135" x2="190" y2="135" stroke="#a78bfa" stroke-opacity="0.5"/>
-  <path d="M205 135 H235" stroke="#00e87a" stroke-width="2.5"/>
-  <rect x="235" y="110" width="50" height="50" rx="6" stroke="#00e87a" stroke-width="2" fill="#00e87a" fill-opacity="0.1"/>
-  <path d="M248 145 L262 128 L275 152" stroke="#00e87a" stroke-width="2" fill="none"/>
-  <rect x="16" y="258" width="62" height="22" rx="11" fill="#00e87a" fill-opacity="0.15" stroke="#00e87a" stroke-opacity="0.35"/>
-  <text x="26" y="273" fill="#00e87a" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">qiskit</text>
+  <line x1="8" y1="32" x2="50" y2="32" stroke="#a78bfa" stroke-opacity="0.55" stroke-width="2"/>
+  <line x1="8" y1="48" x2="50" y2="48" stroke="#a78bfa" stroke-opacity="0.55" stroke-width="2"/>
+  <line x1="8" y1="64" x2="50" y2="64" stroke="#a78bfa" stroke-opacity="0.55" stroke-width="2"/>
+  <rect x="16" y="25" width="14" height="14" rx="3" fill="#a78bfa" fill-opacity="0.25" stroke="#a78bfa" stroke-width="2"/>
+  <text x="23" y="36" text-anchor="middle" fill="#a78bfa" font-family="ui-monospace,monospace" font-size="10" font-weight="700">H</text>
+  <rect x="32" y="41" width="12" height="14" rx="3" fill="#a78bfa" fill-opacity="0.2" stroke="#a78bfa" stroke-width="2"/>
+  <line x1="50" y1="48" x2="60" y2="32" stroke="#00e87a" stroke-width="2" stroke-opacity="0.7"/>
+  <line x1="50" y1="48" x2="60" y2="64" stroke="#00e87a" stroke-width="2" stroke-opacity="0.7"/>
+  <circle cx="60" cy="32" r="7" fill="#00e87a" fill-opacity="0.85"/>
+  <circle cx="60" cy="64" r="7" fill="#00e87a" fill-opacity="0.85"/>
+  <circle cx="82" cy="48" r="10" fill="#00e87a"/>
+  <line x1="67" y1="32" x2="72" y2="48" stroke="#00e87a" stroke-width="2"/>
+  <line x1="67" y1="64" x2="72" y2="48" stroke="#00e87a" stroke-width="2"/>
 </svg>

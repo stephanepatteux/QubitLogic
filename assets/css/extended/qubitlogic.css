@@ -808,11 +808,11 @@ code, pre, kbd, samp {
   object-fit: cover;
 }
 
-/* Post list — small thumbnail left of title */
+/* ── Post list: square thumbnail left of card ─────────────── */
 .post-entry,
 .first-entry {
   display: grid !important;
-  grid-template-columns: 108px 1fr;
+  grid-template-columns: 96px 1fr;
   grid-template-rows: auto auto auto;
   column-gap: 1.1rem;
   row-gap: 0;
@@ -820,62 +820,84 @@ code, pre, kbd, samp {
   min-height: unset !important;
   flex-direction: unset !important;
 }
+
 .post-entry .entry-cover--thumb,
 .first-entry .entry-cover--thumb {
   grid-column: 1;
   grid-row: 1 / span 3;
   margin: 0;
-  width: 108px;
+  width: 96px;
+  height: 96px;
   flex-shrink: 0;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--qs-border, rgba(255, 255, 255, 0.1));
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
+
+.post-entry:hover .entry-cover--thumb,
+.first-entry:hover .entry-cover--thumb {
+  border-color: var(--qs-green);
+  box-shadow: 0 4px 20px rgba(0, 232, 122, 0.15);
+}
+
 .post-entry .entry-cover--thumb img,
 .first-entry .entry-cover--thumb img {
   display: block;
-  width: 108px;
-  height: 81px;
+  width: 96px;
+  height: 96px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
 }
+
 .post-entry .entry-header,
 .first-entry .entry-header {
   grid-column: 2;
   margin: 0;
 }
+
 .post-entry .entry-header h2,
 .first-entry .entry-header h2 {
   font-size: 1.05rem !important;
   line-height: 1.4;
 }
+
 .first-entry .entry-header h1,
 .first-entry .entry-header h2 {
   font-size: 1.05rem !important;
 }
+
 .post-entry .entry-content,
 .first-entry .entry-content {
   grid-column: 2;
   margin-top: 0.35rem;
   -webkit-line-clamp: 2;
 }
+
 .post-entry .entry-footer,
 .first-entry .entry-footer {
   grid-column: 2;
   margin-top: 0.5rem;
 }
+
 @media (max-width: 520px) {
   .post-entry,
   .first-entry {
-    grid-template-columns: 80px 1fr;
-    column-gap: 0.85rem;
+    grid-template-columns: 72px 1fr;
+    column-gap: 0.75rem;
   }
   .post-entry .entry-cover--thumb,
-  .first-entry .entry-cover--thumb,
+  .first-entry .entry-cover--thumb {
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
+  }
   .post-entry .entry-cover--thumb img,
   .first-entry .entry-cover--thumb img {
-    width: 80px;
-    height: 60px;
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
   }
 }
 .ql-phase-label {

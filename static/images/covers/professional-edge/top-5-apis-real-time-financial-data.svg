@@ -1,25 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none" role="img" aria-label="Top 5 APIs for Real-Time Financial Data (2026)">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none" role="img" aria-label="Top 5 APIs for Real-Time Financial Data (2026)">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="400" y2="300" gradientUnits="userSpaceOnUse">
+    <linearGradient id="bg" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
       <stop stop-color="#0c0c0f"/>
-      <stop offset="1" stop-color="#0f1418"/>
+      <stop offset="1" stop-color="#0a0e12"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="45%" r="55%">
-      <stop stop-color="#38bdf8" stop-opacity="0.18"/>
+    <radialGradient id="glow" cx="50%" cy="44%" r="52%">
+      <stop stop-color="#38bdf8" stop-opacity="0.22"/>
       <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <rect width="400" height="300" fill="url(#bg)"/>
-  <rect width="400" height="300" fill="url(#glow)"/>
-  <rect x="0" y="0" width="4" height="300" fill="#38bdf8"/>
+  <rect width="96" height="96" fill="url(#bg)"/>
+  <rect width="96" height="96" fill="url(#glow)"/>
+  <rect x="0" y="0" width="3.5" height="96" fill="#38bdf8"/>
 
-  <line x1="130" y1="175" x2="270" y2="175" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1"/>
-  <rect x="145" y="148" width="14" height="27" fill="#38bdf8" fill-opacity="0.7"/>
-  <rect x="168" y="132" width="14" height="43" fill="#fbbf24" fill-opacity="0.7"/>
-  <rect x="191" y="158" width="14" height="17" fill="#38bdf8" fill-opacity="0.5"/>
-  <rect x="214" y="122" width="14" height="53" fill="#fbbf24" fill-opacity="0.8"/>
-  <rect x="237" y="140" width="14" height="35" fill="#38bdf8" fill-opacity="0.6"/>
-  <path d="M130 108 H270" stroke="#fbbf24" stroke-width="2"/>
-  <rect x="16" y="258" width="118" height="22" rx="11" fill="#a78bfa" fill-opacity="0.15" stroke="#a78bfa" stroke-opacity="0.35"/>
-  <text x="26" y="273" fill="#a78bfa" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">financial data</text>
+  <line x1="12" y1="82" x2="88" y2="82" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1.5"/>
+  <line x1="26" y1="20" x2="26" y2="76" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="20" y="32" width="12" height="30" rx="2" fill="#fbbf24" fill-opacity="0.85"/>
+  <line x1="46" y1="12" x2="46" y2="76" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="40" y="20" width="12" height="38" rx="2" fill="#38bdf8" fill-opacity="0.9"/>
+  <line x1="66" y1="8" x2="66" y2="70" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="60" y="14" width="12" height="32" rx="2" fill="#38bdf8"/>
+  <rect x="70" y="66" width="22" height="14" rx="4" fill="#fbbf24" fill-opacity="0.2" stroke="#fbbf24" stroke-width="1.5"/>
+  <text x="81" y="76" text-anchor="middle" fill="#fbbf24" font-family="ui-monospace,monospace" font-size="8.5" font-weight="700">API</text>
 </svg>
