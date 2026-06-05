@@ -1,7 +1,7 @@
 ---
 title: "Quantum Computing in 2026: The Race to Build the Most Powerful Machine in History"
-date: 2026-06-05T14:00:00+01:00
-lastmod: 2026-06-05T14:00:00+01:00
+date: 2026-06-05T09:00:00+01:00
+lastmod: 2026-06-05T09:00:00+01:00
 draft: false
 description: "Quantum computing explained from first principles: how qubits actually work, who leads the race in 2026 (IBM, Google, Microsoft, IonQ, Quantinuum, QuEra), what real-world problems quantum computers will solve first, and why your encrypted data is already at risk."
 summary: "Google solved a problem in 10 minutes that would take the fastest classical computer 10 septillion years. IBM has 4,158 qubits networked together. Microsoft is growing qubits from topological superconductors. Here is what is actually happening in quantum computing — explained without the hype."
