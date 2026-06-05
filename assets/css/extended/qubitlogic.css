@@ -3,6 +3,44 @@
    assets/css/extended/qubitlogic.css
    ============================================================ */
 
+/* ── Self-hosted fonts (Inter + JetBrains Mono) ───────────── */
+/* latin-ext subset */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin subset */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* JetBrains Mono — latin-ext subset */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('/fonts/jbm-tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx7cwhsk.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* JetBrains Mono — latin subset */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('/fonts/jbm-tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* ── Design Tokens (shared) ───────────────────────────────── */
 :root {
   --qs-green:       #00c96a;
@@ -1274,12 +1312,7 @@ body.ql-modal-open { overflow: hidden; }
 }
 .footer a:hover { color: var(--qs-green); }
 
-/* Site links row (params.footer.text) — About, Privacy, Affiliate */
-.footer span:first-of-type + span,
-.footer > span:nth-child(3) {
-  display: block;
-  margin-top: 0.35rem;
-}
+/* Site links row layout handled by PaperMod's footer template */
 
 /* ── Cookie banner ────────────────────────────────────────── */
 #ql-cookie-notice {
@@ -1358,4 +1391,101 @@ body.ql-modal-open { overflow: hidden; }
 @media (max-width: 480px) {
   .post-entry { padding: 1rem 1.1rem; }
   #ql-cookie-notice { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── Skip-to-content (accessibility) ─────────────────────── */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  text-decoration: none;
+}
+.skip-to-content:focus {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 99999;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  background: var(--qs-green);
+  color: var(--qs-btn-on-accent);
+  border-radius: var(--qs-radius-sm);
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-bottom: none;
+}
+
+/* ── Focus-visible rings (keyboard navigation) ────────────── */
+:focus-visible {
+  outline: 2px solid var(--qs-green);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* ── Mobile table horizontal scroll ──────────────────────── */
+.post-content .table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  margin: 1.75rem 0;
+  border-radius: var(--qs-radius-sm);
+}
+.post-content .table-scroll::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2rem;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(to left, var(--qs-bg, #0c0c0f), transparent);
+  border-radius: 0 var(--qs-radius-sm) var(--qs-radius-sm) 0;
+}
+.post-content .table-scroll table {
+  margin: 0;
+  border-radius: 0;
+}
+
+/* ── Print styles ─────────────────────────────────────────── */
+@media print {
+  .header,
+  .footer,
+  #ql-cookie-notice,
+  .ql-newsletter-fab,
+  .ql-modal,
+  .qs-affiliate-box,
+  .qs-affiliate-stack,
+  .qs-affiliate-top-notice,
+  #qs-progress,
+  #TableOfContents { display: none !important; }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  .post-content a { color: #000; }
+  .post-content a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+  }
+
+  .highlight pre {
+    background: #f5f5f5 !important;
+    color: #000 !important;
+    border: 1px solid #ccc;
+  }
+  .highlight .lntd:first-child { color: #666; border-right-color: #ccc; }
+
+  .post-content table { border: 1px solid #ccc; }
+  .post-content th { background: #eee !important; color: #000 !important; }
+  .post-content td { color: #000 !important; }
 }

@@ -1,5 +1,5 @@
 baseURL = "https://qubitlogic.dev/"
-locale = "en-us"
+locale = "en-gb"
 title = "QubitLogic"
 theme = "PaperMod"
 enableRobotsTXT = true

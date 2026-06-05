@@ -1,10 +1,11 @@
 {{/* Footer: cookie notice, newsletter modal, reading progress */}}
+<script>var m=document.querySelector('main.main');if(m&&!m.id)m.id='main-content';</script>
 {{ partial "newsletter_modal.html" . }}
 
 <div id="ql-cookie-notice" role="dialog" aria-label="Cookie notice" aria-live="polite" style="display:none">
   <p>
-    This site uses no first-party tracking cookies. Affiliate links may set cookies on third-party sites when used.
-    <a href="/privacy/">Learn more</a>
+    This site sets no first-party tracking cookies. Clicking affiliate links (Awin, Vultr, TradingView, Coursera, Jobscan, Jooble) may set cookies on those third-party sites.
+    <a href="/privacy/">Privacy policy</a>
   </p>
   <button id="ql-cookie-accept" aria-label="Dismiss cookie notice">Got it</button>
 </div>
@@ -156,5 +157,17 @@
   }
 
   document.querySelectorAll('.ql-subscribe-form').forEach(handleSubscribeForm);
+})();
+</script>
+
+<script>
+(function() {
+  document.querySelectorAll('.post-content table').forEach(function(t) {
+    if (t.closest('.table-scroll')) return;
+    var w = document.createElement('div');
+    w.className = 'table-scroll';
+    t.parentNode.insertBefore(w, t);
+    w.appendChild(t);
+  });
 })();
 </script>

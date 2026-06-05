@@ -10,7 +10,7 @@ ShowBreadCrumbs: false
 ShowToc: true
 ---
 
-*Last updated: 4 June 2026*
+*Last updated: 5 June 2026*
 
 ## Who we are
 
@@ -42,7 +42,9 @@ When you visit QubitLogic, our web server (Nginx on a UK-based VPS) logs the fol
 - Your browser user-agent string
 - The date and time of your visit
 
-These logs are used solely for security monitoring and are not shared with third parties.
+These logs are used solely for security monitoring and are not shared with third parties. Logs are retained for 30 days and then automatically deleted.
+
+**Legal basis:** Legitimate interests (Article 6(1)(f) UK GDPR) — protecting the security and integrity of the server and this website.
 
 ### Analytics
 
@@ -52,7 +54,18 @@ We do not currently use Google Analytics, cookies, or any third-party tracking s
 
 ## Cookies
 
-This site does not set first-party cookies. Third-party links (including affiliate links) may result in cookies being set by those third-party services when you click through. We have no control over those cookies — please refer to the privacy policies of DigitalOcean, Vultr, Coursera, and other linked services.
+This site does not set first-party cookies. Third-party links (including affiliate links) may result in cookies being set by those third-party services when you click through. We have no control over those cookies.
+
+The following affiliate services may set cookies if you click their links:
+
+- **Awin** — used for DigitalOcean and Paperspace affiliate links ([Awin privacy policy](https://www.awin.com/gb/privacy))
+- **Vultr** — referral links ([Vultr privacy policy](https://www.vultr.com/legal/privacy/))
+- **TradingView** — affiliate links ([TradingView privacy policy](https://www.tradingview.com/privacy-policy/))
+- **Coursera** — course affiliate links ([Coursera privacy policy](https://www.coursera.org/about/privacy))
+- **Jobscan** — affiliate links via ShareASale ([Jobscan privacy policy](https://www.jobscan.co/privacy-policy))
+- **Jooble** — job search affiliate links ([Jooble privacy policy](https://jooble.org/info/en/privacy))
+
+Please refer to each service's privacy policy for details of how they use cookies.
 
 ---
 
