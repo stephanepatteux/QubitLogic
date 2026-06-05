@@ -311,6 +311,20 @@ MOTIFS: dict[str, str] = {
   <line x1="62" y1="64" x2="74" y2="76" stroke="SECONDARY" stroke-width="4.5" stroke-linecap="round"/>
   <path d="M56 58 L64 66 L60 70 L52 62 Z" fill="SECONDARY" fill-opacity="0.9"/>""",
 
+    # ── Quantum computing race: atom + 6 company orbits ────────────────
+    "quantum_race": """
+  <circle cx="48" cy="46" r="20" fill="ACCENT" fill-opacity="0.12" stroke="ACCENT" stroke-width="2.5"/>
+  <ellipse cx="48" cy="46" rx="38" ry="16" stroke="ACCENT" stroke-width="1.5" fill="none" stroke-opacity="0.6"/>
+  <ellipse cx="48" cy="46" rx="38" ry="16" stroke="SECONDARY" stroke-width="1.5" fill="none" stroke-opacity="0.6" transform="rotate(60 48 46)"/>
+  <ellipse cx="48" cy="46" rx="38" ry="16" stroke="ACCENT" stroke-width="1.5" fill="none" stroke-opacity="0.45" transform="rotate(120 48 46)"/>
+  <circle cx="48" cy="46" r="7" fill="ACCENT"/>
+  <circle cx="86" cy="46" r="5" fill="ACCENT" fill-opacity="0.85"/>
+  <circle cx="67" cy="16" r="4.5" fill="SECONDARY" fill-opacity="0.85"/>
+  <circle cx="29" cy="16" r="4.5" fill="ACCENT" fill-opacity="0.7"/>
+  <circle cx="10" cy="46" r="5" fill="SECONDARY" fill-opacity="0.7"/>
+  <circle cx="29" cy="76" r="4.5" fill="ACCENT" fill-opacity="0.6"/>
+  <circle cx="67" cy="76" r="4.5" fill="SECONDARY" fill-opacity="0.6"/>""",
+
     # ── Fallback ────────────────────────────────────────────────────────
     "default": """
   <circle cx="48" cy="46" r="32" fill="ACCENT" fill-opacity="0.14" stroke="ACCENT" stroke-width="2.5"/>
@@ -343,6 +357,7 @@ SLUG_MOTIFS: dict[str, str] = {
     "simulating-circuit-depth-code-optimization":         "circuit_depth",
     "traveling-salesperson-simulated-annealing":          "tsp",
     "quantum-developer-toolkit":                          "toolkit",
+    "quantum-computing-explained-2026":                   "quantum_race",
 }
 
 FRONT_MATTER_RE = re.compile(r"^---\s*\n(.*?)\n---", re.DOTALL)

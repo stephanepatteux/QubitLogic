@@ -361,3 +361,4 @@ The next article bridges the quantum and classical ML worlds — connecting Qisk
 - [Qiskit — `GroverOperator` API reference](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.GroverOperator) — official documentation for the `GroverOperator` class used in this tutorial
 - [NIST Post-Quantum Cryptography project](https://csrc.nist.gov/projects/post-quantum-cryptography) — why Grover's halving of symmetric key strength drove the NIST PQC standardisation process
 - [Building a Quantum-Inspired Optimizer in Python](/quantum-coding/quantum-inspired-optimizer-python/) — introduces QAOA and variational quantum circuits, the complementary algorithm to Grover's exact search
+- [Quantum Computing in 2026: The Race Explained](/quantum-computing-explained-2026/) — full landscape overview: who is building quantum computers, what hardware milestones mean, and when real-world applications arrive

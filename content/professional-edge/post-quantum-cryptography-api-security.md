@@ -29,7 +29,9 @@ In [Post 10](/quantum-coding/grovers-search-logic-python/) we noted that Grover'
 
 The real threat is asymmetric cryptography. **Shor's algorithm** — a different quantum algorithm — breaks RSA, DSA, and elliptic curve cryptography (ECDH, ECDSA) in polynomial time. Every HTTPS connection, every JWT signed with RS256, every SSH key using ECDSA is vulnerable to a cryptographically relevant quantum computer (CRQC).
 
-We do not have a CRQC today. Best estimates put it 5–15 years away. But there is an attack that works right now, today, with no quantum hardware at all.
+We do not have a CRQC today. Best estimates put it 5–15 years away. If you want the full picture of where quantum hardware actually stands — who is building what, which milestones have been hit, and when each threat becomes real — see [Quantum Computing in 2026: The Race Explained](/quantum-computing-explained-2026/).
+
+But there is an attack that works right now, today, with no quantum hardware at all.
 
 ---
 

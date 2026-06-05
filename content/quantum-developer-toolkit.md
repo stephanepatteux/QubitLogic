@@ -206,6 +206,14 @@ Used in: [Post-quantum cryptography](/professional-edge/post-quantum-cryptograph
 
 ---
 
+---
+
+## New to Quantum Computing?
+
+If you are still building your mental model of what quantum computers are and why they matter, start with the overview: [Quantum Computing in 2026: The Race, the Reality, and Why It Changes Everything](/quantum-computing-explained-2026/). It covers how qubits work, who is building them, and what the honest application timeline looks like.
+
+---
+
 ## Newsletter
 
 One article per week. Always with code.
