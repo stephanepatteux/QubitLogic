@@ -4,13 +4,20 @@ date: 2026-06-01T08:00:00+01:00
 lastmod: 2026-06-01T17:30:00+01:00
 draft: false
 description: "Post-quantum cryptography for Python APIs — which algorithms are vulnerable to quantum attacks, NIST FIPS replacements, and how to audit and migrate your API stack now."
+keywords:
+  - "post-quantum cryptography API"
+  - "PQC API security"
+  - "quantum-safe TLS"
+  - "CRYSTALS-Kyber"
+  - "post-quantum migration API"
+  - "NIST PQC standards"
 summary: "RSA-2048 and ECDSA are broken by a sufficiently powerful quantum computer. That hardware does not exist yet — but 'harvest now, decrypt later' attacks mean your API traffic is at risk today. Here is what to fix and how."
 
 series: ["Phase 3: Professional Edge"]
 tags: ["security", "cryptography", "post-quantum", "api", "python", "tls", "nist"]
 categories: ["tutorial"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/post-quantum-cryptography-api-security.png"]
 
 faq:
   - q: "Is RSA-2048 still safe to use in 2026?"

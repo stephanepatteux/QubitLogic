@@ -4,13 +4,20 @@ date: 2026-06-01T10:30:00+01:00
 lastmod: 2026-06-01T14:30:00+01:00
 draft: false
 description: "QAOA vs classical benchmark — MaxCut across 6–20 nodes comparing brute force, greedy, and simulated annealing. Reproducible code and an honest verdict on when QAOA wins."
+keywords:
+  - "QAOA benchmark"
+  - "QAOA vs classical"
+  - "quantum approximate optimization"
+  - "MaxCut QAOA"
+  - "QAOA Python"
+  - "quantum classical comparison"
 summary: "When does QAOA beat classical methods? We ran controlled benchmarks across problem sizes 6–20 nodes with four algorithms. Here is the data, the crossover point, and what it actually means for practical quantum development."
 
 series: ["Phase 2: Quantum Coding"]
 tags: ["qiskit", "qaoa", "benchmarks", "optimization", "python", "classical-algorithms"]
 categories: ["benchmark"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/qaoa-vs-classical-brute-force-benchmarking.png"]
 
 faq:
   - q: "When does QAOA outperform classical optimization?"

@@ -5,13 +5,19 @@ date: 2026-06-01T14:00:00+01:00
 lastmod: 2026-06-01T19:30:00+01:00
 draft: false
 description: "Quantum AI certifications 2026 — IBM, Coursera, AWS Braket, and university programs rated on curriculum depth, industry recognition, and ROI for working developers."
+keywords:
+  - "quantum computing certification"
+  - "IBM Certified Quantum Developer"
+  - "quantum AI certification"
+  - "Qiskit certification"
+  - "quantum developer credential"
 summary: "Quantum AI certifications range from free 4-hour courses to $4,000 university programs. We evaluated seven credentials on curriculum depth, industry recognition, and practical skills transfer. Here is what is worth your time and money."
 
 series: ["Phase 3: Professional Edge"]
 tags: ["quantum-computing", "certifications", "career", "education", "review"]
 categories: ["review"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/quantum-ai-certification-review.png"]
 
 faq:
   - q: "Is the IBM Quantum Qiskit Developer certification worth it in 2026?"

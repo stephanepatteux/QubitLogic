@@ -4,13 +4,20 @@ date: 2026-06-01T17:30:00+01:00
 lastmod: 2026-06-01T17:00:00+01:00
 draft: false
 description: "When to use quantum machine learning — kernel advantage conditions, dequantization risks, hardware requirements, and a go/no-go decision framework for developers in 2026."
+keywords:
+  - "quantum machine learning"
+  - "QML use cases"
+  - "quantum advantage ML"
+  - "when to use QML"
+  - "quantum classical ML comparison"
+  - "dequantization"
 summary: "Quantum ML is not always better than classical ML. This guide gives you a decision framework — based on kernel theory, dequantization results, and benchmark data from this series — for identifying the specific conditions where QML earns its place."
 
 series: ["Phase 2: Quantum Coding"]
 tags: ["quantum-ml", "machine-learning", "qiskit", "pennylane", "decision-framework", "python"]
 categories: ["review"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/quantum-machine-learning-when-to-use.png"]
 
 weight: 14
 ---

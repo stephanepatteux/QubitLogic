@@ -4,13 +4,20 @@ date: 2026-06-01T12:00:00+01:00
 lastmod: 2026-06-01T15:00:00+01:00
 draft: false
 description: "Grover's algorithm in Python with Qiskit — oracle construction, amplitude amplification, iteration count formula, and honest O(√N) vs O(N) benchmark with Qiskit Aer."
+keywords:
+  - "Grover's algorithm Python"
+  - "Grover's search Qiskit"
+  - "quantum search algorithm"
+  - "O(sqrt N) search"
+  - "quantum oracle implementation"
+  - "Qiskit Grover"
 summary: "Grover's algorithm searches an unsorted database in O(√N) steps vs O(N) classical. This guide implements it from scratch in Qiskit with a concrete use case, explains every gate, and benchmarks the real-world tradeoff."
 
 series: ["Phase 2: Quantum Coding"]
 tags: ["qiskit", "grovers-algorithm", "quantum-computing", "python", "search", "algorithms"]
 categories: ["tutorial"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/grovers-search-logic-python.png"]
 
 faq:
   - q: "What is Grover's algorithm used for in practice?"

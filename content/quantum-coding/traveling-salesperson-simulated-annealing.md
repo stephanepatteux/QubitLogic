@@ -4,13 +4,20 @@ date: 2026-06-01T16:30:00+01:00
 lastmod: 2026-06-01T16:30:00+01:00
 draft: false
 description: "Simulated annealing for TSP in Python — 2-opt local search, adaptive cooling schedule, restart logic, and benchmarks up to 500 cities against nearest-neighbour and brute force."
+keywords:
+  - "traveling salesperson Python"
+  - "simulated annealing TSP"
+  - "TSP solver Python"
+  - "combinatorial optimization Python"
+  - "2-opt TSP"
+  - "metaheuristic optimization"
 summary: "TSP is NP-hard and a benchmark for combinatorial optimizers. This guide builds a production-quality simulated annealing solver in Python with 2-opt moves, adaptive cooling, restart logic, and benchmarks against nearest-neighbour and brute force on instances up to 500 cities."
 
 series: ["Phase 2: Quantum Coding"]
 tags: ["tsp", "simulated-annealing", "optimization", "python", "algorithms", "combinatorial"]
 categories: ["tutorial"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/traveling-salesperson-simulated-annealing.png"]
 
 weight: 13
 ---

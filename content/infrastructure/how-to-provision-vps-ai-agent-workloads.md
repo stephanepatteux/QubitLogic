@@ -4,13 +4,20 @@ date: 2026-06-01T08:30:00+01:00
 lastmod: 2026-06-01T10:00:00+01:00
 draft: false
 description: "VPS for AI agent workloads on Ubuntu 24.04 — provision, harden, and benchmark with sysbench and fio. CPU governor tuning, swap config, Nginx, and cloud provider selection."
+keywords:
+  - "VPS provisioning"
+  - "AI agent hosting"
+  - "Ubuntu server setup"
+  - "DigitalOcean VPS"
+  - "self-hosted AI"
+  - "cloud VM configuration"
 summary: "Stop running AI agents on commodity shared hosting. This guide walks you through selecting, provisioning, and benchmarking a high-frequency VPS — with real fio and sysbench numbers for DigitalOcean and Vultr."
 
 series: ["Phase 1: Infrastructure"]
 tags: ["vps", "linux", "ubuntu", "nginx", "python", "ai-agents", "devops", "infrastructure"]
 categories: ["tutorial"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/how-to-provision-vps-ai-agent-workloads.png"]
 
 weight: 1
 ---

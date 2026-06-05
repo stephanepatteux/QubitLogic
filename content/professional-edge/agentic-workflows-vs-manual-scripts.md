@@ -4,13 +4,20 @@ date: 2026-06-01T12:30:00+01:00
 lastmod: 2026-06-01T19:00:00+01:00
 draft: false
 description: "LangGraph vs Python scripts benchmark — agentic AI vs deterministic code across data pipelines, research, code generation, and API orchestration. Cost, latency, and reliability measured."
+keywords:
+  - "agentic workflows"
+  - "AI agents vs scripts"
+  - "LangChain agents"
+  - "LangGraph workflow"
+  - "autonomous AI pipeline"
+  - "agentic automation"
 summary: "Agentic AI is not always better than a well-written script. We benchmarked LangGraph agents against deterministic Python across four task types: data pipeline, research synthesis, code generation, and multi-step API orchestration. Here is when to use each."
 
 series: ["Phase 3: Professional Edge"]
 tags: ["ai-agents", "langgraph", "python", "automation", "benchmark", "architecture"]
 categories: ["benchmark"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/agentic-workflows-vs-manual-scripts.png"]
 
 weight: 18
 ---

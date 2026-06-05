@@ -20,8 +20,14 @@ jobs:
           hugo-version: '0.162.1'
           extended: true
 
+      - name: Install Pillow
+        run: pip install Pillow
+
       - name: Generate post cover images
         run: python3 scripts/generate_cover_images.py
+
+      - name: Generate OG social preview images
+        run: python3 scripts/generate_og_images.py
 
       - name: Build
         run: hugo --minify

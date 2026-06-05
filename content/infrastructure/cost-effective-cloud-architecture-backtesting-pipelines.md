@@ -4,13 +4,20 @@ date: 2026-06-01T14:30:00+01:00
 lastmod: 2026-06-01T12:30:00+01:00
 draft: false
 description: "Python backtesting pipeline on a $24/mo VPS — multiprocessing pools, memory-mapped data loading, chunked I/O, and cron scheduling for 500+ overnight strategy runs."
+keywords:
+  - "cloud cost optimization"
+  - "backtesting infrastructure"
+  - "algorithmic trading cloud"
+  - "Python backtesting"
+  - "cost-effective VPS"
+  - "cloud architecture finance"
 summary: "Running 500 strategy variations overnight on a $24/mo VPS is an architecture problem, not a hardware problem. This guide covers memory-mapped data loading, multiprocessing pools, chunked result storage, and cron scheduling for backtesting pipelines."
 
 series: ["Phase 1: Infrastructure"]
 tags: ["backtesting", "python", "multiprocessing", "infrastructure", "finance", "performance", "linux"]
 categories: ["tutorial"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/cost-effective-cloud-architecture-backtesting-pipelines.png"]
 
 weight: 5
 ---

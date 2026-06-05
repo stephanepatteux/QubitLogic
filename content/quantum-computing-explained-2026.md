@@ -23,7 +23,7 @@ keywords:
   - "IonQ Rigetti D-Wave Quantinuum stock"
   - "quantum computing career opportunities"
 
-images: ["/images/og-default.png"]
+images: ["/images/og/quantum-computing-explained-2026.png"]
 schema_howto: false
 
 faq:

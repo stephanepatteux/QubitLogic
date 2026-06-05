@@ -4,13 +4,19 @@ date: 2026-06-01T13:00:00+01:00
 lastmod: 2026-06-01T12:00:00+01:00
 draft: false
 description: "Quantum-AI developer stack 2026 — IBM Quantum, IonQ, and Azure Quantum reviewed with real cost breakdowns, simulator options, and honest hardware capability ratings."
+keywords:
+  - "quantum-ready infrastructure"
+  - "post-quantum tech stack"
+  - "quantum computing infrastructure"
+  - "hybrid quantum classical"
+  - "quantum cloud setup"
 summary: "You do not need a quantum computer on your desk. You need the right access layer. This guide maps every tier of the quantum-AI stack — from local Qiskit simulators to IBM and IonQ cloud backends — with honest cost and capability assessments."
 
 series: ["Phase 1: Infrastructure"]
 tags: ["quantum-computing", "qiskit", "ibm-quantum", "infrastructure", "cloud", "hardware", "ai-agents"]
 categories: ["review"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/quantum-ready-tech-stack.png"]
 
 weight: 4
 ---

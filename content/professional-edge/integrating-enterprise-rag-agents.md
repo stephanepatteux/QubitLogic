@@ -4,13 +4,20 @@ date: 2026-06-01T09:30:00+01:00
 lastmod: 2026-06-01T18:00:00+01:00
 draft: false
 description: "Enterprise RAG agent architecture — chunking strategy, embedding model selection, vector DB choice, RAGAS retrieval evaluation, and self-hosted VPS deployment guide."
+keywords:
+  - "enterprise RAG"
+  - "retrieval augmented generation"
+  - "RAG LangChain"
+  - "enterprise AI agent"
+  - "RAG Python"
+  - "vector database enterprise"
 summary: "A RAG agent that works in a demo often fails in production. This guide covers the architectural decisions that separate reliable enterprise RAG from brittle prototype RAG — chunking, retrieval evaluation, reranking, and self-hosted deployment."
 
 series: ["Phase 3: Professional Edge"]
 tags: ["rag", "llm", "python", "langchain", "vector-database", "enterprise", "ai-agents", "fastapi"]
 categories: ["tutorial"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/integrating-enterprise-rag-agents.png"]
 
 weight: 16
 ---

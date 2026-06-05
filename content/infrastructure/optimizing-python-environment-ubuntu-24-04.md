@@ -4,13 +4,20 @@ date: 2026-06-01T11:30:00+01:00
 lastmod: 2026-06-01T11:30:00+01:00
 draft: false
 description: "Python performance on Ubuntu 24.04 — venv isolation, uvicorn worker sizing, py-spy profiling, and memory optimisation for AI agent workloads. Reproducible benchmarks."
+keywords:
+  - "Python environment Ubuntu"
+  - "pyenv setup"
+  - "virtual environment"
+  - "Ubuntu 24.04 Python"
+  - "pip optimization"
+  - "Python dependency management"
 summary: "The default Python setup on Ubuntu 24.04 leaves significant performance on the table. This guide covers venv strategy, dependency pinning, uvicorn worker count formulas, and how to profile and fix the real bottlenecks in your AI agent stack."
 
 series: ["Phase 1: Infrastructure"]
 tags: ["python", "ubuntu", "performance", "uvicorn", "fastapi", "profiling", "ai-agents", "infrastructure"]
 categories: ["tutorial"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/optimizing-python-environment-ubuntu-24-04.png"]
 
 weight: 3
 ---

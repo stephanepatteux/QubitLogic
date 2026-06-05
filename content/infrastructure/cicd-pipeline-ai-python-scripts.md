@@ -4,13 +4,20 @@ date: 2026-06-01T16:00:00+01:00
 lastmod: 2026-06-01T13:00:00+01:00
 draft: false
 description: "GitHub Actions CI/CD for Python AI scripts — pytest, dependency auditing, mypy type checking, and zero-downtime SSH deployment to a Linux VPS. Complete workflow included."
+keywords:
+  - "CI/CD pipeline Python"
+  - "GitHub Actions"
+  - "automated deployment"
+  - "Python testing CI"
+  - "continuous integration AI"
+  - "GitHub Actions workflow"
 summary: "Manually SSHing into your VPS to deploy updated agent code is a liability. This guide builds a complete GitHub Actions pipeline that tests, audits, and deploys Python AI scripts to a VPS automatically on every push to main."
 
 series: ["Phase 1: Infrastructure"]
 tags: ["cicd", "github-actions", "python", "pytest", "devops", "infrastructure", "ai-agents", "linux"]
 categories: ["tutorial"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/cicd-pipeline-ai-python-scripts.png"]
 
 weight: 6
 ---

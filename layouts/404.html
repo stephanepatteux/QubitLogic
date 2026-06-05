@@ -1,0 +1,52 @@
+{{- define "main" }}
+<div class="ql-404">
+  <div class="ql-404-code" aria-hidden="true">404</div>
+  <h1 class="ql-404-title">Page not found</h1>
+  <p class="ql-404-desc">That URL doesn't exist — it may have moved or been removed. Try one of these:</p>
+
+  <nav class="ql-404-nav" aria-label="Suggested pages">
+    <a href="/" class="ql-404-link">
+      <span class="ql-404-link-icon">⌂</span>
+      <span>
+        <strong>Home</strong>
+        <span class="ql-404-link-sub">Latest articles and site overview</span>
+      </span>
+    </a>
+    <a href="/start-here/" class="ql-404-link">
+      <span class="ql-404-link-icon">▶</span>
+      <span>
+        <strong>Start Here</strong>
+        <span class="ql-404-link-sub">Recommended reading order for new visitors</span>
+      </span>
+    </a>
+    <a href="/quantum-coding/" class="ql-404-link">
+      <span class="ql-404-link-icon">∣ψ⟩</span>
+      <span>
+        <strong>Quantum Coding</strong>
+        <span class="ql-404-link-sub">Qiskit, QAOA, Grover's, QML — all with runnable code</span>
+      </span>
+    </a>
+    <a href="/infrastructure/" class="ql-404-link">
+      <span class="ql-404-link-icon">⬡</span>
+      <span>
+        <strong>Infrastructure</strong>
+        <span class="ql-404-link-sub">VPS, Nginx, Python, CI/CD for AI workloads</span>
+      </span>
+    </a>
+    <a href="/professional-edge/" class="ql-404-link">
+      <span class="ql-404-link-icon">▸</span>
+      <span>
+        <strong>Professional Edge</strong>
+        <span class="ql-404-link-sub">PQC, RAG agents, financial APIs, compliance</span>
+      </span>
+    </a>
+    <a href="/search/" class="ql-404-link">
+      <span class="ql-404-link-icon">⌕</span>
+      <span>
+        <strong>Search</strong>
+        <span class="ql-404-link-sub">Full-text search across all articles</span>
+      </span>
+    </a>
+  </nav>
+</div>
+{{- end }}

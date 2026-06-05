@@ -4,13 +4,20 @@ date: 2026-06-01T15:00:00+01:00
 lastmod: 2026-06-01T16:00:00+01:00
 draft: false
 description: "Qiskit circuit depth optimisation — transpiler levels, gate cancellation, and circuit rewriting to reduce noise and simulation time. Benchmarks and reproducible commands."
+keywords:
+  - "quantum circuit optimization"
+  - "circuit depth reduction"
+  - "Qiskit transpiler"
+  - "gate cancellation"
+  - "quantum circuit depth"
+  - "Qiskit optimization levels"
 summary: "Deep circuits are slow to simulate and noisy on real hardware. This guide covers Qiskit transpiler optimization levels, gate cancellation, circuit rewriting, and how to measure and reduce depth without changing your circuit's logical output."
 
 series: ["Phase 2: Quantum Coding"]
 tags: ["qiskit", "circuit-optimization", "transpiler", "python", "quantum-computing", "performance"]
 categories: ["tutorial"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/simulating-circuit-depth-code-optimization.png"]
 
 weight: 12
 ---

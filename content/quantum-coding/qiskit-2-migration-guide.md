@@ -4,13 +4,20 @@ date: 2026-06-02T10:00:00+01:00
 lastmod: 2026-06-02T10:00:00+01:00
 draft: false
 description: "Qiskit 2.x migration guide — fix QuantumCircuit, Sampler, Estimator, and transpiler breaking changes. Side-by-side old vs new code for every major API shift."
+keywords:
+  - "Qiskit 2.0 migration"
+  - "Qiskit breaking changes"
+  - "Sampler Estimator Qiskit"
+  - "Qiskit execute deprecated"
+  - "Qiskit 2.x upgrade"
+  - "IBM Quantum migration"
 summary: "Qiskit 2.x removed the legacy execute() function, changed the Sampler and Estimator primitives interface, and restructured the transpiler. This guide fixes every common breaking change with side-by-side before/after code."
 
 series: ["Phase 2: Quantum Coding"]
 tags: ["qiskit", "migration", "python", "quantum-computing", "qiskit-2", "primitives", "transpiler"]
 categories: ["tutorial"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/qiskit-2-migration-guide.png"]
 
 faq:
   - q: "What are the biggest breaking changes in Qiskit 2.x?"

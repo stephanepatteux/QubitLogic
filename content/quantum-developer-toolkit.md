@@ -4,6 +4,12 @@ title: "Quantum Developer Toolkit: The Stack I Actually Use"
 date: 2026-06-02T00:00:00+01:00
 draft: false
 description: "The quantum AI developer toolkit in 2026 — frameworks, cloud compute, learning resources, financial data APIs, and infrastructure tools reviewed with honest verdicts."
+keywords:
+  - "quantum developer toolkit"
+  - "quantum computing tools 2026"
+  - "Qiskit developer tools"
+  - "quantum programming resources"
+  - "quantum computing starter kit"
 summary: "Every tool in this list is something I use in the QubitLogic articles. No filler recommendations, no undisclosed incentives beyond the affiliate disclosures. Organised by what you actually need at each stage."
 hidemeta: false
 hideSummary: false
@@ -13,7 +19,7 @@ ShowToc: true
 TocOpen: false
 tags: ["toolkit", "quantum-computing", "qiskit", "pennylane", "infrastructure", "resources"]
 categories: ["review"]
-images: ["/images/og-default.png"]
+images: ["/images/og/quantum-developer-toolkit.png"]
 weight: 100
 ---
 

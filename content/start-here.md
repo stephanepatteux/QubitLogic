@@ -3,6 +3,13 @@ title: "Start Here: The QubitLogic Learning Path"
 date: 2026-06-01T00:00:00+01:00
 draft: false
 description: "QubitLogic learning path for developers — start with VPS infrastructure, progress to Qiskit quantum algorithms, finish with production AI and PQC. Every article has runnable code."
+keywords:
+  - "quantum computing learning path"
+  - "quantum developer roadmap"
+  - "learn quantum computing"
+  - "Qiskit beginner guide"
+  - "quantum AI development"
+images: ["/images/og/start-here.png"]
 hidemeta: true
 hideSummary: true
 ShowReadingTime: false

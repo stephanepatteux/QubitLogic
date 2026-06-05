@@ -4,13 +4,20 @@ date: 2026-06-01T10:00:00+01:00
 lastmod: 2026-06-01T11:00:00+01:00
 draft: false
 description: "Nginx reverse proxy for Python FastAPI on VPS — TLS via Certbot, rate limiting, upstream health checks, and LLM-aware timeout tuning. Full production configuration."
+keywords:
+  - "Nginx reverse proxy"
+  - "Python API deployment"
+  - "FastAPI production"
+  - "Nginx configuration"
+  - "SSL termination"
+  - "self-hosted API"
 summary: "Uvicorn should never face the internet directly. This guide builds a hardened Nginx reverse proxy layer in front of your FastAPI AI backend — with TLS, rate limiting, and LLM-aware timeout tuning."
 
 series: ["Phase 1: Infrastructure"]
 tags: ["nginx", "linux", "python", "fastapi", "tls", "security", "ai-agents", "infrastructure"]
 categories: ["tutorial"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/nginx-reverse-proxy-python-ai-api.png"]
 
 weight: 2
 ---

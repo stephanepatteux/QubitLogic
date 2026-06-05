@@ -4,13 +4,20 @@ date: 2026-06-01T09:00:00+01:00
 lastmod: 2026-06-01T14:00:00+01:00
 draft: false
 description: "QAOA optimizer in Python with Qiskit — implement quantum-inspired MaxCut from scratch, build the cost Hamiltonian, and benchmark against a classical greedy baseline."
+keywords:
+  - "quantum-inspired optimization"
+  - "simulated annealing Python"
+  - "combinatorial optimization"
+  - "QUBO Python"
+  - "quantum optimization without hardware"
+  - "heuristic optimizer"
 summary: "Quantum-inspired optimization does not require a quantum computer. This guide implements QAOA from scratch in Python using Qiskit, applies it to a real combinatorial problem (MaxCut), and benchmarks it honestly against classical alternatives."
 
 series: ["Phase 2: Quantum Coding"]
 tags: ["qiskit", "qaoa", "optimization", "python", "quantum-computing", "maxcut"]
 categories: ["tutorial"]
 
-images: ["/images/og-default.png"]
+images: ["/images/og/quantum-inspired-optimizer-python.png"]
 
 weight: 8
 ---
