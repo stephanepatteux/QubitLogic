@@ -1,32 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none" role="img" aria-label="Review: Are Quantum AI Certifications Worth It?">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none" role="img" aria-label="Review: Are Quantum AI Certifications Worth It?">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+    <linearGradient id="bg" x1="0" y1="0" x2="400" y2="300" gradientUnits="userSpaceOnUse">
       <stop stop-color="#0c0c0f"/>
       <stop offset="1" stop-color="#0f1418"/>
     </linearGradient>
-    <linearGradient id="glow" x1="0" y1="0" x2="900" y2="630" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#38bdf8" stop-opacity="0.14"/>
-      <stop offset="1" stop-color="#fbbf24" stop-opacity="0.05"/>
-    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="55%">
+      <stop stop-color="#38bdf8" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#glow)"/>
-  <rect x="0" y="0" width="8" height="630" fill="#38bdf8"/>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <rect width="400" height="300" fill="url(#glow)"/>
+  <rect x="0" y="0" width="4" height="300" fill="#38bdf8"/>
 
-  <g stroke="#fbbf24" stroke-opacity="0.28" stroke-width="1" fill="none">
-    <rect x="860" y="100" width="280" height="160" rx="10"/>
-    <path d="M900 220 L960 150 L1020 190 L1080 120 L1140 220"/>
-    <line x1="900" y1="130" x2="1140" y2="130"/>
-  </g>
-  <circle cx="960" cy="150" r="5" fill="#38bdf8" fill-opacity="0.7"/>
-  <circle cx="1080" cy="120" r="5" fill="#fbbf24" fill-opacity="0.7"/>
-  <rect x="72" y="56" width="189" height="34" rx="17" fill="#38bdf8" fill-opacity="0.12" stroke="#38bdf8" stroke-opacity="0.35"/>
-  <text x="90" y="78" fill="#38bdf8" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" letter-spacing="0.04em">PROFESSIONAL EDGE</text>
-  <rect x="1008" y="56" width="72" height="34" rx="17" fill="#a78bfa" fill-opacity="0.12" stroke="#a78bfa" stroke-opacity="0.4"/>
-  <text x="1044" y="78" fill="#a78bfa" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Review</text>
-  <text x="72" y="272" fill="#e4e4ec" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="700">Review: Are Quantum AI</text>
-  <text x="72" y="328" fill="#e4e4ec" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="700">Certifications Worth It?</text>
-  <text x="72" y="590" fill="#8888a0" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="500">qubitlogic.dev</text>
-  <circle cx="1128" cy="578" r="5" fill="#38bdf8" fill-opacity="0.8"/>
-  <circle cx="1154" cy="578" r="5" fill="#fbbf24" fill-opacity="0.55"/>
+  <rect x="145" y="95" width="110" height="80" rx="6" stroke="#fbbf24" stroke-width="2" fill="#fbbf24" fill-opacity="0.08"/>
+  <circle cx="200" cy="125" r="18" stroke="#38bdf8" stroke-width="2" fill="none"/>
+  <path d="M192 125 L198 131 L210 119" stroke="#38bdf8" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <line x1="165" y1="155" x2="235" y2="155" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.5"/>
+  <rect x="16" y="258" width="139" height="22" rx="11" fill="#a78bfa" fill-opacity="0.15" stroke="#a78bfa" stroke-opacity="0.35"/>
+  <text x="26" y="273" fill="#a78bfa" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600">quantum computing</text>
 </svg>

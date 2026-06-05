@@ -1,10 +1,9 @@
 {{- with .cxt }}
+{{- if and (not $.IsSingle) (not $.isHidden) }}
 {{- $coverImage := partial "cover-image-url.html" . }}
-{{- if (and $coverImage (not $.isHidden)) }}
-<figure class="entry-cover">
-  {{- $loading := cond $.IsSingle "eager" "lazy" }}
+<figure class="entry-cover entry-cover--thumb">
   {{- $alt := (.Params.cover.alt | default .Title | plainify) }}
-  <img loading="{{ $loading }}" src="{{ $coverImage | absURL }}" alt="{{ $alt }}" width="1200" height="630">
+  <img loading="lazy" src="{{ $coverImage | absURL }}" alt="{{ $alt }}" width="400" height="300">
 </figure>
 {{- end }}
 {{- end }}

@@ -808,23 +808,75 @@ code, pre, kbd, samp {
   object-fit: cover;
 }
 
-/* Post list / single cover images */
-.entry-cover {
-  margin-bottom: 1rem;
-  border-radius: var(--qs-radius, 10px);
+/* Post list — small thumbnail left of title */
+.post-entry,
+.first-entry {
+  display: grid !important;
+  grid-template-columns: 108px 1fr;
+  grid-template-rows: auto auto auto;
+  column-gap: 1.1rem;
+  row-gap: 0;
+  align-items: start;
+  min-height: unset !important;
+  flex-direction: unset !important;
+}
+.post-entry .entry-cover--thumb,
+.first-entry .entry-cover--thumb {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  margin: 0;
+  width: 108px;
+  flex-shrink: 0;
+  border-radius: 8px;
   overflow: hidden;
-  border: 1px solid var(--qs-border, rgba(255, 255, 255, 0.08));
+  border: 1px solid var(--qs-border, rgba(255, 255, 255, 0.1));
 }
-.entry-cover img {
+.post-entry .entry-cover--thumb img,
+.first-entry .entry-cover--thumb img {
   display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1200 / 630;
+  width: 108px;
+  height: 81px;
   object-fit: cover;
-  border-radius: var(--qs-radius, 10px);
+  border-radius: 8px;
 }
-.first-entry .entry-cover img {
-  max-height: 320px;
+.post-entry .entry-header,
+.first-entry .entry-header {
+  grid-column: 2;
+  margin: 0;
+}
+.post-entry .entry-header h2,
+.first-entry .entry-header h2 {
+  font-size: 1.05rem !important;
+  line-height: 1.4;
+}
+.first-entry .entry-header h1,
+.first-entry .entry-header h2 {
+  font-size: 1.05rem !important;
+}
+.post-entry .entry-content,
+.first-entry .entry-content {
+  grid-column: 2;
+  margin-top: 0.35rem;
+  -webkit-line-clamp: 2;
+}
+.post-entry .entry-footer,
+.first-entry .entry-footer {
+  grid-column: 2;
+  margin-top: 0.5rem;
+}
+@media (max-width: 520px) {
+  .post-entry,
+  .first-entry {
+    grid-template-columns: 80px 1fr;
+    column-gap: 0.85rem;
+  }
+  .post-entry .entry-cover--thumb,
+  .first-entry .entry-cover--thumb,
+  .post-entry .entry-cover--thumb img,
+  .first-entry .entry-cover--thumb img {
+    width: 80px;
+    height: 60px;
+  }
 }
 .ql-phase-label {
   display: block;
