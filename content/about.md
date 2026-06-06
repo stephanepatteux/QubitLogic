@@ -1,8 +1,9 @@
 ---
-title: "About QubitLogic"
+title: "About — Stephane Patteux"
 date: 2026-06-01T00:00:00+01:00
 draft: false
-description: "QubitLogic is a technical workbench for quantum-AI hybrid development — tutorials, benchmarks, and infrastructure guides with reproducible code."
+description: "QubitLogic by Stephane Patteux — quantum-AI tutorials, honest benchmarks, and reproducible Python code for developers."
+images: ["/images/og/about.png"]
 hidemeta: true
 hideSummary: true
 ShowReadingTime: false

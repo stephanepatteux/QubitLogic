@@ -18,8 +18,17 @@ OUTPUT  = ROOT / "static" / "images" / "og"
 W, H = 1200, 630
 
 SKIP_FILES = {
-    "about.md", "privacy.md", "affiliate-disclosure.md",
-    "newsletter.md", "search.md", "_index.md",
+    "privacy.md", "affiliate-disclosure.md",
+    "newsletter.md", "search.md",
+}
+
+HOME_OG = {
+    "slug": "home",
+    "title": "QubitLogic",
+    "description": "Quantum-AI tutorials, Qiskit guides, and Python infrastructure — code-first, benchmarked, self-hosted.",
+    "label": "Home",
+    "accent": (0, 232, 122),
+    "bg": (12, 12, 15),
 }
 
 SECTIONS = {
@@ -29,8 +38,10 @@ SECTIONS = {
     "root":              {"accent": (0, 232, 122),    "bg": (12, 12, 15),  "label": "QubitLogic"},
 }
 
-FONT_BOLD   = "C:/Windows/Fonts/arialbd.ttf"
-FONT_NORMAL = "C:/Windows/Fonts/arial.ttf"
+FONT_CANDIDATES = [
+    ("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"),
+    ("C:/Windows/Fonts/arialbd.ttf", "C:/Windows/Fonts/arial.ttf"),
+]
 
 def parse_front_matter(path: Path) -> dict:
     text = path.read_text(encoding="utf-8", errors="replace")
@@ -58,17 +69,36 @@ def add_radial_glow(img: Image.Image, cx: int, cy: int, radius: int, color: tupl
         draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(*color, alpha))
     img.alpha_composite(glow)
 
-def generate_og(path: Path) -> Path | None:
-    fm = parse_front_matter(path)
-    title = fm.get("title", "")
-    desc  = fm.get("description", "")
-    if not title:
-        return None
+def output_slug(path: Path) -> str:
+    if path.name == "_index.md":
+        return path.parent.name
+    return path.stem
 
-    info   = section_info(path)
-    accent = info["accent"]
-    bg     = info["bg"]
-    label  = info["label"]
+
+def load_fonts() -> tuple:
+    for bold, normal in FONT_CANDIDATES:
+        try:
+            return (
+                ImageFont.truetype(bold, 28),
+                ImageFont.truetype(normal, 26),
+                ImageFont.truetype(bold, 68),
+                ImageFont.truetype(normal, 32),
+            )
+        except OSError:
+            continue
+    default = ImageFont.load_default()
+    return default, default, default, default
+
+
+def render_og(
+    *,
+    slug: str,
+    title: str,
+    desc: str,
+    label: str,
+    accent: tuple[int, int, int],
+    bg: tuple[int, int, int],
+) -> Path:
 
     # ── Canvas ────────────────────────────────────────────────────────────────
     img = Image.new("RGBA", (W, H), (*bg, 255))
@@ -90,17 +120,7 @@ def generate_og(path: Path) -> Path | None:
     bar_w = 8
     draw.rectangle([0, 0, bar_w, H], fill=(*accent, 255))
 
-    # ── Fonts ──────────────────────────────────────────────────────────────────
-    try:
-        fnt_site  = ImageFont.truetype(FONT_BOLD,   28)
-        fnt_label = ImageFont.truetype(FONT_NORMAL, 26)
-        fnt_title = ImageFont.truetype(FONT_BOLD,   68)
-        fnt_desc  = ImageFont.truetype(FONT_NORMAL, 32)
-    except Exception:
-        fnt_site  = ImageFont.load_default()
-        fnt_label = fnt_site
-        fnt_title = fnt_site
-        fnt_desc  = fnt_site
+    fnt_site, fnt_label, fnt_title, fnt_desc = load_fonts()
 
     pad_l = 72  # left padding (after accent bar)
     pad_r = 72
@@ -132,31 +152,61 @@ def generate_og(path: Path) -> Path | None:
     draw.rectangle([pad_l, rule_y, W - pad_r, rule_y + 1], fill=(*accent, 60))
     draw.text((pad_l, rule_y + 16), "qubitlogic.dev", font=fnt_label, fill=(*accent, 200))
 
-    # ── Save ──────────────────────────────────────────────────────────────────
-    slug = path.stem
-    out  = OUTPUT / f"{slug}.png"
     OUTPUT.mkdir(parents=True, exist_ok=True)
+    out = OUTPUT / f"{slug}.png"
     img.convert("RGB").save(out, "PNG", optimize=True)
     return out
 
 
+def generate_og(path: Path) -> Path | None:
+    fm = parse_front_matter(path)
+    title = fm.get("title", "")
+    desc = fm.get("description", "")
+    if not title:
+        return None
+
+    info = section_info(path)
+    return render_og(
+        slug=output_slug(path),
+        title=title,
+        desc=desc,
+        label=info["label"],
+        accent=info["accent"],
+        bg=info["bg"],
+    )
+
+
+def generate_home_og() -> Path:
+    return render_og(
+        slug=HOME_OG["slug"],
+        title=HOME_OG["title"],
+        desc=HOME_OG["description"],
+        label=HOME_OG["label"],
+        accent=HOME_OG["accent"],
+        bg=HOME_OG["bg"],
+    )
+
+
 def iter_posts() -> list[Path]:
-    return [
+    paths = [
         p for p in sorted(CONTENT.rglob("*.md"))
         if p.name not in SKIP_FILES
-        and p.name != "_index.md"
         and parse_front_matter(p).get("title")
     ]
+    return paths
 
 
 def main() -> None:
-    posts = iter_posts()
     generated = []
-    for p in posts:
+    home = generate_home_og()
+    generated.append(("home", home))
+    print("  home")
+
+    for p in iter_posts():
         out = generate_og(p)
         if out:
-            generated.append((p.stem, out))
-            print(f"  {p.stem}")
+            generated.append((output_slug(p), out))
+            print(f"  {output_slug(p)}")
     print(f"\nGenerated {len(generated)} OG images → static/images/og/")
 
 

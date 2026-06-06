@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /series/
+Disallow: /tags/
+Disallow: /categories/
 
 # ── Block AI training scrapers (updated June 2026) ──────────
 # OpenAI

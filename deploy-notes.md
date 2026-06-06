@@ -35,7 +35,22 @@ Modes (select via `workflow_dispatch`):
 | `VPS_SSH_KEY` | Private key for `ubuntu@51.195.86.197` |
 | `SMTP_PASSWORD` | Zoho Mail app password for `hello@qubitlogic.dev` |
 
+### Optional secrets
+
+| Secret | Description |
+|---|---|
+| `GOOGLE_SITE_VERIFICATION` | Meta tag content from [Google Search Console](https://search.google.com/search-console) → HTML tag verification. Injected at build time; also paste into `hugo.toml` `params.analytics.google.SiteVerificationTag` if preferred. |
+
 Add at: **repo → Settings → Secrets and variables → Actions**.
+
+## Google Search Console (recommended)
+
+1. Add property `https://qubitlogic.dev` in Search Console.
+2. Choose **HTML tag** verification and copy the `content="..."` value.
+3. Either set GitHub secret `GOOGLE_SITE_VERIFICATION`, or paste the value in `hugo.toml` under `params.analytics.google.SiteVerificationTag`.
+4. Push to `main`, then click **Verify** in Search Console.
+5. Submit sitemap: `https://qubitlogic.dev/sitemap.xml`.
+6. Optional: URL Inspection → `https://qubitlogic.dev/series/` → **Request removal** (taxonomy pages are `noindex` + blocked in `robots.txt`).
 
 ## One-time VPS setup
 
