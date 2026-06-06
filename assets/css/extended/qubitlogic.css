@@ -906,7 +906,7 @@ code, pre, kbd, samp {
 
 /* ── Post list: square thumbnail left of card ─────────────── */
 .post-entry,
-.first-entry {
+.first-entry:not(.ql-hero) {
   display: grid !important;
   grid-template-columns: 96px 1fr;
   grid-template-rows: auto auto auto;
@@ -917,8 +917,28 @@ code, pre, kbd, samp {
   flex-direction: unset !important;
 }
 
+.ql-hero.first-entry {
+  display: block !important;
+  min-height: unset !important;
+  margin: 0 0 2rem !important;
+}
+
+.ql-hero .entry-header,
+.ql-hero .entry-content,
+.ql-hero .entry-footer {
+  display: block !important;
+  grid-column: unset !important;
+  overflow: visible !important;
+  -webkit-line-clamp: unset !important;
+}
+
+.ql-hero .entry-header h1 {
+  font-size: clamp(1.75rem, 5vw, 2.5rem) !important;
+  line-height: 1.2 !important;
+}
+
 .post-entry .entry-cover--thumb,
-.first-entry .entry-cover--thumb {
+.first-entry:not(.ql-hero) .entry-cover--thumb {
   grid-column: 1;
   grid-row: 1 / span 3;
   margin: 0;
@@ -933,13 +953,13 @@ code, pre, kbd, samp {
 }
 
 .post-entry:hover .entry-cover--thumb,
-.first-entry:hover .entry-cover--thumb {
+.first-entry:not(.ql-hero):hover .entry-cover--thumb {
   border-color: var(--qs-green);
   box-shadow: 0 4px 20px rgba(0, 232, 122, 0.15);
 }
 
 .post-entry .entry-cover--thumb img,
-.first-entry .entry-cover--thumb img {
+.first-entry:not(.ql-hero) .entry-cover--thumb img {
   display: block;
   width: 96px;
   height: 96px;
@@ -948,54 +968,50 @@ code, pre, kbd, samp {
 }
 
 .post-entry .entry-header,
-.first-entry .entry-header {
+.first-entry:not(.ql-hero) .entry-header {
   grid-column: 2;
   margin: 0;
 }
 
 .post-entry .entry-header h2,
-.first-entry .entry-header h2 {
+.first-entry:not(.ql-hero) .entry-header h2 {
   font-size: 1.05rem !important;
   line-height: 1.4;
 }
 
-.first-entry .entry-header h1,
-.first-entry .entry-header h2 {
-  font-size: 1.05rem !important;
-}
-
 .post-entry .entry-content,
-.first-entry .entry-content {
+.first-entry:not(.ql-hero) .entry-content {
   grid-column: 2;
   margin-top: 0.35rem;
   -webkit-line-clamp: 2;
 }
 
 .post-entry .entry-footer,
-.first-entry .entry-footer {
+.first-entry:not(.ql-hero) .entry-footer {
   grid-column: 2;
   margin-top: 0.5rem;
 }
 
 @media (max-width: 520px) {
   .post-entry,
-  .first-entry {
+  .first-entry:not(.ql-hero) {
     grid-template-columns: 72px 1fr;
     column-gap: 0.75rem;
   }
   .post-entry .entry-cover--thumb,
-  .first-entry .entry-cover--thumb {
+  .first-entry:not(.ql-hero) .entry-cover--thumb {
     width: 72px;
     height: 72px;
     border-radius: 8px;
   }
   .post-entry .entry-cover--thumb img,
-  .first-entry .entry-cover--thumb img {
+  .first-entry:not(.ql-hero) .entry-cover--thumb img {
     width: 72px;
     height: 72px;
     border-radius: 8px;
   }
 }
+
 .ql-phase-label {
   display: block;
   padding: 0.5rem 0.75rem;
