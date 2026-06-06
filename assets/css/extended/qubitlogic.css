@@ -1094,22 +1094,9 @@ code, pre, kbd, samp {
 .ql-hero-cta {
   font-size: 0.9rem;
   color: var(--qs-text-muted);
-  margin: 0 0 1rem;
+  margin: 0;
 }
 .ql-hero-cta a { font-weight: 600; }
-
-.ql-hero .entry-footer {
-  margin: 0;
-  padding: 0.5rem 0 0.25rem;
-}
-
-.ql-hero .social-icons a {
-  color: var(--qs-text-muted);
-}
-
-.ql-hero .social-icons a:hover {
-  color: var(--qs-green);
-}
 
 /* ── Section banners ──────────────────────────────────────── */
 .ql-section-banner {
@@ -1421,7 +1408,31 @@ body.ql-modal-open { overflow: hidden; }
 }
 .footer a:hover { color: var(--qs-green); }
 
-/* Site links row layout handled by PaperMod's footer template */
+.footer-social {
+  margin-bottom: 0.35rem;
+}
+
+.footer-social .social-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.15rem;
+}
+
+.footer .social-icons a {
+  padding: 0.35rem 0.5rem;
+  color: var(--qs-text-muted);
+  text-decoration: none;
+}
+
+.footer .social-icons a:hover {
+  color: var(--qs-green);
+}
+
+.footer .social-icons a svg {
+  width: 22px;
+  height: 22px;
+}
 
 /* ── Cookie banner ────────────────────────────────────────── */
 #ql-cookie-notice {
