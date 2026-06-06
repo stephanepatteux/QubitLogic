@@ -29,7 +29,7 @@ faq:
 weight: 8
 ---
 
-**Setup guides:** once you pick a provider, follow [VPS hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) → [provision](/infrastructure/how-to-provision-vps-ai-agent-workloads/) → [FastAPI deploy](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/).
+**Setup guides:** [Hetzner provision](/infrastructure/hetzner-vps-provision-python-ai-ubuntu-24-04/) (EU) or [DO/Vultr provision](/infrastructure/how-to-provision-vps-ai-agent-workloads/) → [hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) → [FastAPI deploy](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/).
 
 ## Quick Summary
 

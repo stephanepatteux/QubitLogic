@@ -143,6 +143,10 @@ jobs:
 
           # Quick health check
           curl -sf http://127.0.0.1:8001/api/newsletter/health && echo "API health: OK" || echo "API health: FAILED"
+
+          # Seed owner subscriber (confirmed) for weekly send testing
+          /opt/qubitlogic/newsletter/venv/bin/python /opt/qubitlogic/newsletter/seed_subscriber.py \
+            stephanepatteux@gmail.com || true
           RUN
 
       # Scheduled run + manual "send" mode
