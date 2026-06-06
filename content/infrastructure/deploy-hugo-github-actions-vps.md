@@ -1,7 +1,7 @@
 ---
 title: "Deploy Hugo to VPS: GitHub Actions & rsync"
-date: 2026-06-06T14:00:00+01:00
-lastmod: 2026-06-06T18:00:00+01:00
+date: 2026-06-05T14:00:00+01:00
+lastmod: 2026-06-06T08:00:00+01:00
 draft: false
 description: "Automate Hugo deploys to your VPS — GitHub Actions builds with submodules, rsync pushes public/ to Nginx docroot, and optional GOOGLE_SITE_VERIFICATION at build time."
 keywords:

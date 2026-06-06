@@ -1,7 +1,7 @@
 ---
 title: "Self-Hosted Newsletter API: FastAPI, SQLite, No Mailchimp"
-date: 2026-06-06T12:00:00+01:00
-lastmod: 2026-06-06T18:00:00+01:00
+date: 2026-06-05T12:00:00+01:00
+lastmod: 2026-06-06T08:00:00+01:00
 draft: false
 description: "Build a GDPR-friendly newsletter API with FastAPI, SQLite, double opt-in, and SMTP — on the same VPS as your Hugo blog. No Mailchimp or ConvertKit required."
 keywords:

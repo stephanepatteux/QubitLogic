@@ -1,7 +1,7 @@
 ---
 title: "Cloudflare + Nginx on a VPS: Static Site & API"
-date: 2026-06-06T13:00:00+01:00
-lastmod: 2026-06-06T18:00:00+01:00
+date: 2026-06-05T13:00:00+01:00
+lastmod: 2026-06-06T08:00:00+01:00
 draft: false
 description: "Put Cloudflare in front of your VPS — DNS proxy, Full (Strict) SSL with Origin CA, Nginx for Hugo static files plus FastAPI API routes, and cache rules that skip /api."
 keywords:
