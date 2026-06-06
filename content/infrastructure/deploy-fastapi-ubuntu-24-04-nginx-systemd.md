@@ -1,7 +1,7 @@
 ---
 title: "Deploy FastAPI on Ubuntu 24.04: Nginx, systemd, SSL"
-date: 2026-06-06T11:00:00+01:00
-lastmod: 2026-06-06T18:00:00+01:00
+date: 2026-06-05T11:00:00+01:00
+lastmod: 2026-06-06T08:00:00+01:00
 draft: false
 description: "Deploy FastAPI on Ubuntu 24.04 for production — Gunicorn + Uvicorn workers, systemd auto-restart, Nginx reverse proxy, Certbot HTTPS, and UFW. Step-by-step with verification."
 keywords:

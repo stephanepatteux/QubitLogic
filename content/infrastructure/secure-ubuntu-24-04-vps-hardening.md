@@ -1,7 +1,7 @@
 ---
 title: "Ubuntu 24.04 VPS Hardening: SSH, UFW & Fail2Ban"
-date: 2026-06-06T10:00:00+01:00
-lastmod: 2026-06-06T18:00:00+01:00
+date: 2026-06-05T10:00:00+01:00
+lastmod: 2026-06-06T08:00:00+01:00
 draft: false
 description: "Harden a fresh Ubuntu 24.04 VPS in 30 minutes — non-root sudo user, SSH keys only, UFW firewall, Fail2Ban, and unattended security upgrades before you deploy anything."
 keywords:
