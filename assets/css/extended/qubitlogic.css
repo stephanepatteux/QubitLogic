@@ -201,12 +201,12 @@ code, pre, kbd, samp {
 }
 #menu .menu-item a:hover { color: var(--qs-green); }
 
-/* ── Homepage hero ────────────────────────────────────────── */
-.home-info {
+/* ── Homepage hero (legacy home-info; ql-hero overrides below) ─ */
+.home-info:not(.ql-hero) {
   padding: 3rem 0 2rem;
 }
 
-.home-info .entry-content {
+.home-info:not(.ql-hero) .entry-content {
   color: var(--qs-text-muted);
   font-size: 1.05rem;
   line-height: 1.6;
@@ -790,6 +790,7 @@ code, pre, kbd, samp {
   margin-bottom: 2rem;
   padding: 0 !important;
   background: var(--qs-surface) !important;
+  min-height: unset !important;
 }
 
 .ql-hero-bg {
@@ -804,7 +805,7 @@ code, pre, kbd, samp {
 
 .ql-hero-inner {
   position: relative;
-  padding: 2rem 1.75rem 1.5rem;
+  padding: 2rem 1.75rem 2rem;
 }
 
 .ql-hero-eyebrow {
@@ -849,12 +850,26 @@ code, pre, kbd, samp {
   transform: translateY(-3px);
   box-shadow: 0 8px 32px rgba(0, 232, 122, 0.1);
 }
-.ql-phase-card img {
+.ql-phase-card-media {
   display: block;
   width: 100%;
-  height: auto;
   aspect-ratio: 1200 / 320;
-  object-fit: cover;
+  background-color: var(--qs-surface-2);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.ql-phase-card-media--infra {
+  background-image: url("/images/banner-infrastructure.svg");
+}
+
+.ql-phase-card-media--quantum {
+  background-image: url("/images/banner-quantum.svg");
+}
+
+.ql-phase-card-media--edge {
+  background-image: url("/images/banner-professional.svg");
 }
 
 /* ── Inline article figures / diagrams ───────────────────── */
@@ -1031,7 +1046,7 @@ code, pre, kbd, samp {
 
 .ql-hero .entry-footer {
   margin: 0;
-  padding-top: 0.25rem;
+  padding: 0.5rem 0 0.25rem;
 }
 
 .ql-hero .social-icons a {
