@@ -113,6 +113,8 @@ For QubitLogic, GitHub Actions wins because the site and newsletter code already
 
 {{< callout type="warning" title="Do not skip confirmation testing" >}}
 The broadcast script deliberately ignores unconfirmed rows. Before you debug cron, make sure you have subscribed with a real address and clicked the confirmation link so your row shows `confirmed=1`.
+
+On QubitLogic, `deploy.yml` and `setup-api` also run `newsletter/seed_subscriber.py` to add `stephanepatteux@gmail.com` as **confirmed** for weekly send testing — no manual SQL required after deploy.
 {{< /callout >}}
 
 ---

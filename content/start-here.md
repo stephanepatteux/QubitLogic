@@ -45,6 +45,11 @@ Build the server stack that runs every quantum experiment in Phase 2.
 | 10 | [CI/CD Pipeline for AI Python Scripts](/infrastructure/cicd-pipeline-ai-python-scripts/) | Tutorial |
 | 11 | [DigitalOcean vs Vultr: Performance Benchmarks for AI Workloads](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/) | Benchmark |
 | 12 | [DigitalOcean vs Vultr vs Hetzner VPS Benchmark 2026](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/) | Benchmark |
+| 13 | [Hetzner VPS for Python AI (Provision & Tune)](/infrastructure/hetzner-vps-provision-python-ai-ubuntu-24-04/) | Tutorial |
+| 14 | [Uptime Kuma: Monitor Your VPS Stack](/infrastructure/uptime-kuma-monitoring-ubuntu-vps-24-04/) | Tutorial |
+| 15 | [Hugo SEO: Sitemap, Schema & Search Console](/infrastructure/hugo-seo-search-console-sitemap-schema/) | Tutorial |
+| 16 | [Newsletter Broadcasts: Cron, RSS & SMTP](/infrastructure/self-hosted-newsletter-broadcast-cron-rss/) | Tutorial |
+| 17 | [VPS Backup & Restore with Restic](/infrastructure/vps-backup-restore-restic-ubuntu-24-04/) | Tutorial |
 | — | [How to Build a Technical Blog with Cursor and Hugo](/build-technical-blog-cursor-hugo/) | Build log |
 
 ---

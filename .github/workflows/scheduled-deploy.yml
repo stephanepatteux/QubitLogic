@@ -1,33 +1,33 @@
-name: Deploy to VPS
+name: Scheduled deploy (weekly articles)
 
+# Publishes future-dated Hugo posts: runs every Monday 07:05 UTC (08:05 BST)
+# after article date (Monday 08:00 Europe/London). buildFuture=false in hugo.toml
+# means posts only appear once date <= build time AND this workflow runs.
 on:
-  push:
-    branches: [main]
+  schedule:
+    - cron: "5 7 * * 1"
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           submodules: true
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
+      - uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.162.1'
+          hugo-version: "0.162.1"
           extended: true
 
       - name: Install Pillow
         run: pip install Pillow
 
-      - name: Generate post cover images
-        run: python3 scripts/generate_cover_images.py
-
-      - name: Generate OG social preview images
-        run: python3 scripts/generate_og_images.py
+      - name: Generate images
+        run: |
+          python3 scripts/generate_cover_images.py
+          python3 scripts/generate_og_images.py
 
       - name: Build
         env:

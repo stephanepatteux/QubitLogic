@@ -16,6 +16,10 @@
 1. Builds the Hugo site (`hugo --minify`)
 2. Rsyncs `public/` → `/var/www/qubitlogic/`
 3. Rsyncs `newsletter/` → `/opt/qubitlogic/newsletter/`
+4. Seeds `stephanepatteux@gmail.com` as a **confirmed** subscriber (idempotent via `seed_subscriber.py`)
+
+### `scheduled-deploy.yml` — Mondays 07:05 UTC
+Publishes **future-dated** Hugo posts (`buildFuture = false`). New infra articles use `date: Monday 08:00 Europe/London`; this workflow runs after that time so they appear without a manual push.
 
 ### `newsletter.yml` — Tuesday 09:00 UTC + manual dispatch
 Modes (select via `workflow_dispatch`):
@@ -58,6 +62,9 @@ Run `setup-api` workflow mode once after first deploy. It:
 - Installs `qubitlogic-newsletter.service` as a systemd unit
 - Kills any zombie on port 8001 before starting
 - Patches `/etc/nginx/sites-available/qubitlogic` with the `/api/newsletter/` proxy block
+- Seeds `stephanepatteux@gmail.com` as confirmed (weekly send test list)
+
+**Weekly cadence:** publish articles **Monday 08:00 UK** → newsletter sends **Tuesday 09:00 UTC** (reads RSS `index.xml`).
 - Reloads Nginx
 - Health-checks the API
 
