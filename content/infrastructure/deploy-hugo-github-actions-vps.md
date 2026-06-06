@@ -1,7 +1,7 @@
 ---
 title: "Deploy Hugo to VPS: GitHub Actions & rsync"
 date: 2026-06-06T14:00:00+01:00
-lastmod: 2026-06-06T14:00:00+01:00
+lastmod: 2026-06-06T16:00:00+01:00
 draft: false
 description: "Automate Hugo deploys to your VPS — GitHub Actions builds with submodules, rsync pushes public/ to Nginx docroot, and optional GOOGLE_SITE_VERIFICATION at build time."
 keywords:
@@ -25,6 +25,10 @@ faq:
     a: "PaperMod and most Hugo themes are Git submodules. Without recursive checkout, CI builds with an empty themes/ folder — you get an unstyled site. Always set submodules: recursive in actions/checkout."
   - q: "Is rsync --delete safe for Hugo deploys?"
     a: "Yes, when DEPLOY_PATH points at your Nginx docroot (e.g. /var/www/yoursite/public/). --delete removes stale files from old builds. Dry-run first with rsync -avzn if you are nervous — a wrong path can delete unrelated directories."
+  - q: "Why pin the Hugo version in GitHub Actions?"
+    a: "Hugo minor releases occasionally change behaviour (pagination, Goldmark, module resolution). Pinning hugo-version to match your local install prevents CI building differently than your laptop. QubitLogic pins 0.162.1 — update deliberately after testing locally."
+  - q: "How do I fix Host key verification failed in the rsync step?"
+    a: "Add an ssh-keyscan step before rsync to populate known_hosts for your VPS IP. GitHub runners start with an empty known_hosts file. See the workflow fix in Step 3 below."
 howto_total_time: "PT1H"
 howto_cost: "0"
 howto_steps:
@@ -89,6 +93,8 @@ sudo chown -R deploy:deploy /var/www/yoursite
 
 Nginx `root` points at `/var/www/yoursite/public` (see [Cloudflare + Nginx guide](/infrastructure/cloudflare-nginx-vps-static-site-api/)).
 
+The VPS does **not** need Hugo, Go, or Node installed. Production only serves pre-built HTML from `public/`. That separation is the main reason CI + rsync beats `git pull && hugo` on the server: your production box never drifts because a package update broke the build toolchain.
+
 ---
 
 ## Step 2 — GitHub secrets
@@ -104,6 +110,16 @@ Repository → **Settings** → **Secrets and variables** → **Actions**:
 | `GOOGLE_SITE_VERIFICATION` | Optional — meta tag for Search Console |
 
 Add the matching **public** key to `~deploy/.ssh/authorized_keys`.
+
+Generate a deploy-only key pair on your laptop (do not reuse your personal SSH key):
+
+```bash
+ssh-keygen -t ed25519 -C "github-actions-deploy" -f ~/.ssh/deploy_ed25519 -N ""
+cat ~/.ssh/deploy_ed25519.pub   # → append to ~/.ssh/authorized_keys on VPS
+cat ~/.ssh/deploy_ed25519       # → paste entire block into DEPLOY_KEY secret
+```
+
+Restrict the key to rsync if you want defence in depth — for most solo blogs, a dedicated key with no passphrase is sufficient.
 
 ---
 
@@ -138,6 +154,9 @@ jobs:
           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
         run: hugo --minify
 
+      - name: Add VPS to known_hosts
+        run: ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts
+
       - name: Rsync to VPS
         uses: burnett01/rsync-deployments@7.0.1
         with:
@@ -149,7 +168,23 @@ jobs:
           remote_key: ${{ secrets.DEPLOY_KEY }}
 ```
 
+The `ssh-keyscan` step fixes the most common first-time failure: **Host key verification failed**. GitHub runners start with an empty `known_hosts` file on every run.
+
 Hugo hosting docs: [gohugo.io/hosting-and-deployment](https://gohugo.io/hosting-and-deployment/). Actions checkout submodules: [GitHub docs](https://github.com/actions/checkout#usage).
+
+### Why pin `hugo-version`?
+
+`latest` in CI is a trap. Hugo 0.140 and 0.162 can produce different HTML from the same source — pagination changes, Goldmark defaults, module resolution. Pin the version to match your local machine:
+
+```bash
+hugo version   # locally — use this string in the workflow
+```
+
+When you upgrade, test `hugo --minify` locally first, then bump the workflow pin in the same commit.
+
+### What `fetch-depth: 0` does
+
+Hugo's `.GitInfo` and `.Lastmod` need full Git history. Shallow clones (`fetch-depth: 1`, the default) leave `lastmod` empty on article pages. `fetch-depth: 0` fetches all commits — slightly slower checkout, correct dates in sitemaps and Open Graph.
 
 {{< callout type="warning" title="--delete" >}}
 `rsync --delete` removes files on the server that are not in `public/`. Correct for static sites; terrifying if `DEPLOY_PATH` is wrong. Dry-run first: `rsync -avzn public/ user@host:/path/`.
@@ -164,6 +199,30 @@ baseURL = "https://yourdomain.dev/"
 ```
 
 Wrong `baseURL` breaks CSS paths and sitemap URLs. Hugo discourse on Nginx 403s: [discourse.gohugo.io/t/help-deploying-with-nginx/12609](https://discourse.gohugo.io/t/help-deploying-with-nginx/12609).
+
+Common `baseURL` mistakes:
+
+| `baseURL` value | Symptom |
+|-----------------|---------|
+| `http://localhost:1313/` | CSS 404 in production; canonical URLs point at localhost |
+| `https://example.com` (no trailing slash) | Relative URLs break on nested pages |
+| `https://www.example.com/` but Nginx serves bare domain | Mixed-content or redirect loops with Cloudflare |
+
+Rule: **match exactly what users type in the browser**, including `https://` and trailing `/`.
+
+### Optional: Search Console verification at build time
+
+Two options — pick one:
+
+1. **GitHub secret** — set `GOOGLE_SITE_VERIFICATION` in Actions secrets; pass it as a build env var (already shown in the workflow above). Your head partial reads `getenv "GOOGLE_SITE_VERIFICATION"`.
+2. **`hugo.toml`** — paste the tag content directly:
+
+```toml
+[params.analytics.google]
+  SiteVerificationTag = "your-verification-string-from-search-console"
+```
+
+The meta tag is baked into HTML at build time — no runtime PHP or JavaScript required. QubitLogic uses the env-var approach so the verification string never sits in the public repo.
 
 ---
 
@@ -200,13 +259,69 @@ Restore: extract tarball into `/var/www/yoursite/`.
 
 ---
 
+## Common mistakes
+
+1. **`submodules: true` instead of `recursive`** — PaperMod installs as an empty directory; site builds with no CSS. Use `submodules: recursive`.
+
+2. **Wrong `DEPLOY_PATH`** — `rsync --delete` to `/var/www/` instead of `/var/www/yoursite/public/` deletes unrelated files. Always dry-run: `rsync -avzn public/ deploy@host:/path/`.
+
+3. **Hugo not Extended** — SCSS pipelines (PaperMod, custom CSS) fail silently or skip minification. Set `extended: true` in `peaceiris/actions-hugo`.
+
+4. **Building with `draft: true` posts** — fine locally, but remember `hugo --minify` in CI respects draft flags unless you pass `-D`. Production workflows should not use `-D`.
+
+5. **Forgetting trailing slash on `DEPLOY_PATH`** — rsync creates a nested `public/public/` directory. Use `/var/www/yoursite/public/` with trailing slash.
+
+6. **Deploy key has a passphrase** — GitHub Actions cannot prompt. Generate with `-N ""` or use `ssh-agent` in a custom step.
+
+7. **Cloudflare caches a broken deploy** — after fixing `baseURL`, purge cache in Cloudflare → Caching → Purge Everything.
+
+---
+
 ## Troubleshooting
 
-**Submodule empty on CI** — `submodules: recursive` required for PaperMod.
+**Submodule empty on CI** — `submodules: recursive` required for PaperMod. Locally run `git submodule update --init --recursive` and commit the submodule pointer.
 
-**Permission denied (publickey)** — `DEPLOY_KEY` must match authorized_keys; user must own `DEPLOY_PATH`.
+**Permission denied (publickey)** — `DEPLOY_KEY` must be the **private** key matching an entry in `~deploy/.ssh/authorized_keys`. Check file permissions: `chmod 600 authorized_keys`.
 
-**Site looks unstyled** — `baseURL` mismatch or Cloudflare caching old CSS — purge cache in dashboard.
+**Host key verification failed** — add the `ssh-keyscan` step shown in Step 3.
+
+**Site looks unstyled** — three causes in order: (1) `baseURL` mismatch — view source and check CSS `href` paths; (2) theme submodule empty in CI; (3) Cloudflare serving stale CSS — purge cache.
+
+**404 on article pages but homepage works** — Nginx `try_files` missing `$uri $uri/` fallback. Hugo generates `post/index.html` for clean URLs:
+
+```nginx
+location / {
+    try_files $uri $uri/ =404;
+}
+```
+
+**Actions pass but site unchanged** — wrong branch trigger (`on.push.branches`), or `DEPLOY_PATH` points at a directory Nginx does not serve. SSH in and `ls -la /var/www/yoursite/public/`.
+
+**Hugo build fails on SCSS** — need Extended edition. Error mentions `toCSS` or `resources.ExecuteAsTemplate` — set `extended: true`.
+
+---
+
+## Frequently Asked Questions
+
+### Why rsync instead of git pull on the VPS?
+
+The VPS only needs static HTML — not your Git history, Hugo binary, or theme source. rsync pushes the built `public/` folder in seconds and avoids installing Hugo on production. `git pull` on the server couples deploy to server tooling and makes rollbacks harder.
+
+### Why do I need `submodules: recursive` in GitHub Actions?
+
+PaperMod and most Hugo themes are Git submodules. Without recursive checkout, CI builds with an empty `themes/` folder — you get an unstyled site.
+
+### Is rsync `--delete` safe for Hugo deploys?
+
+Yes, when `DEPLOY_PATH` points at your Nginx docroot (e.g. `/var/www/yoursite/public/`). `--delete` removes stale files from old builds. Dry-run first with `rsync -avzn` if you are nervous.
+
+### Why pin the Hugo version in GitHub Actions?
+
+Hugo minor releases occasionally change behaviour. Pinning `hugo-version` to match your local install prevents CI building differently than your laptop.
+
+### How do I fix Host key verification failed in the rsync step?
+
+Add `ssh-keyscan -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts` before the rsync step. GitHub runners start with an empty known_hosts file.
 
 ---
 

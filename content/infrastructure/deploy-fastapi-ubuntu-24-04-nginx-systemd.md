@@ -1,7 +1,7 @@
 ---
 title: "Deploy FastAPI on Ubuntu 24.04: Nginx, systemd, SSL"
 date: 2026-06-06T11:00:00+01:00
-lastmod: 2026-06-06T11:00:00+01:00
+lastmod: 2026-06-06T16:00:00+01:00
 draft: false
 description: "Deploy FastAPI on Ubuntu 24.04 for production — Gunicorn + Uvicorn workers, systemd auto-restart, Nginx reverse proxy, Certbot HTTPS, and UFW. Step-by-step with verification."
 keywords:
@@ -26,6 +26,10 @@ faq:
     a: "Binding to localhost means only Nginx on the same machine can reach your app. UFW should not expose port 8000 publicly — attackers who bypass Nginx cannot hit uvicorn directly. This is the standard pattern in the official FastAPI deployment docs."
   - q: "How many Gunicorn workers do I need on a 1 GB VPS?"
     a: "Start with 2 workers (-w 2). Each Uvicorn worker loads your Python app into memory, so 4 workers on 1 GB RAM often causes OOM kills. Scale workers with RAM: roughly one worker per 512 MB–1 GB for lightweight APIs."
+  - q: "Can I use the same VPS for Hugo and FastAPI?"
+    a: "Yes — this is the QubitLogic pattern. Nginx serves Hugo static files at / and proxies /api/ to FastAPI on 127.0.0.1:8000. One Gunicorn service handles all API routes (newsletter, webhooks, health). See the Cloudflare + Nginx guide for the combined server block."
+  - q: "Do I need Docker to deploy FastAPI on Ubuntu?"
+    a: "No. On a single $6–12/mo VPS, systemd + Gunicorn is simpler than Docker: fewer moving parts, lower RAM overhead, and easier debugging with journalctl. Docker makes sense at multi-service scale; for one API on one VPS, native systemd is the right default."
 howto_total_time: "PT45M"
 howto_cost: "6"
 howto_steps:
@@ -161,6 +165,37 @@ sudo systemctl status fastapi
 
 Gunicorn design: [docs.gunicorn.org](https://docs.gunicorn.org/en/stable/design.html).
 
+### How many workers?
+
+Gunicorn's classic formula is `(2 × CPU cores) + 1`, but on a memory-constrained VPS the limit is usually **RAM per worker**, not CPU.
+
+| VPS RAM | Suggested `-w` | Notes |
+|---------|----------------|-------|
+| 1 GB | 2 | Default for this guide; leave headroom for Nginx + OS |
+| 2 GB | 2–3 | Fine for newsletter/webhook APIs |
+| 4 GB | 3–5 | Add workers only after checking `free -h` under load |
+
+Check memory after deploy:
+
+```bash
+ps aux --sort=-%mem | head -8
+free -h
+```
+
+If you see OOM kills in `dmesg | grep -i oom`, reduce workers or add swap (see [hardening guide](/infrastructure/secure-ubuntu-24-04-vps-hardening/)).
+
+For **I/O-bound** routes (LLM API calls, external HTTP), workers spend time waiting — you can often run more workers than the CPU formula suggests. For **CPU-bound** work (embedding models, pandas), stick to 1 worker per vCPU. See [Python environment tuning](/infrastructure/optimizing-python-environment-ubuntu-24-04/) for uvloop and preload options.
+
+### Environment variables in production
+
+When you add a `.env` file (newsletter SMTP, API keys), load it via systemd instead of hardcoding secrets:
+
+```ini
+EnvironmentFile=/opt/api/.env
+```
+
+Create `/opt/api/.env` owned by `deploy` with mode `600`. Never commit `.env` to Git — use the same pattern in [CI/CD deploy](/infrastructure/cicd-pipeline-ai-python-scripts/) with GitHub Secrets.
+
 ---
 
 ## Step 3 — Nginx reverse proxy
@@ -189,6 +224,19 @@ sudo nginx -t && sudo systemctl reload nginx
 ```
 
 Replace `api.example.com` with your domain. Nginx proxy module: [nginx.org docs](https://nginx.org/en/docs/http/ngx_http_proxy_module.html).
+
+### Subdomain vs path on the same domain
+
+Two valid patterns:
+
+| Pattern | `server_name` | When to use |
+|---------|---------------|-------------|
+| **Subdomain** | `api.example.com` | Separate TLS cert, clear API boundary |
+| **Path** | `example.com` + `location /api/` | Hugo blog + API on one cert (QubitLogic) |
+
+If Hugo already serves `example.com`, add a `location /api/` block to that server — do not create a second Nginx site on port 80 for the same hostname. The [newsletter API guide](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) uses the path pattern.
+
+The `X-Forwarded-Proto` header matters when you later put [Cloudflare](/infrastructure/cloudflare-nginx-vps-static-site-api/) in front: FastAPI's `request.url` and redirect logic depend on it.
 
 ---
 
@@ -228,13 +276,76 @@ sudo ufw status
 
 ---
 
+## Common mistakes
+
+1. **Binding to `0.0.0.0:8000` and opening UFW port 8000** — bypasses Nginx TLS and rate limits. Always bind `127.0.0.1` and keep 8000 off the firewall.
+
+2. **Running uvicorn directly in production** — no multi-worker support, weaker signal handling on deploy/restart. Use Gunicorn + UvicornWorker.
+
+3. **Forgetting `WorkingDirectory` in systemd** — imports break if the service starts from `/` and cannot find `main.py`.
+
+4. **Missing `proxy_set_header Host`** — some FastAPI middleware and OAuth redirects generate wrong URLs.
+
+5. **Deploying before DNS propagates** — Certbot fails with "connection refused" or "NXDOMAIN". Wait for `dig +short api.example.com` to return your VPS IP.
+
+6. **No health endpoint** — you cannot distinguish Nginx misconfig from app crash. Always expose `GET /health` and monitor it.
+
+7. **Blocking calls inside `async def`** — freezes all workers under load. Use `async` HTTP clients or offload CPU work to a thread pool. Covered in depth in [Python tuning](/infrastructure/optimizing-python-environment-ubuntu-24-04/).
+
+---
+
 ## Troubleshooting
 
-**502 Bad Gateway** — App not listening: `journalctl -u fastapi -n 50 --no-pager`.
+**502 Bad Gateway** — Nginx cannot reach upstream.
 
-**Certbot fails** — DNS not propagated; check `dig +short api.example.com`.
+```bash
+sudo systemctl status fastapi
+curl -s http://127.0.0.1:8000/health
+journalctl -u fastapi -n 50 --no-pager
+```
 
-**Slow LLM routes** — Default Nginx `proxy_read_timeout` is 60s. See [LLM-aware Nginx hardening](/infrastructure/nginx-reverse-proxy-python-ai-api/).
+Common causes: service crashed, wrong bind address, or venv path changed after `pip install`.
+
+**502 only on HTTPS, HTTP works** — Certbot modified Nginx config incorrectly. Compare `/etc/nginx/sites-enabled/fastapi` and run `sudo nginx -t`.
+
+**Certbot fails** — DNS not propagated (`dig +short api.example.com`), port 80 blocked by UFW, or Cloudflare orange-cloud proxying before origin is ready. For Cloudflare, use [Full (strict)](/infrastructure/cloudflare-nginx-vps-static-site-api/) with Origin CA instead of Certbot on the origin.
+
+**Service starts then dies** — syntax error in `main.py` or missing dependency:
+
+```bash
+cd /opt/api && source .venv/bin/activate
+gunicorn main:app -k uvicorn.workers.UvicornWorker -b 127.0.0.1:8000
+```
+
+Run in foreground to see the traceback.
+
+**Slow LLM routes / 504 Gateway Timeout** — default Nginx `proxy_read_timeout` is 60s. LLM calls often need 120–300s. See [LLM-aware Nginx hardening](/infrastructure/nginx-reverse-proxy-python-ai-api/).
+
+**High memory after deploy** — too many Gunicorn workers. Drop `-w` to 2 and add swap on 1 GB instances.
+
+---
+
+## Frequently Asked Questions
+
+### Should I run uvicorn or Gunicorn in production?
+
+Run Gunicorn as the process manager with `UvicornWorker` (`-k uvicorn.workers.UvicornWorker`). Uvicorn alone is fine for development; Gunicorn gives you multiple workers, graceful restarts, and production-grade signal handling. Bind to `127.0.0.1:8000` and let Nginx handle TLS on 443.
+
+### Why bind FastAPI to 127.0.0.1 instead of 0.0.0.0?
+
+Binding to localhost means only Nginx on the same machine can reach your app. UFW should not expose port 8000 publicly — attackers who bypass Nginx cannot hit uvicorn directly. This is the standard pattern in the [official FastAPI deployment docs](https://fastapi.tiangolo.com/deployment/).
+
+### How many Gunicorn workers do I need on a 1 GB VPS?
+
+Start with 2 workers (`-w 2`). Each Uvicorn worker loads your Python app into memory, so 4 workers on 1 GB RAM often causes OOM kills. Scale workers with RAM: roughly one worker per 512 MB–1 GB for lightweight APIs.
+
+### Can I use the same VPS for Hugo and FastAPI?
+
+Yes — this is the QubitLogic pattern. Nginx serves Hugo static files at `/` and proxies `/api/` to FastAPI on `127.0.0.1:8000`. One Gunicorn service handles all API routes.
+
+### Do I need Docker to deploy FastAPI on Ubuntu?
+
+No. On a single $6–12/mo VPS, systemd + Gunicorn is simpler than Docker: fewer moving parts, lower RAM overhead, and easier debugging with `journalctl`.
 
 ---
 
