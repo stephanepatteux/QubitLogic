@@ -37,15 +37,37 @@ elif [ -f "$INSTALL_DIR/.env" ]; then
 fi
 
 echo "==> Installing systemd service..."
-sudo fuser -k 8001/tcp 2>/dev/null || true
-sleep 1
+free_port_8001() {
+  sudo systemctl stop "$SERVICE" 2>/dev/null || true
+  for _ in 1 2 3 4 5; do
+    if ! ss -tln | grep -q ':8001 '; then
+      return 0
+    fi
+    sudo fuser -k 8001/tcp 2>/dev/null || true
+    sleep 1
+  done
+  if ss -tln | grep -q ':8001 '; then
+    echo "Port 8001 still in use:"
+    ss -tlnp | grep ':8001 ' || true
+    return 1
+  fi
+}
 
 sudo cp "$INSTALL_DIR/qubitlogic-newsletter.service" \
   "/etc/systemd/system/${SERVICE}.service"
 sudo systemctl daemon-reload
 sudo systemctl enable "$SERVICE"
-sudo systemctl restart "$SERVICE"
+
+free_port_8001
+sudo systemctl start "$SERVICE"
 sleep 3
+
+if ! sudo systemctl is-active --quiet "$SERVICE"; then
+  echo "Service start failed — retrying after port cleanup..."
+  free_port_8001
+  sudo systemctl start "$SERVICE"
+  sleep 3
+fi
 
 if sudo systemctl is-active --quiet "$SERVICE"; then
   echo "Service: running"
