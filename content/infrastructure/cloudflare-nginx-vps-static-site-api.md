@@ -1,7 +1,7 @@
 ---
 title: "Cloudflare + Nginx on a VPS: Static Site & API"
 date: 2026-06-06T13:00:00+01:00
-lastmod: 2026-06-06T13:00:00+01:00
+lastmod: 2026-06-06T18:00:00+01:00
 draft: false
 description: "Put Cloudflare in front of your VPS — DNS proxy, Full (Strict) SSL with Origin CA, Nginx for Hugo static files plus FastAPI API routes, and cache rules that skip /api."
 keywords:
@@ -25,6 +25,10 @@ faq:
     a: "The classic loop: Cloudflare Flexible SSL hits your Nginx HTTP→HTTPS redirect, which redirects back, forever. Fix: set SSL mode to Full (strict), install an Origin CA cert on Nginx, and ensure Nginx listens on 443 with that certificate."
   - q: "Should I cache API routes behind Cloudflare?"
     a: "No. Create a Cache Rule to bypass cache when URI path starts with /api/. POST requests (newsletter subscribe) must never be cached — you will silently drop subscriptions or serve stale error responses."
+  - q: "What is Authenticated Origin Pulls (AOP)?"
+    a: "AOP makes Nginx verify that incoming HTTPS requests carry a Cloudflare client certificate. Direct connections to your VPS IP (bypassing the CDN) are rejected. Stronger than IP allowlists because it does not break when Cloudflare changes IP ranges."
+  - q: "Cloudflare Origin CA vs Let's Encrypt on the origin?"
+    a: "Use Origin CA when Cloudflare proxies all traffic (orange cloud). Use Let's Encrypt when you need browsers to connect directly to the VPS without Cloudflare. QubitLogic uses Origin CA because every DNS record is proxied."
 howto_total_time: "PT1H"
 howto_cost: "0"
 howto_steps:
@@ -65,6 +69,19 @@ Cloudflare's free tier includes unmetered DDoS mitigation, global CDN caching fo
 | Flexible | HTTPS | **HTTP** | Never (insecure origin) |
 | Full | HTTPS | HTTPS (any cert) | Risky |
 | **Full (strict)** | HTTPS | HTTPS (valid origin cert) | **Yes** |
+
+### How this guide compares
+
+| Feature | MangoHost / generic blogs | DigitalOcean community tutorial | This guide |
+|---------|---------------------------|--------------------------------|------------|
+| Full (strict) + Origin CA | Yes | Yes | Yes |
+| Hugo static + FastAPI `/api/` | Rare | PHP-focused | **Yes** (QubitLogic stack) |
+| Authenticated Origin Pulls | Rare | **Yes** | **Yes** (Step 6b) |
+| Real visitor IP in Nginx logs | Often missing | Partial | **CF-Connecting-IP config** |
+| Cache rules for `/api/` bypass | Sometimes | No | **Yes** |
+| Series integration | Standalone | Standalone | Links to [Hugo deploy](/infrastructure/deploy-hugo-github-actions-vps/) + [newsletter](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) |
+
+The [DigitalOcean Cloudflare + Nginx tutorial](https://www.digitalocean.com/community/tutorials/how-to-host-a-website-using-cloudflare-and-nginx-on-ubuntu-22-04) is the SERP benchmark. This guide matches its security depth and adds the **Hugo + FastAPI split** most competitors omit.
 
 ---
 
@@ -151,9 +168,42 @@ server {
 
     ssl_certificate     /etc/ssl/cloudflare/origin.pem;
     ssl_certificate_key /etc/ssl/cloudflare/origin.key;
+    ssl_protocols       TLSv1.2 TLSv1.3;
 
     root /var/www/yoursite/public;
     index index.html;
+
+    # Real visitor IP (Cloudflare sets CF-Connecting-IP)
+    set_real_ip_from 103.21.244.0/22;
+    set_real_ip_from 103.22.200.0/22;
+    set_real_ip_from 103.31.4.0/22;
+    set_real_ip_from 104.16.0.0/13;
+    set_real_ip_from 104.24.0.0/14;
+    set_real_ip_from 108.162.192.0/18;
+    set_real_ip_from 131.0.72.0/22;
+    set_real_ip_from 141.101.64.0/18;
+    set_real_ip_from 162.158.0.0/15;
+    set_real_ip_from 172.64.0.0/13;
+    set_real_ip_from 173.245.48.0/20;
+    set_real_ip_from 188.114.96.0/20;
+    set_real_ip_from 190.93.240.0/20;
+    set_real_ip_from 197.234.240.0/22;
+    set_real_ip_from 198.41.128.0/17;
+    set_real_ip_from 2400:cb00::/32;
+    set_real_ip_from 2606:4700::/32;
+    set_real_ip_from 2803:f800::/32;
+    set_real_ip_from 2405:b500::/32;
+    set_real_ip_from 2405:8100::/32;
+    set_real_ip_from 2a06:98c0::/29;
+    set_real_ip_from 2c0f:f248::/32;
+    real_ip_header CF-Connecting-IP;
+
+    # Immutable static assets (long cache at browser; Cloudflare also caches)
+    location ~* \.(css|js|png|jpg|jpeg|gif|ico|svg|woff2|webp)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
 
     location /api/ {
         proxy_pass http://127.0.0.1:8000;
@@ -189,11 +239,47 @@ Newsletter `POST` must never be cached. See [self-hosted newsletter API](/infras
 
 ---
 
-## Step 6 — Optional: lock origin to Cloudflare IPs
+## Step 6 — Block direct origin access
 
-Advanced: restrict UFW so only [Cloudflare IP ranges](https://www.cloudflare.com/ips/) reach ports 80/443. **Keep SSH open** to your home IP or provider console.
+Attackers who discover your raw VPS IP can bypass Cloudflare entirely. Two defences — use **both** for production.
 
-This prevents attackers from bypassing the CDN if they discover your raw VPS IP. Trade-off: more firewall maintenance when Cloudflare updates ranges.
+### Option A — Authenticated Origin Pulls (recommended)
+
+Stronger than IP allowlists: Nginx verifies Cloudflare's client certificate on every request.
+
+1. Dashboard → **SSL/TLS** → **Origin Server** → enable **Authenticated Origin Pulls**
+2. Download the Cloudflare CA certificate (or pull from [authenticated_origin_pull_ca.pem](https://developers.cloudflare.com/ssl/static/authenticated_origin_pull_ca.pem))
+
+On the VPS:
+
+```bash
+sudo curl -sLo /etc/ssl/cloudflare/aop.pem \
+  https://developers.cloudflare.com/ssl/static/authenticated_origin_pull_ca.pem
+```
+
+Add inside your `server { listen 443 ssl; ... }` block:
+
+```nginx
+ssl_client_certificate /etc/ssl/cloudflare/aop.pem;
+ssl_verify_client on;
+```
+
+Reload Nginx. Direct `curl https://YOUR_VPS_IP/` without Cloudflare's certificate now fails with **400 Bad Request**. Traffic through orange-cloud DNS still works.
+
+Reference: [DigitalOcean — Cloudflare authenticated pulls](https://www.digitalocean.com/community/tutorials/how-to-host-a-website-using-cloudflare-and-nginx-on-ubuntu-22-04).
+
+### Option B — UFW allowlist (supplementary)
+
+Restrict ports 80/443 to [Cloudflare IP ranges](https://www.cloudflare.com/ips/) only. **Keep SSH open** to your home IP or provider console.
+
+```bash
+# Example — automate with Cloudflare's published IP list
+for ip in $(curl -s https://www.cloudflare.com/ips-v4); do
+  sudo ufw allow from $ip to any port 80,443 proto tcp comment 'Cloudflare'
+done
+```
+
+Trade-off: update rules when Cloudflare publishes new ranges. AOP (Option A) avoids this maintenance.
 
 ---
 
@@ -216,6 +302,34 @@ Browser: padlock → certificate issued by Cloudflare (edge), origin uses Origin
 **521 Web server down** — Nginx not running or firewall blocks Cloudflare. Check `sudo systemctl status nginx`.
 
 **403 on static files** — Wrong `root` path or permissions: `sudo chown -R www-data:www-data /var/www/yoursite/public` (or `deploy` if you prefer).
+
+**400 after enabling AOP** — Cloudflare proxy disabled (grey cloud) or AOP not enabled in dashboard. Both sides must match.
+
+**Wrong IP in Nginx logs** — Missing `real_ip_header CF-Connecting-IP` block. Without it, every request logs a Cloudflare edge IP.
+
+---
+
+## Frequently Asked Questions
+
+### What is the difference between Cloudflare Flexible and Full (strict) SSL?
+
+Flexible encrypts visitor → Cloudflare but sends HTTP to origin — insecure. Full (strict) encrypts end-to-end with a valid Origin CA certificate on Nginx.
+
+### Why does Cloudflare cause redirect loops with Nginx?
+
+Flexible SSL + Nginx HTTPS redirect = infinite loop. Fix: Full (strict) + Origin CA.
+
+### Should I cache API routes behind Cloudflare?
+
+No. Bypass cache for `/api/` paths. POST newsletter subscribe must never be cached.
+
+### What is Authenticated Origin Pulls?
+
+Nginx verifies Cloudflare's client certificate. Blocks direct IP access bypassing the CDN.
+
+### Cloudflare Origin CA vs Let's Encrypt on the origin?
+
+Origin CA when all traffic is proxied through Cloudflare. Let's Encrypt when connecting directly to the VPS.
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Ubuntu 24.04 VPS Hardening: SSH, UFW & Fail2Ban"
 date: 2026-06-06T10:00:00+01:00
-lastmod: 2026-06-06T10:00:00+01:00
+lastmod: 2026-06-06T18:00:00+01:00
 draft: false
 description: "Harden a fresh Ubuntu 24.04 VPS in 30 minutes — non-root sudo user, SSH keys only, UFW firewall, Fail2Ban, and unattended security upgrades before you deploy anything."
 keywords:
@@ -68,7 +68,18 @@ When you finish, continue with [VPS provisioning for AI workloads](/infrastructu
 
 ### Why harden before you deploy
 
-Shodan and credential-stuffing bots scan the entire IPv4 space continuously. A fresh DigitalOcean droplet typically logs its first failed SSH login within **5–15 minutes** of creation. Deploying FastAPI or Hugo first means you are fixing security while production traffic hits an open attack surface.
+Shodan and credential-stuffing bots scan the entire IPv4 space continuously. Independent scans show a fresh public VPS gets its first SSH probe within **4–15 minutes** of going live — often before you finish installing packages. Deploying FastAPI or Hugo first means you are fixing security while production traffic hits an open attack surface.
+
+### How this guide compares
+
+| | Generic VPS tutorials | This guide |
+|---|----------------------|------------|
+| Scope | SSH + UFW only | SSH, UFW, Fail2Ban, auto-updates, swap, verification |
+| Audience | Any Linux server | **Ubuntu 24.04** developers deploying FastAPI/Hugo next |
+| Next step | "Install your app" | Links to [provision](/infrastructure/how-to-provision-vps-ai-agent-workloads/) → [FastAPI](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) in series order |
+| Enterprise | CIS/USG automation (Ubuntu Pro) | Practical baseline without paid subscriptions |
+
+Need CIS Level 1 compliance? Ubuntu Pro's [USG tool](https://ubuntu.com/blog/hardening-automation-for-cis-benchmarks-now-available-for-ubuntu-24-04-lts) automates hundreds of rules. This checklist covers the **critical subset** that stops 95% of automated attacks on a solo-developer VPS.
 
 The checklist below follows the same order we use on every QubitLogic VPS: identity (non-root user), access (SSH keys), network (UFW), intrusion response (Fail2Ban), and maintenance (unattended-upgrades). Application hardening — [Nginx rate limits](/infrastructure/nginx-reverse-proxy-python-ai-api/), [Cloudflare origin locking](/infrastructure/cloudflare-nginx-vps-static-site-api/) — comes after this baseline.
 
@@ -143,8 +154,12 @@ KbdInteractiveAuthentication no
 PubkeyAuthentication yes
 X11Forwarding no
 MaxAuthTries 3
+LoginGraceTime 30
+MaxStartups 3:50:10
 AllowUsers deploy
 ```
+
+`LoginGraceTime 30` closes idle login attempts faster. `MaxStartups 3:50:10` drops excess concurrent unauthenticated connections — useful during SSH floods.
 
 Apply and test in a **second SSH session** (keep the first open until confirmed):
 
@@ -193,6 +208,9 @@ Create a local jail override:
 
 ```bash
 sudo tee /etc/fail2ban/jail.d/sshd.local > /dev/null <<'EOF'
+[DEFAULT]
+banaction = ufw
+
 [sshd]
 enabled = true
 port = ssh
@@ -286,6 +304,22 @@ ssh deploy@YOUR_VPS_IP
 - Secrets management and [CI/CD deploy keys](/infrastructure/cicd-pipeline-ai-python-scripts/)
 
 Those are the next layers once this baseline is in place.
+
+---
+
+## Frequently Asked Questions
+
+### How long does Ubuntu 24.04 VPS hardening take?
+
+About 30 minutes on a fresh droplet: create a sudo user (5 min), harden SSH (5 min), configure UFW and Fail2Ban (10 min), enable unattended-upgrades and swap (10 min). Always keep a second SSH session open while changing `sshd_config`.
+
+### Should I change SSH from port 22 to a custom port?
+
+For a single VPS with SSH key authentication and Fail2Ban, port 22 is fine. Custom ports reduce log noise but break muscle memory and CI deploy keys. If you change it, update UFW, Fail2Ban jail config, and every GitHub Actions secret that SSHs to the server.
+
+### What is the minimum firewall setup for a web VPS?
+
+UFW default deny incoming, allow outgoing, then explicitly allow OpenSSH (22), HTTP (80), and HTTPS (443). Never expose application ports like 8000 publicly — FastAPI should listen on `127.0.0.1` behind Nginx.
 
 ---
 

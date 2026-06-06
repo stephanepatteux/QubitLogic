@@ -1,7 +1,7 @@
 ---
 title: "Deploy Hugo to VPS: GitHub Actions & rsync"
 date: 2026-06-06T14:00:00+01:00
-lastmod: 2026-06-06T16:00:00+01:00
+lastmod: 2026-06-06T18:00:00+01:00
 draft: false
 description: "Automate Hugo deploys to your VPS — GitHub Actions builds with submodules, rsync pushes public/ to Nginx docroot, and optional GOOGLE_SITE_VERIFICATION at build time."
 keywords:
@@ -61,6 +61,21 @@ This is the deploy half of [How to Build a Technical Blog with Cursor and Hugo](
 | Submodule handling | Manual | Automatic |
 | Rollback | Git revert on server | Re-run previous workflow |
 | Cost | $0 | $0 (public repos) |
+
+### How this guide compares
+
+| Feature | git pull on VPS (DeployWise default) | Netlify/Vercel | This guide |
+|---------|--------------------------------------|----------------|------------|
+| Hugo on production server | Required | N/A (their CDN) | **Not needed** |
+| Submodule handling | Manual | N/A | **Automatic** |
+| Monthly cost | VPS only | Free tier limits | **$0 CI** + VPS |
+| Data sovereignty | Full | US SaaS | **Full** (your VPS) |
+| FastAPI on same host | Yes | No server-side code | **Yes** (rsync static only) |
+| Rollback | Git revert on server | Redeploy prev build | Re-run workflow / tarball |
+
+Generic "GitHub Actions deploy to VPS" guides target Node.js apps with `git pull` + PM2. This is the **Hugo-specific** workflow: build in CI, rsync `public/` only, pin Extended edition, handle PaperMod submodules.
+
+Typical deploy time on a warm runner: **build ~30s, rsync ~10s** for a 200-page site.
 
 ---
 
@@ -133,6 +148,15 @@ name: Deploy to VPS
 on:
   push:
     branches: [main]
+    paths:
+      - "content/**"
+      - "layouts/**"
+      - "static/**"
+      - "assets/**"
+      - "hugo.toml"
+      - "themes/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch: {}   # manual redeploy from Actions tab
 
 jobs:
   build-deploy:
