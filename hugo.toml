@@ -26,8 +26,8 @@ paginate = 10
   # Apply: https://site.financialmodelingprep.com/affiliates — paste tracking URL when approved
   fmp = ""
   tradingview = "https://www.tradingview.com/?aff_id=157199"
-  # Apply: https://www.namecheap.com/affiliates/ via Impact — 20% domains, 35% hosting/SSL
-  namecheap = ""
+  # Apply: https://www.dynadot.com/affiliate — Ambassador Program, 30% domain reg/transfer
+  dynadot = ""
   # Apply: https://www.zoho.com/affiliate/ — 15-20% recurring for 12 months, 90-day cookie
   zoho = ""
   # Apply: https://www.jobscan.co/affiliates via ShareASale — 15% commission, 45-day cookie. Quantum job seekers need ATS optimisation.

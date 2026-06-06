@@ -69,6 +69,10 @@ For multi-agent pipelines (3+ concurrent agents, vector DB on the same host), go
 
 ## Step 2 — Create and Access the Droplet / Instance
 
+{{< callout type="info" title="Security first" >}}
+For the full SSH / UFW / Fail2Ban baseline, use the dedicated [Ubuntu 24.04 hardening checklist](/infrastructure/secure-ubuntu-24-04-vps-hardening/). The steps below are a minimal subset so you can keep reading this provisioning guide in order.
+{{< /callout >}}
+
 After creating your server (Ubuntu 24.04 LTS, SSH key authentication), connect:
 
 ```bash

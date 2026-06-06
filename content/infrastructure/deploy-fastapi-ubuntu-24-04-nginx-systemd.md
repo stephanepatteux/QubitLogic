@@ -1,0 +1,211 @@
+---
+title: "How to Deploy FastAPI on Ubuntu 24.04 with Nginx, systemd, and Let's Encrypt"
+date: 2026-06-06T11:00:00+01:00
+lastmod: 2026-06-06T11:00:00+01:00
+draft: false
+description: "Deploy FastAPI on Ubuntu 24.04 for production — Gunicorn + Uvicorn workers, systemd auto-restart, Nginx reverse proxy, Certbot HTTPS, and UFW. Step-by-step with verification."
+keywords:
+  - "deploy fastapi ubuntu 24.04"
+  - "fastapi production vps"
+  - "systemd fastapi service"
+  - "nginx fastapi reverse proxy"
+  - "gunicorn uvicorn workers"
+  - "certbot nginx ssl"
+summary: "Turn a local FastAPI app into a live HTTPS API on your VPS — without exposing uvicorn directly to the internet. The on-ramp to our advanced Nginx hardening guide."
+series: ["Phase 1: Infrastructure"]
+tags: ["fastapi", "python", "nginx", "systemd", "ubuntu", "vps", "ssl", "devops", "infrastructure"]
+categories: ["tutorial"]
+images: ["/images/og/deploy-fastapi-ubuntu-24-04-nginx-systemd.png"]
+weight: 8
+ShowToc: true
+TocOpen: false
+---
+
+## Overview
+
+Running `uvicorn main:app --reload` on your laptop is development. Production means **Gunicorn managing Uvicorn workers**, **systemd** restarting on crash, **Nginx** terminating TLS, and **Let's Encrypt** for free HTTPS.
+
+This is the standard pattern used across DEV tutorials and the [FastAPI deployment docs](https://fastapi.tiangolo.com/deployment/) — adapted for a $6–12/mo VPS and the QubitLogic stack (newsletter API, webhooks, small agent backends).
+
+**Before you start:** [Harden Ubuntu 24.04](/infrastructure/secure-ubuntu-24-04-vps-hardening/) on your server. For rate limiting and LLM timeout tuning, continue to [Nginx reverse proxy hardening](/infrastructure/nginx-reverse-proxy-python-ai-api/) after this guide.
+
+---
+
+## Prerequisites
+
+- Ubuntu 24.04 VPS with a `deploy` sudo user
+- Domain `api.example.com` (or `example.com`) with an **A record** → VPS IP
+- Sample FastAPI app (we provide a minimal one below)
+
+{{< affiliate_stack >}}
+
+{{< affiliate_box
+    name="Cursor"
+    url="AFFILIATE_LINK_CURSOR"
+    cta="Try Cursor free"
+    badge="Build the API"
+    desc="Write and refactor your FastAPI routes in Cursor before deploying — same workflow we use for QubitLogic."
+    offer="AI-assisted IDE"
+>}}
+
+---
+
+## Step 1 — Sample application
+
+On the server:
+
+```bash
+sudo mkdir -p /opt/api
+sudo chown deploy:deploy /opt/api
+cd /opt/api
+python3.12 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install fastapi "uvicorn[standard]" gunicorn
+```
+
+Create `main.py`:
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI(title="Production API", version="1.0.0")
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+@app.post("/webhook")
+async def webhook(payload: dict):
+    return {"received": True, "keys": list(payload.keys())}
+```
+
+Test locally on the server:
+
+```bash
+uvicorn main:app --host 127.0.0.1 --port 8000
+# another shell: curl -s http://127.0.0.1:8000/health
+```
+
+---
+
+## Step 2 — systemd service (Gunicorn + UvicornWorker)
+
+```bash
+sudo tee /etc/systemd/system/fastapi.service > /dev/null <<'EOF'
+[Unit]
+Description=FastAPI (Gunicorn + Uvicorn)
+After=network.target
+
+[Service]
+User=deploy
+Group=deploy
+WorkingDirectory=/opt/api
+Environment="PATH=/opt/api/.venv/bin"
+ExecStart=/opt/api/.venv/bin/gunicorn main:app \
+  -k uvicorn.workers.UvicornWorker \
+  -w 2 \
+  -b 127.0.0.1:8000 \
+  --access-logfile - \
+  --error-logfile -
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now fastapi
+sudo systemctl status fastapi
+```
+
+Gunicorn design: [docs.gunicorn.org](https://docs.gunicorn.org/en/stable/design.html).
+
+---
+
+## Step 3 — Nginx reverse proxy
+
+```bash
+sudo apt install -y nginx
+sudo tee /etc/nginx/sites-available/fastapi > /dev/null <<'EOF'
+server {
+    listen 80;
+    server_name api.example.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+EOF
+
+sudo ln -sf /etc/nginx/sites-available/fastapi /etc/nginx/sites-enabled/
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+Replace `api.example.com` with your domain. Nginx proxy module: [nginx.org docs](https://nginx.org/en/docs/http/ngx_http_proxy_module.html).
+
+---
+
+## Step 4 — HTTPS with Certbot
+
+```bash
+sudo apt install -y certbot python3-certbot-nginx
+sudo certbot --nginx -d api.example.com --non-interactive --agree-tos -m you@example.com
+```
+
+Certbot auto-renews via systemd timer. Verify: [eff.org/certbot](https://certbot.eff.org/instructions).
+
+```bash
+curl -sI https://api.example.com/health
+```
+
+---
+
+## Step 5 — Firewall reminder
+
+If you followed the [hardening guide](/infrastructure/secure-ubuntu-24-04-vps-hardening/), ports 80/443 are already open. **Do not** expose port 8000 publicly — only Nginx should face the internet.
+
+```bash
+sudo ufw status
+```
+
+---
+
+## Verification
+
+| Test | Command | Expected |
+|------|---------|----------|
+| Service running | `systemctl is-active fastapi` | `active` |
+| Local upstream | `curl -s http://127.0.0.1:8000/health` | `{"status":"ok"}` |
+| Public HTTPS | `curl -s https://api.example.com/health` | `{"status":"ok"}` |
+| Survives reboot | `sudo reboot` then curl again | still `ok` |
+
+---
+
+## Troubleshooting
+
+**502 Bad Gateway** — App not listening: `journalctl -u fastapi -n 50 --no-pager`.
+
+**Certbot fails** — DNS not propagated; check `dig +short api.example.com`.
+
+**Slow LLM routes** — Default Nginx `proxy_read_timeout` is 60s. See [LLM-aware Nginx hardening](/infrastructure/nginx-reverse-proxy-python-ai-api/).
+
+---
+
+## Next steps
+
+1. [Self-hosted newsletter API](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) — real FastAPI workload on this stack
+2. [Cloudflare + static site + API](/infrastructure/cloudflare-nginx-vps-static-site-api/)
+3. [CI/CD deploy on git push](/infrastructure/cicd-pipeline-ai-python-scripts/)
+4. [Python environment tuning](/infrastructure/optimizing-python-environment-ubuntu-24-04/)
+
+---
+
+*Affiliate links may appear in partner boxes. [Affiliate Disclosure](/affiliate-disclosure/).*

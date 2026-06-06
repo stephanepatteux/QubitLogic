@@ -58,6 +58,7 @@ Editorial-only recommendations say:
 | Brilliant.org | Link pending (MyAffiliates) | [affiliates.brilliant.partners](https://affiliates.brilliant.partners/signup.php) |
 | Coursera (IBM Qiskit course) | Impact approval pending | [about.coursera.org/affiliates](https://about.coursera.org/affiliates) |
 | Financial Modeling Prep | Apply for publisher affiliate | [site.financialmodelingprep.com/affiliates](https://site.financialmodelingprep.com/affiliates) |
+| Dynadot (domains) | Ambassador Program — apply in-account | [dynadot.com/affiliate](https://www.dynadot.com/affiliate) |
 
 ---
 

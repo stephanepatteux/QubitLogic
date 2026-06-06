@@ -24,7 +24,7 @@ weight: 2
 
 ## Overview
 
-In [Part 1 of this series](/infrastructure/how-to-provision-vps-ai-agent-workloads/) we provisioned a hardened Ubuntu 24.04 VPS and ran uvicorn behind a basic Nginx proxy. That configuration is fine for local testing — it is not acceptable in production.
+In [Part 1 of this series](/infrastructure/how-to-provision-vps-ai-agent-workloads/) we provisioned a hardened Ubuntu 24.04 VPS. If you need the full **first deploy** walkthrough (systemd, Certbot, Gunicorn), start with [Deploy FastAPI on Ubuntu 24.04](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/). This guide assumes FastAPI is already listening on `127.0.0.1:8000` — a basic proxy is fine for local testing but not for production.
 
 The problem is that `uvicorn` is an ASGI server, not a hardened web server. It has no built-in:
 
