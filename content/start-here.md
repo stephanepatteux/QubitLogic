@@ -28,18 +28,24 @@ QubitLogic covers the full journey from provisioning your first server to deploy
 
 Build the server stack that runs every quantum experiment in Phase 2.
 
-**Start here →** [How to Provision a VPS for AI Agent Workloads](/infrastructure/how-to-provision-vps-ai-agent-workloads/)
+**Start here →** [Ubuntu 24.04 VPS Hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) then [Provision a VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/)
 
 | # | Article | Type |
 |---|---------|------|
+| 0 | [Ubuntu 24.04 VPS Hardening Checklist](/infrastructure/secure-ubuntu-24-04-vps-hardening/) | Tutorial |
 | 1 | [How to Provision a VPS for AI Agent Workloads](/infrastructure/how-to-provision-vps-ai-agent-workloads/) | Tutorial |
-| 2 | [Nginx Reverse Proxy: Securing Your Python AI API](/infrastructure/nginx-reverse-proxy-python-ai-api/) | Tutorial |
-| 3 | [Optimizing Python Environment Performance on Ubuntu 24.04](/infrastructure/optimizing-python-environment-ubuntu-24-04/) | Tutorial |
-| 4 | [The Quantum-Ready Tech Stack](/infrastructure/quantum-ready-tech-stack/) | Review |
-| 5 | [Cost-Effective Cloud Architecture for Backtesting Pipelines](/infrastructure/cost-effective-cloud-architecture-backtesting-pipelines/) | Tutorial |
-| 6 | [CI/CD Pipeline for AI Python Scripts](/infrastructure/cicd-pipeline-ai-python-scripts/) | Tutorial |
-| 7 | [DigitalOcean vs Vultr: Performance Benchmarks for AI Workloads](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/) | Benchmark |
-| 8 | [DigitalOcean vs Vultr vs Hetzner VPS Benchmark 2026](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/) | Benchmark |
+| 2 | [Deploy FastAPI on Ubuntu 24.04 (Nginx + systemd + SSL)](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) | Tutorial |
+| 3 | [Nginx Reverse Proxy: Securing Your Python AI API](/infrastructure/nginx-reverse-proxy-python-ai-api/) | Tutorial |
+| 4 | [Self-Hosted Newsletter API (FastAPI + SQLite)](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) | Tutorial |
+| 5 | [Cloudflare + Nginx (Static Site + API)](/infrastructure/cloudflare-nginx-vps-static-site-api/) | Tutorial |
+| 6 | [Deploy Hugo with GitHub Actions + rsync](/infrastructure/deploy-hugo-github-actions-vps/) | Tutorial |
+| 7 | [Optimizing Python Environment Performance on Ubuntu 24.04](/infrastructure/optimizing-python-environment-ubuntu-24-04/) | Tutorial |
+| 8 | [The Quantum-Ready Tech Stack](/infrastructure/quantum-ready-tech-stack/) | Review |
+| 9 | [Cost-Effective Cloud Architecture for Backtesting Pipelines](/infrastructure/cost-effective-cloud-architecture-backtesting-pipelines/) | Tutorial |
+| 10 | [CI/CD Pipeline for AI Python Scripts](/infrastructure/cicd-pipeline-ai-python-scripts/) | Tutorial |
+| 11 | [DigitalOcean vs Vultr: Performance Benchmarks for AI Workloads](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/) | Benchmark |
+| 12 | [DigitalOcean vs Vultr vs Hetzner VPS Benchmark 2026](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/) | Benchmark |
+| — | [How to Build a Technical Blog with Cursor and Hugo](/build-technical-blog-cursor-hugo/) | Build log |
 
 ---
 

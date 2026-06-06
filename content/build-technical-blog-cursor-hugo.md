@@ -47,7 +47,7 @@ Most of the stack is free. Hosting is the only recurring cost.
 | VPS hosting | [DigitalOcean](https://www.awin1.com/cread.php?awinmid=123996&awinaffid=2917857&ued=https%3A%2F%2Fwww.digitalocean.com%2Fpricing) or [Vultr](https://www.vultr.com/?ref=9904429-9J) | ~$6–12/mo |
 | Web server | [Nginx](https://nginx.org/) | Free |
 | OS | Ubuntu 24.04 LTS | Free |
-| Domain registrar | [Namecheap](https://www.namecheap.com/) | ~£10/yr |
+| Domain registrar | [Dynadot](https://www.dynadot.com/) | ~£10/yr |
 | DNS / CDN | [Cloudflare](https://cloudflare.com/) | Free |
 | Newsletter API | [FastAPI](https://fastapi.tiangolo.com/) + [SQLite](https://sqlite.org/) | Free |
 | Transactional email | [Zoho Mail](https://www.zoho.com/mail/) | Free tier |
@@ -105,16 +105,16 @@ Install from [cursor.com](https://cursor.com/referral?code=TKHKBWB8304Q). It ope
 
 ---
 
-## Step 2 — Register a Domain (Namecheap + Cloudflare)
+## Step 2 — Register a Domain (Dynadot + Cloudflare)
 
-Pick a short `.dev` or `.io` domain. I used **Namecheap** for `qubitlogic.dev` — WHOIS privacy is included at no extra cost, renewal pricing is predictable, and the dashboard is straightforward.
+Pick a short `.dev` or `.io` domain. **Dynadot** offers competitive renewals, WHOIS privacy on most TLDs, and an in-house **Ambassador** affiliate programme (30% on registrations) — often easier to join than large Impact networks when your site is still growing.
 
 {{< affiliate_box
-    name="Namecheap"
-    url="AFFILIATE_LINK_NAMECHEAP"
+    name="Dynadot"
+    url="AFFILIATE_LINK_DYNADOT"
     cta="Search domains"
-    badge="20% commission for referrals"
-    desc="Where qubitlogic.dev is registered. WHOIS privacy free, no dark patterns on renewal. Affiliate programme via Impact — apply at namecheap.com/affiliates."
+    badge="Ambassador programme"
+    desc="Register your domain, then point nameservers to Cloudflare. Apply at dynadot.com/affiliate for referral links."
     price=".dev from ~£10/yr"
 >}}
 
@@ -122,7 +122,7 @@ Once registered, immediately point your nameservers to **Cloudflare**:
 
 1. Sign up at [cloudflare.com](https://cloudflare.com/) (free)
 2. Add your site → Cloudflare gives you two nameservers
-3. Replace the nameservers in Namecheap's dashboard with the Cloudflare ones
+3. Replace the nameservers in your registrar's dashboard (Dynadot → Domain → Nameservers) with the Cloudflare ones
 4. Propagation takes 10–30 minutes
 
 Cloudflare gives you free DNS, DDoS mitigation, SSL edge termination, and keeps your VPS IP hidden from the public internet. It costs nothing.
@@ -779,7 +779,7 @@ Store all affiliate URLs in `hugo.toml`:
   digitalocean = "https://your-awin-link..."
   vultr        = "https://www.vultr.com/?ref=YOURREF"
   cursor       = "https://cursor.com/referral?code=YOURCODE"
-  namecheap    = "https://your-impact-link..."
+  dynadot      = "https://your-dynadot-referral-link..."
   zoho         = "https://your-zoho-affiliate-link..."
 ```
 
@@ -822,7 +822,7 @@ Every tool in this build either has a programme you can apply to now, or is edit
 | **Cursor** | Referral | Credits/rewards per sign-up | [cursor.com/referral](https://cursor.com/referral?code=TKHKBWB8304Q) — already in hugo.toml |
 | **DigitalOcean** | Awin | $25 per qualified referral | [Awin → DigitalOcean](https://ui.awin.com/publisher-signup) |
 | **Vultr** | Direct referral | $100 per verified referral | [vultr.com/affiliates](https://www.vultr.com/affiliates/) |
-| **Namecheap** | Impact | 20% domains, 35% hosting/SSL | [namecheap.com/affiliates](https://www.namecheap.com/affiliates/) |
+| **Dynadot** | Ambassador (in-house) | 30% domain reg/transfer | [dynadot.com/affiliate](https://www.dynadot.com/affiliate) |
 | **Zoho** | Direct | 15–20% recurring for 12 months, 90-day cookie | [zoho.com/affiliate](https://www.zoho.com/affiliate/) |
 | Hugo | None — open source | — | — |
 | GitHub | None | — | — |
@@ -831,7 +831,7 @@ Every tool in this build either has a programme you can apply to now, or is edit
 | PaperMod | None — open source | — | — |
 | Ubuntu | None | — | — |
 
-Namecheap and Zoho are the **new ones** — both fit naturally in this type of "build a blog" article and have clear public terms. Apply to both via Impact / the Zoho affiliate portal before publishing, then paste your tracking URLs into `hugo.toml` as `namecheap` and `zoho`.
+Dynadot and Zoho are natural fits in a "build a blog" article. Apply at [dynadot.com/affiliate](https://www.dynadot.com/affiliate) and the Zoho affiliate portal before publishing, then paste tracking URLs into `hugo.toml` as `dynadot` and `zoho`.
 
 ---
 
@@ -840,7 +840,7 @@ Namecheap and Zoho are the **new ones** — both fit naturally in this type of "
 | Item | Monthly | Annual |
 |:---|:---|:---|
 | VPS — $6/mo plan (DigitalOcean or Vultr) | ~$6 | ~$72 |
-| Domain — qubitlogic.dev (Namecheap) | — | ~£10 |
+| Domain — qubitlogic.dev (registrar) | — | ~£10 |
 | Cursor | Free tier | — |
 | Hugo, PaperMod, Nginx, FastAPI, SQLite | Free | Free |
 | GitHub + GitHub Actions (under 2,000 min/mo) | Free | Free |
@@ -910,7 +910,7 @@ Every competing tutorial that mentions `.cursorrules` shows a generic example. H
 ## Getting Started Today
 
 1. **[Install Cursor](https://cursor.com/referral?code=TKHKBWB8304Q)** — free tier is enough to start
-2. **Register a domain** — [Namecheap](https://www.namecheap.com/) + Cloudflare nameservers
+2. **Register a domain** — [Dynadot](https://www.dynadot.com/) + Cloudflare nameservers
 3. **Provision a VPS** — [DigitalOcean](https://www.awin1.com/cread.php?awinmid=123996&awinaffid=2917857&ued=https%3A%2F%2Fwww.digitalocean.com%2Fpricing) ($200 free credits) or [Vultr](https://www.vultr.com/?ref=9904429-9J) ($300 free credits)
 4. **Install Hugo** and clone PaperMod
 5. **Design your logo** in SVG with Cursor — describe it, iterate, done
