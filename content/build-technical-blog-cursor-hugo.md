@@ -367,7 +367,7 @@ I built a dozen shortcodes this way: affiliate boxes, callouts, benchmark tables
 
 ## Step 10 — Set Up GitHub and Automated Deployment
 
-Push the site to GitHub, then set up a deploy workflow that runs on every push to `main`.
+Push the site to GitHub, then automate deploy on every push to `main`.
 
 ```bash
 git remote add origin https://github.com/yourusername/your-repo.git
@@ -376,91 +376,11 @@ git commit -m "initial site"
 git push -u origin main
 ```
 
-### On the VPS — install Hugo and configure Nginx
+**Full deploy walkthrough:** the standalone guide [Deploy Hugo to VPS: GitHub Actions & rsync](/infrastructure/deploy-hugo-github-actions-vps/) covers the complete workflow — `peaceiris/actions-hugo`, submodule checkout, `rsync --delete`, GitHub secrets (`DEPLOY_HOST`, `DEPLOY_KEY`), and `baseURL` pitfalls. You do **not** need Hugo installed on the VPS; CI builds `public/` and rsyncs only static files.
 
-```bash
-# Install Hugo on VPS
-snap install hugo
+On the server, create the Nginx docroot (`/var/www/yoursite/public`) and point `root` at it. For Cloudflare + Origin CA TLS, see [Cloudflare + Nginx on a VPS](/infrastructure/cloudflare-nginx-vps-static-site-api/).
 
-# Create web root
-mkdir -p /var/www/yourdomain
-chown -R deploy:deploy /var/www/yourdomain
-
-# Install Nginx
-apt install -y nginx
-```
-
-Create `/etc/nginx/sites-available/yourdomain.conf`:
-
-```nginx
-server {
-    listen 80;
-    server_name yourdomain.dev www.yourdomain.dev;
-    root /var/www/yourdomain;
-    index index.html;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-
-    # Aggressive caching for immutable assets
-    location ~* \.(css|js|png|svg|ico|woff2|webp)$ {
-        expires 1y;
-        add_header Cache-Control "public, immutable";
-    }
-}
-```
-
-```bash
-ln -s /etc/nginx/sites-available/yourdomain.conf /etc/nginx/sites-enabled/
-nginx -t && systemctl reload nginx
-```
-
-### GitHub Actions deploy workflow
-
-Create `.github/workflows/deploy.yml`:
-
-```yaml
-name: Deploy
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-          fetch-depth: 0
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: latest
-          extended: true
-
-      - name: Build
-        run: hugo --minify
-
-      - name: Deploy via rsync
-        uses: burnett01/rsync-deployments@7.0.1
-        with:
-          switches: -avz --delete
-          path: public/
-          remote_path: /var/www/yourdomain/
-          remote_host: ${{ secrets.VPS_HOST }}
-          remote_user: deploy
-          remote_key: ${{ secrets.VPS_SSH_KEY }}
-```
-
-Add two secrets in GitHub → Settings → Secrets → Actions:
-- `VPS_HOST`: your VPS IP
-- `VPS_SSH_KEY`: the private SSH key for `deploy` (paste the full `-----BEGIN OPENSSH PRIVATE KEY-----` block)
-
-Every `git push` to `main` now builds and deploys automatically. From Cursor's terminal: write, commit, push, live in under 2 minutes.
+Every `git push` to `main` builds and deploys automatically. From Cursor's terminal: write, commit, push, live in under 2 minutes.
 
 > **Cursor prompt used:**
 > *"My GitHub Actions deploy job is failing with 'Host key verification failed' on the rsync step. Write the fix — add a known_hosts setup step that accepts the VPS host key automatically without hardcoding it."*
@@ -598,17 +518,15 @@ This is the correct GDPR consent flow. Single opt-in is not compliant in most EU
 
 ## Step 14 — Self-Hosted Newsletter
 
-No Mailchimp, no Beehiiv, no SaaS that charges per subscriber. This is a FastAPI app running on the same VPS, backed by SQLite.
+No Mailchimp, no Beehiiv, no SaaS that charges per subscriber. QubitLogic runs a FastAPI app on the same VPS, backed by SQLite, with double opt-in and Zoho SMTP for confirmation emails.
 
-### Why self-host?
+**Full tutorial:** [Self-Hosted Newsletter API: FastAPI, SQLite, No Mailchimp](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) — complete code for subscribe/confirm/unsubscribe routes, `.env` setup, Nginx `/api/` proxy, Hugo form wiring, and SPF/DKIM/DMARC for deliverability.
 
-- Subscriber data stays on your server — you own it
-- No fees that scale with list size
-- Simple to extend (weekly send script, unsubscribe webhook, etc.)
+**Prerequisites:** complete [Deploy FastAPI on Ubuntu 24.04](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) first — the newsletter API runs on the same Gunicorn + systemd stack.
 
 ### Transactional email — Zoho Mail free tier
 
-Zoho Mail's free tier supports up to 5 email addresses with SMTP access — more than enough for a newsletter confirmation sender. `hello@qubitlogic.dev` runs on a Zoho free account.
+Zoho Mail's free tier supports up to 5 email addresses with SMTP access — more than enough for confirmation and unsubscribe mail. `hello@qubitlogic.dev` runs on a Zoho free account.
 
 {{< affiliate_box
     name="Zoho Mail"
@@ -620,146 +538,7 @@ Zoho Mail's free tier supports up to 5 email addresses with SMTP access — more
     price="Free tier; paid from ~$1/user/mo"
 >}}
 
-Sign up at [zoho.com/mail](https://www.zoho.com/mail/), verify your domain via DNS TXT record, create `hello@yourdomain.dev`, and generate an **App Password** for SMTP (account settings → Security → App Passwords).
-
-Zoho SMTP settings:
-```
-Host: smtp.zoho.eu  (UK/EU) or smtp.zoho.com (US)
-Port: 587 (STARTTLS)
-User: hello@yourdomain.dev
-Pass: your app password
-```
-
-### The FastAPI backend
-
-```bash
-mkdir -p /opt/yoursite/newsletter
-cd /opt/yoursite/newsletter
-python3 -m venv venv
-source venv/bin/activate
-pip install fastapi uvicorn python-dotenv
-```
-
-Create `/opt/yoursite/newsletter/api.py`:
-
-```python
-import os, sqlite3, secrets, smtplib, ssl
-from fastapi import FastAPI, Form, HTTPException, Query
-from fastapi.responses import HTMLResponse
-from email.message import EmailMessage
-
-app = FastAPI()
-DB   = os.getenv("NEWSLETTER_DB", "/var/lib/yoursite/newsletter.db")
-SITE = os.getenv("SITE_URL", "https://yourdomain.dev")
-
-def get_db():
-    con = sqlite3.connect(DB)
-    con.execute("""CREATE TABLE IF NOT EXISTS subscribers (
-        email TEXT PRIMARY KEY,
-        token TEXT UNIQUE NOT NULL,
-        confirmed INTEGER DEFAULT 0,
-        created_at TEXT DEFAULT (datetime('now'))
-    )""")
-    return con
-
-@app.post("/api/newsletter/subscribe")
-async def subscribe(email: str = Form(...)):
-    token = secrets.token_urlsafe(32)
-    db = get_db()
-    try:
-        db.execute(
-            "INSERT INTO subscribers (email, token) VALUES (?, ?)",
-            (email, token)
-        )
-        db.commit()
-    except sqlite3.IntegrityError:
-        raise HTTPException(400, "Already subscribed or pending confirmation.")
-    send_confirmation(email, token)
-    return HTMLResponse("<p>Check your email to confirm your subscription.</p>")
-
-def send_confirmation(to: str, token: str):
-    confirm_url = f"{SITE}/api/newsletter/confirm?token={token}"
-    msg = EmailMessage()
-    msg["Subject"] = "Confirm your QubitLogic subscription"
-    msg["From"]    = os.getenv("EMAIL_FROM", "hello@yourdomain.dev")
-    msg["To"]      = to
-    msg.set_content(
-        f"Click to confirm:\n{confirm_url}\n\n"
-        f"If you didn't subscribe, ignore this email."
-    )
-    ctx = ssl.create_default_context()
-    with smtplib.SMTP(os.getenv("SMTP_HOST"), int(os.getenv("SMTP_PORT", 587))) as s:
-        s.starttls(context=ctx)
-        s.login(os.getenv("SMTP_USER"), os.getenv("SMTP_PASSWORD"))
-        s.send_message(msg)
-
-@app.get("/api/newsletter/confirm")
-async def confirm(token: str = Query(...)):
-    db = get_db()
-    row = db.execute(
-        "UPDATE subscribers SET confirmed=1 WHERE token=? AND confirmed=0",
-        (token,)
-    ).rowcount
-    db.commit()
-    if not row:
-        raise HTTPException(400, "Invalid or already confirmed token.")
-    return HTMLResponse("<p>Subscribed! You'll receive the next issue.</p>")
-
-@app.get("/api/newsletter/unsubscribe")
-async def unsubscribe(token: str = Query(...)):
-    db = get_db()
-    db.execute("DELETE FROM subscribers WHERE token=?", (token,))
-    db.commit()
-    return HTMLResponse("<p>Unsubscribed. Your data has been deleted.</p>")
-```
-
-Create `/opt/yoursite/newsletter/.env`:
-
-```bash
-NEWSLETTER_DB=/var/lib/yoursite/newsletter.db
-SITE_URL=https://yourdomain.dev
-EMAIL_FROM=QubitLogic <hello@yourdomain.dev>
-SMTP_HOST=smtp.zoho.eu
-SMTP_PORT=587
-SMTP_USER=hello@yourdomain.dev
-SMTP_PASSWORD=your-zoho-app-password
-```
-
-### Run as a systemd service
-
-```ini
-# /etc/systemd/system/yoursite-newsletter.service
-[Unit]
-Description=Newsletter API
-After=network.target
-
-[Service]
-User=deploy
-WorkingDirectory=/opt/yoursite/newsletter
-EnvironmentFile=/opt/yoursite/newsletter/.env
-ExecStart=/opt/yoursite/newsletter/venv/bin/uvicorn api:app --host 127.0.0.1 --port 8001
-Restart=always
-RestartSec=5
-
-[Install]
-WantedBy=multi-user.target
-```
-
-```bash
-systemctl daemon-reload
-systemctl enable --now yoursite-newsletter
-```
-
-Add a proxy block in Nginx to expose the API:
-
-```nginx
-location /api/newsletter/ {
-    proxy_pass http://127.0.0.1:8001;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-}
-```
+Sign up at [zoho.com/mail](https://www.zoho.com/mail/), verify your domain via DNS TXT record, create `hello@yourdomain.dev`, and generate an **App Password** for SMTP.
 
 > **Cursor prompt used:**
 > *"Review this FastAPI newsletter endpoint for security issues. Check for: SQL injection (are parameters properly escaped?), email address validation, rate limiting on the subscribe endpoint, token entropy, and whether the unsubscribe endpoint leaks subscriber existence."*
@@ -907,17 +686,31 @@ Every competing tutorial that mentions `.cursorrules` shows a generic example. H
 
 ---
 
+## Deep-dive infrastructure guides
+
+This build log is the narrative; these standalone tutorials have the copy-paste commands:
+
+| Topic | Guide |
+|-------|-------|
+| VPS security baseline | [Ubuntu 24.04 hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) |
+| Hugo CI/CD deploy | [GitHub Actions + rsync](/infrastructure/deploy-hugo-github-actions-vps/) |
+| Newsletter API | [FastAPI + SQLite](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) |
+| Cloudflare edge | [Static site + API](/infrastructure/cloudflare-nginx-vps-static-site-api/) |
+| FastAPI production | [Nginx + systemd + SSL](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) |
+
+---
+
 ## Getting Started Today
 
 1. **[Install Cursor](https://cursor.com/referral?code=TKHKBWB8304Q)** — free tier is enough to start
 2. **Register a domain** — [Dynadot](https://www.dynadot.com/) + Cloudflare nameservers
-3. **Provision a VPS** — [DigitalOcean](https://www.awin1.com/cread.php?awinmid=123996&awinaffid=2917857&ued=https%3A%2F%2Fwww.digitalocean.com%2Fpricing) ($200 free credits) or [Vultr](https://www.vultr.com/?ref=9904429-9J) ($300 free credits)
+3. **[Harden a VPS](/infrastructure/secure-ubuntu-24-04-vps-hardening/)** then [provision it](/infrastructure/how-to-provision-vps-ai-agent-workloads/) — DigitalOcean or Vultr
 4. **Install Hugo** and clone PaperMod
 5. **Design your logo** in SVG with Cursor — describe it, iterate, done
-6. **Set up GitHub Actions** for automated deploy
+6. **[Set up GitHub Actions deploy](/infrastructure/deploy-hugo-github-actions-vps/)** — push to main, site updates
 7. **Harden Nginx** with security headers
 8. **Write your privacy policy and affiliate disclosure** before going live
-9. **Build the newsletter API** when you're ready — or start with a Zoho forwarding address and add the API later
+9. **[Build the newsletter API](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/)** when ready — or start with Zoho forwarding
 
 The whole stack can be running in a weekend. The hard part is not the infrastructure — it is writing consistently once it is live.
 

@@ -19,7 +19,7 @@ categories: ["tutorial"]
 
 images: ["/images/og/how-to-provision-vps-ai-agent-workloads.png"]
 
-weight: 1
+weight: 2
 ---
 
 ## Overview
@@ -69,29 +69,15 @@ For multi-agent pipelines (3+ concurrent agents, vector DB on the same host), go
 
 ## Step 2 — Create and Access the Droplet / Instance
 
-{{< callout type="info" title="Security first" >}}
-For the full SSH / UFW / Fail2Ban baseline, use the dedicated [Ubuntu 24.04 hardening checklist](/infrastructure/secure-ubuntu-24-04-vps-hardening/). The steps below are a minimal subset so you can keep reading this provisioning guide in order.
-{{< /callout >}}
-
 After creating your server (Ubuntu 24.04 LTS, SSH key authentication), connect:
 
 ```bash
 ssh root@YOUR_VPS_IP
 ```
 
-Immediately create a non-root user and disable root SSH:
-
-```bash
-adduser deploy
-usermod -aG sudo deploy
-rsync --archive --chown=deploy:deploy ~/.ssh /home/deploy
-nano /etc/ssh/sshd_config
-# Set: PermitRootLogin no
-# Set: PasswordAuthentication no
-systemctl restart sshd
-```
-
-Reconnect as your new user:
+{{< callout type="warning" title="Harden before you continue" >}}
+Run the full [Ubuntu 24.04 VPS hardening checklist](/infrastructure/secure-ubuntu-24-04-vps-hardening/) **now** — non-root user, SSH keys only, UFW, Fail2Ban, and unattended-upgrades. The rest of this guide assumes you are logged in as `deploy` with the firewall already active.
+{{< /callout >}}
 
 ```bash
 ssh deploy@YOUR_VPS_IP
@@ -106,7 +92,6 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install -y \
     build-essential git curl wget unzip \
     htop iotop ncdu tmux \
-    fail2ban ufw \
     python3.12 python3.12-venv python3.12-dev \
     python3-pip
 ```
@@ -117,29 +102,7 @@ Ubuntu 24.04 ships Python 3.12 in the standard repositories. Do **not** install 
 
 ---
 
-## Step 4 — Firewall Setup
-
-```bash
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-sudo ufw allow ssh
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-sudo ufw enable
-sudo ufw status verbose
-```
-
-Enable fail2ban for SSH brute-force protection:
-
-```bash
-sudo systemctl enable fail2ban
-sudo systemctl start fail2ban
-sudo fail2ban-client status sshd
-```
-
----
-
-## Step 5 — Python Environment for AI Agent Workloads
+## Step 4 — Python Environment for AI Agent Workloads
 
 Create a dedicated project directory and virtual environment:
 
@@ -185,7 +148,7 @@ load_dotenv()
 
 ---
 
-## Step 6 — CPU Governor Tuning
+## Step 5 — CPU Governor Tuning
 
 The default Linux CPU governor is `powersave` on many VPS providers. This throttles burst performance exactly when your agent needs it (inference calls, tool execution spikes).
 
@@ -210,7 +173,7 @@ If your VPS kernel does not expose cpufreq (common on KVM/HVM hypervisors), this
 
 ---
 
-## Step 7 — Swap Configuration
+## Step 6 — Swap Configuration
 
 AI agent processes can spike RAM when loading large context windows or caching embeddings. A properly sized swap prevents OOM kills without masking real memory issues.
 
@@ -234,7 +197,7 @@ sudo sysctl -p
 
 ---
 
-## Step 8 — Nginx as a Reverse Proxy
+## Step 7 — Nginx as a Reverse Proxy
 
 If your agent exposes an HTTP API (FastAPI, Flask, etc.), run it on localhost and proxy through Nginx — never expose uvicorn directly on port 80.
 
@@ -273,7 +236,7 @@ TLS is covered in `deploy-notes.md` — use Certbot once you have a domain point
 
 ---
 
-## Step 9 — Run Your Agent as a systemd Service
+## Step 8 — Run Your Agent as a systemd Service
 
 Never run your agent in a tmux session in production. Use systemd so it restarts on crash and on reboot:
 
@@ -310,7 +273,7 @@ sudo journalctl -u myagent -f   # tail logs
 
 ---
 
-## Step 10 — Benchmark Your VPS
+## Step 9 — Benchmark Your VPS
 
 Run these before you commit to a provider. Takes under 5 minutes.
 

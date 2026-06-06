@@ -1,5 +1,5 @@
 ---
-title: "How to Build a Self-Hosted Newsletter API with FastAPI and SQLite (No Mailchimp)"
+title: "Self-Hosted Newsletter API: FastAPI, SQLite, No Mailchimp"
 date: 2026-06-06T12:00:00+01:00
 lastmod: 2026-06-06T12:00:00+01:00
 draft: false
@@ -16,9 +16,29 @@ series: ["Phase 1: Infrastructure"]
 tags: ["fastapi", "python", "sqlite", "newsletter", "gdpr", "hugo", "nginx", "self-hosted", "infrastructure"]
 categories: ["tutorial"]
 images: ["/images/og/self-hosted-newsletter-api-fastapi-sqlite.png"]
-weight: 9
+weight: 5
 ShowToc: true
 TocOpen: false
+faq:
+  - q: "Is double opt-in required for a newsletter under GDPR?"
+    a: "For UK and EU audiences, double opt-in is the safest consent mechanism: the user submits an email, receives a confirmation link, and only then is marked as subscribed. Single opt-in risks storing emails without provable consent. The ICO direct marketing guidance recommends clear consent records — a confirmed=1 row with timestamp in SQLite is sufficient for a small list."
+  - q: "Can SQLite handle a newsletter subscriber list?"
+    a: "Easily for lists under 100,000 subscribers. SQLite handles thousands of writes per second on NVMe — far more than a technical blog newsletter needs. If you outgrow it, migrate to PostgreSQL with the same schema; the FastAPI routes stay identical."
+  - q: "What DNS records do I need for newsletter emails to arrive?"
+    a: "At minimum: SPF (TXT record authorising your SMTP server), DKIM (signing key from Zoho or your mail provider), and DMARC (policy for failed authentication). Without SPF/DKIM, confirmation emails land in spam. Zoho's admin console shows the exact records for your domain."
+howto_total_time: "PT2H"
+howto_cost: "6"
+howto_steps:
+  - name: "Understand the architecture"
+    text: "Hugo form POSTs to /api/newsletter/subscribe; FastAPI stores pending subscribers in SQLite and sends a confirmation email via SMTP."
+  - name: "Implement FastAPI routes"
+    text: "Write subscribe, confirm, and unsubscribe endpoints with secrets.token_urlsafe tokens and parameterized SQL."
+  - name: "Configure environment and systemd"
+    text: "Set SMTP credentials and NEWSLETTER_DB path in .env, load via EnvironmentFile in fastapi.service."
+  - name: "Proxy /api/ through Nginx"
+    text: "Add a location block proxying /api/ to 127.0.0.1:8000 on your Hugo site server block."
+  - name: "Add Hugo subscribe form and verify"
+    text: "Wire the form to POST /api/newsletter/subscribe, test double opt-in end-to-end, and check SPF/DKIM if mail goes to spam."
 ---
 
 ## Overview
@@ -75,6 +95,17 @@ User clicks link → GET /confirm?token=… → confirmed=1
 ```
 
 UK/EU readers: double opt-in aligns with [ICO direct marketing guidance](https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/). Link your [Privacy policy](/privacy/) from every form.
+
+### SaaS vs self-hosted cost
+
+| | Mailchimp (500 contacts) | Self-hosted |
+|---|--------------------------|-------------|
+| Monthly cost | ~$13+ | $0 (same VPS as blog) |
+| Data location | US SaaS servers | Your SQLite file |
+| Customisation | Limited | Full FastAPI control |
+| GDPR export/erase | Vendor process | `DELETE FROM subscribers` |
+
+For a technical blog with under 5,000 subscribers, self-hosting is cheaper and gives you provable consent records in your own database.
 
 ---
 
@@ -185,6 +216,18 @@ NEWSLETTER_FROM=news@yourdomain.dev
 Load in systemd: add `EnvironmentFile=/opt/api/.env` under `[Service]` in `fastapi.service`, then `sudo systemctl restart fastapi`.
 
 Zoho SMTP setup: [zoho.com/mail/help/zoho-smtp](https://www.zoho.com/mail/help/zoho-smtp.html).
+
+### SPF, DKIM, and DMARC (deliverability)
+
+Confirmation emails that land in spam usually mean missing DNS authentication. After connecting Zoho (or any SMTP provider), add these records at your DNS host (Cloudflare → DNS):
+
+| Record | Purpose | Example |
+|--------|---------|---------|
+| SPF (TXT) | Authorises Zoho to send for your domain | `v=spf1 include:zoho.eu ~all` |
+| DKIM (TXT/CNAME) | Cryptographic signature on outbound mail | Copy from Zoho admin → Email Authentication |
+| DMARC (TXT) | Policy when SPF/DKIM fail | `v=DMARC1; p=none; rua=mailto:you@domain` |
+
+Verify with [mail-tester.com](https://www.mail-tester.com/) after sending a test confirmation. Score 8+/10 before promoting the signup form publicly.
 
 ---
 

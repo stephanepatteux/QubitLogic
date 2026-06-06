@@ -1,0 +1,30 @@
+{{/* Generic HowTo JSON-LD — pages with howto_steps: [] in front matter */}}
+{{ with .Params.howto_steps }}
+  {{ $steps := slice }}
+  {{ range $i, $step := . }}
+    {{ $item := dict
+      "@type" "HowToStep"
+      "position" (add $i 1)
+      "name" $step.name
+      "text" $step.text
+    }}
+    {{ with $step.url }}
+      {{ $item = merge $item (dict "url" .) }}
+    {{ end }}
+    {{ $steps = $steps | append $item }}
+  {{ end }}
+  {{ $howto := dict
+    "@context" "https://schema.org"
+    "@type" "HowTo"
+    "name" $.Title
+    "description" ($.Description | plainify)
+    "step" $steps
+  }}
+  {{ with $.Params.howto_total_time }}
+    {{ $howto = merge $howto (dict "totalTime" .) }}
+  {{ end }}
+  {{ with $.Params.howto_cost }}
+    {{ $howto = merge $howto (dict "estimatedCost" (dict "@type" "MonetaryAmount" "currency" "GBP" "value" .)) }}
+  {{ end }}
+<script type="application/ld+json">{{ $howto | jsonify | safeJS }}</script>
+{{ end }}

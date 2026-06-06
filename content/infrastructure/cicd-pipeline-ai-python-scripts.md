@@ -407,6 +407,14 @@ With pip caching enabled (`cache: pip` in `setup-python`), the full pipeline fro
 
 ---
 
+## See also
+
+- [Deploy Hugo to VPS: GitHub Actions & rsync](/infrastructure/deploy-hugo-github-actions-vps/) — same rsync pattern for static sites
+- [Deploy FastAPI on Ubuntu 24.04](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) — production API stack this pipeline deploys to
+- [Ubuntu 24.04 VPS hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) — run before storing deploy SSH keys on a fresh server
+
+---
+
 ## Conclusion
 
 Manual VPS deployment is a risk that compounds over time — the more you deploy, the more chances for human error. The pipeline in this guide eliminates that risk at every step:

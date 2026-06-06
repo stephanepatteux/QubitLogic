@@ -367,6 +367,14 @@ The Gunicorn + preload configuration achieves the highest throughput **and** the
 
 ---
 
+## See also
+
+- [Deploy FastAPI on Ubuntu 24.04](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) — apply these tuning choices to a production Gunicorn + Uvicorn deployment
+- [Nginx reverse proxy hardening](/infrastructure/nginx-reverse-proxy-python-ai-api/) — timeout and rate-limit settings for LLM-backed APIs
+- [Provision a VPS for AI workloads](/infrastructure/how-to-provision-vps-ai-agent-workloads/) — baseline server setup before optimising Python
+
+---
+
 ## Conclusion
 
 Python performance on a VPS is not about micro-optimising hot loops — it is about making the right architectural choices at each layer:
