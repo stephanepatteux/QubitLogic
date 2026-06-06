@@ -1013,6 +1013,19 @@ code, pre, kbd, samp {
 }
 .ql-hero-cta a { font-weight: 600; }
 
+.ql-hero .entry-footer {
+  margin: 0;
+  padding-top: 0.25rem;
+}
+
+.ql-hero .social-icons a {
+  color: var(--qs-text-muted);
+}
+
+.ql-hero .social-icons a:hover {
+  color: var(--qs-green);
+}
+
 /* ── Section banners ──────────────────────────────────────── */
 .ql-section-banner {
   margin: 0 0 1.5rem;

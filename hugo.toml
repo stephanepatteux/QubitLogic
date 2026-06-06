@@ -48,33 +48,9 @@ paginate = 10
   author = "Stephane Patteux"
   images = ["/images/og/home.png"]
 
-  [params.schema]
-    publisherType = "Organization"
-    sameAs = [
-      "https://github.com/stephanepatteux/QubitLogic",
-      "https://dev.to/steph60220",
-    ]
-
-  # Header logo
-  [params.label]
-    text = ""
-    icon = "/images/logo-mark.svg"
-    iconHeight = 28
-
   # Dark mode default
   defaultTheme = "dark"
   disableThemeToggle = false
-
-  # Homepage layout
-  homeInfoParams.Title = "QubitLogic"
-  homeInfoParams.Content = "A technical workbench for Quantum-AI Hybrid Development. Benchmarks, code, and infrastructure for developers building at the frontier."
-
-  # Social / icons
-  socialIcons = [
-    { name = "github", url = "https://github.com/stephanepatteux/QubitLogic" },
-    { name = "devto", title = "DEV Community", url = "https://dev.to/steph60220" },
-    { name = "rss", url = "/index.xml" }
-  ]
 
   # Reading experience
   ShowReadingTime = true
@@ -91,19 +67,48 @@ paginate = 10
   hidemeta = false
   hideSummary = false
 
-  # Search
-  fuseOpts.isCaseSensitive = false
-  fuseOpts.shouldSort = true
-  fuseOpts.location = 0
-  fuseOpts.distance = 1000
-  fuseOpts.threshold = 0.4
-  fuseOpts.minMatchCharLength = 2
-  fuseOpts.keys = ["title", "permalink", "summary", "content"]
+[params.schema]
+  publisherType = "Organization"
+  sameAs = [
+    "https://github.com/stephanepatteux/QubitLogic",
+    "https://dev.to/steph60220",
+  ]
 
-  # Google Search Console: paste verification tag here, or set GOOGLE_SITE_VERIFICATION
-  # env var / GitHub secret at build time (see deploy-notes.md).
-  [params.analytics.google]
-    SiteVerificationTag = ""
+[params.label]
+  text = ""
+  icon = "/images/logo-mark.svg"
+  iconHeight = 28
+
+[params.homeInfoParams]
+  Title = "QubitLogic"
+  Content = "A technical workbench for Quantum-AI Hybrid Development. Benchmarks, code, and infrastructure for developers building at the frontier."
+
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/stephanepatteux/QubitLogic"
+
+[[params.socialIcons]]
+  name = "devto"
+  title = "DEV Community"
+  url = "https://dev.to/steph60220"
+
+[[params.socialIcons]]
+  name = "rss"
+  url = "/index.xml"
+
+[params.fuseOpts]
+  isCaseSensitive = false
+  shouldSort = true
+  location = 0
+  distance = 1000
+  threshold = 0.4
+  minMatchCharLength = 2
+  keys = ["title", "permalink", "summary", "content"]
+
+# Google Search Console: paste verification tag here, or set GOOGLE_SITE_VERIFICATION
+# env var / GitHub secret at build time (see deploy-notes.md).
+[params.analytics.google]
+  SiteVerificationTag = ""
 
 [params.footer]
   text = '<a href="/about/">About</a> · <a href="/privacy/">Privacy</a> · <a href="/affiliate-disclosure/">Affiliate</a>'
