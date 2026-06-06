@@ -44,8 +44,11 @@ Key articles referenced in discussions:
 ```bash
 git clone --recurse-submodules https://github.com/stephanepatteux/QubitLogic.git
 cd QubitLogic
+bash scripts/setup-dev.sh   # submodules, Hugo Extended, Pillow
 hugo server -D
 ```
+
+If you cloned without `--recurse-submodules`, run `bash scripts/setup-dev.sh` once before starting Hugo.
 
 Requires [Hugo Extended v0.162.1+](https://github.com/gohugoio/hugo/releases).
 
