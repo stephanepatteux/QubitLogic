@@ -50,7 +50,10 @@ paginate = 10
 
   [params.schema]
     publisherType = "Organization"
-    sameAs = ["https://github.com/stephanepatteux/QubitLogic"]
+    sameAs = [
+      "https://github.com/stephanepatteux/QubitLogic",
+      "https://dev.to/steph60220",
+    ]
 
   # Header logo
   [params.label]
@@ -69,6 +72,7 @@ paginate = 10
   # Social / icons
   socialIcons = [
     { name = "github", url = "https://github.com/stephanepatteux/QubitLogic" },
+    { name = "devto", title = "DEV Community", url = "https://dev.to/steph60220" },
     { name = "rss", url = "/index.xml" }
   ]
 

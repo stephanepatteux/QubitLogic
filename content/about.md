@@ -37,7 +37,7 @@ The VPS provisioned in Phase 1 runs the quantum experiments in Phase 2. The secu
 
 QubitLogic is written and maintained by **Stephane Patteux**, a developer based in the UK working on AI systems, algorithmic infrastructure, and quantum-classical hybrid applications.
 
-Code for all articles is on [GitHub](https://github.com/stephanepatteux/QubitLogic).
+Code for all articles is on [GitHub](https://github.com/stephanepatteux/QubitLogic). Cross-posts and shorter write-ups are on [DEV](https://dev.to/steph60220).
 
 The full build log — Hugo, Nginx, GitHub Actions, self-hosted newsletter, SVG logo, compliance — is documented in [How to Build a Technical Blog with Cursor and Hugo](/build-technical-blog-cursor-hugo/).
 
