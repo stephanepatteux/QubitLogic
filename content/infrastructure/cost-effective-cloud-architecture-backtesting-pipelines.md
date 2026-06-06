@@ -442,6 +442,14 @@ Memory-mapped data loading saves 170 MB of RAM at 4 workers with essentially no 
 
 ---
 
+## See also
+
+- [Ubuntu 24.04 VPS hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) — secure the VPS before running overnight sweeps
+- [DigitalOcean vs Vultr vs Hetzner benchmark 2026](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/) — pick the right $24–48/mo plan for I/O-heavy sweeps
+- [CI/CD pipeline for AI Python scripts](/infrastructure/cicd-pipeline-ai-python-scripts/) — automate deploy after your pipeline is stable
+
+---
+
 ## Conclusion
 
 Running cost-effective backtesting on a VPS is straightforward once the four failure modes are addressed:

@@ -1,5 +1,5 @@
 ---
-title: "How to Deploy a Hugo Site to a VPS with GitHub Actions and rsync"
+title: "Deploy Hugo to VPS: GitHub Actions & rsync"
 date: 2026-06-06T14:00:00+01:00
 lastmod: 2026-06-06T14:00:00+01:00
 draft: false
@@ -15,9 +15,29 @@ series: ["Phase 1: Infrastructure"]
 tags: ["hugo", "github-actions", "rsync", "nginx", "ci-cd", "devops", "papermod", "infrastructure"]
 categories: ["tutorial"]
 images: ["/images/og/deploy-hugo-github-actions-vps.png"]
-weight: 11
+weight: 7
 ShowToc: true
 TocOpen: false
+faq:
+  - q: "Why rsync instead of git pull on the VPS?"
+    a: "The VPS only needs static HTML — not your Git history, Hugo binary, or theme source. rsync pushes the built public/ folder in seconds and avoids installing Hugo on production. git pull on the server couples deploy to server tooling and makes rollbacks harder."
+  - q: "Why do I need submodules: recursive in GitHub Actions?"
+    a: "PaperMod and most Hugo themes are Git submodules. Without recursive checkout, CI builds with an empty themes/ folder — you get an unstyled site. Always set submodules: recursive in actions/checkout."
+  - q: "Is rsync --delete safe for Hugo deploys?"
+    a: "Yes, when DEPLOY_PATH points at your Nginx docroot (e.g. /var/www/yoursite/public/). --delete removes stale files from old builds. Dry-run first with rsync -avzn if you are nervous — a wrong path can delete unrelated directories."
+howto_total_time: "PT1H"
+howto_cost: "0"
+howto_steps:
+  - name: "Prepare VPS docroot"
+    text: "Create /var/www/yoursite/public owned by deploy, with Nginx root pointing at it."
+  - name: "Add GitHub Actions secrets"
+    text: "Store DEPLOY_HOST, DEPLOY_USER, DEPLOY_KEY, and DEPLOY_PATH as repository secrets."
+  - name: "Create deploy.yml workflow"
+    text: "Checkout with submodules, build Hugo extended with --minify, rsync public/ to the VPS."
+  - name: "Set correct baseURL in hugo.toml"
+    text: "Match baseURL to your production domain — wrong values break CSS and sitemap URLs."
+  - name: "Push to main and verify"
+    text: "Confirm Actions passes, curl the live site, and check google-site-verification if configured."
 ---
 
 ## Overview
@@ -27,6 +47,16 @@ Manually SSHing to run `git pull && hugo` works once. It fails when you forget s
 **GitHub Actions** builds Hugo in a clean environment, runs `hugo --minify`, and **rsync**s only the `public/` folder to your VPS. Nginx serves the files — no Node runtime on the server.
 
 This is the deploy half of [How to Build a Technical Blog with Cursor and Hugo](/build-technical-blog-cursor-hugo/). For Python services on the same VPS, see [CI/CD for AI Python scripts](/infrastructure/cicd-pipeline-ai-python-scripts/).
+
+### CI vs manual deploy
+
+| | `ssh` + `hugo` on VPS | GitHub Actions + rsync |
+|---|----------------------|------------------------|
+| Hugo on server | Required | Not needed |
+| Reproducible builds | No (server drift) | Yes (clean runner) |
+| Submodule handling | Manual | Automatic |
+| Rollback | Git revert on server | Re-run previous workflow |
+| Cost | $0 | $0 (public repos) |
 
 ---
 

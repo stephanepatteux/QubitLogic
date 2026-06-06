@@ -29,6 +29,8 @@ faq:
 weight: 8
 ---
 
+**Setup guides:** once you pick a provider, follow [VPS hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) → [provision](/infrastructure/how-to-provision-vps-ai-agent-workloads/) → [FastAPI deploy](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/).
+
 ## Quick Summary
 
 Based on sysbench CPU and fio NVMe testing across equivalent $5–$12/mo plans (June 2026):

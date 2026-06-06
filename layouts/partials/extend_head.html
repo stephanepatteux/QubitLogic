@@ -7,4 +7,4 @@
 <meta name="theme-color" content="#0c0c0f" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f8f9fc" media="(prefers-color-scheme: light)">
 {{ if .Params.courseraAffiliate }}{{ partial "affiliate/coursera_impact.html" . }}{{ end }}
-{{ if .Params.schema_howto }}{{ partial "schema-howto.html" . }}{{ end }}
+{{ if .Params.howto_steps }}{{ partial "schema-howto-generic.html" . }}{{ else if .Params.schema_howto }}{{ partial "schema-howto.html" . }}{{ end }}

@@ -1,5 +1,5 @@
 ---
-title: "How to Set Up Cloudflare with Nginx on a VPS (Static Site + API Subdomain)"
+title: "Cloudflare + Nginx on a VPS: Static Site & API"
 date: 2026-06-06T13:00:00+01:00
 lastmod: 2026-06-06T13:00:00+01:00
 draft: false
@@ -15,9 +15,29 @@ series: ["Phase 1: Infrastructure"]
 tags: ["cloudflare", "nginx", "vps", "ssl", "hugo", "fastapi", "cdn", "dns", "infrastructure"]
 categories: ["tutorial"]
 images: ["/images/og/cloudflare-nginx-vps-static-site-api.png"]
-weight: 10
+weight: 6
 ShowToc: true
 TocOpen: false
+faq:
+  - q: "What is the difference between Cloudflare Flexible and Full (strict) SSL?"
+    a: "Flexible encrypts traffic between the visitor and Cloudflare but sends plain HTTP to your origin — anyone on the path to your VPS can read it. Full (strict) encrypts end-to-end and requires a valid certificate on Nginx. Use Full (strict) with a Cloudflare Origin CA certificate — free, 15-year validity, issued in the dashboard."
+  - q: "Why does Cloudflare cause redirect loops with Nginx?"
+    a: "The classic loop: Cloudflare Flexible SSL hits your Nginx HTTP→HTTPS redirect, which redirects back, forever. Fix: set SSL mode to Full (strict), install an Origin CA cert on Nginx, and ensure Nginx listens on 443 with that certificate."
+  - q: "Should I cache API routes behind Cloudflare?"
+    a: "No. Create a Cache Rule to bypass cache when URI path starts with /api/. POST requests (newsletter subscribe) must never be cached — you will silently drop subscriptions or serve stale error responses."
+howto_total_time: "PT1H"
+howto_cost: "0"
+howto_steps:
+  - name: "Add domain to Cloudflare and update nameservers"
+    text: "Create a free Cloudflare account, add your site, set the A record to proxied (orange cloud), and point registrar nameservers to Cloudflare."
+  - name: "Set SSL to Full (strict)"
+    text: "In SSL/TLS overview, select Full (strict) — never Flexible for a VPS with HTTPS Nginx."
+  - name: "Install Origin CA certificate on Nginx"
+    text: "Generate a 15-year Origin CA cert in the dashboard, save origin.pem and origin.key on the VPS under /etc/ssl/cloudflare/."
+  - name: "Configure Nginx for static Hugo and API proxy"
+    text: "Serve Hugo from root, proxy_pass /api/ to 127.0.0.1:8000, redirect HTTP to HTTPS."
+  - name: "Add cache bypass rules for /api/"
+    text: "Create a Cache Rule to bypass cache on /api/ paths and verify cf-cache-status on static vs API responses."
 ---
 
 ## Overview
@@ -25,6 +45,26 @@ TocOpen: false
 A bare VPS exposes your IP and handles every DDoS byte itself. **Cloudflare's free plan** adds CDN caching, DNS, and edge TLS — while Nginx on the VPS serves your [Hugo](/infrastructure/deploy-hugo-github-actions-vps/) `public/` folder and proxies [FastAPI](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) on `/api/`.
 
 This matches how **qubitlogic.dev** runs: domain at a registrar, nameservers at Cloudflare, origin on Ubuntu 24.04.
+
+### Traffic flow
+
+```
+Visitor → Cloudflare edge (TLS, cache, DDoS)
+       → Your VPS Nginx (Origin CA TLS)
+       → /        → Hugo static files
+       → /api/*   → FastAPI on 127.0.0.1:8000
+```
+
+Cloudflare's free tier includes unmetered DDoS mitigation, global CDN caching for static assets, and DNS — there is no reason to expose a bare VPS IP for a Hugo blog.
+
+### SSL mode comparison
+
+| Mode | Visitor → CF | CF → Origin | Use for VPS? |
+|------|--------------|-------------|--------------|
+| Off | HTTP | HTTP | Never |
+| Flexible | HTTPS | **HTTP** | Never (insecure origin) |
+| Full | HTTPS | HTTPS (any cert) | Risky |
+| **Full (strict)** | HTTPS | HTTPS (valid origin cert) | **Yes** |
 
 ---
 

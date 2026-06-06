@@ -1,5 +1,5 @@
 ---
-title: "Ubuntu 24.04 VPS Hardening Checklist: SSH, UFW, Fail2Ban, and Auto-Updates"
+title: "Ubuntu 24.04 VPS Hardening: SSH, UFW & Fail2Ban"
 date: 2026-06-06T10:00:00+01:00
 lastmod: 2026-06-06T10:00:00+01:00
 draft: false
@@ -16,9 +16,31 @@ series: ["Phase 1: Infrastructure"]
 tags: ["ubuntu", "linux", "security", "vps", "ssh", "ufw", "fail2ban", "devops", "infrastructure"]
 categories: ["tutorial"]
 images: ["/images/og/secure-ubuntu-24-04-vps-hardening.png"]
-weight: 7
+weight: 1
 ShowToc: true
 TocOpen: false
+faq:
+  - q: "How long does Ubuntu 24.04 VPS hardening take?"
+    a: "About 30 minutes on a fresh droplet: create a sudo user (5 min), harden SSH (5 min), configure UFW and Fail2Ban (10 min), enable unattended-upgrades and swap (10 min). Always keep a second SSH session open while changing sshd_config so you cannot lock yourself out."
+  - q: "Should I change SSH from port 22 to a custom port?"
+    a: "For a single VPS with SSH key authentication and Fail2Ban, port 22 is fine — custom ports reduce log noise but break muscle memory and CI deploy keys. If you change the port, update UFW, Fail2Ban jail config, and every GitHub Actions secret that SSHs to the server."
+  - q: "What is the minimum firewall setup for a web VPS?"
+    a: "UFW default deny incoming, allow outgoing, then explicitly allow OpenSSH (22), HTTP (80), and HTTPS (443). Never expose application ports like 8000 publicly — FastAPI and similar services should listen on 127.0.0.1 behind Nginx."
+howto_total_time: "PT30M"
+howto_cost: "6"
+howto_steps:
+  - name: "Create a sudo user with SSH keys"
+    text: "Add a deploy user, grant sudo, copy your ed25519 public key to authorized_keys, and verify login in a second terminal before disabling root access."
+  - name: "Harden SSH configuration"
+    text: "Create /etc/ssh/sshd_config.d/99-hardening.conf with PermitRootLogin no, PasswordAuthentication no, and AllowUsers deploy. Reload ssh and test before closing your root session."
+  - name: "Enable UFW default-deny firewall"
+    text: "Set default deny incoming, allow OpenSSH plus ports 80 and 443, then enable UFW and confirm Status active."
+  - name: "Install and configure Fail2Ban"
+    text: "Install fail2ban, create an sshd jail with maxretry 3 and bantime 1h, enable the service, and verify the jail is active."
+  - name: "Enable automatic security updates"
+    text: "Install unattended-upgrades, run dpkg-reconfigure to enable automatic security patches, and confirm the timer is enabled."
+  - name: "Verify the hardening checklist"
+    text: "Run sshd -T checks, ufw status, fail2ban-client status, and ss -tulpn to confirm only expected services listen on public interfaces. Reboot and reconnect via SSH."
 ---
 
 ## Overview
@@ -35,11 +57,26 @@ This guide is the security baseline for the [QubitLogic infrastructure series](/
 
 When you finish, continue with [VPS provisioning for AI workloads](/infrastructure/how-to-provision-vps-ai-agent-workloads/) or jump straight to [deploying FastAPI](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/).
 
+### At a glance
+
+| Item | Value |
+|------|-------|
+| Time | ~30 minutes |
+| Cost | $6–12/mo VPS (you need a server first) |
+| Outcome | SSH keys only, firewall active, auto-patches enabled |
+| Next | [Provision VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/) → [FastAPI deploy](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) |
+
+### Why harden before you deploy
+
+Shodan and credential-stuffing bots scan the entire IPv4 space continuously. A fresh DigitalOcean droplet typically logs its first failed SSH login within **5–15 minutes** of creation. Deploying FastAPI or Hugo first means you are fixing security while production traffic hits an open attack surface.
+
+The checklist below follows the same order we use on every QubitLogic VPS: identity (non-root user), access (SSH keys), network (UFW), intrusion response (Fail2Ban), and maintenance (unattended-upgrades). Application hardening — [Nginx rate limits](/infrastructure/nginx-reverse-proxy-python-ai-api/), [Cloudflare origin locking](/infrastructure/cloudflare-nginx-vps-static-site-api/) — comes after this baseline.
+
 ---
 
 ## Prerequisites
 
-- A VPS from [DigitalOcean](https://www.digitalocean.com/pricing) or [Vultr](https://www.vultr.com/pricing/) running **Ubuntu 24.04**
+- A VPS from {{< affiliate_link url="AFFILIATE_LINK_DIGITALOCEAN" >}}DigitalOcean{{< /affiliate_link >}} or {{< affiliate_link url="AFFILIATE_LINK_VULTR" >}}Vultr{{< /affiliate_link >}} running **Ubuntu 24.04** (see [DO vs Vultr benchmark](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/) if you have not picked a provider yet)
 - Root or initial `ubuntu` user access via SSH key (password-only images need an extra key-copy step)
 - Your laptop’s public key in `~/.ssh/id_ed25519.pub` (generate with `ssh-keygen -t ed25519` if missing)
 
@@ -52,6 +89,8 @@ Run this checklist **before** exposing application ports or cloning private repo
 ---
 
 ## Step 1 — Create a sudo user
+
+Running daily work as `root` means a single mistyped `rm -rf` destroys the entire server. A dedicated `deploy` user with `sudo` limits blast radius while keeping admin access.
 
 Log in as root (or the provider’s default user), then:
 
@@ -84,6 +123,10 @@ ssh deploy@YOUR_VPS_IP
 ---
 
 ## Step 2 — Harden SSH
+
+Password authentication is the primary vector for VPS compromise. Disabling it and requiring ed25519 keys eliminates dictionary attacks entirely — bots can hammer port 22 forever without getting in.
+
+Use a drop-in file under `sshd_config.d/` rather than editing the main config: Ubuntu package updates will not overwrite your rules.
 
 Edit the SSH daemon config:
 
@@ -119,6 +162,8 @@ Moving SSH off port 22 reduces log noise but breaks muscle memory and some CI de
 
 ## Step 3 — Configure UFW (default deny)
 
+UFW is a frontend for `iptables`. **Default deny incoming** means every port is closed unless you explicitly allow it — the correct posture for a public VPS. Cloud providers often ship images with no firewall enabled; assume the internet can reach every listening port until you prove otherwise.
+
 ```bash
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
@@ -136,6 +181,8 @@ Docs: [Ubuntu UFW guide](https://help.ubuntu.com/community/UFW).
 ---
 
 ## Step 4 — Install Fail2Ban
+
+SSH keys stop password guessing, but Fail2Ban adds a second layer: repeated failed attempts (misconfigured keys, stale CI deploy keys) trigger an automatic IP ban. On a typical VPS you will see dozens of failed root logins per hour — Fail2Ban keeps that noise from becoming a resource drain.
 
 ```bash
 sudo apt update

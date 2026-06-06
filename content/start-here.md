@@ -91,7 +91,7 @@ Apply quantum and AI skills to production. These articles are self-contained.
 | Goal | Start here |
 |------|-----------|
 | I want to understand what quantum computing actually is | [Quantum Computing in 2026: The Race Explained](/quantum-computing-explained-2026/) |
-| I want to build an AI server stack from scratch | [Phase 1 article 1](/infrastructure/how-to-provision-vps-ai-agent-workloads/) |
+| I want to build an AI server stack from scratch | [VPS hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) then [provision a VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/) |
 | I want to write quantum algorithms in Python | [Phase 2 article 1](/quantum-coding/quantum-inspired-optimizer-python/) |
 | I want to secure APIs against quantum attacks | [Phase 3 article 1](/professional-edge/post-quantum-cryptography-api-security/) |
 | I want to compare quantum frameworks | [Qiskit vs PennyLane 2026](/quantum-coding/qiskit-vs-pennylane-2026/) |

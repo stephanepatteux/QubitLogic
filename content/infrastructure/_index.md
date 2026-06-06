@@ -1,5 +1,32 @@
 ---
 title: "Infrastructure Tutorials — VPS, Nginx & Python"
-description: "VPS provisioning, Nginx configuration, Python environment tuning, and CI/CD pipelines for AI workloads. Self-hosted, benchmarked, production-ready."
+description: "VPS provisioning, Ubuntu hardening, Nginx configuration, FastAPI deployment, and CI/CD pipelines for AI workloads. Self-hosted, benchmarked, production-ready."
 images: ["/images/og/infrastructure.png"]
 ---
+
+Production infrastructure for solo developers and small teams — benchmarked on real VPS hardware, not marketing copy.
+
+## Learning path
+
+Follow these in order if you are building from scratch:
+
+1. [Ubuntu 24.04 VPS Hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) — SSH, UFW, Fail2Ban baseline
+2. [Provision a VPS for AI workloads](/infrastructure/how-to-provision-vps-ai-agent-workloads/) — Python stack and benchmarks
+3. [Deploy FastAPI on Ubuntu 24.04](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) — Gunicorn, systemd, Certbot
+4. [Nginx reverse proxy hardening](/infrastructure/nginx-reverse-proxy-python-ai-api/) — rate limits, LLM timeouts
+5. [Self-hosted newsletter API](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) — FastAPI + SQLite + GDPR opt-in
+6. [Cloudflare + Nginx](/infrastructure/cloudflare-nginx-vps-static-site-api/) — CDN, Origin CA, static + API
+7. [Deploy Hugo via GitHub Actions](/infrastructure/deploy-hugo-github-actions-vps/) — rsync CI/CD
+
+Full table with benchmarks and advanced topics: [Start Here](/start-here/).
+
+## By topic
+
+| Topic | Articles |
+|-------|----------|
+| Security | [Hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/), [Nginx hardening](/infrastructure/nginx-reverse-proxy-python-ai-api/) |
+| Python APIs | [FastAPI deploy](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/), [Newsletter API](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) |
+| Static sites | [Hugo Actions deploy](/infrastructure/deploy-hugo-github-actions-vps/), [Build log](/build-technical-blog-cursor-hugo/) |
+| Edge / CDN | [Cloudflare + Nginx](/infrastructure/cloudflare-nginx-vps-static-site-api/) |
+| CI/CD | [Python pipeline](/infrastructure/cicd-pipeline-ai-python-scripts/), [Hugo deploy](/infrastructure/deploy-hugo-github-actions-vps/) |
+| Provider choice | [DO vs Vultr](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/), [DO vs Vultr vs Hetzner 2026](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/) |

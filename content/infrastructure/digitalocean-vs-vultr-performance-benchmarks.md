@@ -32,7 +32,7 @@ weight: 7
 
 ## Overview
 
-This is the final article in Phase 1 of the QubitLogic infrastructure series. Every previous article has referenced DigitalOcean and Vultr as the two primary VPS recommendations. This article delivers the data behind those recommendations. All tests were run on fresh nodes provisioned for QubitLogic benchmarking.
+This is the final benchmark article in Phase 1 of the QubitLogic infrastructure series. **New to VPS setup?** Start with [Ubuntu 24.04 hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) and [VPS provisioning](/infrastructure/how-to-provision-vps-ai-agent-workloads/). Every previous article has referenced DigitalOcean and Vultr as the two primary VPS recommendations. This article delivers the data behind those recommendations. All tests were run on fresh nodes provisioned for QubitLogic benchmarking.
 
 **Test setup:**
 

@@ -1,5 +1,5 @@
 ---
-title: "How to Deploy FastAPI on Ubuntu 24.04 with Nginx, systemd, and Let's Encrypt"
+title: "Deploy FastAPI on Ubuntu 24.04: Nginx, systemd, SSL"
 date: 2026-06-06T11:00:00+01:00
 lastmod: 2026-06-06T11:00:00+01:00
 draft: false
@@ -16,9 +16,29 @@ series: ["Phase 1: Infrastructure"]
 tags: ["fastapi", "python", "nginx", "systemd", "ubuntu", "vps", "ssl", "devops", "infrastructure"]
 categories: ["tutorial"]
 images: ["/images/og/deploy-fastapi-ubuntu-24-04-nginx-systemd.png"]
-weight: 8
+weight: 3
 ShowToc: true
 TocOpen: false
+faq:
+  - q: "Should I run uvicorn or Gunicorn in production?"
+    a: "Run Gunicorn as the process manager with UvicornWorker (-k uvicorn.workers.UvicornWorker). Uvicorn alone is fine for development; Gunicorn gives you multiple workers, graceful restarts, and production-grade signal handling. Bind to 127.0.0.1:8000 and let Nginx handle TLS on 443."
+  - q: "Why bind FastAPI to 127.0.0.1 instead of 0.0.0.0?"
+    a: "Binding to localhost means only Nginx on the same machine can reach your app. UFW should not expose port 8000 publicly — attackers who bypass Nginx cannot hit uvicorn directly. This is the standard pattern in the official FastAPI deployment docs."
+  - q: "How many Gunicorn workers do I need on a 1 GB VPS?"
+    a: "Start with 2 workers (-w 2). Each Uvicorn worker loads your Python app into memory, so 4 workers on 1 GB RAM often causes OOM kills. Scale workers with RAM: roughly one worker per 512 MB–1 GB for lightweight APIs."
+howto_total_time: "PT45M"
+howto_cost: "6"
+howto_steps:
+  - name: "Create sample FastAPI app and venv"
+    text: "Install fastapi, uvicorn, and gunicorn in /opt/api, write a health endpoint, and verify with curl on 127.0.0.1:8000."
+  - name: "Configure systemd service"
+    text: "Create fastapi.service running Gunicorn with UvicornWorker, bound to 127.0.0.1:8000, with Restart=always."
+  - name: "Set up Nginx reverse proxy"
+    text: "Install Nginx, proxy_pass to 127.0.0.1:8000, set X-Forwarded-* headers, and test with nginx -t."
+  - name: "Obtain Let's Encrypt certificate"
+    text: "Run certbot --nginx for your API subdomain and verify HTTPS with curl."
+  - name: "Confirm firewall and reboot test"
+    text: "Ensure UFW allows only 22/80/443, port 8000 is not public, and the service survives reboot."
 ---
 
 ## Overview
@@ -28,6 +48,25 @@ Running `uvicorn main:app --reload` on your laptop is development. Production me
 This is the standard pattern used across DEV tutorials and the [FastAPI deployment docs](https://fastapi.tiangolo.com/deployment/) — adapted for a $6–12/mo VPS and the QubitLogic stack (newsletter API, webhooks, small agent backends).
 
 **Before you start:** [Harden Ubuntu 24.04](/infrastructure/secure-ubuntu-24-04-vps-hardening/) on your server. For rate limiting and LLM timeout tuning, continue to [Nginx reverse proxy hardening](/infrastructure/nginx-reverse-proxy-python-ai-api/) after this guide.
+
+### At a glance
+
+| Layer | Component | Port | Faces internet? |
+|-------|-----------|------|-----------------|
+| Edge | Nginx + Certbot | 443 | Yes (TLS termination) |
+| App | Gunicorn + Uvicorn | 8000 on 127.0.0.1 | No |
+| Process | systemd | — | Auto-restart on crash |
+
+This three-layer stack is what most DEV tutorials and the [FastAPI deployment guide](https://fastapi.tiangolo.com/deployment/) recommend for a single VPS. You get HTTPS, process supervision, and zero extra infrastructure cost.
+
+### Gunicorn vs raw uvicorn
+
+| | Development | Production |
+|---|-------------|------------|
+| Command | `uvicorn main:app --reload` | `gunicorn main:app -k uvicorn.workers.UvicornWorker` |
+| Workers | 1 | 2+ (scale with RAM) |
+| Bind address | `127.0.0.1` or `0.0.0.0` | **127.0.0.1 only** |
+| TLS | None | Nginx + Certbot |
 
 ---
 

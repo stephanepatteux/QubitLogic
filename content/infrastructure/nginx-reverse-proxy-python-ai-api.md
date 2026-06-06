@@ -19,7 +19,7 @@ categories: ["tutorial"]
 
 images: ["/images/og/nginx-reverse-proxy-python-ai-api.png"]
 
-weight: 2
+weight: 4
 ---
 
 ## Overview
