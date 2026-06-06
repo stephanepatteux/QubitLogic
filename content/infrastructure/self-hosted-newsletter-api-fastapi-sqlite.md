@@ -1,7 +1,7 @@
 ---
 title: "Self-Hosted Newsletter API: FastAPI, SQLite, No Mailchimp"
 date: 2026-06-06T12:00:00+01:00
-lastmod: 2026-06-06T12:00:00+01:00
+lastmod: 2026-06-06T18:00:00+01:00
 draft: false
 description: "Build a GDPR-friendly newsletter API with FastAPI, SQLite, double opt-in, and SMTP — on the same VPS as your Hugo blog. No Mailchimp or ConvertKit required."
 keywords:
@@ -26,6 +26,10 @@ faq:
     a: "Easily for lists under 100,000 subscribers. SQLite handles thousands of writes per second on NVMe — far more than a technical blog newsletter needs. If you outgrow it, migrate to PostgreSQL with the same schema; the FastAPI routes stay identical."
   - q: "What DNS records do I need for newsletter emails to arrive?"
     a: "At minimum: SPF (TXT record authorising your SMTP server), DKIM (signing key from Zoho or your mail provider), and DMARC (policy for failed authentication). Without SPF/DKIM, confirmation emails land in spam. Zoho's admin console shows the exact records for your domain."
+  - q: "Should I use Listmonk instead of a custom FastAPI newsletter?"
+    a: "Listmonk is better for campaigns, analytics, and lists above ~10,000 subscribers — it needs PostgreSQL and Docker. FastAPI + SQLite is better for a technical blog: three routes, double opt-in, zero extra containers, and full control on the same VPS as Hugo. Many developers start with FastAPI and migrate to Listmonk only when they need broadcast campaigns."
+  - q: "How do I stop bots spamming my subscribe form?"
+    a: "Add an Nginx rate limit on POST /api/newsletter/subscribe (5 requests per minute per IP), a honeypot hidden field bots fill but humans leave empty, and reject disposable email domains in FastAPI. Never expose a public admin endpoint without API key auth."
 howto_total_time: "PT2H"
 howto_cost: "6"
 howto_steps:
@@ -107,6 +111,19 @@ UK/EU readers: double opt-in aligns with [ICO direct marketing guidance](https:/
 
 For a technical blog with under 5,000 subscribers, self-hosting is cheaper and gives you provable consent records in your own database.
 
+### FastAPI + SQLite vs Listmonk vs Mailchimp
+
+| | Mailchimp | Listmonk (self-hosted) | **FastAPI + SQLite (this guide)** |
+|---|-----------|------------------------|-----------------------------------|
+| Monthly cost | $13+ at 500 contacts | $0 (+ VPS) | **$0** (same VPS as blog) |
+| Setup time | 15 min | 1–2 hrs (Docker + Postgres) | **~1 hr** after FastAPI deploy |
+| Double opt-in | Yes | Yes | Yes |
+| Broadcast campaigns | Yes | Yes | Build yourself (cron + SMTP) |
+| Data ownership | Vendor | Your Postgres | **Your SQLite file** |
+| Best for | Non-technical marketers | Newsletter-first sites | **Developer blogs on Hugo** |
+
+Listmonk is excellent when newsletters are the product. For a blog with a signup form in the footer, **50 lines of FastAPI** beats running Postgres and a second Docker stack.
+
 ---
 
 ## Step 2 — FastAPI application
@@ -156,10 +173,15 @@ def send_mail(to: str, subject: str, body: str):
         s.login(SMTP_USER, SMTP_PASS)
         s.send_message(msg)
 
+DISPOSABLE = {"mailinator.com", "guerrillamail.com", "tempmail.com"}
+
 @app.post("/api/newsletter/subscribe")
-async def subscribe(email: str = Form(...)):
+async def subscribe(email: str = Form(...), website: str = Form(default="")):
+    # Honeypot — bots fill hidden "website" field; humans leave it empty
+    if website:
+        return HTMLResponse("<p>Check your email to confirm.</p>")
     email = email.strip().lower()
-    if "@" not in email:
+    if "@" not in email or email.split("@")[-1] in DISPOSABLE:
         raise HTTPException(400, "Invalid email")
     token = secrets.token_urlsafe(32)
     con = db()
@@ -231,11 +253,27 @@ Verify with [mail-tester.com](https://www.mail-tester.com/) after sending a test
 
 ---
 
-## Step 4 — Nginx route `/api/`
+## Step 4 — Nginx route `/api/` + rate limit
+
+Add to `/etc/nginx/nginx.conf` (http block) once:
+
+```nginx
+limit_req_zone $binary_remote_addr zone=newsletter:10m rate=5r/m;
+```
 
 If Hugo serves the root site, proxy only API paths:
 
 ```nginx
+location /api/newsletter/subscribe {
+    limit_req zone=newsletter burst=2 nodelay;
+    limit_req_status 429;
+    proxy_pass http://127.0.0.1:8000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
 location /api/ {
     proxy_pass http://127.0.0.1:8000;
     proxy_set_header Host $host;
@@ -245,7 +283,9 @@ location /api/ {
 }
 ```
 
-See [Nginx reverse proxy hardening](/infrastructure/nginx-reverse-proxy-python-ai-api/) for rate limits on `POST /api/newsletter/subscribe`.
+`5r/m` = five subscribe attempts per IP per minute — enough for humans, blocks list-bombing bots. Reload: `sudo nginx -t && sudo systemctl reload nginx`.
+
+Full rate-limit patterns: [Nginx reverse proxy hardening](/infrastructure/nginx-reverse-proxy-python-ai-api/).
 
 ---
 
@@ -257,6 +297,8 @@ In a partial or page:
 <form class="ql-subscribe-form" action="/api/newsletter/subscribe" method="POST">
   <label for="email">Email</label>
   <input type="email" name="email" id="email" required autocomplete="email">
+  <!-- Honeypot: hide with CSS, leave empty -->
+  <input type="text" name="website" tabindex="-1" autocomplete="off" hidden aria-hidden="true">
   <button type="submit" class="ql-subscribe-btn">Subscribe</button>
   <p class="ql-subscribe-msg" hidden></p>
 </form>
@@ -287,6 +329,48 @@ sqlite3 /var/lib/qubitlogic/newsletter.db "SELECT email, confirmed FROM subscrib
 **403 from Nginx** — `client_max_body_size` too small (unlikely for email); check SELinux/AppArmor only if enabled.
 
 **CORS errors** — Same-origin form POST avoids CORS; for SPA use explicit `CORSMiddleware` in FastAPI.
+
+**429 Too Many Requests** — Nginx rate limit triggered. Normal if you tested repeatedly; wait 60s or tune `rate=5r/m`.
+
+### GDPR data export and erasure
+
+UK/EU users can request their data. One-liner export:
+
+```bash
+sqlite3 /var/lib/qubitlogic/newsletter.db ".mode csv" "SELECT * FROM subscribers WHERE email='user@example.com';"
+```
+
+Erasure (right to be forgotten):
+
+```bash
+sqlite3 /var/lib/qubitlogic/newsletter.db "DELETE FROM subscribers WHERE email='user@example.com';"
+```
+
+Document this process in your [Privacy policy](/privacy/).
+
+---
+
+## Frequently Asked Questions
+
+### Is double opt-in required for a newsletter under GDPR?
+
+For UK and EU audiences, double opt-in is the safest consent mechanism. Single opt-in risks storing emails without provable consent. A `confirmed=1` row with timestamp in SQLite is sufficient for a small list.
+
+### Can SQLite handle a newsletter subscriber list?
+
+Easily for lists under 100,000 subscribers. If you outgrow it, migrate to PostgreSQL with the same schema.
+
+### What DNS records do I need for newsletter emails to arrive?
+
+SPF, DKIM, and DMARC at your DNS host. Verify with [mail-tester.com](https://www.mail-tester.com/) before promoting the form.
+
+### Should I use Listmonk instead of a custom FastAPI newsletter?
+
+Listmonk for campaigns and large lists; FastAPI + SQLite for developer blogs with a footer signup form.
+
+### How do I stop bots spamming my subscribe form?
+
+Nginx rate limit (5/min per IP), honeypot field, and reject disposable domains — all included in this guide.
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Deploy FastAPI on Ubuntu 24.04: Nginx, systemd, SSL"
 date: 2026-06-06T11:00:00+01:00
-lastmod: 2026-06-06T16:00:00+01:00
+lastmod: 2026-06-06T18:00:00+01:00
 draft: false
 description: "Deploy FastAPI on Ubuntu 24.04 for production — Gunicorn + Uvicorn workers, systemd auto-restart, Nginx reverse proxy, Certbot HTTPS, and UFW. Step-by-step with verification."
 keywords:
@@ -71,6 +71,20 @@ This three-layer stack is what most DEV tutorials and the [FastAPI deployment gu
 | Workers | 1 | 2+ (scale with RAM) |
 | Bind address | `127.0.0.1` or `0.0.0.0` | **127.0.0.1 only** |
 | TLS | None | Nginx + Certbot |
+
+### How this guide compares
+
+| Feature | Vultr / HostMyCode tutorials | RamNode guide | This guide |
+|---------|------------------------------|---------------|--------------|
+| Gunicorn + UvicornWorker | Partial | Yes | Yes |
+| systemd service | Yes | Yes | Yes |
+| Certbot HTTPS | Yes | Yes | Yes |
+| Worker sizing for 1 GB RAM | Rare | Generic formula | **RAM table + OOM diagnostics** |
+| Hugo + API on same VPS | No | No | **Yes** (path routing) |
+| LLM timeout tuning | No | 300s in Nginx | Links to [dedicated Nginx guide](/infrastructure/nginx-reverse-proxy-python-ai-api/) |
+| Full series path | Standalone | Standalone | [Hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) → deploy → [newsletter](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) |
+
+Most provider tutorials stop at "hello world on HTTPS." This article is the on-ramp to a **complete QubitLogic-style stack** on one $6–12/mo VPS.
 
 ---
 
@@ -207,6 +221,8 @@ server {
     listen 80;
     server_name api.example.com;
 
+    client_max_body_size 10M;
+
     location / {
         proxy_pass http://127.0.0.1:8000;
         proxy_http_version 1.1;
@@ -214,6 +230,20 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_connect_timeout 75s;
+        proxy_read_timeout 120s;
+        proxy_send_timeout 120s;
+    }
+
+    # WebSocket support (optional — enable if your API uses WS)
+    location /ws {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_read_timeout 86400s;
     }
 }
 EOF
@@ -237,6 +267,19 @@ Two valid patterns:
 If Hugo already serves `example.com`, add a `location /api/` block to that server — do not create a second Nginx site on port 80 for the same hostname. The [newsletter API guide](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) uses the path pattern.
 
 The `X-Forwarded-Proto` header matters when you later put [Cloudflare](/infrastructure/cloudflare-nginx-vps-static-site-api/) in front: FastAPI's `request.url` and redirect logic depend on it.
+
+`proxy_read_timeout 120s` prevents 504 errors on slow routes (LLM calls, webhooks). Default Nginx timeout is 60s — too short for AI backends. For heavy inference, see [Nginx hardening](/infrastructure/nginx-reverse-proxy-python-ai-api/) (300s+).
+
+### Zero-downtime code updates
+
+After changing Python code:
+
+```bash
+cd /opt/api && source .venv/bin/activate && pip install -r requirements.txt  # if deps changed
+sudo systemctl reload fastapi   # or restart if you changed systemd unit
+```
+
+Gunicorn gracefully replaces workers on `reload`. For breaking schema changes, test on `127.0.0.1:8000` before reloading.
 
 ---
 
