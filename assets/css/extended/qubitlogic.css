@@ -624,7 +624,7 @@ code, pre, kbd, samp {
 /* ── Affiliate stack (multi-offer, high intent) ───────────── */
 .qs-affiliate-stack {
   margin: 2rem 0;
-  padding: 1.15rem 1.25rem 1rem;
+  padding: 1.25rem;
   background: var(--qs-surface-2);
   border: 1px solid var(--qs-border);
   border-radius: var(--qs-radius);
@@ -646,22 +646,33 @@ code, pre, kbd, samp {
 .qs-affiliate-stack-card {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  padding: 0.85rem 1rem;
+  gap: 0.25rem;
+  padding: 1rem 1rem 1.1rem;
   background: var(--qs-surface);
   border: 1px solid var(--qs-border);
   border-radius: var(--qs-radius-sm);
   text-decoration: none !important;
+  box-sizing: border-box;
   transition: border-color var(--qs-transition), transform 0.1s ease;
 }
 
-.qs-affiliate-stack-card:hover {
+/* Cards are <a> tags — .post-content a sets border-bottom: transparent; restore full box */
+.post-content a.qs-affiliate-stack-card {
+  border: 1px solid var(--qs-border);
+  border-bottom: 1px solid var(--qs-border);
+}
+
+.qs-affiliate-stack-card:hover,
+.post-content a.qs-affiliate-stack-card:hover {
   border-color: var(--qs-green-dim);
+  border-bottom-color: var(--qs-green-dim);
   transform: translateY(-2px);
 }
 
-.qs-affiliate-stack-card--primary {
+.qs-affiliate-stack-card--primary,
+.post-content a.qs-affiliate-stack-card--primary {
   border-color: var(--qs-green-dim);
+  border-bottom-color: var(--qs-green-dim);
   background: linear-gradient(145deg, var(--qs-surface) 0%, var(--qs-surface-2) 100%);
 }
 
