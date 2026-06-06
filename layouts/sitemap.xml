@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 {{- range .Site.Pages }}
   {{- $skip := in (slice "taxonomy" "term" "sitemap") .Kind -}}
-  {{- $skip = or $skip (eq .File.BaseFileName "search") -}}
+  {{- $skip = or $skip (eq .RelPermalink "/search/") -}}
   {{- $skip = or $skip .Params.sitemap.disable -}}
   {{- if not $skip }}
   <url>
