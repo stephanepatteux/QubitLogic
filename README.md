@@ -27,6 +27,7 @@ Technical articles with reproducible code, honest benchmarks, and practical impl
 ```bash
 git clone --recurse-submodules https://github.com/stephanepatteux/QubitLogic.git
 cd QubitLogic
+bash scripts/setup-dev.sh   # one-time: submodules, Hugo, Pillow
 hugo server -D
 ```
 
