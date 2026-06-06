@@ -58,7 +58,9 @@ jobs:
             newsletter/ \
             ubuntu@51.195.86.197:/opt/qubitlogic/newsletter/
 
-      - name: Seed confirmed newsletter subscriber (owner test)
+      - name: Setup newsletter API on VPS (idempotent)
+        env:
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@51.195.86.197 \
-            '/opt/qubitlogic/newsletter/venv/bin/python /opt/qubitlogic/newsletter/seed_subscriber.py stephanepatteux@gmail.com 2>/dev/null || python3 /opt/qubitlogic/newsletter/seed_subscriber.py stephanepatteux@gmail.com' || true
+            "SMTP_PASSWORD='$SMTP_PASSWORD' bash /opt/qubitlogic/newsletter/setup_api.sh"

@@ -108,46 +108,11 @@ jobs:
       # One-time API service + Nginx setup
       - name: "Mode: setup-api"
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'setup-api'
+        env:
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
         run: |
-          ssh ubuntu@51.195.86.197 'bash -s' <<'RUN'
-          set -e
-
-          # Kill anything on port 8001 (zombie processes from failed restarts)
-          sudo fuser -k 8001/tcp 2>/dev/null || true
-          sleep 1
-
-          # Install systemd service
-          sudo cp /opt/qubitlogic/newsletter/qubitlogic-newsletter.service \
-            /etc/systemd/system/qubitlogic-newsletter.service
-          sudo systemctl daemon-reload
-          sudo systemctl enable qubitlogic-newsletter
-          sudo systemctl restart qubitlogic-newsletter
-          sleep 3
-          if sudo systemctl is-active --quiet qubitlogic-newsletter; then
-            echo "Service: running"
-          else
-            echo "Service: FAILED — journalctl output:"
-            sudo journalctl -xeu qubitlogic-newsletter --no-pager -n 40
-            exit 1
-          fi
-
-          # Patch Nginx — add /api/newsletter/ block if not already present
-          NGINX_CONF=/etc/nginx/sites-available/qubitlogic
-          if grep -q "api/newsletter" "$NGINX_CONF"; then
-            echo "Nginx: /api/newsletter/ block already present — skipping"
-          else
-            # Insert before the closing } of the server block
-            sudo sed -i 's|^}$|    # Newsletter API\n    location /api/newsletter/ {\n        proxy_pass         http://127.0.0.1:8001/api/newsletter/;\n        proxy_set_header   Host              $host;\n        proxy_set_header   X-Real-IP         $remote_addr;\n        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;\n        proxy_set_header   X-Forwarded-Proto $scheme;\n        proxy_read_timeout 10s;\n    }\n}|' "$NGINX_CONF"
-            sudo nginx -t && sudo systemctl reload nginx && echo "Nginx: reloaded with /api/newsletter/ block"
-          fi
-
-          # Quick health check
-          curl -sf http://127.0.0.1:8001/api/newsletter/health && echo "API health: OK" || echo "API health: FAILED"
-
-          # Seed owner subscriber (confirmed) for weekly send testing
-          /opt/qubitlogic/newsletter/venv/bin/python /opt/qubitlogic/newsletter/seed_subscriber.py \
-            stephanepatteux@gmail.com || true
-          RUN
+          ssh ubuntu@51.195.86.197 \
+            "SMTP_PASSWORD='$SMTP_PASSWORD' bash /opt/qubitlogic/newsletter/setup_api.sh"
 
       # Scheduled run + manual "send" mode
       - name: "Mode: send"
