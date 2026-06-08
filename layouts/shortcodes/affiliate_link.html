@@ -16,6 +16,8 @@
   {{- $url = site.Params.affiliates.paperspace -}}
 {{- else if eq $url "AFFILIATE_LINK_BRIGHTDATA" -}}
   {{- $url = site.Params.affiliates.bright_data -}}
+{{- else if eq $url "AFFILIATE_LINK_BRIGHTDATA_PROXY" -}}
+  {{- $url = site.Params.affiliates.bright_data_proxy -}}
 {{- else if eq $url "AFFILIATE_LINK_COURSERA_IBM_QUANTUM" -}}
   {{- $url = site.Params.affiliates.coursera_ibm_quantum | default "https://www.coursera.org/learn/packt-beginners-guide-to-practical-quantum-computing-with-ibm-qiskit-w6mos" -}}
 {{- else if eq $url "AFFILIATE_LINK_FMP" -}}

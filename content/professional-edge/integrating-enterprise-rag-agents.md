@@ -1,7 +1,7 @@
 ---
 title: "Integrating Enterprise-Grade RAG Agents"
 date: 2026-06-01T09:30:00+01:00
-lastmod: 2026-06-01T18:00:00+01:00
+lastmod: 2026-06-07T14:00:00+01:00
 draft: false
 description: "Enterprise RAG agent architecture — chunking strategy, embedding model selection, vector DB choice, RAGAS retrieval evaluation, and self-hosted VPS deployment guide."
 keywords:
@@ -406,7 +406,7 @@ Two proxy providers used in production RAG deployments at scale:
 
 | Provider | Type | Locations | Pricing | Best for |
 |:---|:---|:---|:---|:---|
-| **Bright Data** | Residential + Datacenter | 195 countries, 72M+ IPs | Pay-as-you-go from ~$10.50/GB | High-scale scraping, JS rendering, anti-bot bypass |
+| {{< affiliate_link url="AFFILIATE_LINK_BRIGHTDATA_PROXY" >}}Bright Data{{< /affiliate_link >}} | Residential + Datacenter | 195 countries, 400M+ residential IPs | Pay-as-you-go from ~$10.50/GB | High-scale scraping, JS rendering, anti-bot bypass |
 | **Oxylabs** | Residential + Datacenter | 195+ countries, 100M+ IPs | From $15/GB | Enterprise SLAs, financial data sources, compliance |
 
 **Integration pattern** — route your `httpx` or `requests` session through the proxy:
@@ -428,10 +428,10 @@ Use this as the fetch layer before passing content to your document loader. Rota
 
 {{< affiliate_box
     name="Bright Data"
-    url="AFFILIATE_LINK_BRIGHTDATA"
+    url="AFFILIATE_LINK_BRIGHTDATA_PROXY"
     cta="Start Free Trial"
     badge="Enterprise Proxy"
-    desc="72M+ residential IPs across 195 countries. Built-in JavaScript rendering, CAPTCHA bypass, and structured data extraction. The standard proxy infrastructure for production-scale RAG pipelines."
+    desc="400M+ residential IPs across 195 countries. Built-in JavaScript rendering, CAPTCHA bypass, and structured data extraction. The standard proxy infrastructure for production-scale RAG pipelines."
     price="From ~$10.50/GB"
 >}}
 

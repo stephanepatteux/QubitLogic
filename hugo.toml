@@ -22,6 +22,7 @@ paginate = 10
   vultr = "https://www.vultr.com/?ref=9904429-9J"
   cursor = "https://cursor.com/referral?code=TKHKBWB8304Q"
   bright_data = "https://get.brightdata.com/4xmvog6ozily"
+  bright_data_proxy = "https://get.brightdata.com/3evbu"
   coursera_ibm_quantum = ""
   # Apply: https://site.financialmodelingprep.com/affiliates — paste tracking URL when approved
   fmp = ""

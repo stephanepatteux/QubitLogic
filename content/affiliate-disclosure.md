@@ -46,7 +46,7 @@ Editorial-only recommendations say:
 | Cursor | Referral | Per [Cursor referral terms](https://cursor.com/referral) | [cursor.com/referral](https://cursor.com/referral) |
 | DigitalOcean | Awin | $25 per qualifying referral | [Awin publisher signup](https://ui.awin.com/publisher-signup) → “DigitalOcean” |
 | Paperspace (DigitalOcean) | Awin | Via DigitalOcean programme | Same as DigitalOcean |
-| Bright Data | PartnerStack | Per programme terms | [get.brightdata.com](https://get.brightdata.com/4xmvog6ozily) |
+| Bright Data | PartnerStack | Per programme terms | [Homepage](https://get.brightdata.com/4xmvog6ozily), [Proxy products](https://get.brightdata.com/3evbu) |
 | TradingView | Partner programme | 30% rev-share or fixed CPA on qualifying web subscriptions ([rules](https://www.tradingview.com/partner-rules/)) | [tradingview.com/partner-program](https://www.tradingview.com/partner-program/) |
 
 ---
