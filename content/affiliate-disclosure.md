@@ -3,6 +3,11 @@ title: "Affiliate Disclosure"
 date: 2026-06-01T00:00:00+01:00
 draft: false
 description: "QubitLogic affiliate disclosure — how we use affiliate links and our editorial independence policy."
+keywords:
+  - "affiliate disclosure"
+  - "QubitLogic affiliate policy"
+  - "editorial independence"
+images: ["/images/og/affiliate-disclosure.png"]
 hidemeta: true
 hideSummary: true
 ShowReadingTime: false

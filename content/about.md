@@ -3,6 +3,10 @@ title: "About — Stephane Patteux"
 date: 2026-06-01T00:00:00+01:00
 draft: false
 description: "QubitLogic by Stephane Patteux — quantum-AI tutorials, honest benchmarks, and reproducible Python code for developers."
+keywords:
+  - "QubitLogic"
+  - "Stephane Patteux"
+  - "quantum AI developer"
 images: ["/images/og/about.png"]
 hidemeta: true
 hideSummary: true

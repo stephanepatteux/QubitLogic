@@ -8,7 +8,10 @@ summary: "The complete walkthrough of how QubitLogic was built: Hugo static site
 keywords: ["build a blog with cursor", "hugo blog tutorial 2026", "hugo papermod tutorial", "self-hosted newsletter python", "cursor ai blog setup", "github actions hugo deploy", "hugo vs astro 2026", "technical blog free stack vps"]
 tags: ["cursor", "hugo", "vps", "python", "github-actions", "build-in-public", "devops", "newsletter", "security", "compliance"]
 categories: ["build"]
-images: ["/images/og-build-cursor-hugo.png"]
+images: ["/images/og/build-technical-blog-cursor-hugo.png"]
+sitemap:
+  priority: 0.9
+  changefreq: monthly
 weight: 99
 ShowToc: true
 TocOpen: true

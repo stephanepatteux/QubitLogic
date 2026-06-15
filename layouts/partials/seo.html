@@ -1,6 +1,7 @@
 {{/*
   QubitLogic SEO partial
-  Outputs: JSON-LD + Open Graph + Twitter Card + taxonomy robots override
+  Outputs: JSON-LD + Open Graph + Twitter Card
+  Robots meta is handled in layouts/_partials/head.html
   Include in: layouts/partials/extend_head.html (PaperMod hook)
 */}}
 
@@ -8,28 +9,24 @@
 {{ $isPage := .IsPage }}
 {{ $isSection := .IsSection }}
 {{ $isTaxonomy := or (eq .Kind "taxonomy") (eq .Kind "term") }}
-{{ $isArticle := and (not $isHome) $isPage (ne .File.Path "about.md") }}
-{{ $isAbout := and $isPage (eq .File.Path "about.md") }}
+{{ $utilityPages := slice "search.md" "privacy.md" "affiliate-disclosure.md" "newsletter.md" }}
+{{ $filePath := "" }}
+{{ with .File }}{{ $filePath = .Path }}{{ end }}
+{{ $isUtility := and $isPage (in $utilityPages $filePath) }}
+{{ $isStartHere := and $isPage (eq $filePath "start-here.md") }}
+{{ $isAbout := and $isPage (eq $filePath "about.md") }}
+{{ $isArticle := and (not $isHome) $isPage (not $isAbout) (not $isUtility) (not $isStartHere) }}
 {{ $siteName := .Site.Title }}
 {{ $siteURL := .Site.BaseURL | strings.TrimSuffix "/" }}
 {{ $authorName := .Site.Params.author | default "Stephane Patteux" }}
+{{ $twitterSite := .Site.Params.social.twitter | default "@QubitLogic" }}
+{{ $twitterCreator := .Site.Params.social.twitterCreator | default "" }}
 {{ $pageURL := .Permalink }}
 {{ $pageTitle := .Title | default $siteName }}
 {{ $desc := .Description | default .Summary | default .Site.Params.description }}
-{{ $image := "/images/og-default.png" }}
-{{ if $isHome }}
-  {{ with .Site.Params.images }}{{ $image = index . 0 }}{{ end }}
-{{ else }}
-  {{ with .Params.images }}{{ $image = index . 0 }}{{ end }}
-{{ end }}
+{{ $image := partial "og-image-url.html" . }}
 {{ $imageAbs := printf "%s%s" $siteURL $image }}
 {{ $imageAlt := $pageTitle }}
-
-{{ if $isTaxonomy }}
-<meta name="robots" content="noindex, follow">
-{{ else }}
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-{{ end }}
 
 <meta property="og:locale" content="en_GB">
 <meta property="og:site_name" content="{{ $siteName }}">
@@ -37,6 +34,7 @@
 <meta property="og:title" content="{{ $pageTitle }}">
 <meta property="og:description" content="{{ $desc | plainify | truncate 200 }}">
 <meta property="og:image" content="{{ $imageAbs }}">
+<meta property="og:image:secure_url" content="{{ $imageAbs }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="{{ $imageAlt }}">
@@ -46,6 +44,9 @@
 <meta property="article:author" content="{{ $authorName }}">
 <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
 <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+{{ with .Section }}
+<meta property="article:section" content="{{ . | title }}">
+{{ end }}
 {{ range .Params.tags }}
 <meta property="article:tag" content="{{ . }}">
 {{ end }}
@@ -54,14 +55,17 @@
 {{ end }}
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@QubitLogic">
+<meta name="twitter:site" content="{{ $twitterSite }}">
+{{ with $twitterCreator }}
+<meta name="twitter:creator" content="{{ . }}">
+{{ end }}
 <meta name="twitter:title" content="{{ $pageTitle }}">
 <meta name="twitter:description" content="{{ $desc | plainify | truncate 200 }}">
 <meta name="twitter:image" content="{{ $imageAbs }}">
 <meta name="twitter:image:alt" content="{{ $imageAlt }}">
 
 {{/* ── BreadcrumbList ────────────────────────────────────────────── */}}
-{{ if or $isArticle $isSection $isAbout }}
+{{ if or $isArticle $isSection $isAbout $isStartHere $isUtility }}
   {{ $items := slice }}
   {{ $items = $items | append (dict "@type" "ListItem" "position" 1 "name" "Home" "item" (printf "%s/" $siteURL)) }}
   {{ if .Section }}
@@ -71,7 +75,7 @@
     {{ if eq .Section "professional-edge" }}{{ $sectionTitle = "Professional Edge" }}{{ end }}
     {{ $items = $items | append (dict "@type" "ListItem" "position" 2 "name" $sectionTitle "item" (printf "%s/%s/" $siteURL .Section)) }}
   {{ end }}
-  {{ if and (not $isSection) (or .Section $isAbout) }}
+  {{ if and (not $isSection) (or .Section $isAbout $isStartHere $isUtility) }}
     {{ $items = $items | append (dict "@type" "ListItem" "position" (cond .Section 3 2) "name" $pageTitle "item" $pageURL) }}
   {{ end }}
   {{ $breadcrumb := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $items }}
@@ -87,6 +91,7 @@
     "name" $siteName
     "url" (printf "%s/" $siteURL)
     "description" (.Site.Params.description | plainify)
+    "inLanguage" "en-GB"
     "publisher" (dict "@type" "Organization" "name" $siteName "url" (printf "%s/" $siteURL))
     "potentialAction" (dict
       "@type" "SearchAction"
@@ -116,6 +121,7 @@
     "name" $pageTitle
     "description" ($desc | plainify | truncate 200)
     "url" $pageURL
+    "inLanguage" "en-GB"
     "isPartOf" (dict "@type" "WebSite" "name" $siteName "url" (printf "%s/" $siteURL))
   }}
 <script type="application/ld+json">{{ $collection | jsonify | safeJS }}</script>
@@ -129,13 +135,62 @@
     "name" $pageTitle
     "description" ($desc | plainify | truncate 200)
     "url" $pageURL
+    "inLanguage" "en-GB"
     "mainEntity" (dict "@type" "Person" "name" $authorName "url" $pageURL "jobTitle" "Developer" "description" "UK-based developer working on AI systems, algorithmic infrastructure, and quantum-classical hybrid applications.")
   }}
 <script type="application/ld+json">{{ $aboutPage | jsonify | safeJS }}</script>
 {{ end }}
 
+{{/* ── Utility pages: WebPage ────────────────────────────────────── */}}
+{{ if $isUtility }}
+  {{ $webPage := dict
+    "@context" "https://schema.org"
+    "@type" "WebPage"
+    "name" $pageTitle
+    "description" ($desc | plainify | truncate 200)
+    "url" $pageURL
+    "inLanguage" "en-GB"
+    "isPartOf" (dict "@type" "WebSite" "name" $siteName "url" (printf "%s/" $siteURL))
+  }}
+<script type="application/ld+json">{{ $webPage | jsonify | safeJS }}</script>
+{{ end }}
+
+{{/* ── Start Here hub: WebPage + ItemList ────────────────────────── */}}
+{{ if $isStartHere }}
+  {{ $webPage := dict
+    "@context" "https://schema.org"
+    "@type" "WebPage"
+    "name" $pageTitle
+    "description" ($desc | plainify | truncate 200)
+    "url" $pageURL
+    "inLanguage" "en-GB"
+    "isPartOf" (dict "@type" "WebSite" "name" $siteName "url" (printf "%s/" $siteURL))
+  }}
+<script type="application/ld+json">{{ $webPage | jsonify | safeJS }}</script>
+  {{ with .Params.learningPath }}
+    {{ $listItems := slice }}
+    {{ range $i, $item := . }}
+      {{ $listItems = $listItems | append (dict
+        "@type" "ListItem"
+        "position" (add $i 1)
+        "name" $item.name
+        "url" (printf "%s%s" $siteURL $item.url)
+      ) }}
+    {{ end }}
+    {{ $itemList := dict
+      "@context" "https://schema.org"
+      "@type" "ItemList"
+      "name" "QubitLogic Learning Path"
+      "description" "Recommended reading order for quantum-AI developers"
+      "itemListElement" $listItems
+    }}
+<script type="application/ld+json">{{ $itemList | jsonify | safeJS }}</script>
+  {{ end }}
+{{ end }}
+
 {{/* ── Articles: TechArticle ───────────────────────────────────── */}}
 {{ if $isArticle }}
+  {{ $wordCount := len (.Plain | split " ") }}
   {{ $article := dict
     "@context" "https://schema.org"
     "@type" "TechArticle"
@@ -152,7 +207,16 @@
       "logo" (dict "@type" "ImageObject" "url" (printf "%s/favicon.png" $siteURL))
     )
     "mainEntityOfPage" (dict "@type" "WebPage" "@id" $pageURL)
+    "inLanguage" "en-GB"
+    "wordCount" $wordCount
   }}
+  {{ with .Params.keywords }}
+    {{ $article = merge $article (dict "keywords" (delimit . ", ")) }}
+  {{ else }}
+    {{ with .Params.tags }}
+      {{ $article = merge $article (dict "keywords" (delimit . ", ")) }}
+    {{ end }}
+  {{ end }}
   {{ with .Params.series }}
     {{ $article = merge $article (dict "isPartOf" (dict "@type" "CreativeWorkSeries" "name" (index . 0))) }}
   {{ end }}

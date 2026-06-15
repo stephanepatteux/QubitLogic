@@ -3,6 +3,11 @@ title: "Weekly Quantum Dev Digest"
 date: 2026-06-01T00:00:00+01:00
 draft: false
 description: "One serious article per week covering quantum algorithms, AI infrastructure, and financial APIs — with runnable code. Free newsletter from QubitLogic."
+keywords:
+  - "quantum computing newsletter"
+  - "QubitLogic newsletter"
+  - "developer newsletter quantum AI"
+images: ["/images/og/newsletter.png"]
 hidemeta: true
 hideSummary: true
 ShowReadingTime: false

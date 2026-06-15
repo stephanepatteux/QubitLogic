@@ -29,6 +29,9 @@ jobs:
       - name: Generate OG social preview images
         run: python3 scripts/generate_og_images.py
 
+      - name: Generate favicons
+        run: python3 scripts/generate_favicons.py
+
       - name: Build
         env:
           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}

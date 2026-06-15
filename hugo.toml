@@ -75,6 +75,10 @@ paginate = 10
     "https://dev.to/steph60220",
   ]
 
+[params.social]
+  twitter = "@QubitLogic"
+  twitterCreator = "@steph60220"
+
 [params.label]
   text = ""
   icon = "/images/logo-mark.svg"

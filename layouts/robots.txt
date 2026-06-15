@@ -3,19 +3,14 @@ Allow: /
 Disallow: /series/
 Disallow: /tags/
 Disallow: /categories/
+Disallow: /search/
 
 # ── Block AI training scrapers (updated June 2026) ──────────
-# OpenAI
+# OpenAI training
 User-agent: GPTBot
 Disallow: /
 
-User-agent: ChatGPT-User
-Disallow: /
-
-User-agent: OAI-SearchBot
-Disallow: /
-
-# Anthropic
+# Anthropic training
 User-agent: Claude-Web
 Disallow: /
 
@@ -25,46 +20,40 @@ Disallow: /
 User-agent: anthropic-ai
 Disallow: /
 
-# Google (AI training — distinct from Googlebot search indexing)
+# Google AI training — distinct from Googlebot search indexing
 User-agent: Google-Extended
 Disallow: /
 
-# Perplexity
-User-agent: PerplexityBot
-Disallow: /
-
-# Meta / Facebook
+# Meta / Facebook training
 User-agent: Meta-ExternalAgent
 Disallow: /
 
 User-agent: Meta-ExternalFetcher
 Disallow: /
 
-# Amazon
+# Amazon training
 User-agent: Amazonbot
 Disallow: /
 
-# Apple
+# Apple training
 User-agent: Applebot-Extended
 Disallow: /
 
-# Cohere
+# Cohere training
 User-agent: cohere-ai
 Disallow: /
 
-# Allen Institute for AI
+# Allen Institute for AI training
 User-agent: AI2Bot
 Disallow: /
 
-# DataForSEO (bulk scraper)
+# Bulk scrapers
 User-agent: DataForSeoBot
 Disallow: /
 
-# ByteDance / TikTok
 User-agent: Bytespider
 Disallow: /
 
-# Common Training Crawlers
 User-agent: CCBot
 Disallow: /
 
@@ -100,6 +89,17 @@ User-agent: Slurp
 Allow: /
 
 User-agent: Yandex
+Allow: /
+
+# ── Allow AI search / citation crawlers (GEO visibility) ───
+# These fetch pages for real-time answers and citations, not model training.
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
 Allow: /
 
 Sitemap: {{ .Site.BaseURL }}sitemap.xml

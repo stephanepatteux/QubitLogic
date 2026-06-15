@@ -1,0 +1,33 @@
+{{/*
+  Resolve Open Graph image URL for a page.
+  Priority: params.images → site home images → /images/og/{slug}.png → og-default
+*/}}
+{{- $image := "" -}}
+{{- if .IsHome -}}
+  {{- with site.Params.images -}}
+    {{- $image = index . 0 -}}
+  {{- end -}}
+{{- else -}}
+  {{- with .Params.images -}}
+    {{- $image = index . 0 -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $image -}}
+  {{- $slug := "" -}}
+  {{- if .IsHome -}}
+    {{- $slug = "home" -}}
+  {{- else if .File -}}
+  {{- if eq .File.BaseFileName "_index" -}}
+    {{- $slug = .File.Dir | strings.TrimSuffix "/" | path.Base -}}
+  {{- else -}}
+    {{- $slug = .File.BaseFileName -}}
+  {{- end -}}
+{{- end -}}
+  {{- if $slug -}}
+    {{- $image = printf "/images/og/%s.png" $slug -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $image -}}
+  {{- $image = "/images/og/og-default.png" -}}
+{{- end -}}
+{{- return $image -}}

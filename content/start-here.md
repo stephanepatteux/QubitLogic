@@ -10,6 +10,24 @@ keywords:
   - "Qiskit beginner guide"
   - "quantum AI development"
 images: ["/images/og/start-here.png"]
+learningPath:
+  - name: "Quantum Computing in 2026: The Race Explained"
+    url: "/quantum-computing-explained-2026/"
+  - name: "Ubuntu 24.04 VPS Hardening Checklist"
+    url: "/infrastructure/secure-ubuntu-24-04-vps-hardening/"
+  - name: "Building a Quantum-Inspired Optimizer in Python"
+    url: "/quantum-coding/quantum-inspired-optimizer-python/"
+  - name: "Post-Quantum Cryptography: API Security Vulnerabilities"
+    url: "/professional-edge/post-quantum-cryptography-api-security/"
+  - name: "Qiskit vs PennyLane 2026"
+    url: "/quantum-coding/qiskit-vs-pennylane-2026/"
+  - name: "DigitalOcean vs Vultr vs Hetzner VPS Benchmark 2026"
+    url: "/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/"
+  - name: "How to Build a Technical Blog with Cursor and Hugo"
+    url: "/build-technical-blog-cursor-hugo/"
+sitemap:
+  priority: 0.95
+  changefreq: weekly
 hidemeta: true
 hideSummary: true
 ShowReadingTime: false
