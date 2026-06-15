@@ -24,6 +24,9 @@ keywords:
   - "quantum computing career opportunities"
 
 images: ["/images/og/quantum-computing-explained-2026.png"]
+sitemap:
+  priority: 0.95
+  changefreq: weekly
 schema_howto: false
 
 faq:

@@ -20,6 +20,9 @@ TocOpen: false
 tags: ["toolkit", "quantum-computing", "qiskit", "pennylane", "infrastructure", "resources"]
 categories: ["review"]
 images: ["/images/og/quantum-developer-toolkit.png"]
+sitemap:
+  priority: 0.9
+  changefreq: monthly
 weight: 100
 ---
 

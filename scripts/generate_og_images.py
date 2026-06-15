@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate 1200x630 OG social preview images for every QubitLogic post.
+"""Generate 1200x630 OG social preview images for every QubitLogic page.
 
 Requires: Pillow  (pip install Pillow)
 Output:   static/images/og/<slug>.png
@@ -17,9 +17,27 @@ OUTPUT  = ROOT / "static" / "images" / "og"
 
 W, H = 1200, 630
 
-SKIP_FILES = {
-    "privacy.md", "affiliate-disclosure.md",
-    "newsletter.md", "search.md",
+UTILITY_PAGES = {
+    "privacy.md": {
+        "label": "Legal",
+        "accent": (136, 136, 160),
+        "bg": (14, 14, 18),
+    },
+    "affiliate-disclosure.md": {
+        "label": "Legal",
+        "accent": (136, 136, 160),
+        "bg": (14, 14, 18),
+    },
+    "newsletter.md": {
+        "label": "Newsletter",
+        "accent": (0, 232, 122),
+        "bg": (12, 12, 15),
+    },
+    "search.md": {
+        "label": "Search",
+        "accent": (136, 136, 160),
+        "bg": (14, 14, 18),
+    },
 }
 
 HOME_OG = {
@@ -27,6 +45,15 @@ HOME_OG = {
     "title": "QubitLogic",
     "description": "Quantum-AI tutorials, Qiskit guides, and Python infrastructure — code-first, benchmarked, self-hosted.",
     "label": "Home",
+    "accent": (0, 232, 122),
+    "bg": (12, 12, 15),
+}
+
+DEFAULT_OG = {
+    "slug": "og-default",
+    "title": "QubitLogic",
+    "description": "Quantum-AI tutorials, Qiskit guides, and Python infrastructure for developers.",
+    "label": "Technical Workbench",
     "accent": (0, 232, 122),
     "bg": (12, 12, 15),
 }
@@ -56,6 +83,8 @@ def parse_front_matter(path: Path) -> dict:
     return fm
 
 def section_info(path: Path) -> dict:
+    if path.name in UTILITY_PAGES:
+        return UTILITY_PAGES[path.name]
     parts = path.relative_to(CONTENT).parts
     key = parts[0] if len(parts) > 1 else "root"
     return SECTIONS.get(key, SECTIONS["root"])
@@ -187,11 +216,21 @@ def generate_home_og() -> Path:
     )
 
 
+def generate_default_og() -> Path:
+    return render_og(
+        slug=DEFAULT_OG["slug"],
+        title=DEFAULT_OG["title"],
+        desc=DEFAULT_OG["description"],
+        label=DEFAULT_OG["label"],
+        accent=DEFAULT_OG["accent"],
+        bg=DEFAULT_OG["bg"],
+    )
+
+
 def iter_posts() -> list[Path]:
     paths = [
         p for p in sorted(CONTENT.rglob("*.md"))
-        if p.name not in SKIP_FILES
-        and parse_front_matter(p).get("title")
+        if parse_front_matter(p).get("title")
     ]
     return paths
 
@@ -201,6 +240,10 @@ def main() -> None:
     home = generate_home_og()
     generated.append(("home", home))
     print("  home")
+
+    default = generate_default_og()
+    generated.append(("og-default", default))
+    print("  og-default")
 
     for p in iter_posts():
         out = generate_og(p)

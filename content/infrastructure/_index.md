@@ -1,6 +1,11 @@
 ---
 title: "Infrastructure Tutorials — VPS, Nginx & Python"
 description: "VPS provisioning, Ubuntu hardening, Nginx configuration, FastAPI deployment, and CI/CD pipelines for AI workloads. Self-hosted, benchmarked, production-ready."
+keywords:
+  - "VPS tutorials"
+  - "Nginx Python deployment"
+  - "Ubuntu server hardening"
+  - "self-hosted AI infrastructure"
 images: ["/images/og/infrastructure.png"]
 ---
 

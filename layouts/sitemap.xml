@@ -6,15 +6,27 @@
   {{- $skip = or $skip (eq .RelPermalink "/search/") -}}
   {{- $skip = or $skip .Params.sitemap.disable -}}
   {{- if not $skip }}
+  {{- $changefreq := "monthly" -}}
+  {{- if .Params.sitemap.changefreq -}}
+    {{- $changefreq = .Params.sitemap.changefreq -}}
+  {{- else if eq .Kind "home" -}}
+    {{- $changefreq = "daily" -}}
+  {{- else if eq .Kind "section" -}}
+    {{- $changefreq = "weekly" -}}
+  {{- end -}}
+  {{- $priority := "0.7" -}}
+  {{- if .Params.sitemap.priority -}}
+    {{- $priority = printf "%v" .Params.sitemap.priority -}}
+  {{- else if eq .Kind "home" -}}
+    {{- $priority = "1.0" -}}
+  {{- else if eq .Kind "section" -}}
+    {{- $priority = "0.8" -}}
+  {{- end -}}
   <url>
     <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
-    <lastmod>{{ .Lastmod.Format "2006-01-02" }}</lastmod>{{ end }}{{ if eq .Kind "home" }}
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>{{ else if eq .Kind "section" }}
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>{{ else if eq .Kind "page" }}
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>{{ end }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02" }}</lastmod>{{ end }}
+    <changefreq>{{ $changefreq }}</changefreq>
+    <priority>{{ $priority }}</priority>
   </url>
   {{- end }}
 {{- end }}
