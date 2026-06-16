@@ -1,0 +1,35 @@
+name: Apply nginx www redirect
+
+on:
+  workflow_dispatch:
+
+jobs:
+  patch-nginx:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Load SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+
+      - name: Add VPS to known hosts
+        run: ssh-keyscan -H 51.195.86.197 >> ~/.ssh/known_hosts
+
+      - name: Patch nginx www → apex redirect on VPS
+        run: |
+          scp -o StrictHostKeyChecking=no scripts/patch-nginx-www-redirect.sh \
+            ubuntu@51.195.86.197:/tmp/patch-nginx-www-redirect.sh
+          ssh -o StrictHostKeyChecking=no ubuntu@51.195.86.197 \
+            'chmod +x /tmp/patch-nginx-www-redirect.sh && sudo /tmp/patch-nginx-www-redirect.sh'
+
+      - name: Verify redirect
+        run: |
+          code=$(curl -sI -o /dev/null -w '%{http_code}' https://www.qubitlogic.dev/)
+          location=$(curl -sI https://www.qubitlogic.dev/ | awk -F': ' 'tolower($1)=="location" {print $2}' | tr -d '\r')
+          echo "HTTP status: $code"
+          echo "Location: $location"
+          test "$code" = "301" -o "$code" = "308"
+          echo "$location" | grep -q 'https://qubitlogic.dev/'
