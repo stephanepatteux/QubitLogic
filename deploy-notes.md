@@ -73,9 +73,15 @@ Run `setup-api` workflow mode once after first deploy. It:
 - Patches `/etc/nginx/sites-available/qubitlogic` with the `/api/newsletter/` proxy block
 - Seeds `stephanepatteux@gmail.com` as confirmed (weekly send test list)
 
-**Weekly cadence:** publish articles **Monday 08:00 UK** → newsletter sends **Tuesday 09:00 UTC** (reads RSS `index.xml`).
-- Reloads Nginx
-- Health-checks the API
+**Weekly cadence:** publish articles **Monday 08:00 UK** → newsletter sends **Tuesday 09:00 UTC** (reads RSS `index.xml`). Deploy workflows also attempt an idempotent send after each deploy so mid-week publishes are not missed.
+
+### Newsletter troubleshooting
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Email says an old article | RSS feed was unsorted; `send.py` took the first `<item>` | `layouts/rss.xml` sorts by publish date; `send.py` picks newest `pubDate` |
+| Tuesday send skipped ("already sent") | Same GUID as a wrongly-sent older post | After RSS fix, next deploy/send picks the real latest article |
+| No email after Monday publish | Newsletter ran before deploy, or article `date` is still in the future | Monday `scheduled-deploy.yml`; deploy also calls `scripts/vps-newsletter-send.sh` |
 
 ## Nginx site config (`/etc/nginx/sites-available/qubitlogic`)
 

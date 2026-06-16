@@ -62,3 +62,8 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@51.195.86.197 \
             '/opt/qubitlogic/newsletter/venv/bin/python /opt/qubitlogic/newsletter/seed_subscriber.py stephanepatteux@gmail.com 2>/dev/null || python3 /opt/qubitlogic/newsletter/seed_subscriber.py stephanepatteux@gmail.com' || true
+
+      - name: Send weekly newsletter if new article (idempotent)
+        env:
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: bash scripts/vps-newsletter-send.sh

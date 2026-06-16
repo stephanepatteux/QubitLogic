@@ -71,3 +71,8 @@ jobs:
             ubuntu@51.195.86.197:/tmp/patch-nginx-www-redirect.sh
           ssh -o StrictHostKeyChecking=no ubuntu@51.195.86.197 \
             'chmod +x /tmp/patch-nginx-www-redirect.sh && sudo /tmp/patch-nginx-www-redirect.sh'
+
+      - name: Send weekly newsletter if new article (idempotent)
+        env:
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: bash scripts/vps-newsletter-send.sh

@@ -66,8 +66,35 @@ log = logging.getLogger("newsletter.send")
 
 # ── RSS ───────────────────────────────────────────────────────────────────────
 
+def _item_to_post(item: ET.Element) -> dict | None:
+    def txt(tag: str) -> str:
+        el = item.find(tag)
+        return el.text.strip() if el is not None and el.text else ""
+
+    post = {
+        "title":       txt("title"),
+        "link":        txt("link"),
+        "guid":        txt("guid") or txt("link"),
+        "description": txt("description"),
+        "pubDate":     txt("pubDate"),
+    }
+    if not post["title"] or not post["link"]:
+        return None
+    return post
+
+
+def _parse_pub_date(pub_date_str: str) -> datetime:
+    if not pub_date_str:
+        return datetime.min.replace(tzinfo=timezone.utc)
+    from email.utils import parsedate_to_datetime
+    try:
+        return parsedate_to_datetime(pub_date_str)
+    except Exception:
+        return datetime.min.replace(tzinfo=timezone.utc)
+
+
 def fetch_latest_post() -> dict | None:
-    """Return the most recent RSS item as a dict, or None on failure."""
+    """Return the newest RSS item by pubDate (not feed order)."""
     try:
         with urlopen(RSS_URL, timeout=15) as r:
             raw = r.read()
@@ -81,33 +108,28 @@ def fetch_latest_post() -> dict | None:
         log.error("Could not parse RSS: %s", e)
         return None
 
-    ns = {"content": "http://purl.org/rss/1.0/modules/content/"}
     channel = root.find("channel")
     if channel is None:
         log.error("No <channel> in RSS")
         return None
 
-    item = channel.find("item")
-    if item is None:
+    items = channel.findall("item")
+    if not items:
         log.info("RSS has no items — nothing to send")
         return None
 
-    def txt(tag: str) -> str:
-        el = item.find(tag)
-        return el.text.strip() if el is not None and el.text else ""
+    posts: list[dict] = []
+    for item in items:
+        post = _item_to_post(item)
+        if post:
+            posts.append(post)
 
-    post = {
-        "title":       txt("title"),
-        "link":        txt("link"),
-        "guid":        txt("guid") or txt("link"),
-        "description": txt("description"),
-        "pubDate":     txt("pubDate"),
-    }
-    if not post["title"] or not post["link"]:
-        log.error("Latest RSS item missing title or link")
+    if not posts:
+        log.error("RSS items missing title or link")
         return None
 
-    return post
+    posts.sort(key=lambda p: _parse_pub_date(p["pubDate"]), reverse=True)
+    return posts[0]
 
 # ── State ─────────────────────────────────────────────────────────────────────
 
@@ -123,9 +145,10 @@ def post_is_stale(pub_date_str: str) -> bool:
     """Return True if the post is older than MAX_AGE_DAYS."""
     if not pub_date_str:
         return False   # no date → don't block
-    from email.utils import parsedate_to_datetime
     try:
-        dt = parsedate_to_datetime(pub_date_str)
+        dt = _parse_pub_date(pub_date_str)
+        if dt == datetime.min.replace(tzinfo=timezone.utc):
+            return False
         age = (datetime.now(timezone.utc) - dt).days
         return age > MAX_AGE_DAYS
     except Exception:

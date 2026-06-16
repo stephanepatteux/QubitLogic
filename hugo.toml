@@ -177,6 +177,10 @@ paginate = 10
 [outputs]
   home = ["HTML", "RSS", "JSON"]   # JSON required for client-side search
 
+[services]
+  [services.rss]
+    limit = -1   # include all posts; layouts/rss.xml sorts by publish date
+
 [privacy]
   [privacy.vimeo]
     disabled = false
