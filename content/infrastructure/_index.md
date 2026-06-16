@@ -19,13 +19,10 @@ Follow these in order if you are building from scratch:
 7. [Deploy Hugo via GitHub Actions](/infrastructure/deploy-hugo-github-actions-vps/) — rsync CI/CD
 8. [Hetzner VPS provision](/infrastructure/hetzner-vps-provision-python-ai-ubuntu-24-04/) — EU price-performance path
 9. [Uptime Kuma monitoring](/infrastructure/uptime-kuma-monitoring-ubuntu-vps-24-04/) — health checks for Hugo + API
-10. [Hugo SEO & Search Console](/infrastructure/hugo-seo-search-console-sitemap-schema/) — sitemap, schema, GSC
-11. [Newsletter broadcasts](/infrastructure/self-hosted-newsletter-broadcast-cron-rss/) — weekly RSS → SMTP
-12. [VPS backup with Restic](/infrastructure/vps-backup-restore-restic-ubuntu-24-04/) — disaster recovery
 
 Full table with benchmarks and advanced topics: [Start Here](/start-here/).
 
-**Publishing cadence:** new infra tutorials publish **Mondays 08:00 UK**; newsletter sends **Tuesdays 09:00 UTC** (see [broadcast guide](/infrastructure/self-hosted-newsletter-broadcast-cron-rss/)).
+**Publishing cadence:** new infra tutorials publish **Mondays 08:00 UK**; newsletter sends **Tuesdays 09:00 UTC**.
 
 ## By topic
 

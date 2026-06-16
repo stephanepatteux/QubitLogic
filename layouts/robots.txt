@@ -3,6 +3,8 @@ Allow: /
 Disallow: /series/
 Disallow: /tags/
 Disallow: /categories/
+Disallow: /search/
+Disallow: /page/
 
 # ── Block AI training scrapers (updated June 2026) ──────────
 # OpenAI

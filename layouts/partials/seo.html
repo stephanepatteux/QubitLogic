@@ -8,7 +8,10 @@
 {{ $isPage := .IsPage }}
 {{ $isSection := .IsSection }}
 {{ $isTaxonomy := or (eq .Kind "taxonomy") (eq .Kind "term") }}
-{{ $isArticle := and (not $isHome) $isPage (ne .File.Path "about.md") }}
+{{ $isSearch := eq .Layout "search" }}
+{{ $isPaginated := and $isHome (gt (.Paginator.PageNumber | default 1) 1) }}
+{{ $isProduction := hugo.IsProduction | or (eq .Site.Params.env "production") }}
+{{ $isArticle := and (not $isHome) $isPage (ne .File.Path "about.md") (not $isSearch) }}
 {{ $isAbout := and $isPage (eq .File.Path "about.md") }}
 {{ $siteName := .Site.Title }}
 {{ $siteURL := .Site.BaseURL | strings.TrimSuffix "/" }}
@@ -25,10 +28,12 @@
 {{ $imageAbs := printf "%s%s" $siteURL $image }}
 {{ $imageAlt := $pageTitle }}
 
-{{ if $isTaxonomy }}
+{{ if or $isTaxonomy $isSearch $isPaginated .Params.robotsNoIndex }}
 <meta name="robots" content="noindex, follow">
-{{ else }}
+{{ else if $isProduction }}
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+{{ else }}
+<meta name="robots" content="noindex, nofollow">
 {{ end }}
 
 <meta property="og:locale" content="en_GB">
