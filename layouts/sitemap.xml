@@ -4,6 +4,7 @@
 {{- range .Site.Pages }}
   {{- $skip := in (slice "taxonomy" "term" "sitemap") .Kind -}}
   {{- $skip = or $skip (eq .RelPermalink "/search/") -}}
+  {{- $skip = or $skip (hasPrefix .RelPermalink "/page/") -}}
   {{- $skip = or $skip .Params.sitemap.disable -}}
   {{- if not $skip }}
   <url>

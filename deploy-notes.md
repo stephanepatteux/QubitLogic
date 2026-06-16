@@ -56,6 +56,15 @@ Add at: **repo → Settings → Secrets and variables → Actions**.
 5. Submit sitemap: `https://qubitlogic.dev/sitemap.xml`.
 6. Optional: URL Inspection → `https://qubitlogic.dev/series/` → **Request removal** (taxonomy pages are `noindex` + blocked in `robots.txt`).
 
+### Common Search Console coverage fixes
+
+| Issue | Cause | Fix |
+|-------|-------|-----|
+| **Not found (404)** | Indexed pages link to future-dated Hugo posts (`buildFuture = false`) | Only link from live pages after publish date; redeploy on Mondays or push to `main` |
+| **Duplicate without user-selected canonical** | `www.qubitlogic.dev` serves same HTML as apex | Nginx 301: `www` → `https://qubitlogic.dev` (see nginx config above) |
+| **Crawled – currently not indexed** on `/search/` or `/page/N/` | Utility/pagination pages were indexable | `noindex` + `robots.txt` Disallow (handled in `seo.html`) |
+| **Duplicate robots meta** | PaperMod `head.html` and `seo.html` both emitted robots | Single robots tag in `seo.html` only |
+
 ## One-time VPS setup
 
 Run `setup-api` workflow mode once after first deploy. It:
@@ -74,12 +83,24 @@ Run `setup-api` workflow mode once after first deploy. It:
 server {
     listen 80;
     server_name qubitlogic.dev www.qubitlogic.dev;
-    return 301 https://$host$request_uri;
+    return 301 https://qubitlogic.dev$request_uri;
 }
 
 server {
     listen 443 ssl http2;
-    server_name qubitlogic.dev www.qubitlogic.dev;
+    server_name www.qubitlogic.dev;
+
+    ssl_certificate     /etc/letsencrypt/live/qubitlogic.dev/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/qubitlogic.dev/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+
+    return 301 https://qubitlogic.dev$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name qubitlogic.dev;
 
     root /var/www/qubitlogic;
     index index.html;

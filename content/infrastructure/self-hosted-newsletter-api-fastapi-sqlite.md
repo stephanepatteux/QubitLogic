@@ -376,7 +376,7 @@ Nginx rate limit (5/min per IP), honeypot field, and reject disposable domains �
 
 ## Next steps
 
-1. [Newsletter broadcasts: Cron, RSS & SMTP](/infrastructure/self-hosted-newsletter-broadcast-cron-rss/) — weekly sends from `index.xml`
+1. Newsletter broadcasts (Cron, RSS & SMTP) — weekly sends from `index.xml` *(publishes in the infrastructure series)*
 2. [Cloudflare in front of static + API](/infrastructure/cloudflare-nginx-vps-static-site-api/)
 3. [Deploy Hugo via GitHub Actions](/infrastructure/deploy-hugo-github-actions-vps/)
 4. [CI/CD for the API repo](/infrastructure/cicd-pipeline-ai-python-scripts/)
