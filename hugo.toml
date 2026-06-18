@@ -43,8 +43,8 @@ paginate = 10
   affiliate_link_rel = "nofollow sponsored noopener"
   env = "production"
   title = "QubitLogic"
-  tagline = "Quantum-AI Tutorials, Qiskit & Python Infrastructure"
-  description = "A technical workbench for Quantum-AI Hybrid Development. Code-first tutorials on Qiskit, AI agents, Python infrastructure, and self-hosted stacks."
+  tagline = "Quantum Developer Tools, AI Agent VPS Tutorials & Qiskit Code"
+  description = "A technical workbench for Quantum-AI Hybrid Development. Code-first tutorials on Qiskit, cloud quantum developer tools, AI agent VPS hosting, Python infrastructure, and self-hosted stacks."
   keywords = ["quantum computing", "AI development", "Qiskit", "Python", "VPS", "self-hosted", "AI agents", "quantum machine learning"]
   author = "Stephane Patteux"
   images = ["/images/og/home.png"]
@@ -82,7 +82,7 @@ paginate = 10
 
 [params.homeInfoParams]
   Title = "QubitLogic"
-  Content = "A technical workbench for Quantum-AI Hybrid Development. Benchmarks, code, and infrastructure for developers building at the frontier."
+  Content = "A technical workbench for Quantum-AI Hybrid Development. Free cloud quantum developer tools, AI agent VPS tutorials, benchmarks, code, and infrastructure for developers building at the frontier."
 
 [[params.socialIcons]]
   name = "github"

@@ -1,9 +1,9 @@
 ---
-title: "CI/CD Pipeline for AI Python Scripts"
+title: "CI/CD Pipeline for Python AI Scripts: GitHub Actions to VPS"
 date: 2026-06-01T16:00:00+01:00
-lastmod: 2026-06-01T13:00:00+01:00
+lastmod: 2026-06-18T12:00:00+01:00
 draft: false
-description: "GitHub Actions CI/CD for Python AI scripts — pytest, dependency auditing, mypy type checking, and zero-downtime SSH deployment to a Linux VPS. Complete workflow included."
+description: "GitHub Actions CI/CD for Python AI agents — pytest, dependency audits, mypy, and zero-downtime SSH deploy to your VPS. Complete workflow YAML included."
 keywords:
   - "CI/CD pipeline Python"
   - "GitHub Actions"

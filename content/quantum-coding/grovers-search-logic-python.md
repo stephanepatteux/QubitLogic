@@ -1,9 +1,9 @@
 ---
-title: "Implementing Grover's Search Logic in Python"
+title: "Grover's Algorithm in Python: Full Qiskit Implementation with Code"
 date: 2026-06-01T12:00:00+01:00
-lastmod: 2026-06-01T15:00:00+01:00
+lastmod: 2026-06-18T12:00:00+01:00
 draft: false
-description: "Grover's algorithm in Python with Qiskit — oracle construction, amplitude amplification, iteration count formula, and honest O(√N) vs O(N) benchmark with Qiskit Aer."
+description: "Grover's algorithm in Python with complete Qiskit code — oracle construction, amplitude amplification, iteration formula, and O(√N) vs O(N) benchmark on Aer."
 keywords:
   - "Grover's algorithm Python"
   - "Grover's search Qiskit"

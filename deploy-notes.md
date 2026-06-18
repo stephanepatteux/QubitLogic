@@ -65,6 +65,20 @@ Add at: **repo → Settings → Secrets and variables → Actions**.
 | **Crawled – currently not indexed** on `/search/` or `/page/N/` | Utility/pagination pages were indexable | `noindex` + `robots.txt` Disallow (handled in `seo.html`) |
 | **Duplicate robots meta** | PaperMod `head.html` and `seo.html` both emitted robots | Single robots tag in `seo.html` only |
 
+### Weekly CTR review (15 min)
+
+After title or description changes on high-impression pages, track whether clicks improve in Search Console:
+
+1. **Performance → Pages** — sort by impressions, note pages with 0% CTR.
+2. **Performance → Queries** — for each zero-click URL, check which query and average position.
+3. Change **one page title per week** (not all at once) so you can attribute CTR movement.
+4. After deploy, **URL Inspection → Request indexing** for that URL only.
+5. Wait 2–3 weeks before judging — Google re-crawls and may A/B test snippets.
+
+**Priority order** (by impression volume when you started tracking): financial data APIs → quantum developer toolkit → VPS AI agent guide → Grover's Python → Hugo/Cursor build log.
+
+Target: move overall CTR from ~0.4% toward **2%+** over 8 weeks.
+
 ## One-time VPS setup
 
 Run `setup-api` workflow mode once after first deploy. It:

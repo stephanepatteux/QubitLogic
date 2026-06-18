@@ -1,9 +1,9 @@
 ---
-title: "How to Provision a High-Frequency VPS for AI Agent Workloads"
+title: "How to Run an AI Agent on a VPS: Provision, Tune & Benchmark Ubuntu 24.04"
 date: 2026-06-01T08:30:00+01:00
-lastmod: 2026-06-01T10:00:00+01:00
+lastmod: 2026-06-18T12:00:00+01:00
 draft: false
-description: "VPS for AI agent workloads on Ubuntu 24.04 — provision, harden, and benchmark with sysbench and fio. CPU governor tuning, swap config, Nginx, and cloud provider selection."
+description: "Step-by-step guide to run LangChain and AI agents on a VPS — Ubuntu 24.04 hardening, sysbench/fio benchmarks, and provider comparison from $6/mo."
 keywords:
   - "VPS provisioning"
   - "AI agent hosting"
@@ -11,6 +11,9 @@ keywords:
   - "DigitalOcean VPS"
   - "self-hosted AI"
   - "cloud VM configuration"
+  - "run ai agent on vps"
+  - "vps for ai agents"
+  - "deploy langchain on vps"
 summary: "Stop running AI agents on commodity shared hosting. This guide walks you through selecting, provisioning, and benchmarking a high-frequency VPS — with real fio and sysbench numbers for DigitalOcean and Vultr."
 
 series: ["Phase 1: Infrastructure"]
@@ -19,12 +22,26 @@ categories: ["tutorial"]
 
 images: ["/images/og/how-to-provision-vps-ai-agent-workloads.png"]
 
+faq:
+  - q: "What VPS do I need for an AI agent?"
+    a: "Minimum: 2 vCPU, 4 GB RAM, 50 GB NVMe (~$12–24/mo). That handles a single LangChain ReAct agent with FastAPI. Multi-agent pipelines need 4 vCPU and 8 GB RAM (~$48/mo). CPU steal time and disk IOPS matter more than raw core count."
+  - q: "How do I deploy LangChain on a VPS?"
+    a: "Provision Ubuntu 24.04, harden SSH and UFW, install Python 3.11+, deploy your agent behind Gunicorn on 127.0.0.1:8000, and put Nginx in front for TLS and rate limiting. See the FastAPI deploy guide and Nginx reverse proxy guide in this series."
+  - q: "What is the best VPS for AI agents?"
+    a: "DigitalOcean for documentation and reliability; Vultr High Frequency for fastest NVMe I/O; Hetzner CX22 for best price-performance in EU. All three work — benchmark with the sysbench and fio commands in this article before committing."
+  - q: "Can I run an AI agent on a $6 VPS?"
+    a: "Yes for development and single-agent workloads with 2 GB RAM, but 4 GB is the practical minimum for LangChain plus a local SQLite or vector cache. Upgrade when you run concurrent agents or local embedding models."
+
 weight: 2
 ---
 
+{{< callout type="tip" title="Quick answer — minimum VPS for an AI agent" >}}
+**2 vCPU, 4 GB RAM, 50 GB NVMe** (~$12–24/mo). Run Ubuntu 24.04, harden SSH first, deploy LangChain or FastAPI behind Nginx. To **run an AI agent on a VPS** in production, never expose uvicorn directly — use the [Nginx reverse proxy guide](/infrastructure/nginx-reverse-proxy-python-ai-api/).
+{{< /callout >}}
+
 ## Overview
 
-AI agent workloads are not like serving a WordPress blog. A Python process running a LangChain ReAct loop, calling three external APIs in parallel, and writing results to a local SQLite database creates a specific resource profile: **bursty CPU, low-to-moderate sustained RAM, high-frequency I/O on temp files, and latency-sensitive outbound HTTP.**
+If you want to **run an AI agent on a VPS** or **deploy LangChain on a VPS**, this guide covers provider selection through production tuning. AI agent workloads are not like serving a WordPress blog. A Python process running a LangChain ReAct loop, calling three external APIs in parallel, and writing results to a local SQLite database creates a specific resource profile: **bursty CPU, low-to-moderate sustained RAM, high-frequency I/O on temp files, and latency-sensitive outbound HTTP.**
 
 Generic "cloud VPS" marketing copy is useless for this. What matters is:
 

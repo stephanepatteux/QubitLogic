@@ -1,9 +1,9 @@
 ---
-title: "How to Build a Technical Blog with Cursor and Hugo (2026)"
+title: "Build a Hugo Blog with Cursor AI: Full 2026 Setup Guide"
 date: 2026-06-04T18:00:00+01:00
-lastmod: 2026-06-04T18:00:00+01:00
+lastmod: 2026-06-18T12:00:00+01:00
 draft: false
-description: "Build a fast technical blog with Cursor and Hugo — SVG logo, self-hosted newsletter, GDPR compliance, Nginx security. Full working stack for under £10/month."
+description: "Build a Hugo blog with Cursor AI in 2026 — PaperMod theme, GitHub Actions deploy, self-hosted newsletter, and Nginx hardening. Full QubitLogic build log with real prompts."
 summary: "The complete walkthrough of how QubitLogic was built: Hugo static site, PaperMod theme, SVG logo from scratch, GitHub Actions CI/CD, self-hosted FastAPI newsletter, UK GDPR compliance, Nginx security headers — all with real Cursor prompts used along the way. Most of the stack is free."
 keywords: ["build a blog with cursor", "hugo blog tutorial 2026", "hugo papermod tutorial", "self-hosted newsletter python", "cursor ai blog setup", "github actions hugo deploy", "hugo vs astro 2026", "technical blog free stack vps"]
 tags: ["cursor", "hugo", "vps", "python", "github-actions", "build-in-public", "devops", "newsletter", "security", "compliance"]

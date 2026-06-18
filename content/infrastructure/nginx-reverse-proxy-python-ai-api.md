@@ -39,6 +39,8 @@ Every Python AI API that talks to the internet needs a proper reverse proxy in f
 
 This guide builds that layer completely — including one Nginx behaviour that almost everyone gets wrong with LLM backends: **timeout configuration for slow inference responses.**
 
+**Related:** Provision the VPS first with [How to Run an AI Agent on a VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/). Building a trading agent? After securing your API, wire in [real-time financial data APIs](/professional-edge/top-5-apis-real-time-financial-data/).
+
 ---
 
 ## Prerequisites

@@ -391,6 +391,20 @@ If the build is green but the live site is wrong, the usual culprit is deploy ca
 
 ---
 
+## Weekly Search Console CTR review
+
+Technical setup gets you indexed. **Titles and descriptions** get you clicks. After changing front matter on a high-impression page:
+
+1. **Performance → Pages** in Search Console — sort by impressions, filter for 0% CTR.
+2. **Performance → Queries** — note which query and position each URL earns.
+3. Change **one title per week** so you can attribute CTR movement.
+4. Deploy, then **URL Inspection → Request indexing** for that URL.
+5. Wait 2–3 weeks before judging snippet changes.
+
+Priority order on QubitLogic: financial data APIs → quantum developer toolkit → VPS AI agent guide → Grover's Python → Hugo/Cursor build log. Target overall CTR toward **2%+** over 8 weeks.
+
+---
+
 ## Frequently Asked Questions
 
 ### Does Hugo generate robots.txt and sitemap.xml without a plugin?

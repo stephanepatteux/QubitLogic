@@ -1,6 +1,7 @@
 ---
 title: "Start Here: The QubitLogic Learning Path"
 date: 2026-06-01T00:00:00+01:00
+lastmod: 2026-06-18T12:00:00+01:00
 draft: false
 description: "QubitLogic learning path for developers — start with VPS infrastructure, progress to Qiskit quantum algorithms, finish with production AI and PQC. Every article has runnable code."
 keywords:
@@ -10,7 +11,6 @@ keywords:
   - "Qiskit beginner guide"
   - "quantum AI development"
 images: ["/images/og/start-here.png"]
-hidemeta: true
 hideSummary: true
 ShowReadingTime: false
 ShowBreadCrumbs: false
@@ -20,6 +20,8 @@ TocOpen: true
 
 QubitLogic covers the full journey from provisioning your first server to deploying quantum-classical hybrid applications in production. Every article has runnable code. Pick your entry point below.
 
+**Popular starting points:** [Free cloud quantum developer tools](/quantum-developer-toolkit/) · [Run an AI agent on a VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/) · [Real-time financial data APIs](/professional-edge/top-5-apis-real-time-financial-data/)
+
 {{< affiliate_stack >}}
 
 ---
@@ -28,12 +30,12 @@ QubitLogic covers the full journey from provisioning your first server to deploy
 
 Build the server stack that runs every quantum experiment in Phase 2.
 
-**Start here →** [Ubuntu 24.04 VPS Hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) then [Provision a VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/)
+**Start here →** [Ubuntu 24.04 VPS Hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) then [Run an AI Agent on a VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/)
 
 | # | Article | Type |
 |---|---------|------|
 | 0 | [Ubuntu 24.04 VPS Hardening Checklist](/infrastructure/secure-ubuntu-24-04-vps-hardening/) | Tutorial |
-| 1 | [How to Provision a VPS for AI Agent Workloads](/infrastructure/how-to-provision-vps-ai-agent-workloads/) | Tutorial |
+| 1 | [How to Run an AI Agent on a VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/) | Tutorial |
 | 2 | [Deploy FastAPI on Ubuntu 24.04 (Nginx + systemd + SSL)](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) | Tutorial |
 | 3 | [Nginx Reverse Proxy: Securing Your Python AI API](/infrastructure/nginx-reverse-proxy-python-ai-api/) | Tutorial |
 | 4 | [Self-Hosted Newsletter API (FastAPI + SQLite)](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) | Tutorial |
@@ -81,7 +83,7 @@ Apply quantum and AI skills to production. These articles are self-contained.
 |---|---------|------|
 | 1 | [Post-Quantum Cryptography: API Security Vulnerabilities](/professional-edge/post-quantum-cryptography-api-security/) | Tutorial |
 | 2 | [Integrating Enterprise-Grade RAG Agents](/professional-edge/integrating-enterprise-rag-agents/) | Tutorial |
-| 3 | [Top 5 APIs for Real-Time Financial Data 2026](/professional-edge/top-5-apis-real-time-financial-data/) | Review |
+| 3 | [Best Real-Time Financial Data APIs (2026)](/professional-edge/top-5-apis-real-time-financial-data/) | Review |
 | 4 | [Agentic Workflows vs Manual Scripts: A Benchmark](/professional-edge/agentic-workflows-vs-manual-scripts/) | Benchmark |
 | 5 | [Are Quantum AI Certifications Worth It?](/professional-edge/quantum-ai-certification-review/) | Review |
 | 6 | [Auditing Code for Post-Quantum Compliance](/professional-edge/auditing-code-post-quantum-compliance/) | Tutorial |
@@ -93,7 +95,9 @@ Apply quantum and AI skills to production. These articles are self-contained.
 | Goal | Start here |
 |------|-----------|
 | I want to understand what quantum computing actually is | [Quantum Computing in 2026: The Race Explained](/quantum-computing-explained-2026/) |
-| I want to build an AI server stack from scratch | [VPS hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) then [provision a VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/) |
+| I want to build an AI server stack from scratch | [VPS hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) then [run an AI agent on a VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/) |
+| I want free cloud quantum developer tools | [Quantum developer toolkit](/quantum-developer-toolkit/) |
+| I want real-time financial data for trading agents | [Real-time financial data APIs](/professional-edge/top-5-apis-real-time-financial-data/) |
 | I want to write quantum algorithms in Python | [Phase 2 article 1](/quantum-coding/quantum-inspired-optimizer-python/) |
 | I want to secure APIs against quantum attacks | [Phase 3 article 1](/professional-edge/post-quantum-cryptography-api-security/) |
 | I want to compare quantum frameworks | [Qiskit vs PennyLane 2026](/quantum-coding/qiskit-vs-pennylane-2026/) |
