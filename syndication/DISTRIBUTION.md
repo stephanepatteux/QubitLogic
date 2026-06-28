@@ -12,20 +12,23 @@ Publish **one per week** with `canonical_url` pointing at qubitlogic.dev.
 
 **How to publish:** Copy front matter from each file into DEV.to editor → paste body → set canonical URL → publish.
 
-## Reddit (link when relevant, not spam)
+## Hacker News & Reddit (copy-paste ready)
 
-| Subreddit | Article to share |
-|-----------|------------------|
-| r/selfhosted | Self-hosted Ollama guide |
-| r/LocalLLaMA | Ollama VPS guide |
-| r/homelab | Best VPS benchmark |
-| r/langchain | Deploy LangChain on VPS |
-| r/vps | Best VPS for AI agents |
+Full titles, bodies, reply templates, and posting schedule:
 
-## Hacker News
+**→ [`reddit-hn-best-vps-for-ai-agents.md`](reddit-hn-best-vps-for-ai-agents.md)**
 
-- **Show HN:** Best VPS for AI Agents (2026) — benchmark data + reproducible commands
-- **Show HN:** Deploy LangChain on a VPS — production stack
+Quick links:
+
+| Platform | Article |
+|----------|---------|
+| Show HN | [Best VPS for AI Agents benchmark](https://qubitlogic.dev/infrastructure/best-vps-for-ai-agents-2026/) |
+| r/vps | Same URL |
+| r/selfhosted | Same + [Ollama guide](https://qubitlogic.dev/infrastructure/self-hosted-ai-agent-ollama-vps-2026/) |
+| r/LocalLLaMA | Ollama sizing angle |
+| r/langchain | [Deploy LangChain guide](https://qubitlogic.dev/infrastructure/deploy-langchain-on-vps-ubuntu-24-04/) |
+
+## Reddit (summary)
 
 ## After each publish
 
