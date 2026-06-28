@@ -44,7 +44,7 @@ Most of the stack is free. Hosting is the only recurring cost.
 | Logo | Cursor + hand-coded SVG | Free |
 | Source control | [GitHub](https://github.com/) | Free |
 | CI/CD | [GitHub Actions](https://github.com/features/actions) | Free (2,000 min/mo) |
-| VPS hosting | [DigitalOcean](https://www.awin1.com/cread.php?awinmid=123996&awinaffid=2917857&ued=https%3A%2F%2Fwww.digitalocean.com%2Fpricing) or [Vultr](https://www.vultr.com/?ref=9904429-9J) | ~$6–12/mo |
+| VPS hosting | {{< affiliate_link url="AFFILIATE_LINK_DIGITALOCEAN" >}}DigitalOcean{{< /affiliate_link >}} or [Vultr](https://www.vultr.com/?ref=9904429-9J) | ~$6–12/mo |
 | Web server | [Nginx](https://nginx.org/) | Free |
 | OS | Ubuntu 24.04 LTS | Free |
 | Domain registrar | [Dynadot](https://www.dynadot.com/) | ~£10/yr |
@@ -134,7 +134,7 @@ Cloudflare gives you free DNS, DDoS mitigation, SSL edge termination, and keeps 
 
 ## Step 3 — Provision a VPS
 
-You need a server. I benchmarked [DigitalOcean](https://www.awin1.com/cread.php?awinmid=123996&awinaffid=2917857&ued=https%3A%2F%2Fwww.digitalocean.com%2Fpricing) and [Vultr](https://www.vultr.com/?ref=9904429-9J) for a [separate article on this site](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/). For a static Hugo site plus a lightweight newsletter API, the **$6/mo plan** (1 vCPU, 1 GB RAM) is plenty.
+You need a server. I benchmarked {{< affiliate_link url="AFFILIATE_LINK_DIGITALOCEAN" >}}DigitalOcean{{< /affiliate_link >}} and [Vultr](https://www.vultr.com/?ref=9904429-9J) for a [separate article on this site](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/). For a static Hugo site plus a lightweight newsletter API, the **$6/mo plan** (1 vCPU, 1 GB RAM) is plenty.
 
 {{< affiliate_stack >}}
 

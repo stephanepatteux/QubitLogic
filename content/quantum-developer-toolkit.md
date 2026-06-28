@@ -92,16 +92,15 @@ Used in: [QML decision framework](/quantum-coding/quantum-machine-learning-when-
 
 ### DigitalOcean — VPS for AI agent hosting
 
-The best-documented cloud provider for developers. Premium AMD Droplets run Python AI workloads reliably at a fair price. New accounts get $200 in free credits — enough to run every benchmark in this series.
+The best-documented cloud provider for developers. Premium AMD Droplets run Python AI workloads reliably at a fair price — the same provider we benchmark across Phase 1 infrastructure guides.
 
 {{< affiliate_box
     name="DigitalOcean"
     url="AFFILIATE_LINK_DIGITALOCEAN"
-    cta="Claim $200 Credits"
-    offer="$200 free credits · 60 days for new accounts"
+    cta="Deploy a Droplet"
     badge="Best Documentation"
     primary="true"
-    desc="Enough to provision a VPS, run every benchmark in this series, and deploy a production FastAPI stack before you pay."
+    desc="Provision a VPS, run every benchmark in this series, and deploy a production FastAPI stack on Premium AMD Droplets."
     price="From $4/mo"
 >}}
 

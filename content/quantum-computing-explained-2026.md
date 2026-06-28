@@ -184,9 +184,9 @@ Building a world-class quantum lab — not just buying hardware but designing an
 {{< affiliate_box
     name="DigitalOcean"
     url="AFFILIATE_LINK_DIGITALOCEAN"
-    cta="Get $200 Free Credit"
-    badge="New Accounts"
-    desc="Run Qiskit-Aer simulations on Premium AMD Droplets without the $5M dilution refrigerator. Statevector simulations up to 30+ qubits run reliably on a $48/mo Droplet. New accounts get $200 free credit."
+    cta="Deploy a Droplet"
+    badge="Cloud simulation"
+    desc="Run Qiskit-Aer simulations on Premium AMD Droplets without the $5M dilution refrigerator. Statevector simulations up to 30+ qubits run reliably on a $48/mo Droplet."
     price="From $6/mo"
 >}}
 

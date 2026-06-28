@@ -8,7 +8,7 @@
 {{ $variant := .Get "variant" | default "infra" }}
 
 <div class="qs-affiliate-stack" role="complementary" aria-label="Partner offers for readers">
-  <p class="qs-affiliate-stack-title">Deploy this stack — new-account offers</p>
+  <p class="qs-affiliate-stack-title">Deploy this stack</p>
 
   {{ if eq $variant "finance" }}
   <div class="qs-affiliate-stack-grid">
@@ -18,17 +18,17 @@
       <span class="qs-affiliate-stack-cta">View plans →</span>
     </a>
     <a class="qs-affiliate-stack-card" href="{{ site.Params.affiliates.digitalocean }}"{{ partial "affiliate/outbound_attrs.html" . | safeHTMLAttr }} data-affiliate="digitalocean">
-      <span class="qs-affiliate-stack-offer">$200 free credits</span>
+      <span class="qs-affiliate-stack-offer">Premium AMD Droplets</span>
       <span class="qs-affiliate-stack-name">DigitalOcean</span>
-      <span class="qs-affiliate-stack-cta">Claim credits →</span>
+      <span class="qs-affiliate-stack-cta">Get started →</span>
     </a>
   </div>
   {{ else }}
   <div class="qs-affiliate-stack-grid">
     <a class="qs-affiliate-stack-card qs-affiliate-stack-card--primary" href="{{ site.Params.affiliates.digitalocean }}"{{ partial "affiliate/outbound_attrs.html" . | safeHTMLAttr }} data-affiliate="digitalocean">
-      <span class="qs-affiliate-stack-offer">$200 free credits · 60 days</span>
+      <span class="qs-affiliate-stack-offer">From $4/mo</span>
       <span class="qs-affiliate-stack-name">DigitalOcean</span>
-      <span class="qs-affiliate-stack-cta">Claim credits →</span>
+      <span class="qs-affiliate-stack-cta">Get started →</span>
     </a>
     <a class="qs-affiliate-stack-card" href="{{ site.Params.affiliates.vultr }}"{{ partial "affiliate/outbound_attrs.html" . | safeHTMLAttr }} data-affiliate="vultr">
       <span class="qs-affiliate-stack-offer">$300 free credits · 30 days</span>

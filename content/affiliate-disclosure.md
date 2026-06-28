@@ -10,7 +10,7 @@ ShowBreadCrumbs: false
 ShowToc: true
 ---
 
-*Last updated: 4 June 2026*
+*Last updated: 8 June 2026*
 
 ## Our commitment to transparency
 
@@ -79,7 +79,7 @@ We link to these tools in reviews because we use or benchmark them. **We do not 
 
 | Reader intent | Best affiliate offer | Why |
 |:---|:---|:---|
-| Provisioning a VPS / running tutorials | **DigitalOcean** ($200 credits) or **Vultr** ($300 credits) | High-intent, matches Phase 1 articles; free credits lower signup friction |
+| Provisioning a VPS / running tutorials | **DigitalOcean** (Awin) or **Vultr** ($300 credits) | High-intent, matches Phase 1 articles; Vultr credits lower signup friction where offered |
 | Writing code alongside articles | **Cursor** | Same workflow as our tutorials |
 | Trading / financial APIs content | **TradingView** ($15 off first paid plan, web only) | Clear partner terms; complements API reviews |
 | GPU quantum simulation | **Paperspace** (Awin) | Niche but strong fit for QML posts |

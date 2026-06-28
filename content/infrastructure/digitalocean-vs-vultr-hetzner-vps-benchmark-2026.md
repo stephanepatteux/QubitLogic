@@ -39,7 +39,7 @@ Based on sysbench CPU and fio NVMe testing across equivalent $5–$12/mo plans (
 |:---|:---|:---|:---|:---|
 | **Vultr High Frequency** | **1,074 events/s** | **~410 MB/s** | Raw AI compute, low-latency Python APIs | [Deploy on Vultr](https://www.vultr.com/?ref=9904429-9J) |
 | **Hetzner CX22** | 939 events/s | ~250 MB/s | RAM-heavy backtesting, EU workloads, cost-sensitivity | [Hetzner Cloud](https://www.hetzner.com/cloud) |
-| **DigitalOcean Premium AMD** | 772 events/s | ~150 MB/s | Best documentation, US staging, beginners | [Deploy on DO](https://www.awin1.com/cread.php?awinmid=123996&awinaffid=2917857&ued=https%3A%2F%2Fwww.digitalocean.com%2Fpricing) |
+| **DigitalOcean Premium AMD** | 772 events/s | ~150 MB/s | Best documentation, US staging, beginners | {{< affiliate_link url="AFFILIATE_LINK_DIGITALOCEAN" >}}Deploy on DO{{< /affiliate_link >}} |
 
 **Bottom line:** Vultr wins on raw single-core throughput for Python API workloads. Hetzner wins on price-to-RAM ratio — 4 GB for ~$5/mo is unmatched. DigitalOcean wins on developer experience and US network reliability. Full methodology and reproducible commands below.
 
@@ -127,9 +127,9 @@ sysbench cpu --cpu-max-prime=20000 --time=60 --threads=2 run
 {{< affiliate_box
     name="DigitalOcean"
     url="AFFILIATE_LINK_DIGITALOCEAN"
-    cta="Get $200 Free Credits"
+    cta="Deploy a Droplet"
     badge="Best Documentation"
-    desc="New DigitalOcean accounts get $200 in free credits over 60 days — enough to run this full benchmark suite at zero cost. No credit card required to start."
+    desc="Premium AMD Droplets with the best documentation in our comparison — enough headroom to run this full benchmark suite on a $12/mo plan."
     price="From $4/mo"
 >}}
 
@@ -402,7 +402,7 @@ Here is the decision framework, without hedging:
 
 - **Best value overall: Hetzner CX22.** At ~$4.95/mo with 4 GB RAM and competitive AMD EPYC CPU performance, nothing in this price bracket comes close. If your users and downstream APIs are EU-located, or if you are running a horizontally-scaled fleet where node count matters, Hetzner is the default answer. [Hetzner Cloud SLA](https://www.hetzner.com/legal/privacy-policy) provides 99.9% uptime guarantees across all plans.
 
-- **Best for US deployments and developer experience: DigitalOcean.** DigitalOcean's documentation is genuinely excellent — managed databases, App Platform, block storage, private networking, and load balancers all integrate cleanly. If you are deploying in North America, need low latency to US APIs, or value the ecosystem over raw price, DigitalOcean Premium AMD is the pick. The $200 new-account credit makes it free to get started.
+- **Best for US deployments and developer experience: DigitalOcean.** DigitalOcean's documentation is genuinely excellent — managed databases, App Platform, block storage, private networking, and load balancers all integrate cleanly. If you are deploying in North America, need low latency to US APIs, or value the ecosystem over raw price, DigitalOcean Premium AMD is the pick.
 
 - **Best raw disk I/O: Vultr High Frequency.** 51K 4K random read IOPS and 2.2 GB/s sequential read is best-in-class at this price tier. If your workload is I/O-bound — serving a large FAISS index, running Qdrant with persistent storage, doing heavy SQLite/DuckDB reads — Vultr is worth the premium over Hetzner for disk performance alone.
 
