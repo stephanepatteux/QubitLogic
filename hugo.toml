@@ -43,8 +43,9 @@ paginate = 10
   affiliate_link_rel = "nofollow sponsored noopener"
   env = "production"
   title = "QubitLogic"
-  tagline = "Quantum Developer Tools, AI Agent VPS Tutorials & Qiskit Code"
-  description = "A technical workbench for Quantum-AI Hybrid Development. Code-first tutorials on Qiskit, cloud quantum developer tools, AI agent VPS hosting, Python infrastructure, and self-hosted stacks."
+  tagline = "Qiskit, VPS & Python Tutorials"
+  seoTitle = "Quantum & AI Developer Tutorials"
+  description = "Free quantum computing tutorials, AI agent VPS guides, and Python infrastructure — Qiskit code, benchmarks, and self-hosted stacks for developers."
   keywords = ["quantum computing", "AI development", "Qiskit", "Python", "VPS", "self-hosted", "AI agents", "quantum machine learning"]
   author = "Stephane Patteux"
   images = ["/images/og/home.png"]
@@ -82,7 +83,7 @@ paginate = 10
 
 [params.homeInfoParams]
   Title = "QubitLogic"
-  Content = "A technical workbench for Quantum-AI Hybrid Development. Free cloud quantum developer tools, AI agent VPS tutorials, benchmarks, code, and infrastructure for developers building at the frontier."
+  Content = "Free tutorials with working code — no fluff. **Popular right now:** [cloud quantum developer tools](/quantum-developer-toolkit/) · [VPS for AI agents](/infrastructure/how-to-provision-vps-ai-agent-workloads/) · [real-time financial data APIs](/professional-edge/top-5-apis-real-time-financial-data/) · [DO vs Vultr vs Hetzner benchmark](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/)."
 
 [[params.socialIcons]]
   name = "github"

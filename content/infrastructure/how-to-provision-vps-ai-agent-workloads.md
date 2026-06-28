@@ -1,9 +1,14 @@
 ---
+aliases:
+  - /vps-for-ai-agents/
+  - /best-vps-for-ai-agents/
+  - /run-ai-agent-on-vps/
 title: "How to Run an AI Agent on a VPS: Provision, Tune & Benchmark Ubuntu 24.04"
+seoTitle: "VPS for AI Agents: Ubuntu 24.04 Setup Guide"
 date: 2026-06-01T08:30:00+01:00
-lastmod: 2026-06-18T12:00:00+01:00
+lastmod: 2026-06-28T12:00:00+01:00
 draft: false
-description: "Step-by-step guide to run LangChain and AI agents on a VPS — Ubuntu 24.04 hardening, sysbench/fio benchmarks, and provider comparison from $6/mo."
+description: "Best VPS for AI agents — provision Ubuntu 24.04, harden SSH, benchmark with sysbench/fio, and deploy LangChain or FastAPI from $12/mo. Step-by-step with real numbers."
 keywords:
   - "VPS provisioning"
   - "AI agent hosting"

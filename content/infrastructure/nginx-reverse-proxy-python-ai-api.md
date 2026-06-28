@@ -1,9 +1,10 @@
 ---
 title: "Nginx Reverse Proxy: Securing Your Python AI API"
+seoTitle: "Nginx Reverse Proxy for Python APIs"
 date: 2026-06-01T10:00:00+01:00
-lastmod: 2026-06-01T11:00:00+01:00
+lastmod: 2026-06-28T12:00:00+01:00
 draft: false
-description: "Nginx reverse proxy for Python FastAPI on VPS — TLS via Certbot, rate limiting, upstream health checks, and LLM-aware timeout tuning. Full production configuration."
+description: "Nginx reverse proxy for Python FastAPI — TLS, rate limiting, upstream health checks, and LLM-aware timeouts. Full production config for a self-hosted AI API."
 keywords:
   - "Nginx reverse proxy"
   - "Python API deployment"
@@ -18,6 +19,12 @@ tags: ["nginx", "linux", "python", "fastapi", "tls", "security", "ai-agents", "i
 categories: ["tutorial"]
 
 images: ["/images/og/nginx-reverse-proxy-python-ai-api.png"]
+
+faq:
+  - q: "How do I set up a Python reverse proxy with Nginx?"
+    a: "Run FastAPI or uvicorn on 127.0.0.1:8000, point Nginx upstream at that socket, terminate TLS with Certbot, and add rate limiting plus long proxy_read_timeout for LLM calls. Never expose uvicorn directly to the internet."
+  - q: "What Nginx timeout should I use for LLM APIs?"
+    a: "Set proxy_read_timeout and proxy_send_timeout to 300s or higher for streaming LLM responses. Default 60s causes 504 errors on long agent tool loops."
 
 weight: 4
 ---

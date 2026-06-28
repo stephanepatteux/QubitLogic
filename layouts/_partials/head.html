@@ -3,8 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 {{- /* robots meta: layouts/partials/seo.html via extend_head.html */ -}}
 
-{{- /* Title */}}
-<title>{{ if .IsHome }}{{ site.Title }}{{ with site.Params.tagline }} — {{ . }}{{ end }}{{ else }}{{ if .Title }}{{ .Title }} | {{ end }}{{ site.Title }}{{ end }}</title>
+{{- /* Title — seoTitle keeps SERP under ~60 chars; H1 stays as .Title */ -}}
+{{- $seoTitle := .Params.seoTitle | default .Title -}}
+<title>{{ if .IsHome }}{{ site.Params.seoTitle | default site.Title }}{{ with site.Params.tagline }} — {{ . }}{{ end }}{{ else }}{{ if $seoTitle }}{{ $seoTitle }} | {{ end }}{{ site.Title }}{{ end }}</title>
 
 {{- /* Meta */}}
 {{- if .IsHome }}

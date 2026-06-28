@@ -17,7 +17,8 @@
 {{ $siteURL := .Site.BaseURL | strings.TrimSuffix "/" }}
 {{ $authorName := .Site.Params.author | default "Stephane Patteux" }}
 {{ $pageURL := .Permalink }}
-{{ $pageTitle := .Title | default $siteName }}
+{{ $pageTitle := .Params.seoTitle | default (.Title | default $siteName) }}
+{{ $headline := .Title | default $pageTitle }}
 {{ $desc := .Description | default .Summary | default .Site.Params.description }}
 {{ $image := "/images/og-default.png" }}
 {{ if $isHome }}
@@ -144,7 +145,7 @@
   {{ $article := dict
     "@context" "https://schema.org"
     "@type" "TechArticle"
-    "headline" $pageTitle
+    "headline" $headline
     "description" ($desc | plainify | truncate 200)
     "image" (dict "@type" "ImageObject" "url" $imageAbs "width" 1200 "height" 630)
     "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")

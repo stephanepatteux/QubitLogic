@@ -1,9 +1,10 @@
 ---
 title: "Grover's Algorithm in Python: Full Qiskit Implementation with Code"
+seoTitle: "Grover's Algorithm in Python (Qiskit Code)"
 date: 2026-06-01T12:00:00+01:00
-lastmod: 2026-06-18T12:00:00+01:00
+lastmod: 2026-06-28T12:00:00+01:00
 draft: false
-description: "Grover's algorithm in Python with complete Qiskit code — oracle construction, amplitude amplification, iteration formula, and O(√N) vs O(N) benchmark on Aer."
+description: "Grover's algorithm in Python with complete Qiskit code — oracle, amplitude amplification, iteration count, and O(√N) vs O(N) benchmark on Aer simulator."
 keywords:
   - "Grover's algorithm Python"
   - "Grover's search Qiskit"
