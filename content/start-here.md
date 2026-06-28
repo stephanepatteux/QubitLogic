@@ -20,7 +20,7 @@ TocOpen: true
 
 QubitLogic covers the full journey from provisioning your first server to deploying quantum-classical hybrid applications in production. Every article has runnable code. Pick your entry point below.
 
-**Popular starting points:** [Free cloud quantum developer tools](/quantum-developer-toolkit/) · [Run an AI agent on a VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/) · [Real-time financial data APIs](/professional-edge/top-5-apis-real-time-financial-data/)
+**Popular starting points:** [Best VPS for AI agents (2026)](/infrastructure/best-vps-for-ai-agents-2026/) · [Deploy LangChain on a VPS](/infrastructure/deploy-langchain-on-vps-ubuntu-24-04/) · [Free cloud quantum developer tools](/quantum-developer-toolkit/) · [Real-time financial data APIs](/professional-edge/top-5-apis-real-time-financial-data/)
 
 {{< affiliate_stack >}}
 
@@ -30,25 +30,28 @@ QubitLogic covers the full journey from provisioning your first server to deploy
 
 Build the server stack that runs every quantum experiment in Phase 2.
 
-**Start here →** [Ubuntu 24.04 VPS Hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) then [Run an AI Agent on a VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/)
+**Start here →** [Best VPS for AI Agents (2026)](/infrastructure/best-vps-for-ai-agents-2026/) then [Deploy LangChain on a VPS](/infrastructure/deploy-langchain-on-vps-ubuntu-24-04/)
 
 | # | Article | Type |
 |---|---------|------|
-| 0 | [Ubuntu 24.04 VPS Hardening Checklist](/infrastructure/secure-ubuntu-24-04-vps-hardening/) | Tutorial |
-| 1 | [How to Run an AI Agent on a VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/) | Tutorial |
-| 2 | [Deploy FastAPI on Ubuntu 24.04 (Nginx + systemd + SSL)](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) | Tutorial |
-| 3 | [Nginx Reverse Proxy: Securing Your Python AI API](/infrastructure/nginx-reverse-proxy-python-ai-api/) | Tutorial |
-| 4 | [Self-Hosted Newsletter API (FastAPI + SQLite)](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) | Tutorial |
-| 5 | [Cloudflare + Nginx (Static Site + API)](/infrastructure/cloudflare-nginx-vps-static-site-api/) | Tutorial |
-| 6 | [Deploy Hugo with GitHub Actions + rsync](/infrastructure/deploy-hugo-github-actions-vps/) | Tutorial |
-| 7 | [Optimizing Python Environment Performance on Ubuntu 24.04](/infrastructure/optimizing-python-environment-ubuntu-24-04/) | Tutorial |
-| 8 | [The Quantum-Ready Tech Stack](/infrastructure/quantum-ready-tech-stack/) | Review |
-| 9 | [Cost-Effective Cloud Architecture for Backtesting Pipelines](/infrastructure/cost-effective-cloud-architecture-backtesting-pipelines/) | Tutorial |
-| 10 | [CI/CD Pipeline for AI Python Scripts](/infrastructure/cicd-pipeline-ai-python-scripts/) | Tutorial |
-| 11 | [DigitalOcean vs Vultr: Performance Benchmarks for AI Workloads](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/) | Benchmark |
-| 12 | [DigitalOcean vs Vultr vs Hetzner VPS Benchmark 2026](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/) | Benchmark |
-| 13 | [Hetzner VPS for Python AI (Provision & Tune)](/infrastructure/hetzner-vps-provision-python-ai-ubuntu-24-04/) | Tutorial |
-| 14 | [Uptime Kuma: Monitor Your VPS Stack](/infrastructure/uptime-kuma-monitoring-ubuntu-vps-24-04/) | Tutorial |
+| 1 | [Best VPS for AI Agents (2026)](/infrastructure/best-vps-for-ai-agents-2026/) | Benchmark |
+| 2 | [Deploy LangChain on a VPS](/infrastructure/deploy-langchain-on-vps-ubuntu-24-04/) | Tutorial |
+| 3 | [Self-Hosted AI Agent (Ollama + FastAPI)](/infrastructure/self-hosted-ai-agent-ollama-vps-2026/) | Tutorial |
+| 4 | [Ubuntu 24.04 VPS Hardening Checklist](/infrastructure/secure-ubuntu-24-04-vps-hardening/) | Tutorial |
+| 5 | [How to Run an AI Agent on a VPS](/infrastructure/how-to-provision-vps-ai-agent-workloads/) | Tutorial |
+| 6 | [Deploy FastAPI on Ubuntu 24.04 (Nginx + systemd + SSL)](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) | Tutorial |
+| 7 | [Nginx Reverse Proxy: Securing Your Python AI API](/infrastructure/nginx-reverse-proxy-python-ai-api/) | Tutorial |
+| 8 | [Self-Hosted Newsletter API (FastAPI + SQLite)](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) | Tutorial |
+| 9 | [Cloudflare + Nginx (Static Site + API)](/infrastructure/cloudflare-nginx-vps-static-site-api/) | Tutorial |
+| 10 | [Deploy Hugo with GitHub Actions + rsync](/infrastructure/deploy-hugo-github-actions-vps/) | Tutorial |
+| 11 | [Optimizing Python Environment Performance on Ubuntu 24.04](/infrastructure/optimizing-python-environment-ubuntu-24-04/) | Tutorial |
+| 12 | [The Quantum-Ready Tech Stack](/infrastructure/quantum-ready-tech-stack/) | Review |
+| 13 | [Cost-Effective Cloud Architecture for Backtesting Pipelines](/infrastructure/cost-effective-cloud-architecture-backtesting-pipelines/) | Tutorial |
+| 14 | [CI/CD Pipeline for AI Python Scripts](/infrastructure/cicd-pipeline-ai-python-scripts/) | Tutorial |
+| 15 | [DigitalOcean vs Vultr: Performance Benchmarks for AI Workloads](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/) | Benchmark |
+| 16 | [DigitalOcean vs Vultr vs Hetzner VPS Benchmark 2026](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/) | Benchmark |
+| 17 | [Hetzner VPS for Python AI (Provision & Tune)](/infrastructure/hetzner-vps-provision-python-ai-ubuntu-24-04/) | Tutorial |
+| 18 | [Uptime Kuma: Monitor Your VPS Stack](/infrastructure/uptime-kuma-monitoring-ubuntu-vps-24-04/) | Tutorial |
 | — | [How to Build a Technical Blog with Cursor and Hugo](/build-technical-blog-cursor-hugo/) | Build log |
 
 ---

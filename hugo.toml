@@ -83,7 +83,7 @@ paginate = 10
 
 [params.homeInfoParams]
   Title = "QubitLogic"
-  Content = "Free tutorials with working code — no fluff. **Popular right now:** [cloud quantum developer tools](/quantum-developer-toolkit/) · [VPS for AI agents](/infrastructure/how-to-provision-vps-ai-agent-workloads/) · [real-time financial data APIs](/professional-edge/top-5-apis-real-time-financial-data/) · [DO vs Vultr vs Hetzner benchmark](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/)."
+  Content = "Free tutorials with working code — no fluff. **Popular right now:** [Best VPS for AI agents](/infrastructure/best-vps-for-ai-agents-2026/) · [Deploy LangChain on VPS](/infrastructure/deploy-langchain-on-vps-ubuntu-24-04/) · [Self-hosted Ollama agent](/infrastructure/self-hosted-ai-agent-ollama-vps-2026/) · [DO vs Vultr vs Hetzner](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/)."
 
 [[params.socialIcons]]
   name = "github"

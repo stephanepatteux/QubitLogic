@@ -11,14 +11,17 @@ Production infrastructure for solo developers and small teams — benchmarked on
 Follow these in order if you are building from scratch:
 
 1. [Ubuntu 24.04 VPS Hardening](/infrastructure/secure-ubuntu-24-04-vps-hardening/) — SSH, UFW, Fail2Ban baseline
-2. [Provision a VPS for AI workloads](/infrastructure/how-to-provision-vps-ai-agent-workloads/) — Python stack and benchmarks
-3. [Deploy FastAPI on Ubuntu 24.04](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) — Gunicorn, systemd, Certbot
-4. [Nginx reverse proxy hardening](/infrastructure/nginx-reverse-proxy-python-ai-api/) — rate limits, LLM timeouts
-5. [Self-hosted newsletter API](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) — FastAPI + SQLite + GDPR opt-in
-6. [Cloudflare + Nginx](/infrastructure/cloudflare-nginx-vps-static-site-api/) — CDN, Origin CA, static + API
-7. [Deploy Hugo via GitHub Actions](/infrastructure/deploy-hugo-github-actions-vps/) — rsync CI/CD
-8. [Hetzner VPS provision](/infrastructure/hetzner-vps-provision-python-ai-ubuntu-24-04/) — EU price-performance path
-9. [Uptime Kuma monitoring](/infrastructure/uptime-kuma-monitoring-ubuntu-vps-24-04/) — health checks for Hugo + API
+2. [Best VPS for AI Agents (2026)](/infrastructure/best-vps-for-ai-agents-2026/) — provider comparison with benchmarks
+3. [Deploy LangChain on a VPS](/infrastructure/deploy-langchain-on-vps-ubuntu-24-04/) — production agent stack
+4. [Self-Hosted AI Agent (Ollama)](/infrastructure/self-hosted-ai-agent-ollama-vps-2026/) — local LLM on VPS
+5. [Provision a VPS for AI workloads](/infrastructure/how-to-provision-vps-ai-agent-workloads/) — Python stack and benchmarks
+6. [Deploy FastAPI on Ubuntu 24.04](/infrastructure/deploy-fastapi-ubuntu-24-04-nginx-systemd/) — Gunicorn, systemd, Certbot
+7. [Nginx reverse proxy hardening](/infrastructure/nginx-reverse-proxy-python-ai-api/) — rate limits, LLM timeouts
+8. [Self-hosted newsletter API](/infrastructure/self-hosted-newsletter-api-fastapi-sqlite/) — FastAPI + SQLite + GDPR opt-in
+9. [Cloudflare + Nginx](/infrastructure/cloudflare-nginx-vps-static-site-api/) — CDN, Origin CA, static + API
+10. [Deploy Hugo via GitHub Actions](/infrastructure/deploy-hugo-github-actions-vps/) — rsync CI/CD
+11. [Hetzner VPS provision](/infrastructure/hetzner-vps-provision-python-ai-ubuntu-24-04/) — EU price-performance path
+12. [Uptime Kuma monitoring](/infrastructure/uptime-kuma-monitoring-ubuntu-vps-24-04/) — health checks for Hugo + API
 
 Full table with benchmarks and advanced topics: [Start Here](/start-here/).
 
@@ -33,4 +36,5 @@ Full table with benchmarks and advanced topics: [Start Here](/start-here/).
 | Static sites | [Hugo Actions deploy](/infrastructure/deploy-hugo-github-actions-vps/), [Build log](/build-technical-blog-cursor-hugo/) |
 | Edge / CDN | [Cloudflare + Nginx](/infrastructure/cloudflare-nginx-vps-static-site-api/) |
 | CI/CD | [Python pipeline](/infrastructure/cicd-pipeline-ai-python-scripts/), [Hugo deploy](/infrastructure/deploy-hugo-github-actions-vps/) |
-| Provider choice | [DO vs Vultr](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/), [DO vs Vultr vs Hetzner 2026](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/) |
+| Provider choice | [Best VPS for AI agents](/infrastructure/best-vps-for-ai-agents-2026/), [DO vs Vultr vs Hetzner 2026](/infrastructure/digitalocean-vs-vultr-hetzner-vps-benchmark-2026/) |
+| AI agents | [Deploy LangChain](/infrastructure/deploy-langchain-on-vps-ubuntu-24-04/), [Ollama self-hosted](/infrastructure/self-hosted-ai-agent-ollama-vps-2026/) |

@@ -1,7 +1,6 @@
 ---
 aliases:
   - /vps-for-ai-agents/
-  - /best-vps-for-ai-agents/
   - /run-ai-agent-on-vps/
 title: "How to Run an AI Agent on a VPS: Provision, Tune & Benchmark Ubuntu 24.04"
 seoTitle: "VPS for AI Agents: Ubuntu 24.04 Setup Guide"
@@ -66,7 +65,7 @@ This guide provisions a production-ready Ubuntu 24.04 VPS from scratch, tunes it
 - Python 3.11+ knowledge (we install it in Step 5)
 
 {{< callout type="info" title="Which provider?" >}}
-If you want the quickest start with the most tutorials online, use **DigitalOcean**. If you want slightly cheaper compute and are comfortable with less hand-holding in the UI, use **Vultr High Frequency**. We benchmark both below.
+If you want the quickest start with the most tutorials online, use **DigitalOcean**. If you want slightly cheaper compute and are comfortable with less hand-holding in the UI, use **Vultr High Frequency**. Compare all three in our [best VPS for AI agents (2026)](/infrastructure/best-vps-for-ai-agents-2026/) guide — then [deploy LangChain](/infrastructure/deploy-langchain-on-vps-ubuntu-24-04/) when you're ready.
 {{< /callout >}}
 
 ---

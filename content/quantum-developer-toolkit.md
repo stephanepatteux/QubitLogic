@@ -108,7 +108,7 @@ The best-documented cloud provider for developers. Premium AMD Droplets run Pyth
     price="From $4/mo"
 >}}
 
-Used in: [VPS provisioning](/infrastructure/how-to-provision-vps-ai-agent-workloads/), [DO vs Vultr benchmark](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/)
+Used in: [Best VPS for AI agents (2026)](/infrastructure/best-vps-for-ai-agents-2026/), [VPS provisioning](/infrastructure/how-to-provision-vps-ai-agent-workloads/), [DO vs Vultr benchmark](/infrastructure/digitalocean-vs-vultr-performance-benchmarks/)
 
 ### Vultr — High Frequency for disk-I/O-intensive workloads
 
